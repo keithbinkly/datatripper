@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link active">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux">tmux</a>
+      <a href="nvim.html" class="nav-link nvim">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit">lazygit</a>
+      <a href="claude.html" class="nav-link claude">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode">OpenCode</a>
+    </div>
+  </nav>
+
+  <h1>Terminal Dev Stack</h1>
+  
+  <div class="diagram-container">
+    <pre class="ascii-diagram">
+┌─────────────────────────────────────────────────────────────────────────────┐
+│  <span class="d-ghostty">Ghostty</span> (terminal emulator)                                               │
+│  └─ The "window" that displays everything                                   │
+│                                                                             │
+│  ┌────────────────────────────────────────────────────────────────────────┐ │
+│  │  <span class="d-tmux">tmux</span> (terminal multiplexer)                                          │ │
+│  │  └─ Splits, tabs, persistent sessions                                  │ │
+│  │                                                                        │ │
+│  │  ┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────┐  │ │
+│  │  │  <span class="d-nvim">nvim</span>            │  │  <span class="d-lazygit">lazygit</span>         │  │  <span class="d-claude">claude</span> / <span class="d-opencode">opencode</span>  │  │ │
+│  │  │  (editor)        │  │  (git TUI)       │  │  (AI agents)         │  │ │
+│  │  │                  │  │                  │  │                      │  │ │
+│  │  └──────────────────┘  └──────────────────┘  └──────────────────────┘  │ │
+│  │         pane 1                pane 2               pane 3              │ │
+│  └────────────────────────────────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────────────────────┘
+    </pre>
+  </div>
+
+  <div class="grid">
+    <!-- Ghostty -->
+    <div class="card ghostty">
+      <div class="card-header">
+        <div class="card-icon">G</div>
+        <div>
+          <div class="card-title">Ghostty</div>
+          <div class="card-subtitle">Terminal Emulator</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>GPU-accelerated terminal. Replaces Terminal.app, iTerm2. Fast, native, minimal config.</p>
+        
+        <div class="section-title">Install</div>
+        <div class="install">brew install --cask ghostty</div>
+        
+        <div class="section-title">Config</div>
+        <div class="install">~/.config/ghostty/config</div>
+        
+        <div class="section-title">What to Learn</div>
+        <ul class="learn-list">
+          <li>Font configuration</li>
+          <li>Theme/colors</li>
+          <li>Keybindings</li>
+          <li>That's mostly it—intentionally simple</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- tmux -->
+    <div class="card tmux">
+      <div class="card-header">
+        <div class="card-icon">T</div>
+        <div>
+          <div class="card-title">tmux</div>
+          <div class="card-subtitle">Terminal Multiplexer</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Multiple terminals in one window. Sessions persist through disconnects. Splits, tabs, windows.</p>
+        
+        <div class="section-title">Install</div>
+        <div class="install">brew install tmux</div>
+        
+        <div class="section-title">Commands</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">tmux</span><span class="cmd-desc">start session</span></div>
+          <div class="cmd"><span class="cmd-key">tmux new -s name</span><span class="cmd-desc">named session</span></div>
+          <div class="cmd"><span class="cmd-key">tmux ls</span><span class="cmd-desc">list sessions</span></div>
+          <div class="cmd"><span class="cmd-key">tmux attach -t name</span><span class="cmd-desc">reattach</span></div>
+        </div>
+        
+        <div class="section-title">Inside tmux (Ctrl+b prefix)</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">Ctrl+b %</span><span class="cmd-desc">split vertical</span></div>
+          <div class="cmd"><span class="cmd-key">Ctrl+b "</span><span class="cmd-desc">split horizontal</span></div>
+          <div class="cmd"><span class="cmd-key">Ctrl+b arrow</span><span class="cmd-desc">move panes</span></div>
+          <div class="cmd"><span class="cmd-key">Ctrl+b c</span><span class="cmd-desc">new window</span></div>
+          <div class="cmd"><span class="cmd-key">Ctrl+b n</span><span class="cmd-desc">next window</span></div>
+          <div class="cmd"><span class="cmd-key">Ctrl+b d</span><span class="cmd-desc">detach</span></div>
+        </div>
+        
+        <div class="section-title">What to Learn</div>
+        <ul class="learn-list">
+          <li>Custom prefix key (Ctrl+a popular)</li>
+          <li>Config: ~/.tmux.conf</li>
+          <li>Plugins via tpm</li>
+          <li>Copy mode for scrollback</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- nvim -->
+    <div class="card nvim">
+      <div class="card-header">
+        <div class="card-icon">N</div>
+        <div>
+          <div class="card-title">nvim</div>
+          <div class="card-subtitle">Text Editor</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Modern Vim fork. Keyboard-driven, extensible via Lua. Steep learning curve, very fast once mastered.</p>
+        
+        <div class="section-title">Install</div>
+        <div class="install">brew install neovim</div>
+        
+        <div class="section-title">Modes</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">i</span><span class="cmd-desc">insert mode</span></div>
+          <div class="cmd"><span class="cmd-key">Esc</span><span class="cmd-desc">normal mode</span></div>
+          <div class="cmd"><span class="cmd-key">:w</span><span class="cmd-desc">save</span></div>
+          <div class="cmd"><span class="cmd-key">:q</span><span class="cmd-desc">quit</span></div>
+          <div class="cmd"><span class="cmd-key">:wq</span><span class="cmd-desc">save & quit</span></div>
+        </div>
+        
+        <div class="section-title">Navigation (normal)</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">h j k l</span><span class="cmd-desc">← ↓ ↑ →</span></div>
+          <div class="cmd"><span class="cmd-key">w / b</span><span class="cmd-desc">next/back word</span></div>
+          <div class="cmd"><span class="cmd-key">gg / G</span><span class="cmd-desc">top/bottom</span></div>
+          <div class="cmd"><span class="cmd-key">/search</span><span class="cmd-desc">find</span></div>
+        </div>
+        
+        <div class="section-title">Editing</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">dd</span><span class="cmd-desc">delete line</span></div>
+          <div class="cmd"><span class="cmd-key">yy</span><span class="cmd-desc">copy line</span></div>
+          <div class="cmd"><span class="cmd-key">p</span><span class="cmd-desc">paste</span></div>
+          <div class="cmd"><span class="cmd-key">u / Ctrl+r</span><span class="cmd-desc">undo/redo</span></div>
+        </div>
+        
+        <div class="section-title">What to Learn (big rabbit hole)</div>
+        <ul class="learn-list">
+          <li>Config: ~/.config/nvim/init.lua</li>
+          <li>Starter: LazyVim, NvChad, AstroNvim</li>
+          <li>Motions: ciw, di", etc.</li>
+          <li>Plugins: telescope, treesitter, lsp</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- lazygit -->
+    <div class="card lazygit">
+      <div class="card-header">
+        <div class="card-icon">L</div>
+        <div>
+          <div class="card-title">lazygit</div>
+          <div class="card-subtitle">Git TUI</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Visual git interface in terminal. Staging, commits, branches, rebasing all keyboard-driven.</p>
+        
+        <div class="section-title">Install</div>
+        <div class="install">brew install lazygit</div>
+        
+        <div class="section-title">Launch</div>
+        <div class="install">cd repo && lazygit</div>
+        
+        <div class="section-title">Panels (1-5 or Tab)</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">1</span><span class="cmd-desc">Status</span></div>
+          <div class="cmd"><span class="cmd-key">2</span><span class="cmd-desc">Files</span></div>
+          <div class="cmd"><span class="cmd-key">3</span><span class="cmd-desc">Branches</span></div>
+          <div class="cmd"><span class="cmd-key">4</span><span class="cmd-desc">Commits</span></div>
+          <div class="cmd"><span class="cmd-key">5</span><span class="cmd-desc">Stash</span></div>
+        </div>
+        
+        <div class="section-title">Key Commands</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">space</span><span class="cmd-desc">stage/unstage</span></div>
+          <div class="cmd"><span class="cmd-key">c</span><span class="cmd-desc">commit</span></div>
+          <div class="cmd"><span class="cmd-key">P</span><span class="cmd-desc">push</span></div>
+          <div class="cmd"><span class="cmd-key">p</span><span class="cmd-desc">pull</span></div>
+          <div class="cmd"><span class="cmd-key">?</span><span class="cmd-desc">help</span></div>
+          <div class="cmd"><span class="cmd-key">q</span><span class="cmd-desc">quit</span></div>
+        </div>
+        
+        <div class="section-title">What to Learn</div>
+        <ul class="learn-list">
+          <li>Interactive rebase</li>
+          <li>Cherry-picking</li>
+          <li>Config: ~/.config/lazygit/config.yml</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Claude Code -->
+    <div class="card claude">
+      <div class="card-header">
+        <div class="card-icon">C</div>
+        <div>
+          <div class="card-title">Claude Code</div>
+          <div class="card-subtitle">AI Coding Agent</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Anthropic's CLI agent. Reads your codebase, writes/edits files, runs commands. Human-in-the-loop.</p>
+        
+        <div class="section-title">Install</div>
+        <div class="install">npm install -g @anthropic-ai/claude-code</div>
+        
+        <div class="section-title">Launch</div>
+        <div class="install">cd repo && claude</div>
+        
+        <div class="section-title">Usage</div>
+        <div class="commands">
+          <div class="cmd"><span class="cmd-key">/help</span><span class="cmd-desc">show commands</span></div>
+          <div class="cmd"><span class="cmd-key">/clear</span><span class="cmd-desc">clear context</span></div>
+          <div class="cmd"><span class="cmd-key">/compact</span><span class="cmd-desc">summarize context</span></div>
+        </div>
+        
+        <div class="section-title">What to Learn</div>
+        <ul class="learn-list">
+          <li>CLAUDE.md project instructions</li>
+          <li>MCP servers for tools</li>
+          <li>Effective prompting</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- OpenCode -->
+    <div class="card opencode">
+      <div class="card-header">
+        <div class="card-icon">O</div>
+        <div>
+          <div class="card-title">OpenCode</div>
+          <div class="card-subtitle">AI Coding Agent (OSS)</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <p>Open source alternative. Multiple providers (Claude, GPT, Gemini, local). Free models included.</p>
+        
+        <div class="section-title">Install</div>
+        <div class="install">curl -fsSL https://opencode.ai/install | bash</div>
+        
+        <div class="section-title">Launch</div>
+        <div class="install">cd repo && opencode</div>
+        
+        <div class="section-title">Features</div>
+        <ul class="learn-list">
+          <li>Native TUI with themes</li>
+          <li>LSP integration</li>
+          <li>Multi-session support</li>
+          <li>75+ LLM providers</li>
+          <li>Claude Pro login supported</li>
+        </ul>
+        
+        <div class="section-title">What to Learn</div>
+        <ul class="learn-list">
+          <li>Provider configuration</li>
+          <li>Zen (optimized models)</li>
+          <li>Session sharing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="workflow">
+    <h2>Typical Workflow</h2>
+    <pre class="workflow-code"><span class="comment"># Start day</span>
+<span class="cmd">ghostty</span>                          <span class="comment"># open terminal</span>
+<span class="cmd">tmux new -s myproject</span>            <span class="comment"># new session</span>
+<span class="cmd">cd ~/code/myproject</span>
+
+<span class="comment"># Split into panes</span>
+<span class="cmd">Ctrl+b %</span>                         <span class="comment"># split right</span>
+<span class="cmd">nvim .</span>                           <span class="comment"># editor in left pane</span>
+<span class="cmd">Ctrl+b →</span>                         <span class="comment"># move to right pane</span>
+<span class="cmd">lazygit</span>                          <span class="comment"># git in right pane</span>
+
+<span class="comment"># Open AI agent in new window</span>
+<span class="cmd">Ctrl+b c</span>                         <span class="comment"># new tmux window</span>
+<span class="cmd">claude</span>                           <span class="comment"># or opencode</span>
+
+<span class="comment"># End of day</span>
+<span class="cmd">Ctrl+b d</span>                         <span class="comment"># detach tmux (session keeps running)</span>
+
+<span class="comment"># Next day</span>
+<span class="cmd">tmux attach -t myproject</span>         <span class="comment"># everything still there</span></pre>
+    
+    <div class="priority">
+      <div class="priority-item"><span class="priority-num">1</span> tmux basics <span class="priority-time">30 min</span></div>
+      <div class="priority-item"><span class="priority-num">2</span> lazygit <span class="priority-time">30 min</span></div>
+      <div class="priority-item"><span class="priority-num">3</span> nvim + LazyVim <span class="priority-time">hours/days</span></div>
+      <div class="priority-item"><span class="priority-num">4</span> Ghostty config <span class="priority-time">15 min</span></div>
+      <div class="priority-item"><span class="priority-num">5</span> Claude/OpenCode <span class="priority-time">learn as you go</span></div>
+    </div>
+  </div>
+</body>
+</html>
