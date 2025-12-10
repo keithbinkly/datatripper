@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code - Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux">tmux</a>
+      <a href="nvim.html" class="nav-link nvim">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit">lazygit</a>
+      <a href="claude.html" class="nav-link claude active">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode">OpenCode</a>
+    </div>
+  </nav>
+
+  <div class="detail-container">
+    <div class="detail-header">
+      <div class="detail-icon claude">C</div>
+      <div>
+        <div class="detail-title">Claude Code</div>
+        <div class="detail-subtitle">AI Coding Agent • Anthropic</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>What is it?</h3>
+      <p>Claude Code is Anthropic's official CLI tool for AI-assisted coding. It runs in your terminal, reads your codebase, and can write/edit files and run commands—with your approval.</p>
+      <p>It's "agentic"—meaning Claude can take multi-step actions to accomplish tasks, not just answer questions.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Installation</h3>
+      <pre class="code-block claude"># Requires Node.js
+npm install -g @anthropic-ai/claude-code
+
+# First run will prompt for authentication
+claude</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Basic Usage</h3>
+      <pre class="code-block claude"># Navigate to your project
+cd ~/code/myproject
+
+# Start Claude Code
+claude
+
+# Now you can chat:
+> explain what this project does
+> find all the API endpoints
+> add input validation to the user form
+> write tests for the auth module</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Slash Commands</h3>
+      <table class="cmd-table">
+        <tr><td>/help</td><td>Show available commands</td></tr>
+        <tr><td>/clear</td><td>Clear conversation context</td></tr>
+        <tr><td>/compact</td><td>Summarize context (save tokens)</td></tr>
+        <tr><td>/config</td><td>View/edit configuration</td></tr>
+        <tr><td>/cost</td><td>Show token usage and cost</td></tr>
+        <tr><td>/doctor</td><td>Check installation health</td></tr>
+        <tr><td>/init</td><td>Create CLAUDE.md for project</td></tr>
+        <tr><td>/review</td><td>Review recent changes</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>CLAUDE.md - Project Instructions</h3>
+      <p>Create a <code>CLAUDE.md</code> file in your repo root to give Claude persistent context:</p>
+      <pre class="code-block claude"># CLAUDE.md
+
+## Project Overview
+This is a Next.js e-commerce app with Prisma ORM.
+
+## Tech Stack
+- Next.js 14 (App Router)
+- TypeScript
+- Prisma + PostgreSQL
+- Tailwind CSS
+
+## Conventions
+- Use functional components
+- Prefer server components when possible
+- API routes in /app/api
+- Database models in /prisma/schema.prisma
+
+## Common Commands
+- `npm run dev` - start dev server
+- `npm run db:push` - push schema changes
+- `npm test` - run tests
+
+## Important Files
+- /lib/auth.ts - authentication logic
+- /lib/db.ts - database client</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>How Claude Code Works</h3>
+      <p>Claude Code can:</p>
+      <ul class="learn-list">
+        <li>Read files in your project (with permission)</li>
+        <li>Write/edit files (shows diff, you approve)</li>
+        <li>Run shell commands (shows command, you approve)</li>
+        <li>Search codebase (grep, find)</li>
+        <li>Chain multiple actions together</li>
+      </ul>
+      <p>It's "human in the loop"—you see what it wants to do and approve each action.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Effective Prompting</h3>
+      <pre class="code-block claude"># Be specific about what you want
+> refactor the checkout flow to use React Query instead of useEffect
+
+# Reference specific files
+> look at /lib/auth.ts and add rate limiting
+
+# Ask for explanations first
+> explain how the payment integration works, then suggest improvements
+
+# Incremental changes
+> first show me the plan, then implement step by step</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>MCP Servers</h3>
+      <p>Claude Code supports MCP (Model Context Protocol) servers for extended capabilities:</p>
+      <ul class="learn-list">
+        <li>File system access (beyond current directory)</li>
+        <li>Database queries</li>
+        <li>API integrations</li>
+        <li>Custom tools</li>
+      </ul>
+      <pre class="code-block claude"># Configure in ~/.claude/config.json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-filesystem", "/path/to/allowed/dir"]
+    }
+  }
+}</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Tips</h3>
+      <ul class="learn-list">
+        <li>Start sessions fresh for new tasks (<code>/clear</code>)</li>
+        <li>Use <code>/compact</code> when context gets long</li>
+        <li>Write good CLAUDE.md—it saves repeated explanation</li>
+        <li>Review diffs carefully before approving writes</li>
+        <li>Ask Claude to explain before implementing complex changes</li>
+        <li>Combine with lazygit: Claude writes, you review/commit</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h3>Claude Code vs Cursor/Copilot</h3>
+      <table class="cmd-table">
+        <tr><td>Interface</td><td>Terminal-only (fits this stack), no GUI</td></tr>
+        <tr><td>Model</td><td>Claude only (Sonnet by default)</td></tr>
+        <tr><td>Agentic</td><td>Can take multi-step actions autonomously</td></tr>
+        <tr><td>Pricing</td><td>Uses your API credits or Pro/Max subscription</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Authentication</h3>
+      <p>Claude Code supports:</p>
+      <ul class="learn-list">
+        <li>Claude Pro/Max subscription (login via browser)</li>
+        <li>API key (ANTHROPIC_API_KEY environment variable)</li>
+      </ul>
+      <pre class="code-block claude"># With API key
+export ANTHROPIC_API_KEY=sk-ant-...
+claude
+
+# Or login with subscription
+claude
+# Follow browser prompt</pre>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>lazygit - Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux">tmux</a>
+      <a href="nvim.html" class="nav-link nvim">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit active">lazygit</a>
+      <a href="claude.html" class="nav-link claude">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode">OpenCode</a>
+    </div>
+  </nav>
+
+  <div class="detail-container">
+    <div class="detail-header">
+      <div class="detail-icon lazygit">L</div>
+      <div>
+        <div class="detail-title">lazygit</div>
+        <div class="detail-subtitle">Git TUI • Visual Git in Terminal</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>What is it?</h3>
+      <p>lazygit is a terminal UI for Git that makes staging, committing, branching, and rebasing fast and visual. Instead of typing git commands, you navigate panels and press single keys.</p>
+      <p>It's especially powerful for interactive rebasing, cherry-picking, and managing complex git histories.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Installation</h3>
+      <pre class="code-block lazygit">brew install lazygit
+
+# Launch (from any git repo)
+cd your-repo
+lazygit</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Interface Panels</h3>
+      <p>The UI has 5 main panels. Switch with <code>1-5</code> or <code>Tab</code>/<code>Shift+Tab</code>:</p>
+      <table class="cmd-table">
+        <tr><td>1 - Status</td><td>Repo status, upstream info</td></tr>
+        <tr><td>2 - Files</td><td>Unstaged/staged changes (most used)</td></tr>
+        <tr><td>3 - Branches</td><td>Local branches, remotes, tags</td></tr>
+        <tr><td>4 - Commits</td><td>Commit history (rebasing happens here)</td></tr>
+        <tr><td>5 - Stash</td><td>Stashed changes</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Basic Workflow</h3>
+      <pre class="code-block lazygit"># In Files panel (2):
+j/k           # navigate files
+space         # stage/unstage file
+a             # stage all
+c             # commit (opens editor for message)
+shift+C       # commit with editor for message
+
+# Quick commit flow:
+space space space   # stage files
+c                   # commit
+type message
+enter               # done</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Staging Hunks</h3>
+      <p>You can stage individual chunks of a file, not just the whole file:</p>
+      <pre class="code-block lazygit"># On a file with changes:
+enter         # expand file to see hunks
+space         # stage/unstage current hunk
+a             # stage all hunks in file
+
+# Line-by-line staging:
+enter         # on a hunk, expand to lines
+space         # stage individual line</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Branch Operations</h3>
+      <pre class="code-block lazygit"># In Branches panel (3):
+space         # checkout branch
+n             # new branch
+d             # delete branch
+M             # merge into current
+r             # rebase current onto selected
+f             # fetch
+shift+P       # push
+p             # pull</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Commit Operations</h3>
+      <pre class="code-block lazygit"># In Commits panel (4):
+enter         # view commit details/diff
+r             # reword commit message
+d             # drop commit (in rebase)
+e             # edit commit (in rebase)
+s             # squash into previous
+f             # fixup (squash, discard message)
+shift+C       # cherry-pick commit
+ctrl+j/k      # move commit up/down (reorder)
+g             # reset to commit (soft/mixed/hard)</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Interactive Rebase</h3>
+      <p>This is where lazygit really shines. Much easier than command-line rebase:</p>
+      <pre class="code-block lazygit"># To rebase last N commits:
+# 1. Go to Commits panel (4)
+# 2. Navigate to the commit BEFORE where you want to start
+# 3. Press 'e' to start interactive rebase
+
+# During rebase:
+s             # squash commit
+f             # fixup 
+d             # drop
+r             # reword
+ctrl+j/k      # reorder
+m             # mark as edit point
+c             # continue rebase
+
+# If conflicts:
+# Files panel shows conflicts
+# Edit file, then press space to mark resolved
+# Press 'c' to continue</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Stash</h3>
+      <pre class="code-block lazygit"># From any panel:
+shift+S       # stash all changes (with message prompt)
+s             # stash (quick, no message)
+
+# In Stash panel (5):
+space         # apply stash
+g             # pop stash (apply + delete)
+d             # drop stash</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Other Useful Keys</h3>
+      <table class="cmd-table">
+        <tr><td>?</td><td>Help (shows all keybindings)</td></tr>
+        <tr><td>q</td><td>Quit</td></tr>
+        <tr><td>/</td><td>Search in current panel</td></tr>
+        <tr><td>@</td><td>Open command log (see git commands run)</td></tr>
+        <tr><td>+</td><td>Expand/collapse panels</td></tr>
+        <tr><td>x</td><td>Open menu for current context</td></tr>
+        <tr><td>z</td><td>Undo (via git reflog)</td></tr>
+        <tr><td>ctrl+r</td><td>Switch repos</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Configuration</h3>
+      <p>Config file: <code>~/.config/lazygit/config.yml</code></p>
+      <pre class="code-block lazygit"># Example config.yml
+gui:
+  theme:
+    lightTheme: false
+  showFileTree: true
+  showRandomTip: false
+
+git:
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  
+keybinding:
+  universal:
+    quit: 'q'</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Integration with nvim</h3>
+      <p>Many nvim users open lazygit in a floating terminal. Popular plugins:</p>
+      <ul class="learn-list">
+        <li><code>kdheepak/lazygit.nvim</code> - Dedicated lazygit plugin</li>
+        <li>Or just use <code>:terminal lazygit</code></li>
+        <li>LazyVim includes lazygit by default (<code>&lt;leader&gt;gg</code>)</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

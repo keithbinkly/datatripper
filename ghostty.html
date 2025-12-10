@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ghostty - Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty active">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux">tmux</a>
+      <a href="nvim.html" class="nav-link nvim">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit">lazygit</a>
+      <a href="claude.html" class="nav-link claude">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode">OpenCode</a>
+    </div>
+  </nav>
+
+  <div class="detail-container">
+    <div class="detail-header">
+      <div class="detail-icon ghostty">G</div>
+      <div>
+        <div class="detail-title">Ghostty</div>
+        <div class="detail-subtitle">Terminal Emulator • GPU-Accelerated</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>What is it?</h3>
+      <p>Ghostty is a new terminal emulator created by Mitchell Hashimoto (founder of HashiCorp, creator of Vagrant, Terraform). It's GPU-accelerated, fast, and intentionally simple.</p>
+      <p>It replaces Terminal.app, iTerm2, Alacritty, Kitty, etc. The philosophy is: do one thing well—be a terminal.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Installation</h3>
+      <pre class="code-block ghostty">brew install --cask ghostty
+
+# Or download from ghostty.org</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Why Ghostty?</h3>
+      <table class="cmd-table">
+        <tr><td>Speed</td><td>GPU-accelerated rendering, very low latency</td></tr>
+        <tr><td>Native</td><td>Uses native UI toolkit (not Electron), feels right on macOS</td></tr>
+        <tr><td>Simple</td><td>Minimal config, sensible defaults</td></tr>
+        <tr><td>Modern</td><td>Proper Unicode, ligatures, true color</td></tr>
+        <tr><td>Open source</td><td>Recently open-sourced (was invite-only beta)</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Configuration</h3>
+      <p>Config file: <code>~/.config/ghostty/config</code></p>
+      <p>It's a simple key=value format. No JSON/YAML nesting.</p>
+      <pre class="code-block ghostty"># Example ~/.config/ghostty/config
+
+# Font
+font-family = JetBrains Mono
+font-size = 14
+
+# Theme (many built-in)
+theme = Dracula
+# or: theme = Catppuccin Mocha
+# or: theme = Tokyo Night
+
+# Window
+window-padding-x = 10
+window-padding-y = 10
+window-decoration = true
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+
+# Shell integration
+shell-integration = zsh
+
+# Keybindings (optional)
+keybind = cmd+t=new_tab
+keybind = cmd+w=close_surface</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Built-in Themes</h3>
+      <p>Ghostty ships with many themes. Some popular ones:</p>
+      <ul class="learn-list">
+        <li>Dracula</li>
+        <li>Catppuccin Mocha / Latte / Frappe / Macchiato</li>
+        <li>Tokyo Night</li>
+        <li>Gruvbox Dark / Light</li>
+        <li>Nord</li>
+        <li>One Dark</li>
+        <li>Solarized Dark / Light</li>
+      </ul>
+      <pre class="code-block ghostty"># List all available themes
+ghostty +list-themes</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Keybindings</h3>
+      <p>Default macOS keybindings work. Some useful ones:</p>
+      <table class="cmd-table">
+        <tr><td>Cmd+T</td><td>New tab</td></tr>
+        <tr><td>Cmd+W</td><td>Close tab</td></tr>
+        <tr><td>Cmd+N</td><td>New window</td></tr>
+        <tr><td>Cmd+D</td><td>Split right</td></tr>
+        <tr><td>Cmd+Shift+D</td><td>Split down</td></tr>
+        <tr><td>Cmd+[ / ]</td><td>Previous/next split</td></tr>
+        <tr><td>Cmd+Shift+Enter</td><td>Toggle fullscreen</td></tr>
+        <tr><td>Cmd++/-</td><td>Increase/decrease font size</td></tr>
+        <tr><td>Cmd+0</td><td>Reset font size</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Shell Integration</h3>
+      <p>Ghostty can integrate with your shell for features like:</p>
+      <ul class="learn-list">
+        <li>Cmd+click to open URLs</li>
+        <li>Working directory tracking per tab</li>
+        <li>Semantic prompt zones (know where commands start/end)</li>
+      </ul>
+      <pre class="code-block ghostty"># Add to config
+shell-integration = zsh   # or bash, fish</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Ghostty vs Others</h3>
+      <table class="cmd-table">
+        <tr><td>vs iTerm2</td><td>Faster, simpler. iTerm2 has more features but heavier.</td></tr>
+        <tr><td>vs Alacritty</td><td>Both fast/GPU. Ghostty more polished UI, native feel.</td></tr>
+        <tr><td>vs Kitty</td><td>Both modern. Kitty more features, Ghostty simpler.</td></tr>
+        <tr><td>vs Terminal.app</td><td>Ghostty much faster, better Unicode/color support.</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Note on tmux</h3>
+      <p>Ghostty has built-in splits and tabs. You might wonder: do I need tmux?</p>
+      <p><strong>Yes, still use tmux</strong> because:</p>
+      <ul class="learn-list">
+        <li>Sessions persist after closing Ghostty</li>
+        <li>Works over SSH (Ghostty splits don't)</li>
+        <li>Consistent keybindings across any terminal</li>
+        <li>More powerful session/window management</li>
+      </ul>
+      <p>Use Ghostty as the display layer, tmux as the session layer.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Resources</h3>
+      <ul class="learn-list">
+        <li><a href="https://ghostty.org/docs" style="color: var(--accent-ghostty);">Official docs</a></li>
+        <li><a href="https://github.com/ghostty-org/ghostty" style="color: var(--accent-ghostty);">GitHub repo</a></li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

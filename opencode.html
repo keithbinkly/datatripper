@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenCode - Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux">tmux</a>
+      <a href="nvim.html" class="nav-link nvim">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit">lazygit</a>
+      <a href="claude.html" class="nav-link claude">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode active">OpenCode</a>
+    </div>
+  </nav>
+
+  <div class="detail-container">
+    <div class="detail-header">
+      <div class="detail-icon opencode">O</div>
+      <div>
+        <div class="detail-title">OpenCode</div>
+        <div class="detail-subtitle">AI Coding Agent • Open Source</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>What is it?</h3>
+      <p>OpenCode is an open-source AI coding agent, similar to Claude Code but model-agnostic. It supports 75+ LLM providers including Claude, GPT, Gemini, and local models.</p>
+      <p>Built by the SST team (creators of the serverless framework). It's free, open source, and ships with free models for zero-config start.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Installation</h3>
+      <pre class="code-block opencode"># Quick install
+curl -fsSL https://opencode.ai/install | bash
+
+# Or via npm
+npm install -g opencode
+
+# Or via brew
+brew install sst/tap/opencode
+
+# Launch
+cd your-repo
+opencode</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Key Features</h3>
+      <table class="cmd-table">
+        <tr><td>Multi-provider</td><td>Claude, GPT-4, Gemini, local models, 75+ providers</td></tr>
+        <tr><td>Free tier</td><td>Ships with free models, no account needed</td></tr>
+        <tr><td>Native TUI</td><td>Beautiful terminal UI, themeable</td></tr>
+        <tr><td>LSP integration</td><td>Automatically loads language servers for better context</td></tr>
+        <tr><td>Multi-session</td><td>Run multiple agents in parallel on same project</td></tr>
+        <tr><td>Session sharing</td><td>Share a link to any session</td></tr>
+        <tr><td>Claude Pro/Max</td><td>Login with Anthropic to use your subscription</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Using Your Claude Subscription</h3>
+      <p>If you have Claude Pro or Max, you can use it with OpenCode:</p>
+      <pre class="code-block opencode"># Launch opencode
+opencode
+
+# Use settings/config to login with Anthropic
+# Or set environment variable
+export ANTHROPIC_API_KEY=sk-ant-...</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Provider Configuration</h3>
+      <p>Configure providers via environment variables or config:</p>
+      <pre class="code-block opencode"># OpenAI
+export OPENAI_API_KEY=sk-...
+
+# Anthropic
+export ANTHROPIC_API_KEY=sk-ant-...
+
+# Google
+export GOOGLE_API_KEY=...
+
+# Local (Ollama)
+# Just have Ollama running, OpenCode will detect it</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Zen - Optimized Models</h3>
+      <p>OpenCode offers "Zen"—a curated set of models specifically tested and benchmarked for coding agents:</p>
+      <ul class="learn-list">
+        <li>Validated models that work well for coding</li>
+        <li>Consistent performance across providers</li>
+        <li>No guessing which model is best</li>
+      </ul>
+      <p>Learn more at <a href="https://opencode.ai/zen" style="color: var(--accent-opencode);">opencode.ai/zen</a></p>
+    </div>
+
+    <div class="detail-section">
+      <h3>OpenCode vs Claude Code</h3>
+      <table class="cmd-table">
+        <tr><td>Model support</td><td>OpenCode: 75+ providers | Claude Code: Claude only</td></tr>
+        <tr><td>Open source</td><td>OpenCode: Yes | Claude Code: No</td></tr>
+        <tr><td>Free tier</td><td>OpenCode: Yes (bundled models) | Claude Code: No</td></tr>
+        <tr><td>UI</td><td>OpenCode: Rich TUI | Claude Code: Simple TUI</td></tr>
+        <tr><td>Anthropic sub</td><td>Both support Claude Pro/Max login</td></tr>
+        <tr><td>MCP</td><td>Claude Code has mature MCP support</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>When to Use Which?</h3>
+      <ul class="learn-list">
+        <li><strong>Claude Code</strong> if you're all-in on Claude and want official Anthropic support</li>
+        <li><strong>OpenCode</strong> if you want flexibility, open source, or to try different models</li>
+        <li><strong>Both</strong> are fine—they're just CLI tools, use whichever fits the task</li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <h3>Themes</h3>
+      <p>OpenCode has a themeable TUI. Configure in settings or config file.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Resources</h3>
+      <ul class="learn-list">
+        <li><a href="https://opencode.ai" style="color: var(--accent-opencode);">opencode.ai</a> - Official site</li>
+        <li><a href="https://opencode.ai/docs" style="color: var(--accent-opencode);">Documentation</a></li>
+        <li><a href="https://github.com/sst/opencode" style="color: var(--accent-opencode);">GitHub</a> - 35K+ stars</li>
+        <li><a href="https://opencode.ai/zen" style="color: var(--accent-opencode);">Zen</a> - Optimized models</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>

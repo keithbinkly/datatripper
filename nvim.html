@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>nvim - Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux">tmux</a>
+      <a href="nvim.html" class="nav-link nvim active">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit">lazygit</a>
+      <a href="claude.html" class="nav-link claude">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode">OpenCode</a>
+    </div>
+  </nav>
+
+  <div class="detail-container">
+    <div class="detail-header">
+      <div class="detail-icon nvim">N</div>
+      <div>
+        <div class="detail-title">Neovim</div>
+        <div class="detail-subtitle">Text Editor • The Big Rabbit Hole</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>What is it?</h3>
+      <p>Neovim is a modern fork of Vim, the legendary text editor. It's keyboard-driven, meaning you navigate and edit without touching a mouse. The learning curve is steep, but once mastered, it's significantly faster than GUI editors.</p>
+      <p>Neovim improves on Vim with Lua-based configuration, better plugin architecture, and built-in LSP (Language Server Protocol) support for IDE-like features.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Installation</h3>
+      <pre class="code-block nvim">brew install neovim
+
+# Verify
+nvim --version</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Understanding Modes</h3>
+      <p>Vim/Neovim has multiple modes. This is the key concept that confuses beginners:</p>
+      <table class="cmd-table">
+        <tr><td>Normal mode</td><td>Default. Navigate and run commands. Press <code>Esc</code> to return here.</td></tr>
+        <tr><td>Insert mode</td><td>Type text. Enter with <code>i</code>, <code>a</code>, <code>o</code>, etc.</td></tr>
+        <tr><td>Visual mode</td><td>Select text. Enter with <code>v</code> (char), <code>V</code> (line), <code>Ctrl+v</code> (block).</td></tr>
+        <tr><td>Command mode</td><td>Run Ex commands. Enter with <code>:</code></td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Essential Commands</h3>
+      <pre class="code-block nvim"># Opening files
+nvim file.txt          # open single file
+nvim .                 # open file browser (netrw)
+nvim file1 file2       # open multiple files
+
+# Saving and quitting (command mode)
+:w                     # save
+:q                     # quit
+:wq                    # save and quit
+:q!                    # quit without saving
+:wa                    # save all buffers
+:qa                    # quit all</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Navigation (Normal Mode)</h3>
+      <table class="cmd-table">
+        <tr><td>h j k l</td><td>Left, down, up, right (basic movement)</td></tr>
+        <tr><td>w / W</td><td>Next word / WORD (includes punctuation)</td></tr>
+        <tr><td>b / B</td><td>Back word / WORD</td></tr>
+        <tr><td>e / E</td><td>End of word / WORD</td></tr>
+        <tr><td>0 / $</td><td>Start / end of line</td></tr>
+        <tr><td>^ </td><td>First non-whitespace character</td></tr>
+        <tr><td>gg / G</td><td>Top / bottom of file</td></tr>
+        <tr><td>{ / }</td><td>Previous / next paragraph</td></tr>
+        <tr><td>Ctrl+d / Ctrl+u</td><td>Half-page down / up</td></tr>
+        <tr><td>Ctrl+f / Ctrl+b</td><td>Full page down / up</td></tr>
+        <tr><td>%</td><td>Jump to matching bracket</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Editing (Normal Mode)</h3>
+      <table class="cmd-table">
+        <tr><td>i / a</td><td>Insert before / after cursor</td></tr>
+        <tr><td>I / A</td><td>Insert at start / end of line</td></tr>
+        <tr><td>o / O</td><td>New line below / above</td></tr>
+        <tr><td>x</td><td>Delete character</td></tr>
+        <tr><td>dd</td><td>Delete line</td></tr>
+        <tr><td>yy</td><td>Yank (copy) line</td></tr>
+        <tr><td>p / P</td><td>Paste after / before</td></tr>
+        <tr><td>u</td><td>Undo</td></tr>
+        <tr><td>Ctrl+r</td><td>Redo</td></tr>
+        <tr><td>.</td><td>Repeat last command</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>The Power: Motions + Operators</h3>
+      <p>Vim's killer feature is combining operators with motions. The pattern is: <code>operator + motion</code></p>
+      <pre class="code-block nvim"># Operators
+d = delete    y = yank (copy)    c = change (delete + insert)
+
+# Examples
+dw      # delete word
+d$      # delete to end of line
+d3w     # delete 3 words
+yy      # yank line
+y3j     # yank 3 lines down
+ciw     # change inner word (delete word, enter insert)
+ci"     # change inside quotes
+di(     # delete inside parentheses
+da{     # delete around braces (including braces)
+ct,     # change to comma</pre>
+      <p>This composability is what makes Vim fast—you learn a few operators and motions, then combine them infinitely.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Search and Replace</h3>
+      <pre class="code-block nvim"># Search
+/pattern           # search forward
+?pattern           # search backward
+n / N              # next / previous match
+*                  # search word under cursor
+
+# Replace
+:s/old/new/        # replace first on line
+:s/old/new/g       # replace all on line
+:%s/old/new/g      # replace all in file
+:%s/old/new/gc     # replace all, confirm each</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Configuration</h3>
+      <p>Config lives at <code>~/.config/nvim/init.lua</code> (Lua) or <code>~/.config/nvim/init.vim</code> (Vimscript).</p>
+      <p><strong>Recommendation:</strong> Don't configure from scratch. Use a starter config:</p>
+      <table class="cmd-table">
+        <tr><td>LazyVim</td><td>Most popular. Sensible defaults, easy customization.</td></tr>
+        <tr><td>NvChad</td><td>Beautiful UI, fast. More opinionated.</td></tr>
+        <tr><td>AstroNvim</td><td>Feature-rich, IDE-like out of the box.</td></tr>
+        <tr><td>kickstart.nvim</td><td>Minimal starting point to learn from.</td></tr>
+      </table>
+      <pre class="code-block nvim"># LazyVim installation
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+nvim</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Essential Plugins</h3>
+      <p>Most starter configs include these. If configuring manually:</p>
+      <table class="cmd-table">
+        <tr><td>telescope.nvim</td><td>Fuzzy finder for files, grep, anything</td></tr>
+        <tr><td>nvim-treesitter</td><td>Better syntax highlighting</td></tr>
+        <tr><td>nvim-lspconfig</td><td>Language server integration</td></tr>
+        <tr><td>nvim-cmp</td><td>Autocompletion</td></tr>
+        <tr><td>gitsigns.nvim</td><td>Git integration in gutter</td></tr>
+        <tr><td>which-key.nvim</td><td>Shows available keybindings</td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Learning Path</h3>
+      <ol class="learn-list">
+        <li>Run <code>vimtutor</code> in terminal (built-in tutorial, ~30 min)</li>
+        <li>Use nvim for small edits, keep VS Code as fallback</li>
+        <li>Install LazyVim for a usable setup immediately</li>
+        <li>Learn motions gradually—add one new motion per day</li>
+        <li>Don't customize until you understand what you're changing</li>
+      </ol>
+    </div>
+  </div>
+</body>
+</html>

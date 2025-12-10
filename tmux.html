@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>tmux - Terminal Dev Stack</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">terminal stack</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Overview</a>
+      <a href="ghostty.html" class="nav-link ghostty">Ghostty</a>
+      <a href="tmux.html" class="nav-link tmux active">tmux</a>
+      <a href="nvim.html" class="nav-link nvim">nvim</a>
+      <a href="lazygit.html" class="nav-link lazygit">lazygit</a>
+      <a href="claude.html" class="nav-link claude">Claude Code</a>
+      <a href="opencode.html" class="nav-link opencode">OpenCode</a>
+    </div>
+  </nav>
+
+  <div class="detail-container">
+    <div class="detail-header">
+      <div class="detail-icon tmux">T</div>
+      <div>
+        <div class="detail-title">tmux</div>
+        <div class="detail-subtitle">Terminal Multiplexer • Session Management</div>
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <h3>What is it?</h3>
+      <p>tmux lets you run multiple terminal sessions inside a single window. You can split panes, create tabs (windows), and most importantly—sessions persist even if you close the terminal or disconnect from SSH.</p>
+      <p>Think of it as a window manager for your terminal.</p>
+    </div>
+
+    <div class="detail-section">
+      <h3>Installation</h3>
+      <pre class="code-block tmux">brew install tmux
+
+# Verify
+tmux -V</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Core Concepts</h3>
+      <table class="cmd-table">
+        <tr><td>Session</td><td>A collection of windows. Persists in background. Named (e.g., "project-x").</td></tr>
+        <tr><td>Window</td><td>A tab within a session. Has a number and optional name.</td></tr>
+        <tr><td>Pane</td><td>A split within a window. Multiple panes visible at once.</td></tr>
+        <tr><td>Prefix</td><td>Key combo before commands. Default: <code>Ctrl+b</code></td></tr>
+      </table>
+    </div>
+
+    <div class="detail-section">
+      <h3>Session Management</h3>
+      <pre class="code-block tmux"># From outside tmux (shell)
+tmux                        # start new unnamed session
+tmux new -s myproject       # start named session
+tmux ls                     # list sessions
+tmux attach -t myproject    # attach to session
+tmux kill-session -t name   # kill session
+
+# From inside tmux (prefix commands)
+Ctrl+b d                    # detach from session
+Ctrl+b $                    # rename session
+Ctrl+b s                    # switch session (interactive)</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Window Management</h3>
+      <pre class="code-block tmux"># All commands start with prefix (Ctrl+b)
+Ctrl+b c          # create new window
+Ctrl+b ,          # rename window
+Ctrl+b n          # next window
+Ctrl+b p          # previous window
+Ctrl+b 0-9        # go to window by number
+Ctrl+b w          # list windows (interactive)
+Ctrl+b &          # kill window</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Pane Management</h3>
+      <pre class="code-block tmux"># Splitting
+Ctrl+b %          # split vertical (left/right)
+Ctrl+b "          # split horizontal (top/bottom)
+
+# Navigation
+Ctrl+b ←↓↑→       # move between panes
+Ctrl+b o          # cycle through panes
+Ctrl+b q          # show pane numbers, then press number to jump
+Ctrl+b z          # zoom pane (toggle fullscreen)
+
+# Resizing
+Ctrl+b Ctrl+←↓↑→  # resize pane (hold Ctrl)
+Ctrl+b :resize-pane -D 10   # resize down 10 lines
+
+# Other
+Ctrl+b x          # kill pane
+Ctrl+b {          # swap pane left
+Ctrl+b }          # swap pane right
+Ctrl+b space      # cycle layouts</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Copy Mode (Scrollback)</h3>
+      <p>tmux has its own scrollback buffer. You enter "copy mode" to scroll and select text:</p>
+      <pre class="code-block tmux">Ctrl+b [          # enter copy mode
+q                 # exit copy mode
+
+# In copy mode (vi keys by default):
+h j k l           # navigate
+Ctrl+u / Ctrl+d   # page up/down
+/                 # search
+n / N             # next/prev match
+space             # start selection
+Enter             # copy selection
+
+Ctrl+b ]          # paste</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Configuration</h3>
+      <p>Config file: <code>~/.tmux.conf</code></p>
+      <pre class="code-block tmux"># Example .tmux.conf
+
+# Change prefix to Ctrl+a (easier to type)
+unbind C-b
+set -g prefix C-a
+bind C-a send-prefix
+
+# Enable mouse
+set -g mouse on
+
+# Start windows at 1, not 0
+set -g base-index 1
+setw -g pane-base-index 1
+
+# Easier splits (| and -)
+bind | split-window -h
+bind - split-window -v
+
+# Vi mode for copy
+setw -g mode-keys vi
+
+# Reload config
+bind r source-file ~/.tmux.conf \; display "Reloaded!"
+
+# Reload after editing:
+# tmux source-file ~/.tmux.conf</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Plugin Manager (tpm)</h3>
+      <pre class="code-block tmux"># Install tpm
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# Add to .tmux.conf
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-resurrect'   # save/restore sessions
+
+run '~/.tmux/plugins/tpm/tpm'
+
+# Install plugins: Ctrl+b I (capital i)</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Common Workflows</h3>
+      <pre class="code-block tmux"># Dev setup: editor + terminal + git
+tmux new -s project
+Ctrl+b %              # split vertical
+nvim .                # left pane: editor
+Ctrl+b →              # move right
+Ctrl+b "              # split right pane horizontal
+# top-right: shell for commands
+Ctrl+b ↓              # move to bottom-right
+lazygit               # bottom-right: git
+
+# End of day
+Ctrl+b d              # detach
+
+# Next day
+tmux attach -t project    # everything still running</pre>
+    </div>
+
+    <div class="detail-section">
+      <h3>Quick Reference</h3>
+      <table class="cmd-table">
+        <tr><td>Ctrl+b ?</td><td>List all keybindings</td></tr>
+        <tr><td>Ctrl+b t</td><td>Show clock</td></tr>
+        <tr><td>Ctrl+b :</td><td>Command prompt</td></tr>
+      </table>
+    </div>
+  </div>
+</body>
+</html>
