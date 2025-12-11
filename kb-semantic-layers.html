@@ -80,6 +80,35 @@
       </div>
     </section>
 
+    <!-- Visual Guides -->
+    <section class="kb-section">
+      <h2>Visual Guides & Slide Decks</h2>
+
+      <!-- PDF Viewer - Example template (uncomment and update path when you have a PDF) -->
+      <!--
+      <div class="pdf-viewer slides">
+        <div class="pdf-viewer-header">
+          <div>
+            <div class="pdf-viewer-title">Semantic Layer Deep Dive</div>
+            <div class="pdf-viewer-meta">12 slides • Generated from NotebookLM</div>
+          </div>
+          <div class="pdf-viewer-actions">
+            <a href="slides/semantic-layer-overview.pdf" download class="pdf-viewer-btn">↓ Download</a>
+            <button onclick="toggleFullscreen(this)" class="pdf-viewer-btn">⛶ Fullscreen</button>
+          </div>
+        </div>
+        <div class="pdf-viewer-container">
+          <button class="pdf-fullscreen-close" onclick="toggleFullscreen(this)">✕</button>
+          <iframe src="slides/semantic-layer-overview.pdf"></iframe>
+        </div>
+      </div>
+      -->
+
+      <div class="kb-callout">
+        <p><strong>Coming soon:</strong> Visual explainers and NotebookLM-generated slide decks. Drop your PDF in the <code>/slides</code> folder and uncomment the viewer above.</p>
+      </div>
+    </section>
+
     <!-- Essential Reading -->
     <section class="kb-section">
       <h2>Essential Reading</h2>
@@ -277,5 +306,18 @@
     </section>
 
   </div>
+
+  <!-- Minimal JS for PDF fullscreen toggle -->
+  <script>
+    function toggleFullscreen(btn) {
+      const container = btn.closest('.pdf-viewer').querySelector('.pdf-viewer-container');
+      container.classList.toggle('fullscreen');
+      if (container.classList.contains('fullscreen')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+  </script>
 </body>
 </html>
