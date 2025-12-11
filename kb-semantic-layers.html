@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semantic Layers & Ontologies | DataTripper Knowledge Base</title>
+  <meta name="description" content="Curated resources on semantic layers, ontologies, metrics layers, and business context for data. dbt, Cube, knowledge graphs, and more.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <nav class="nav">
+    <a href="index.html" class="nav-brand">datatripper</a>
+    <div class="nav-links">
+      <a href="index.html" class="nav-link">Terminal Stack</a>
+      <a href="knowledge.html" class="nav-link kb">Knowledge Base</a>
+    </div>
+  </nav>
+
+  <div class="kb-detail-container">
+    <a href="knowledge.html" class="kb-back">← Back to Knowledge Base</a>
+
+    <div class="kb-detail-header">
+      <div class="kb-detail-icon semantic">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3"/>
+          <circle cx="12" cy="12" r="8" stroke-dasharray="4 2"/>
+          <line x1="12" y1="1" x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="23"/>
+          <line x1="1" y1="12" x2="4" y2="12"/>
+          <line x1="20" y1="12" x2="23" y2="12"/>
+        </svg>
+      </div>
+      <div>
+        <h1>Semantic Layers & Ontologies</h1>
+        <p class="kb-detail-subtitle">The bridge between raw data and business meaning</p>
+      </div>
+    </div>
+
+    <div class="kb-intro">
+      <p>A semantic layer translates raw database tables into business concepts that humans understand. Instead of asking "what's the sum of revenue_usd where status = 'completed' and date >= '2024-01-01'", you ask "what's our Q1 revenue?" An ontology takes this further—defining not just metrics, but the relationships between concepts: customers place orders, orders contain products, products belong to categories.</p>
+      <p>This is one of the most important (and underrated) areas in modern data work. Get it right, and your data becomes self-documenting, AI-ready, and actually useful to the business.</p>
+    </div>
+
+    <!-- Why This Matters -->
+    <section class="kb-section">
+      <h2>Why This Matters Now</h2>
+      <div class="kb-callout">
+        <p><strong>The AI connection:</strong> LLMs hallucinate with data because they lack business context. A semantic layer provides that context—making your data AI-ready without endless prompt engineering.</p>
+      </div>
+      <ul class="kb-points">
+        <li><strong>Single source of truth</strong> — Define "revenue" once, use it everywhere</li>
+        <li><strong>Self-service analytics</strong> — Business users can explore without SQL knowledge</li>
+        <li><strong>AI-ready data</strong> — LLMs can reason over semantically-rich data</li>
+        <li><strong>Governance</strong> — Clear ownership of metric definitions</li>
+        <li><strong>Consistency</strong> — No more "my numbers don't match your numbers"</li>
+      </ul>
+    </section>
+
+    <!-- Key Concepts -->
+    <section class="kb-section">
+      <h2>Key Concepts</h2>
+      <div class="kb-concepts">
+        <div class="kb-concept">
+          <h3>Semantic Layer</h3>
+          <p>A business abstraction over raw data. Maps database columns to business terms. Defines how metrics are calculated. Lives between your data warehouse and consumption tools.</p>
+        </div>
+        <div class="kb-concept">
+          <h3>Metrics Layer</h3>
+          <p>A subset focused specifically on metric definitions. Revenue, churn rate, conversion rate—defined once, calculated consistently everywhere.</p>
+        </div>
+        <div class="kb-concept">
+          <h3>Ontology</h3>
+          <p>A formal model of concepts in your domain and their relationships. Goes beyond metrics to define entities (Customer, Product, Order) and how they relate.</p>
+        </div>
+        <div class="kb-concept">
+          <h3>Knowledge Graph</h3>
+          <p>The ontology brought to life with real data. A graph database where nodes are entities and edges are relationships. Enables complex reasoning and discovery.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Essential Reading -->
+    <section class="kb-section">
+      <h2>Essential Reading</h2>
+      <div class="kb-links">
+        <a href="https://davidsj.substack.com/p/semantic-layers-a-buyers-guide" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">David Jayatillake</div>
+          <div class="kb-link-title">Semantic Layers: A Buyer's Guide</div>
+          <div class="kb-link-desc">The definitive comparison of Cube, dbt Semantic Layer, and AtScale. Practical advice on which to choose based on your situation.</div>
+          <span class="kb-link-tag">Must Read</span>
+        </a>
+
+        <a href="https://www.getdbt.com/blog/universal-semantic-layer" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">dbt Labs</div>
+          <div class="kb-link-title">Why We Need a Universal Semantic Layer</div>
+          <div class="kb-link-desc">dbt's vision for a unified semantic layer. Explains the MetricFlow acquisition and their approach to solving consistency.</div>
+          <span class="kb-link-tag">Foundational</span>
+        </a>
+
+        <a href="https://www.typedef.ai/resources/semantic-layer-architectures-explained-warehouse-native-vs-dbt-vs-cube" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">TypeDef.ai</div>
+          <div class="kb-link-title">Semantic Layer Architectures Explained</div>
+          <div class="kb-link-desc">Warehouse-native vs dbt vs Cube. Deep dive into architectural trade-offs and where the industry is heading in 2025.</div>
+          <span class="kb-link-tag">Architecture</span>
+        </a>
+
+        <a href="https://interworks.com/blog/2024/06/21/the-current-state-of-semantic-layers/" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">InterWorks</div>
+          <div class="kb-link-title">The Current State of Semantic Layers (June 2024)</div>
+          <div class="kb-link-desc">Comprehensive overview of the landscape. Covers Cube, dbt, AtScale, and warehouse-native options with pros/cons.</div>
+          <span class="kb-link-tag">Overview</span>
+        </a>
+
+        <a href="https://www.bigdatawire.com/2024/07/01/is-the-universal-semantic-layer-the-next-big-data-battleground/" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Big Data Wire</div>
+          <div class="kb-link-title">Is the Universal Semantic Layer the Next Big Data Battleground?</div>
+          <div class="kb-link-desc">Industry analysis on competition between dbt, Cube, AtScale, and cloud providers. The strategic importance of owning the semantic layer.</div>
+          <span class="kb-link-tag">Industry</span>
+        </a>
+
+        <a href="https://cube.dev/blog/2023-the-year-of-the-semantic-layer" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Cube Blog</div>
+          <div class="kb-link-title">2023: The Year of the Semantic Layer</div>
+          <div class="kb-link-desc">Cube's perspective on why semantic layers became mainstream. Good historical context and trend analysis.</div>
+          <span class="kb-link-tag">History</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Ontologies & Knowledge Graphs -->
+    <section class="kb-section">
+      <h2>Ontologies & Knowledge Graphs</h2>
+      <div class="kb-links">
+        <a href="https://enterprise-knowledge.com/whats-the-difference-between-an-ontology-and-a-knowledge-graph/" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Enterprise Knowledge</div>
+          <div class="kb-link-title">What's the Difference Between an Ontology and a Knowledge Graph?</div>
+          <div class="kb-link-desc">Clear explanation of the relationship. The ontology is the schema; the knowledge graph is the schema populated with data.</div>
+          <span class="kb-link-tag">Fundamentals</span>
+        </a>
+
+        <a href="https://www.ontotext.com/knowledgehub/fundamentals/what-is-a-knowledge-graph/" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Ontotext</div>
+          <div class="kb-link-title">What Is a Knowledge Graph?</div>
+          <div class="kb-link-desc">Comprehensive fundamentals guide. Covers RDF, ontologies, reasoning, and practical applications.</div>
+          <span class="kb-link-tag">Fundamentals</span>
+        </a>
+
+        <a href="https://blindata.io/blog/2024/ontologies-for-semantic-modeling/" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Blindata</div>
+          <div class="kb-link-title">Modeling the Semantics of Data: Knowledge Graphs and Ontologies</div>
+          <div class="kb-link-desc">Why ontologies are resurging in the LLM era. How semantic structuring future-proofs your data for AI.</div>
+          <span class="kb-link-tag">AI + Data</span>
+        </a>
+
+        <a href="https://datawalk.com/ontologies-and-knowledge-graphs-making-enterprise-data-easy-to-understand/" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">DataWalk</div>
+          <div class="kb-link-title">Ontologies and Knowledge Graphs: Making Enterprise Data Easy to Understand</div>
+          <div class="kb-link-desc">Top-down vs bottom-up ontology modeling. How to stay business-focused when building your model.</div>
+          <span class="kb-link-tag">Methodology</span>
+        </a>
+
+        <a href="https://medium.com/timbr-ai/palantir-timbr-the-enterprise-race-to-make-data-ai-ready-4b26a1efe89c" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Timbr.ai</div>
+          <div class="kb-link-title">The Enterprise Race to Make Data AI-Ready</div>
+          <div class="kb-link-desc">Open vs closed ontology architectures. SQL-native semantic layers that augment rather than replace your data stack.</div>
+          <span class="kb-link-tag">Architecture</span>
+        </a>
+
+        <a href="https://graph.build/resources/ontology" target="_blank" rel="noopener" class="kb-link">
+          <div class="kb-link-source">Graph.Build</div>
+          <div class="kb-link-title">Ontology in Graph Models and Knowledge Graphs</div>
+          <div class="kb-link-desc">Ontology governance in enterprise settings. Roles, responsibilities, and best practices for maintenance.</div>
+          <span class="kb-link-tag">Governance</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Tools & Platforms -->
+    <section class="kb-section">
+      <h2>Tools & Platforms</h2>
+      <div class="kb-tools">
+        <a href="https://cube.dev" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">Cube</div>
+          <div class="kb-tool-type">Semantic Layer</div>
+          <div class="kb-tool-desc">API-first semantic layer. Open source core, great for building data apps. Strong caching and pre-aggregations.</div>
+        </a>
+
+        <a href="https://www.getdbt.com/product/semantic-layer" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">dbt Semantic Layer</div>
+          <div class="kb-tool-type">Metrics Layer</div>
+          <div class="kb-tool-desc">Built on MetricFlow. Integrates with dbt workflows. Define metrics in YAML alongside your models.</div>
+        </a>
+
+        <a href="https://www.atscale.com" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">AtScale</div>
+          <div class="kb-tool-type">Semantic Layer</div>
+          <div class="kb-tool-desc">Enterprise-grade. Full MDX support, great for Excel/Tableau heavy orgs. Created open SML standard.</div>
+        </a>
+
+        <a href="https://timbr.ai" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">Timbr</div>
+          <div class="kb-tool-type">Ontology-based Semantic Layer</div>
+          <div class="kb-tool-desc">SQL-native ontologies and knowledge graphs. Query your semantic layer with standard SQL.</div>
+        </a>
+
+        <a href="https://www.ontotext.com/products/graphdb/" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">GraphDB</div>
+          <div class="kb-tool-type">Knowledge Graph</div>
+          <div class="kb-tool-desc">RDF graph database with reasoning capabilities. Good for enterprise knowledge graph deployments.</div>
+        </a>
+
+        <a href="https://protege.stanford.edu" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">Protégé</div>
+          <div class="kb-tool-type">Ontology Editor</div>
+          <div class="kb-tool-desc">Free, open-source ontology editor from Stanford. The standard tool for building OWL ontologies.</div>
+        </a>
+
+        <a href="https://neo4j.com" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">Neo4j</div>
+          <div class="kb-tool-type">Graph Database</div>
+          <div class="kb-tool-desc">Popular property graph database. Good for knowledge graphs with simpler ontology requirements.</div>
+        </a>
+
+        <a href="https://github.com/semantalytics/awesome-semantic-web" target="_blank" rel="noopener" class="kb-tool">
+          <div class="kb-tool-name">Awesome Semantic Web</div>
+          <div class="kb-tool-type">Resource List</div>
+          <div class="kb-tool-desc">Curated list of semantic web tools, ontologies, datasets, and learning resources.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Standards & Specs -->
+    <section class="kb-section">
+      <h2>Standards & Specifications</h2>
+      <div class="kb-standards">
+        <div class="kb-standard">
+          <h3>RDF</h3>
+          <p>Resource Description Framework. W3C standard for data interchange using subject-predicate-object triples.</p>
+        </div>
+        <div class="kb-standard">
+          <h3>OWL</h3>
+          <p>Web Ontology Language. For representing rich, complex knowledge about things, groups, and relationships.</p>
+        </div>
+        <div class="kb-standard">
+          <h3>SPARQL</h3>
+          <p>Query language for RDF data. Like SQL for graph data.</p>
+        </div>
+        <div class="kb-standard">
+          <h3>SML</h3>
+          <p>Semantic Modeling Language. AtScale's open standard for portable metric definitions (Apache licensed).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- My Notes -->
+    <section class="kb-section">
+      <h2>My Notes & Observations</h2>
+      <div class="kb-notes">
+        <div class="kb-note">
+          <h3>The convergence is real</h3>
+          <p>Semantic layers (business metrics) and ontologies (entity relationships) are converging. Tools like Timbr blur the line. The end state is probably a unified "business knowledge layer" that handles both.</p>
+        </div>
+        <div class="kb-note">
+          <h3>Start with metrics, grow into ontology</h3>
+          <p>Don't boil the ocean. Start with a metrics layer (Cube or dbt) for your core KPIs. Add ontological richness later as your AI/search use cases demand it.</p>
+        </div>
+        <div class="kb-note">
+          <h3>Warehouse-native is interesting but early</h3>
+          <p>Snowflake and Databricks are building native semantic layers. Watch this space—but for now, dedicated tools are more mature.</p>
+        </div>
+        <div class="kb-note">
+          <h3>The AI angle is not hype</h3>
+          <p>Every RAG implementation I've seen struggles with business context. A semantic layer solves this. LLMs + semantic layer = dramatically better results than LLMs + raw tables.</p>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
