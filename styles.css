@@ -1098,3 +1098,219 @@ a.kb-card:hover .kb-card-arrow {
     grid-template-columns: 1fr;
   }
 }
+
+/* ========================================
+   PDF Viewer Component
+   ======================================== */
+
+.pdf-viewer {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.pdf-viewer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-dark);
+}
+
+.pdf-viewer-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.pdf-viewer-meta {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.pdf-viewer-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.pdf-viewer-btn {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  padding: 0.4rem 0.75rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.pdf-viewer-btn:hover {
+  background: var(--accent-semantic);
+  color: var(--bg-dark);
+  border-color: var(--accent-semantic);
+}
+
+.pdf-viewer-container {
+  position: relative;
+  width: 100%;
+  height: 500px;
+  background: #1a1a1a;
+}
+
+.pdf-viewer-container iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.pdf-viewer-container.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  border-radius: 0;
+}
+
+.pdf-viewer-container.fullscreen iframe {
+  border-radius: 0;
+}
+
+/* Fullscreen close button */
+.pdf-fullscreen-close {
+  display: none;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  cursor: pointer;
+  z-index: 1001;
+  align-items: center;
+  justify-content: center;
+}
+
+.pdf-viewer-container.fullscreen .pdf-fullscreen-close {
+  display: flex;
+}
+
+.pdf-fullscreen-close:hover {
+  background: var(--accent-semantic);
+  color: var(--bg-dark);
+}
+
+/* Slide deck variant - more landscape */
+.pdf-viewer.slides .pdf-viewer-container {
+  height: 450px;
+  aspect-ratio: 16/9;
+  max-height: 60vh;
+}
+
+/* Image/slide carousel (pure CSS alternative) */
+.slide-carousel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin: 1.5rem 0;
+}
+
+.slide-carousel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg-dark);
+}
+
+.slide-carousel-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.slide-carousel-container {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  background: #1a1a1a;
+}
+
+.slide-carousel-container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.slide-carousel-container::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+.slide-carousel-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+
+.slide-carousel-container::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-semantic);
+}
+
+.slide-carousel img {
+  flex-shrink: 0;
+  width: 100%;
+  height: auto;
+  max-height: 500px;
+  object-fit: contain;
+  scroll-snap-align: start;
+}
+
+.slide-carousel-nav {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.slide-carousel-nav a {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--border);
+  transition: all 0.2s ease;
+}
+
+.slide-carousel-nav a:hover,
+.slide-carousel-nav a:target {
+  background: var(--accent-semantic);
+}
+
+@media (max-width: 600px) {
+  .pdf-viewer-container {
+    height: 350px;
+  }
+
+  .pdf-viewer.slides .pdf-viewer-container {
+    height: 250px;
+  }
+
+  .pdf-viewer-header {
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+}

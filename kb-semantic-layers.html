@@ -80,6 +80,28 @@
       </div>
     </section>
 
+    <!-- Visual Guides -->
+    <section class="kb-section">
+      <h2>Visual Guides & Slide Decks</h2>
+
+      <div class="pdf-viewer slides">
+        <div class="pdf-viewer-header">
+          <div>
+            <div class="pdf-viewer-title">Context Engineering: Unlocking AI Value</div>
+            <div class="pdf-viewer-meta">NotebookLM Generated Slides</div>
+          </div>
+          <div class="pdf-viewer-actions">
+            <a href="slides/Context_Engineering_Unlocking_AI_Value.pdf" download class="pdf-viewer-btn">↓ Download</a>
+            <button onclick="toggleFullscreen(this)" class="pdf-viewer-btn">⛶ Fullscreen</button>
+          </div>
+        </div>
+        <div class="pdf-viewer-container">
+          <button class="pdf-fullscreen-close" onclick="toggleFullscreen(this)">✕</button>
+          <iframe src="slides/Context_Engineering_Unlocking_AI_Value.pdf"></iframe>
+        </div>
+      </div>
+    </section>
+
     <!-- Essential Reading -->
     <section class="kb-section">
       <h2>Essential Reading</h2>
@@ -277,5 +299,18 @@
     </section>
 
   </div>
+
+  <!-- Minimal JS for PDF fullscreen toggle -->
+  <script>
+    function toggleFullscreen(btn) {
+      const container = btn.closest('.pdf-viewer').querySelector('.pdf-viewer-container');
+      container.classList.toggle('fullscreen');
+      if (container.classList.contains('fullscreen')) {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = '';
+      }
+    }
+  </script>
 </body>
 </html>
