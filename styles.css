@@ -1086,33 +1086,101 @@ a.kb-card:hover .kb-card-arrow {
   margin: 0;
 }
 
-/* KB Terms (glossary/definitions) */
-.kb-terms {
+/* KB Guides section */
+.kb-guides {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.kb-guides h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.kb-guides-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 1.25rem;
+}
+
+.kb-guides-list {
   display: flex;
   flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kb-guide-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.kb-guide-link:hover {
+  border-color: var(--accent);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.kb-guide-icon {
+  font-size: 1.25rem;
+  width: 2rem;
+  text-align: center;
+}
+
+.kb-guide-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.kb-guide-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .kb-guide-link {
+    flex-wrap: wrap;
+  }
+  .kb-guide-desc {
+    width: 100%;
+    margin-left: 3rem;
+    margin-top: 0.25rem;
+  }
+}
+
+/* KB Terms (glossary/definitions) - compact 2-column grid */
+.kb-terms {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 0.75rem;
 }
 
 .kb-term {
   background: var(--bg-card);
   border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
-  display: grid;
-  grid-template-columns: 180px 1fr;
-  gap: 1rem;
-  align-items: baseline;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
 }
 
 .kb-term dt {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--accent-semantic);
+  margin-bottom: 0.35rem;
 }
 
 .kb-term dd {
-  font-size: 0.85rem;
-  line-height: 1.7;
+  font-size: 0.75rem;
+  line-height: 1.6;
   color: var(--text-dim);
   margin: 0;
 }
@@ -1136,9 +1204,8 @@ a.kb-card:hover .kb-card-arrow {
 }
 
 @media (max-width: 768px) {
-  .kb-term {
+  .kb-terms {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
   }
 }
 
@@ -1297,6 +1364,66 @@ a.kb-card:hover .kb-card-arrow {
   height: 450px;
   aspect-ratio: 16/9;
   max-height: 60vh;
+}
+
+/* Slides grid layout */
+.kb-slides-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}
+
+.kb-slides-grid .pdf-viewer {
+  margin: 0;
+}
+
+/* Compact slide viewer for grid */
+.pdf-viewer.compact {
+  border-radius: 8px;
+}
+
+.pdf-viewer.compact .pdf-viewer-header {
+  padding: 0.6rem 0.9rem;
+}
+
+.pdf-viewer.compact .pdf-title {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.pdf-viewer.compact .pdf-viewer-container {
+  height: 220px;
+}
+
+.pdf-viewer.compact .pdf-fullscreen-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-dim);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0.25rem;
+  line-height: 1;
+}
+
+.pdf-viewer.compact .pdf-fullscreen-btn:hover {
+  color: var(--accent-semantic);
+}
+
+/* Fullscreen for compact viewers */
+.pdf-viewer.compact.fullscreen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1000;
+  border-radius: 0;
+  margin: 0;
+}
+
+.pdf-viewer.compact.fullscreen .pdf-viewer-container {
+  height: calc(100vh - 50px);
 }
 
 /* Image/slide carousel (pure CSS alternative) */
