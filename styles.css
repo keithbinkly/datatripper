@@ -1086,6 +1086,62 @@ a.kb-card:hover .kb-card-arrow {
   margin: 0;
 }
 
+/* KB Terms (glossary/definitions) */
+.kb-terms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.kb-term {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 1rem;
+  align-items: baseline;
+}
+
+.kb-term dt {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-semantic);
+}
+
+.kb-term dd {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+.kb-term dd strong {
+  color: var(--text);
+}
+
+/* Why Now callout variant */
+.kb-callout.why-now {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: var(--accent-kb);
+}
+
+.kb-callout.why-now .kb-points {
+  margin-top: 1rem;
+}
+
+.kb-callout.why-now .kb-points li::before {
+  color: var(--accent-kb);
+}
+
+@media (max-width: 768px) {
+  .kb-term {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .kb-grid {
