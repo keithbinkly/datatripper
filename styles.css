@@ -1086,6 +1086,77 @@ a.kb-card:hover .kb-card-arrow {
   margin: 0;
 }
 
+/* KB Guides section */
+.kb-guides {
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 0 1.5rem;
+}
+
+.kb-guides h2 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+.kb-guides-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin-bottom: 1.25rem;
+}
+
+.kb-guides-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.kb-guide-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.kb-guide-link:hover {
+  border-color: var(--accent);
+  background: rgba(0, 255, 136, 0.05);
+}
+
+.kb-guide-icon {
+  font-size: 1.25rem;
+  width: 2rem;
+  text-align: center;
+}
+
+.kb-guide-title {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.kb-guide-desc {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  margin-left: auto;
+}
+
+@media (max-width: 600px) {
+  .kb-guide-link {
+    flex-wrap: wrap;
+  }
+  .kb-guide-desc {
+    width: 100%;
+    margin-left: 3rem;
+    margin-top: 0.25rem;
+  }
+}
+
 /* KB Terms (glossary/definitions) - compact 2-column grid */
 .kb-terms {
   display: grid;
