@@ -905,49 +905,54 @@ a.kb-card:hover .kb-card-arrow {
   margin: 0;
 }
 
-/* KB Links - Compact single-line with hover description */
+/* KB Links - Minimal, text-focused design */
 .kb-links {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0;
 }
 
 .kb-link {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 0.7rem 1rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  padding: 0.6rem 0;
   text-decoration: none;
   color: inherit;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   position: relative;
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.kb-link:last-child {
+  border-bottom: none;
 }
 
 .kb-link:hover {
-  background: var(--bg-card-hover);
-  border-color: var(--accent-semantic);
+  background: transparent;
+  padding-left: 0.5rem;
+}
+
+.kb-link:hover .kb-link-title {
+  color: var(--accent-semantic);
 }
 
 .kb-link-source {
   font-size: 0.65rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--accent-semantic);
-  min-width: 100px;
+  color: var(--text-dim);
+  min-width: 90px;
   flex-shrink: 0;
 }
 
 .kb-link-title {
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.85rem;
+  font-weight: 400;
   color: var(--text);
   flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  transition: color 0.15s ease;
 }
 
 .kb-link-desc {
@@ -956,36 +961,89 @@ a.kb-card:hover .kb-card-arrow {
   right: 0;
   top: 100%;
   background: var(--bg-card);
-  border: 1px solid var(--accent-semantic);
-  border-top: none;
-  border-radius: 0 0 6px 6px;
-  padding: 0.75rem 1rem;
-  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.75rem;
   line-height: 1.5;
   color: var(--text-dim);
   opacity: 0;
   visibility: hidden;
   transform: translateY(-4px);
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
   z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
 }
 
 .kb-link:hover .kb-link-desc {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0);
+  transform: translateY(2px);
 }
 
+/* Color-coded tags */
 .kb-link-tag {
-  font-size: 0.6rem;
+  font-size: 0.55rem;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 0.2rem 0.45rem;
-  background: var(--bg-dark);
-  border: 1px solid var(--border);
-  border-radius: 3px;
-  color: var(--text-dim);
+  letter-spacing: 0.03em;
+  padding: 0.15rem 0.4rem;
+  border-radius: 2px;
   flex-shrink: 0;
+  font-weight: 500;
+}
+
+/* Tag color variants */
+.kb-link-tag[data-tag="foundation"],
+.kb-link-tag[data-tag="key concept"] {
+  background: rgba(6, 182, 212, 0.15);
+  color: #06b6d4;
+}
+
+.kb-link-tag[data-tag="theory"] {
+  background: rgba(168, 85, 247, 0.15);
+  color: #a855f7;
+}
+
+.kb-link-tag[data-tag="framework"] {
+  background: rgba(34, 197, 94, 0.15);
+  color: #22c55e;
+}
+
+.kb-link-tag[data-tag="strategy"] {
+  background: rgba(59, 130, 246, 0.15);
+  color: #3b82f6;
+}
+
+.kb-link-tag[data-tag="how-to"],
+.kb-link-tag[data-tag="implementation"] {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+}
+
+.kb-link-tag[data-tag="series"] {
+  background: rgba(251, 146, 60, 0.15);
+  color: #fb923c;
+}
+
+.kb-link-tag[data-tag="case study"] {
+  background: rgba(244, 114, 182, 0.15);
+  color: #f472b6;
+}
+
+.kb-link-tag[data-tag="dbt"] {
+  background: rgba(255, 105, 46, 0.15);
+  color: #ff692e;
+}
+
+.kb-link-tag[data-tag="podcast"],
+.kb-link-tag[data-tag="methodology"] {
+  background: rgba(148, 163, 184, 0.15);
+  color: #94a3b8;
+}
+
+.kb-link-tag[data-tag="opinion"] {
+  background: rgba(251, 191, 36, 0.15);
+  color: #fbbf24;
 }
 
 /* KB Tools */
@@ -1280,16 +1338,25 @@ a.kb-card:hover .kb-card-arrow {
   /* Mobile tap-to-expand for link descriptions */
   .kb-link {
     flex-wrap: wrap;
+    padding: 0.75rem 0;
   }
 
   .kb-link-title {
     white-space: normal;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
   }
 
   .kb-link-source {
     min-width: auto;
-    font-size: 0.6rem;
+    font-size: 0.55rem;
+    display: block;
+    width: 100%;
+    margin-bottom: 0.2rem;
+  }
+
+  .kb-link-tag {
+    order: -1;
+    margin-bottom: 0.3rem;
   }
 
   .kb-link-desc {
@@ -1299,9 +1366,12 @@ a.kb-card:hover .kb-card-arrow {
     opacity: 0;
     padding: 0;
     border: none;
+    border-radius: 0;
+    box-shadow: none;
     width: 100%;
     transition: all 0.3s ease;
     transform: none;
+    background: transparent;
   }
 
   .kb-link:focus .kb-link-desc,
@@ -1309,9 +1379,8 @@ a.kb-card:hover .kb-card-arrow {
   .kb-link.expanded .kb-link-desc {
     max-height: 200px;
     opacity: 1;
-    padding: 0.75rem 0 0 0;
-    margin-top: 0.5rem;
-    border-top: 1px solid var(--border);
+    padding: 0.5rem 0 0 0;
+    margin-top: 0.25rem;
     visibility: visible;
   }
 }
