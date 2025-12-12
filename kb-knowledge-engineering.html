@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge Engineering | DataTripper Knowledge Base</title>
+  <title>Knowledge Engineering | data-centered</title>
   <meta name="description" content="Curated resources on context engineering, semantic layers, ontologies, and making enterprise data AI-ready.">
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <nav class="nav">
-    <a href="knowledge.html" class="nav-brand">datatripper</a>
+    <a href="knowledge.html" class="nav-brand">data-centered</a>
   </nav>
 
   <div class="kb-detail-container">
@@ -351,5 +351,20 @@
     </section>
 
   </div>
+
+  <script>
+    // Mobile tap-to-expand for link descriptions
+    if ('ontouchstart' in window) {
+      document.querySelectorAll('.kb-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (window.innerWidth <= 600 && !this.classList.contains('expanded')) {
+            e.preventDefault();
+            document.querySelectorAll('.kb-link.expanded').forEach(l => l.classList.remove('expanded'));
+            this.classList.add('expanded');
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>

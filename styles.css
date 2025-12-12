@@ -805,22 +805,24 @@ a.kb-card:hover .kb-card-arrow {
   color: var(--text-dim);
 }
 
-/* KB Intro */
+/* KB Intro - no box styling */
 .kb-intro {
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 1.75rem;
   margin-bottom: 2rem;
 }
 
 .kb-intro p {
+  font-size: 0.9rem;
   line-height: 1.8;
+  color: var(--text-dim);
   margin-bottom: 1rem;
 }
 
 .kb-intro p:last-child {
   margin-bottom: 0;
+}
+
+.kb-intro strong {
+  color: var(--text);
 }
 
 /* KB Sections */
@@ -1215,17 +1217,47 @@ a.kb-card:hover .kb-card-arrow {
     grid-template-columns: 1fr;
   }
 
+  /* Compact cards on mobile - horizontal, smaller */
   .kb-card {
-    flex-direction: column;
-    text-align: center;
+    flex-direction: row;
+    align-items: center;
+    padding: 1rem;
+    gap: 1rem;
   }
 
   .kb-card-icon {
-    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+  }
+
+  .kb-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .kb-card-content h2 {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .kb-card-content p {
+    display: none;
+  }
+
+  .kb-card-meta {
+    display: none;
   }
 
   .kb-card-arrow {
     display: none;
+  }
+
+  .kb-card-badge {
+    top: 0.5rem;
+    right: 0.5rem;
+    font-size: 0.55rem;
+    padding: 0.15rem 0.4rem;
   }
 
   .kb-detail-header {
@@ -1243,6 +1275,44 @@ a.kb-card:hover .kb-card-arrow {
 
   .kb-tools {
     grid-template-columns: 1fr;
+  }
+
+  /* Mobile tap-to-expand for link descriptions */
+  .kb-link {
+    flex-wrap: wrap;
+  }
+
+  .kb-link-title {
+    white-space: normal;
+    font-size: 0.85rem;
+  }
+
+  .kb-link-source {
+    min-width: auto;
+    font-size: 0.6rem;
+  }
+
+  .kb-link-desc {
+    position: static;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    width: 100%;
+    transition: all 0.3s ease;
+    transform: none;
+  }
+
+  .kb-link:focus .kb-link-desc,
+  .kb-link:active .kb-link-desc,
+  .kb-link.expanded .kb-link-desc {
+    max-height: 200px;
+    opacity: 1;
+    padding: 0.75rem 0 0 0;
+    margin-top: 0.5rem;
+    border-top: 1px solid var(--border);
+    visibility: visible;
   }
 }
 
