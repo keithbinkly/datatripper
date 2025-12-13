@@ -3,113 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Knowledge Base | DataTripper</title>
-  <meta name="description" content="Curated resources on semantic layers, ontologies, data modeling, and business context. A personal knowledge garden.">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>data-centered</title>
+  <meta name="description" content="Curated resources on knowledge engineering, data visualization, and AI systems.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <nav class="nav">
-    <a href="knowledge.html" class="nav-brand">data-centered</a>
-  </nav>
+<body class="dashboard">
 
-  <div class="kb-hero">
-    <h1 class="kb-title">Knowledge Base</h1>
-    <p class="kb-subtitle">Curated resources and learnings from my explorations into data, semantics, and systems thinking.</p>
-  </div>
+  <header class="dash-header">
+    <div class="dash-brand">data-centered</div>
+    <div class="dash-tagline">curated resources for data & AI practitioners</div>
+  </header>
 
-  <div class="kb-grid">
-    <!-- Knowledge Engineering -->
-    <a href="kb-knowledge-engineering.html" class="kb-card semantic">
-      <div class="kb-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <circle cx="12" cy="12" r="8" stroke-dasharray="4 2"/>
-          <line x1="12" y1="1" x2="12" y2="4"/>
-          <line x1="12" y1="20" x2="12" y2="23"/>
-          <line x1="1" y1="12" x2="4" y2="12"/>
-          <line x1="20" y1="12" x2="23" y2="12"/>
-        </svg>
-      </div>
-      <div class="kb-card-content">
-        <h2>Knowledge Engineering</h2>
-        <p>Making data AI-ready through context engineering, semantic layers, ontologies, and governance. Bridging the gap between raw data and business meaning.</p>
-        <div class="kb-card-meta">
-          <span class="kb-tag">Context Engineering</span>
-          <span class="kb-tag">Semantic Layers</span>
-          <span class="kb-tag">Ontologies</span>
+  <main class="dash-layout">
+
+    <!-- Topics Column -->
+    <section class="dash-col dash-col-main">
+      <div class="dash-section-header">
+        <h2>Topics</h2>
+        <div class="dash-col-labels">
+          <span>resources</span>
+          <span>new</span>
         </div>
       </div>
-      <div class="kb-card-arrow">→</div>
-    </a>
 
-    <!-- Data Visualization (Coming Soon) -->
-    <div class="kb-card coming-soon">
-      <div class="kb-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M18 20V10"/>
-          <path d="M12 20V4"/>
-          <path d="M6 20v-6"/>
-          <line x1="2" y1="20" x2="22" y2="20"/>
-        </svg>
-      </div>
-      <div class="kb-card-content">
-        <h2>Data Visualization</h2>
-        <p>Communicating insights through visual design. Charts, dashboards, and the principles of effective data storytelling.</p>
-        <div class="kb-card-meta">
-          <span class="kb-tag">Charts</span>
-          <span class="kb-tag">Dashboards</span>
-          <span class="kb-tag">Storytelling</span>
+      <div class="dash-topics">
+        <a href="kb-knowledge-engineering.html" class="dash-topic-row">
+          <span class="dash-topic-indicator" style="background: #06b6d4"></span>
+          <span class="dash-topic-title">Knowledge Engineering</span>
+          <span class="dash-topic-count">32</span>
+          <span class="dash-topic-new">+4</span>
+        </a>
+
+        <div class="dash-topic-row coming-soon">
+          <span class="dash-topic-indicator" style="background: #8b5cf6"></span>
+          <span class="dash-topic-title">Data Visualization</span>
+          <span class="dash-topic-count dim">—</span>
+          <span class="dash-topic-new dim">—</span>
+        </div>
+
+        <div class="dash-topic-row coming-soon">
+          <span class="dash-topic-indicator" style="background: #f472b6"></span>
+          <span class="dash-topic-title">Agentic Memory</span>
+          <span class="dash-topic-count dim">—</span>
+          <span class="dash-topic-new dim">—</span>
         </div>
       </div>
-      <div class="kb-card-badge">Coming Soon</div>
-    </div>
+    </section>
 
-    <!-- Agentic Memory (Coming Soon) -->
-    <div class="kb-card coming-soon">
-      <div class="kb-card-icon">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="8" r="5"/>
-          <path d="M4 21v-2a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v2"/>
-          <path d="M9 8h6" stroke-dasharray="2 2"/>
-        </svg>
+    <!-- Guides Column -->
+    <section class="dash-col dash-col-side">
+      <div class="dash-section-header">
+        <h2>Guides</h2>
       </div>
-      <div class="kb-card-content">
-        <h2>Agentic Memory</h2>
-        <p>How AI agents remember, learn, and persist context. Memory architectures, retrieval systems, and long-term agent cognition.</p>
-        <div class="kb-card-meta">
-          <span class="kb-tag">AI Agents</span>
-          <span class="kb-tag">Memory Systems</span>
-          <span class="kb-tag">RAG</span>
-        </div>
+
+      <div class="dash-guides">
+        <a href="index.html" class="dash-guide-row">
+          <span class="dash-guide-title">Terminal Dev Stack</span>
+          <span class="dash-guide-arrow">→</span>
+        </a>
       </div>
-      <div class="kb-card-badge">Coming Soon</div>
-    </div>
-  </div>
 
-  <!-- Guides -->
-  <div class="kb-guides">
-    <h2>Guides</h2>
-    <p class="kb-guides-subtitle">Standalone walkthroughs not yet part of a larger topic.</p>
-    <div class="kb-guides-list">
-      <a href="index.html" class="kb-guide-link">
-        <span class="kb-guide-icon">⌨</span>
-        <span class="kb-guide-title">Terminal Dev Stack</span>
-        <span class="kb-guide-desc">Ghostty, tmux, Neovim, Lazygit, and AI coding tools</span>
-      </a>
-    </div>
-  </div>
+      <div class="dash-section-header" style="margin-top: 2rem;">
+        <h2>Visualizations</h2>
+      </div>
 
-  <div class="kb-about">
-    <h2>About This Knowledge Base</h2>
-    <p>This is my personal collection of curated resources, articles, tools, and learnings. Think of it as a public notebook—a place where I organize what I'm learning and share it with others who might find it useful.</p>
-    <p>Each topic contains:</p>
-    <ul>
-      <li><strong>Key Concepts</strong> — The foundational ideas you need to understand</li>
-      <li><strong>Essential Reading</strong> — Articles and papers worth your time</li>
-      <li><strong>Tools & Projects</strong> — Practical resources to explore</li>
-      <li><strong>My Notes</strong> — Personal observations and connections</li>
-    </ul>
-  </div>
+      <div class="dash-viz-placeholder">
+        <span class="dim">coming soon</span>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="dash-footer">
+    <div class="dash-footer-content">
+      A personal collection of curated resources, articles, and learnings.<br>
+      <span class="dim">Think of it as a public notebook.</span>
+    </div>
+  </footer>
+
 </body>
 </html>
