@@ -5,369 +5,251 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Knowledge Engineering | data-centered</title>
   <meta name="description" content="Curated resources on context engineering, semantic layers, ontologies, and making enterprise data AI-ready.">
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-  <nav class="nav">
-    <a href="knowledge.html" class="nav-brand">data-centered</a>
-  </nav>
+<body class="dashboard topic-page">
 
-  <div class="kb-detail-container">
-    <a href="knowledge.html" class="kb-back">← Back to Knowledge Base</a>
-
-    <div class="kb-detail-header">
-      <div class="kb-detail-icon semantic">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="3"/>
-          <circle cx="12" cy="12" r="8" stroke-dasharray="4 2"/>
-          <line x1="12" y1="1" x2="12" y2="4"/>
-          <line x1="12" y1="20" x2="12" y2="23"/>
-          <line x1="1" y1="12" x2="4" y2="12"/>
-          <line x1="20" y1="12" x2="23" y2="12"/>
-        </svg>
+  <header class="dash-header">
+    <div class="topic-header-row">
+      <a href="knowledge.html" class="topic-back">← Back</a>
+      <div class="topic-title-group">
+        <span class="topic-indicator" style="background: #06b6d4"></span>
+        <h1 class="topic-title">Knowledge Engineering</h1>
       </div>
-      <div>
-        <h1>Knowledge Engineering</h1>
-        <p class="kb-detail-subtitle">Making enterprise data AI-ready through context, semantics, and governance</p>
+      <div class="topic-stats">
+        <span class="topic-stat"><strong>32</strong> resources</span>
       </div>
     </div>
+    <p class="topic-subtitle">Making enterprise data AI-ready through context, semantics, and governance</p>
+  </header>
 
-    <div class="kb-intro">
-      <p>AI systems promise revolutionary conversational access to data, but most projects fail because corporate data lacks the necessary business context and semantic clarity. Traditional data pipelines were designed for transactional processing and reporting, often decoupling data from its business meaning during transformation—creating a critical <strong>AI Context Gap</strong>.</p>
-      <p>To bridge this gap, organizations must establish a comprehensive <strong>Enterprise Context Layer</strong> that transforms raw data into Action-Ready Data with consistent, verifiable business meaning.</p>
-    </div>
+  <main class="topic-layout">
 
-    <!-- Key Terms -->
-    <section class="kb-section">
-      <h2>Key Terms</h2>
-      <div class="kb-terms">
-        <div class="kb-term">
-          <dt>AI Context Gap</dt>
-          <dd>The space between what AI Analysts know (model context) and the specialized <strong>organizational context</strong> (definitions, metrics, unwritten rules, and judgment calls) that humans know but may not have documented.</dd>
+    <!-- Intro + Key Terms Column -->
+    <section class="topic-col topic-col-intro">
+      <div class="topic-intro">
+        <p>AI systems promise revolutionary conversational access to data, but most projects fail because corporate data lacks the necessary business context and semantic clarity. Traditional data pipelines were designed for transactional processing and reporting, often decoupling data from its business meaning—creating a critical <strong>AI Context Gap</strong>.</p>
+      </div>
+
+      <div class="topic-section">
+        <h2 class="topic-section-title">Key Terms</h2>
+        <div class="topic-terms">
+          <div class="topic-term"><dt>AI Context Gap</dt><dd>The space between model context and organizational context that humans know but haven't documented.</dd></div>
+          <div class="topic-term"><dt>Action-Ready Data</dt><dd>Data embedding business context required for automated decision-making by AI systems.</dd></div>
+          <div class="topic-term"><dt>Context Engineering</dt><dd>Engineering explicit knowledge into AI systems to close the AI Context Gap.</dd></div>
+          <div class="topic-term"><dt>Semantic Layer</dt><dd>The authoritative source of business context that persists across system transformations.</dd></div>
+          <div class="topic-term"><dt>Ontology</dt><dd>A formal, machine-readable specification defining entities, relationships, and constraints.</dd></div>
+          <div class="topic-term"><dt>Controlled Vocabulary</dt><dd>A curated list of approved terms—the smallest unit of semantic governance.</dd></div>
         </div>
-        <div class="kb-term">
-          <dt>Action-Ready Data</dt>
-          <dd>Data that moves beyond merely being technically compatible (AI-ready) by embedding the necessary business context, constraints, and implications required for <strong>automated decision-making</strong> by AI systems.</dd>
+      </div>
+
+      <div class="topic-section">
+        <h2 class="topic-section-title">Why Now</h2>
+        <div class="topic-callout">
+          <p><strong>95% of AI projects stall</strong> due to data readiness issues. Legacy data quality (60-70%) is far below the 99%+ required for production AI. Context engineering provides semantic rails to guide AI from probabilistic inference to verifiable knowledge.</p>
         </div>
-        <div class="kb-term">
-          <dt>Context Engineering</dt>
-          <dd>A necessary discipline focused on engineering explicit, structured knowledge (definitions, semantics, and business rules) into AI systems to improve accuracy, trustworthiness, and understanding, thereby closing the AI Context Gap.</dd>
-        </div>
-        <div class="kb-term">
-          <dt>Controlled Vocabulary (CV)</dt>
-          <dd>A curated, finite list of approved terms, each with one intended meaning, used to ensure that data is labeled and categorized consistently—the smallest effective unit of <strong>semantic governance</strong>.</dd>
-        </div>
-        <div class="kb-term">
-          <dt>Ontology</dt>
-          <dd>A formal, explicit, machine-readable specification of a shared conceptualization; a <strong>logical reasoning model</strong> that defines entities, relationships, and constraints through precise logical axioms, enabling machine understanding and automated inference.</dd>
-        </div>
-        <div class="kb-term">
-          <dt>Semantic Ambiguity</dt>
-          <dd>A critical technical barrier where data, stripped of business context during traditional transformations (e.g., distinguishing if a code "A" means Active or Approved), becomes meaningless to AI models, leading to misaligned outputs.</dd>
-        </div>
-        <div class="kb-term">
-          <dt>Semantic Layer</dt>
-          <dd>A critical foundation within data products that serves as the <strong>authoritative source of consistent business context</strong> or meaning that persists across system transformations, enabling AI systems to understand and act upon data.</dd>
+      </div>
+
+      <div class="topic-section">
+        <h2 class="topic-section-title">Slide Decks</h2>
+        <div class="topic-slides">
+          <a href="slides/Context_Engineering_Unlocking_AI_Value.pdf" target="_blank" class="topic-slide-link">
+            <span class="topic-slide-icon">📊</span>
+            <span>Context Engineering: Unlocking AI Value</span>
+          </a>
+          <a href="slides/AI_Context_Gap.pdf" target="_blank" class="topic-slide-link">
+            <span class="topic-slide-icon">📊</span>
+            <span>The AI Context Gap</span>
+          </a>
+          <a href="slides/AI_Value_Chasm.pdf" target="_blank" class="topic-slide-link">
+            <span class="topic-slide-icon">📊</span>
+            <span>The AI Value Chasm</span>
+          </a>
         </div>
       </div>
     </section>
 
-    <!-- Why Now -->
-    <section class="kb-section">
-      <h2>Why Context Matters in the AI Era</h2>
-      <div class="kb-callout why-now">
-        <p>Large Language Models, despite their statistical power, fundamentally operate on probability distributions and produce unreliable results without <strong>structured semantic foundations</strong>. This gap between model capability and business understanding results in <strong>95% of AI projects stalling in pilot</strong> due to data readiness and context issues.</p>
-        <ul class="kb-points">
-          <li>Legacy data quality (60–70% accuracy) is dangerously below the <strong>99%+ reliability</strong> required for production AI</li>
-          <li>Context engineering provides the <strong>semantic rails</strong> to guide AI interpretations toward verifiable knowledge instead of probabilistic inference</li>
-          <li>Organizations with semantic foundations can accelerate AI implementation from months to <strong>weeks</strong></li>
-          <li>As intelligence scales, understanding and accountability must scale with it</li>
-        </ul>
-      </div>
-    </section>
+    <!-- Reading List Column -->
+    <section class="topic-col topic-col-links">
+      <div class="topic-section">
+        <h2 class="topic-section-title">Reading List</h2>
 
-    <!-- Slide Decks -->
-    <section class="kb-section">
-      <h2>Slide Decks</h2>
-      <div class="kb-slides-grid">
-        <div class="pdf-viewer slides compact">
-          <div class="pdf-viewer-header">
-            <span class="pdf-title">Context Engineering: Unlocking AI Value</span>
-            <button class="pdf-fullscreen-btn" onclick="this.closest('.pdf-viewer').classList.toggle('fullscreen')">⛶</button>
+        <div class="topic-category">
+          <h3 class="topic-category-title">Core AI Architecture & Challenges</h3>
+          <div class="topic-links">
+            <a href="https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #06b6d4"></span>
+              <span class="topic-link-author">Sagar Paul</span>
+              <span class="topic-link-title">AI-Ready Data: A Technical Assessment</span>
+            </a>
+            <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #06b6d4"></span>
+              <span class="topic-link-author">Shubham Bhargav</span>
+              <span class="topic-link-title">Context Engineering for AI Analysts</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #a855f7"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">From Metadata to Meaning</span>
+            </a>
+            <a href="https://atlan.com/know/closing-the-context-gap/" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #3b82f6"></span>
+              <span class="topic-link-author">Prukalpa Sankar</span>
+              <span class="topic-link-title">The Missing Line Item in Your 2026 AI Budget</span>
+            </a>
+            <a href="https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #a855f7"></span>
+              <span class="topic-link-author">Vince Dacanay</span>
+              <span class="topic-link-title">The Semantic Gap: Why Your AI Can't Read The Room</span>
+            </a>
           </div>
-          <div class="pdf-viewer-container">
-            <iframe src="slides/Context_Engineering_Unlocking_AI_Value.pdf#navpanes=0&view=FitH" loading="lazy"></iframe>
-          </div>
-          <a href="slides/Context_Engineering_Unlocking_AI_Value.pdf" target="_blank" class="pdf-mobile-link">📄 View Slides</a>
         </div>
-        <div class="pdf-viewer slides compact">
-          <div class="pdf-viewer-header">
-            <span class="pdf-title">The AI Context Gap</span>
-            <button class="pdf-fullscreen-btn" onclick="this.closest('.pdf-viewer').classList.toggle('fullscreen')">⛶</button>
+
+        <div class="topic-category">
+          <h3 class="topic-category-title">Semantic Foundations & Governance</h3>
+          <div class="topic-links">
+            <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #22c55e"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">The Ontology Pipeline</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #a855f7"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Concept Models Versus Ontologies</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Controlled Vocabularies, Part I</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Controlled Vocabularies, Part II</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Controlled Vocabularies, Part III</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Metadata as a Data Model, Part 1</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Metadata as a Data Model, Part 2</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #10b981"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Metadata Application Profiles</span>
+            </a>
           </div>
-          <div class="pdf-viewer-container">
-            <iframe src="slides/AI_Context_Gap.pdf#navpanes=0&view=FitH" loading="lazy"></iframe>
-          </div>
-          <a href="slides/AI_Context_Gap.pdf" target="_blank" class="pdf-mobile-link">📄 View Slides</a>
         </div>
-        <div class="pdf-viewer slides compact">
-          <div class="pdf-viewer-header">
-            <span class="pdf-title">The AI Value Chasm</span>
-            <button class="pdf-fullscreen-btn" onclick="this.closest('.pdf-viewer').classList.toggle('fullscreen')">⛶</button>
+
+        <div class="topic-category">
+          <h3 class="topic-category-title">Data Modeling & Semantic Layer</h3>
+          <div class="topic-links">
+            <a href="https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #a855f7"></span>
+              <span class="topic-link-author">Joe Reis</span>
+              <span class="topic-link-title">Semantics in Data Modeling</span>
+            </a>
+            <a href="https://www.atscale.com/blog/golden-age-of-the-semantic-layer/" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fbbf24"></span>
+              <span class="topic-link-author">Bagofwords</span>
+              <span class="topic-link-title">Semantic Layers Were Built for Control</span>
+            </a>
+            <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #ff692e"></span>
+              <span class="topic-link-author">dbt</span>
+              <span class="topic-link-title">Consume metrics from your Semantic Layer</span>
+            </a>
+            <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #ff692e"></span>
+              <span class="topic-link-author">dbt</span>
+              <span class="topic-link-title">Administer the Semantic Layer</span>
+            </a>
+            <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #ff692e"></span>
+              <span class="topic-link-author">dbt</span>
+              <span class="topic-link-title">Deploy your metrics</span>
+            </a>
           </div>
-          <div class="pdf-viewer-container">
-            <iframe src="slides/AI_Value_Chasm.pdf#navpanes=0&view=FitH" loading="lazy"></iframe>
-          </div>
-          <a href="slides/AI_Value_Chasm.pdf" target="_blank" class="pdf-mobile-link">📄 View Slides</a>
         </div>
+
+        <div class="topic-category">
+          <h3 class="topic-category-title">Agentic Systems & Workflow</h3>
+          <div class="topic-links">
+            <a href="https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #10b981"></span>
+              <span class="topic-link-author">Jay Sobel</span>
+              <span class="topic-link-title">Building an Analyst Agent with dbt</span>
+            </a>
+            <a href="https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #94a3b8"></span>
+              <span class="topic-link-author">Tobias Macey</span>
+              <span class="topic-link-title">Context Engineering as a Discipline</span>
+            </a>
+            <a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #f472b6"></span>
+              <span class="topic-link-author">Ramp Engineering</span>
+              <span class="topic-link-title">Meet Ramp Research: Our Agentic Data Analyst</span>
+            </a>
+            <a href="https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #94a3b8"></span>
+              <span class="topic-link-author">Jenna Jordan</span>
+              <span class="topic-link-title">The Librarian's Reference Interview</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="topic-category">
+          <h3 class="topic-category-title">Knowledge Graphs & RAG</h3>
+          <div class="topic-links">
+            <a href="https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #06b6d4"></span>
+              <span class="topic-link-author">Alessandro Negro</span>
+              <span class="topic-link-title">Grounding LLMs: The Knowledge Graph Foundation</span>
+            </a>
+            <a href="https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #10b981"></span>
+              <span class="topic-link-author">Kurt Cagle</span>
+              <span class="topic-link-title">Tips for Building Knowledge Graphs</span>
+            </a>
+            <a href="https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #3b82f6"></span>
+              <span class="topic-link-author">Vin Vashishta</span>
+              <span class="topic-link-title">Why Your Agentic Enterprise Needs an Ontology</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="topic-category">
+          <h3 class="topic-category-title">Process & Tacit Knowledge</h3>
+          <div class="topic-links">
+            <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Process Knowledge Management, Part I</span>
+            </a>
+            <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" class="topic-link">
+              <span class="topic-link-tag" style="background: #fb923c"></span>
+              <span class="topic-link-author">Jessica Talisman</span>
+              <span class="topic-link-title">Process Knowledge Management, Part II</span>
+            </a>
+          </div>
+        </div>
+
       </div>
     </section>
 
-    <!-- Core AI Architecture & Challenges -->
-    <section class="kb-section">
-      <h2>Core AI Architecture & Challenges</h2>
-      <div class="kb-links">
-        <a href="https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Sagar Paul</div>
-          <div class="kb-link-title">AI-Ready Data: A Technical Assessment. The Fuel and the Friction.</div>
-          <div class="kb-link-desc">Highlights four technical barriers to scalable AI solutions.</div>
-          <span class="kb-link-tag" data-tag="foundation">Foundation</span>
-        </a>
-        <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Shubham Bhargav</div>
-          <div class="kb-link-title">Context Engineering for AI Analysts</div>
-          <div class="kb-link-desc">Defines the AI Context Gap and mandates Context Engineering.</div>
-          <span class="kb-link-tag" data-tag="key concept">Key Concept</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">From Metadata to Meaning</div>
-          <div class="kb-link-desc">Argues that organizations suffer from information/knowledge gaps.</div>
-          <span class="kb-link-tag" data-tag="theory">Theory</span>
-        </a>
-        <a href="https://atlan.com/know/closing-the-context-gap/" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Prukalpa Sankar</div>
-          <div class="kb-link-title">The Missing Line Item in Your 2026 AI Budget: Context Infrastructure</div>
-          <div class="kb-link-desc">Identifies the AI Context Gap as the reason 95% of AI projects fail.</div>
-          <span class="kb-link-tag" data-tag="strategy">Strategy</span>
-        </a>
-        <a href="https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Vince Dacanay</div>
-          <div class="kb-link-title">The Semantic Gap: Why Your AI Still Can't Read The Room</div>
-          <div class="kb-link-desc">Defines Semantic Density as the compressed context and cultural knowledge.</div>
-          <span class="kb-link-tag" data-tag="theory">Theory</span>
-        </a>
-      </div>
-    </section>
+  </main>
 
-    <!-- Semantic Foundations & Governance (Theory) -->
-    <section class="kb-section">
-      <h2>Semantic Foundations & Governance (Theory)</h2>
-      <div class="kb-links">
-        <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">The Ontology Pipeline</div>
-          <div class="kb-link-desc">Presents the Ontology Pipeline as a systematic, iterative approach.</div>
-          <span class="kb-link-tag" data-tag="framework">Framework</span>
-        </a>
-        <a href="https://moderndata101.substack.com/p/the-ontology-pipeline" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">How the Ontology Pipeline Powers Semantic Knowledge Systems</div>
-          <div class="kb-link-desc">Presents the Ontology Pipeline as a systematic methodology.</div>
-          <span class="kb-link-tag" data-tag="framework">Framework</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Concept Models Versus Ontologies: The Sketch and The Blueprint</div>
-          <div class="kb-link-desc">Distinguishes Concept Models (communication tool) from Ontologies (formal specification).</div>
-          <span class="kb-link-tag" data-tag="theory">Theory</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Controlled Vocabularies, Part I</div>
-          <div class="kb-link-desc">Defines the CV as the smallest effective unit of semantic infrastructure.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Controlled Vocabularies, Part II</div>
-          <div class="kb-link-desc">Focuses on building Taxonomy and classification systems.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Controlled Vocabularies, Part III (Reliable AI Focus)</div>
-          <div class="kb-link-desc">Establishes CVs as critical infrastructure for AI reliability.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Metadata as a Data Model, Part 1</div>
-          <div class="kb-link-desc">Contrasts Library Science's holistic approach with enterprise divergence.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Metadata as a Data Model, Part 2</div>
-          <div class="kb-link-desc">Focuses on bridging the governance-semantics disconnect.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Semantic Foundations & Governance (Practice) -->
-    <section class="kb-section">
-      <h2>Semantic Foundations & Governance (Practice)</h2>
-      <div class="kb-links">
-        <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Engineering Context with Controlled Vocabularies</div>
-          <div class="kb-link-desc">Describes Context Engineering using CVs. Details methodology.</div>
-          <span class="kb-link-tag" data-tag="how-to">How-To</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Metadata as a Data Model, Part 3 (Metadata Application Profiles)</div>
-          <div class="kb-link-desc">Introduces the Metadata Application Profile (MAP) as a practical bridge.</div>
-          <span class="kb-link-tag" data-tag="how-to">How-To</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Data Modeling & Semantic Layer -->
-    <section class="kb-section">
-      <h2>Data Modeling & Semantic Layer</h2>
-      <div class="kb-links">
-        <a href="https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Joe Reis</div>
-          <div class="kb-link-title">Semantics in Data Modeling</div>
-          <div class="kb-link-desc">Discusses semantics as the heart of data modeling.</div>
-          <span class="kb-link-tag" data-tag="theory">Theory</span>
-        </a>
-        <a href="https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Juha Korpela</div>
-          <div class="kb-link-title">Modeling Semantics: How Data Models and Ontologies Connect</div>
-          <div class="kb-link-desc">Argues that Conceptual Data Modeling is an excellent starting point.</div>
-          <span class="kb-link-tag" data-tag="theory">Theory</span>
-        </a>
-        <a href="https://www.atscale.com/blog/golden-age-of-the-semantic-layer/" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Bagofwords</div>
-          <div class="kb-link-title">Semantic Layers Were Built for Control, AI Needs Context to Think</div>
-          <div class="kb-link-desc">Argues that traditional BI semantic layers are too rigid and need evolution.</div>
-          <span class="kb-link-tag" data-tag="opinion">Opinion</span>
-        </a>
-        <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">dbt Developer Hub</div>
-          <div class="kb-link-title">Consume metrics from your Semantic Layer</div>
-          <div class="kb-link-desc">Links to key resources for querying and consuming metrics.</div>
-          <span class="kb-link-tag" data-tag="dbt">dbt</span>
-        </a>
-        <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">dbt Developer Hub</div>
-          <div class="kb-link-title">Administer the Semantic Layer</div>
-          <div class="kb-link-desc">Provides instructions and prerequisites for configuring dbt Semantic Layer.</div>
-          <span class="kb-link-tag" data-tag="dbt">dbt</span>
-        </a>
-        <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">dbt Developer Hub</div>
-          <div class="kb-link-title">Deploy your metrics</div>
-          <div class="kb-link-desc">Explains the necessary process for job run in deployment environments.</div>
-          <span class="kb-link-tag" data-tag="dbt">dbt</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Agentic Systems & Workflow -->
-    <section class="kb-section">
-      <h2>Agentic Systems & Workflow</h2>
-      <div class="kb-links">
-        <a href="https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jay Sobel</div>
-          <div class="kb-link-title">Building an Analyst Agent with dbt</div>
-          <div class="kb-link-desc">Provides advice for implementing an Analyst Agent with trusted AI.</div>
-          <span class="kb-link-tag" data-tag="implementation">Implementation</span>
-        </a>
-        <a href="https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Tobias Macey & Nick Schrock</div>
-          <div class="kb-link-title">Context Engineering as a Discipline: Building Governed AI Analytics</div>
-          <div class="kb-link-desc">Discussion of Compass, a Slack-native, agentic analytics system.</div>
-          <span class="kb-link-tag" data-tag="podcast">Podcast</span>
-        </a>
-        <a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Faiz Hilaly, Cesar Duran, Jay Sobel</div>
-          <div class="kb-link-title">Meet Ramp Research: Our Agentic Data Analyst</div>
-          <div class="kb-link-desc">Case study on Ramp's in-house AI agent. Success relied on semantic foundations.</div>
-          <span class="kb-link-tag" data-tag="case study">Case Study</span>
-        </a>
-        <a href="https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jenna Jordan</div>
-          <div class="kb-link-title">The librarian's reference interview for data teams (abridged)</div>
-          <div class="kb-link-desc">Advocates that data teams adopt the Reference Interview methodology.</div>
-          <span class="kb-link-tag" data-tag="methodology">Methodology</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Knowledge Graph Implementation & RAG -->
-    <section class="kb-section">
-      <h2>Knowledge Graph Implementation & RAG</h2>
-      <div class="kb-links">
-        <a href="https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Alessandro Negro</div>
-          <div class="kb-link-title">Grounding LLMs: The Knowledge Graph foundation every AI project needs</div>
-          <div class="kb-link-desc">Uses the Schwartz hallucination case to argue that LLMs need KG grounding.</div>
-          <span class="kb-link-tag" data-tag="foundation">Foundation</span>
-        </a>
-        <a href="https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Kurt Cagle</div>
-          <div class="kb-link-title">Tips for Building Knowledge Graphs</div>
-          <div class="kb-link-desc">Technical advice on KG construction. Notes KGs scale better than alternatives.</div>
-          <span class="kb-link-tag" data-tag="how-to">How-To</span>
-        </a>
-        <a href="https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Vin Vashishta</div>
-          <div class="kb-link-title">Why Your Agentic Enterprise Needs an Ontology</div>
-          <div class="kb-link-desc">Argues that an Enterprise Ontology provides the shared foundation for agents.</div>
-          <span class="kb-link-tag" data-tag="strategy">Strategy</span>
-        </a>
-      </div>
-    </section>
-
-    <!-- Process & Tacit Knowledge -->
-    <section class="kb-section">
-      <h2>Process & Tacit Knowledge</h2>
-      <div class="kb-links">
-        <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Process Knowledge Management, Part I</div>
-          <div class="kb-link-desc">Defines Process Knowledge (how work flows) as a critical component.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-        <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" rel="noopener" class="kb-link">
-          <div class="kb-link-source">Jessica Talisman</div>
-          <div class="kb-link-title">Process Knowledge Management, Part II</div>
-          <div class="kb-link-desc">Details methodologies for collecting process knowledge.</div>
-          <span class="kb-link-tag" data-tag="series">Series</span>
-        </a>
-      </div>
-    </section>
-
-  </div>
-
-  <script>
-    // Mobile tap-to-expand for link descriptions
-    if ('ontouchstart' in window) {
-      document.querySelectorAll('.kb-link').forEach(link => {
-        link.addEventListener('click', function(e) {
-          if (window.innerWidth <= 600 && !this.classList.contains('expanded')) {
-            e.preventDefault();
-            document.querySelectorAll('.kb-link.expanded').forEach(l => l.classList.remove('expanded'));
-            this.classList.add('expanded');
-          }
-        });
-      });
-    }
-  </script>
 </body>
 </html>

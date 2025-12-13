@@ -1921,3 +1921,332 @@ a.kb-card:hover .kb-card-arrow {
     align-items: flex-start;
   }
 }
+
+/* ========================================
+   Topic Page Styles (Dashboard variant)
+   ======================================== */
+
+body.dashboard.topic-page {
+  padding: 0;
+}
+
+/* Topic Header */
+.topic-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.topic-back {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.topic-back:hover {
+  color: var(--accent);
+}
+
+.topic-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.topic-indicator {
+  width: 4px;
+  height: 28px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.topic-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: 0;
+  text-transform: none;
+  text-align: left;
+  margin: 0;
+}
+
+.topic-stats {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.topic-stat strong {
+  color: var(--text);
+}
+
+.topic-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  margin: 0;
+  padding-left: calc(1.5rem + 0.8rem + 4px + 0.75rem); /* back link width + gaps + indicator */
+}
+
+/* Topic Layout - Two Columns */
+.topic-layout {
+  display: grid;
+  grid-template-columns: 380px 1fr;
+  flex: 1;
+}
+
+.topic-col {
+  padding: 2rem 2.5rem;
+}
+
+.topic-col-intro {
+  border-right: 1px solid var(--border);
+  background: rgba(0,0,0,0.15);
+}
+
+.topic-col-links {
+  padding: 2rem 3rem;
+}
+
+/* Topic Intro */
+.topic-intro {
+  margin-bottom: 2rem;
+}
+
+.topic-intro p {
+  font-size: 0.85rem;
+  line-height: 1.75;
+  color: var(--text-dim);
+}
+
+.topic-intro strong {
+  color: var(--text);
+}
+
+/* Topic Sections */
+.topic-section {
+  margin-bottom: 2rem;
+}
+
+.topic-section:last-child {
+  margin-bottom: 0;
+}
+
+.topic-section-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Topic Terms Grid */
+.topic-terms {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.topic-term {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.topic-term:last-child {
+  border-bottom: none;
+}
+
+.topic-term dt {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.25rem;
+}
+
+.topic-term dd {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-dim);
+  margin: 0;
+}
+
+/* Topic Callout */
+.topic-callout {
+  background: rgba(139, 92, 246, 0.08);
+  border: 1px solid var(--accent-kb);
+  border-radius: 6px;
+  padding: 1rem;
+}
+
+.topic-callout p {
+  font-size: 0.8rem;
+  line-height: 1.7;
+  margin: 0;
+}
+
+.topic-callout strong {
+  color: var(--text);
+}
+
+/* Topic Slides */
+.topic-slides {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topic-slide-link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  text-decoration: none;
+  color: var(--text);
+  font-size: 0.8rem;
+  transition: all 0.15s ease;
+}
+
+.topic-slide-link:hover {
+  border-color: var(--accent);
+  background: rgba(0,255,136,0.05);
+  color: var(--accent);
+}
+
+.topic-slide-icon {
+  font-size: 1rem;
+}
+
+/* Topic Category */
+.topic-category {
+  margin-bottom: 2rem;
+}
+
+.topic-category:last-child {
+  margin-bottom: 0;
+}
+
+.topic-category-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  color: var(--text-dim);
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Topic Links - Ashley Cai style */
+.topic-links {
+  display: flex;
+  flex-direction: column;
+}
+
+.topic-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s ease;
+}
+
+.topic-link:last-child {
+  border-bottom: none;
+}
+
+.topic-link:hover {
+  background: linear-gradient(90deg, rgba(0,255,136,0.08) 0%, transparent 100%);
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+.topic-link:hover .topic-link-title {
+  color: var(--accent);
+}
+
+.topic-link-tag {
+  width: 3px;
+  height: 16px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.topic-link-author {
+  font-size: 0.65rem;
+  color: var(--text-dim);
+  min-width: 100px;
+  flex-shrink: 0;
+}
+
+.topic-link-title {
+  font-size: 0.85rem;
+  color: var(--text);
+  transition: color 0.15s ease;
+}
+
+/* Topic Page Mobile */
+@media (max-width: 900px) {
+  .topic-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-col-intro {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .topic-col {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .topic-header-row {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .topic-back {
+    order: -1;
+    width: 100%;
+  }
+
+  .topic-subtitle {
+    padding-left: 0;
+  }
+
+  .topic-title {
+    font-size: 1.1rem;
+  }
+
+  .topic-stats {
+    margin-left: auto;
+  }
+
+  .topic-link {
+    flex-wrap: wrap;
+    padding: 0.75rem 0;
+  }
+
+  .topic-link-author {
+    width: 100%;
+    min-width: auto;
+    margin-bottom: 0.15rem;
+  }
+
+  .topic-link-title {
+    font-size: 0.8rem;
+  }
+}
