@@ -5,12 +5,15 @@
   --border: #2a2a2a;
   --text: #e8e8e8;
   --text-dim: #888;
+  --accent: #00ff88;
   --accent-ghostty: #ff6b6b;
   --accent-tmux: #4ecdc4;
   --accent-nvim: #a6e22e;
   --accent-lazygit: #f39c12;
   --accent-claude: #d4a574;
   --accent-opencode: #9b59b6;
+  --accent-semantic: #06b6d4;
+  --accent-kb: #8b5cf6;
 }
 
 * {
@@ -26,6 +29,232 @@ body {
   min-height: 100vh;
   padding: 2rem;
   padding-top: 5rem;
+}
+
+/* Dashboard Layout */
+body.dashboard {
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.dash-header {
+  padding: 2rem 3rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--text);
+  margin-bottom: 0.25rem;
+}
+
+.dash-tagline {
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.dash-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  flex: 1;
+}
+
+.dash-col {
+  padding: 2rem 3rem;
+}
+
+.dash-col-main {
+  border-right: 1px solid var(--border);
+}
+
+.dash-col-side {
+  background: rgba(0,0,0,0.2);
+}
+
+.dash-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.dash-section-header h2 {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.dash-col-labels {
+  display: flex;
+  gap: 1.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+}
+
+.dash-col-labels span {
+  width: 50px;
+  text-align: right;
+}
+
+/* Topic Rows */
+.dash-topics {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-topic-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s ease;
+}
+
+.dash-topic-row:last-child {
+  border-bottom: none;
+}
+
+a.dash-topic-row:hover {
+  background: linear-gradient(90deg, rgba(0,255,136,0.08) 0%, transparent 100%);
+  padding-left: 0.5rem;
+  margin-left: -0.5rem;
+}
+
+a.dash-topic-row:hover .dash-topic-title {
+  color: var(--accent);
+}
+
+.dash-topic-row.coming-soon {
+  opacity: 0.5;
+}
+
+.dash-topic-indicator {
+  width: 3px;
+  height: 20px;
+  border-radius: 1px;
+  flex-shrink: 0;
+}
+
+.dash-topic-title {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: color 0.15s ease;
+}
+
+.dash-topic-count,
+.dash-topic-new {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  width: 50px;
+  text-align: right;
+}
+
+.dash-topic-new {
+  color: var(--accent);
+}
+
+.dim {
+  color: var(--text-dim);
+}
+
+/* Guide Rows */
+.dash-guides {
+  display: flex;
+  flex-direction: column;
+}
+
+.dash-guide-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.15s ease;
+}
+
+.dash-guide-row:last-child {
+  border-bottom: none;
+}
+
+.dash-guide-row:hover {
+  color: var(--accent);
+}
+
+.dash-guide-title {
+  font-size: 0.85rem;
+}
+
+.dash-guide-arrow {
+  font-family: 'JetBrains Mono', monospace;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+
+.dash-guide-row:hover .dash-guide-arrow {
+  opacity: 1;
+}
+
+/* Viz placeholder */
+.dash-viz-placeholder {
+  padding: 2rem;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+/* Footer */
+.dash-footer {
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 3rem;
+}
+
+.dash-footer-content {
+  font-size: 0.75rem;
+  color: var(--text-dim);
+  line-height: 1.6;
+}
+
+/* Dashboard Mobile */
+@media (max-width: 768px) {
+  .dash-header {
+    padding: 1.5rem;
+  }
+
+  .dash-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .dash-col {
+    padding: 1.5rem;
+  }
+
+  .dash-col-main {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .dash-footer {
+    padding: 1.5rem;
+  }
 }
 
 /* Navigation */
