@@ -2060,39 +2060,35 @@ body.dashboard.topic-page {
   line-height: 1.4;
 }
 
-/* Slides Row - Inline */
-.topic-slides-row {
+/* Slides Links */
+.topic-slides-links {
   display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.5rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--border);
-  margin-top: auto;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.topic-slides-label {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--text-dim);
-}
-
-.topic-slides-row a {
-  font-size: 0.65rem;
+.slide-link {
+  font-size: 0.7rem;
   color: var(--text-dim);
   text-decoration: none;
-  padding: 0.2rem 0.5rem;
-  background: var(--bg-card);
-  border: 1px solid var(--border);
-  border-radius: 3px;
+  padding: 0.3rem 0;
+  border-bottom: 1px dotted var(--border);
   transition: all 0.15s ease;
+  display: block;
 }
 
-.topic-slides-row a:hover {
+.slide-link:last-child {
+  border-bottom: none;
+}
+
+.slide-link:hover {
   color: var(--accent);
-  border-color: var(--accent);
+  padding-left: 0.3rem;
+}
+
+.slide-link::before {
+  content: '→ ';
+  opacity: 0.4;
 }
 
 /* Reading Section */
@@ -2156,8 +2152,9 @@ body.dashboard.topic-page {
   content: '+';
 }
 
-/* Links in collapsed sections */
-.tlink.section-hidden {
+/* Content in collapsed sections */
+.tlink.section-hidden,
+.section-content.section-hidden {
   display: none;
 }
 
@@ -2562,6 +2559,15 @@ body.dashboard.topic-page {
     grid-template-columns: 1fr;
   }
 
+  /* Remove overflow so sticky works relative to viewport */
+  .topic-reading {
+    overflow: visible;
+  }
+
+  .topic-aside {
+    overflow: visible;
+  }
+
   /* Show insights at bottom on mobile */
   .topic-insights {
     display: block;
@@ -2569,14 +2575,18 @@ body.dashboard.topic-page {
     border-left: none;
     border-top: 1px solid var(--border);
     padding: 1rem;
+    overflow: visible;
   }
 
-  /* Tighter sticky headers on mobile */
+  /* Sticky headers on mobile - stick to viewport */
   .tcat {
     background: var(--bg-dark);
     margin: 0 -1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
   }
 
   /* Section separators on mobile */

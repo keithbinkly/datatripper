@@ -21,14 +21,16 @@
 
     <!-- Left Panel: Context -->
     <aside class="topic-aside">
-      <p class="topic-lede">AI projects fail because corporate data lacks business context. Traditional pipelines decouple data from meaning—creating an <strong>AI Context Gap</strong>.</p>
+      <h3 class="tcat">Context</h3>
+      <p class="topic-lede section-content">AI projects fail because corporate data lacks business context. Traditional pipelines decouple data from meaning—creating an <strong>AI Context Gap</strong>.</p>
 
-      <div class="topic-stat-box">
+      <div class="topic-stat-box section-content">
         <span class="topic-stat-num">95%</span>
         <span class="topic-stat-label">of AI projects stall due to data readiness</span>
       </div>
 
-      <div class="topic-terms-grid">
+      <h3 class="tcat">Key Terms</h3>
+      <div class="topic-terms-grid section-content">
         <div class="tterm"><span class="tterm-name">Context Gap</span><span class="tterm-def">Space between model + org context</span></div>
         <div class="tterm"><span class="tterm-name">Action-Ready</span><span class="tterm-def">Data with embedded business context</span></div>
         <div class="tterm"><span class="tterm-name">Semantic Layer</span><span class="tterm-def">Authoritative source of context</span></div>
@@ -36,11 +38,11 @@
         <div class="tterm"><span class="tterm-name">Controlled Vocab</span><span class="tterm-def">Curated list of approved terms</span></div>
       </div>
 
-      <div class="topic-slides-row">
-        <span class="topic-slides-label">Slides</span>
-        <a href="slides/Context_Engineering_Unlocking_AI_Value.pdf" target="_blank">Unlocking AI Value</a>
-        <a href="slides/AI_Context_Gap.pdf" target="_blank">Context Gap</a>
-        <a href="slides/AI_Value_Chasm.pdf" target="_blank">Value Chasm</a>
+      <h3 class="tcat">Slides</h3>
+      <div class="topic-slides-links section-content">
+        <a href="slides/Context_Engineering_Unlocking_AI_Value.pdf" target="_blank" class="slide-link">Unlocking AI Value</a>
+        <a href="slides/AI_Context_Gap.pdf" target="_blank" class="slide-link">Context Gap</a>
+        <a href="slides/AI_Value_Chasm.pdf" target="_blank" class="slide-link">Value Chasm</a>
       </div>
     </aside>
 
@@ -497,17 +499,17 @@
     (function() {
       const isMobile = () => window.innerWidth <= 900;
 
-      // Get links belonging to a section header
-      function getSectionLinks(header) {
-        const links = [];
+      // Get all content belonging to a section header (links or section-content)
+      function getSectionContent(header) {
+        const content = [];
         let sibling = header.nextElementSibling;
         while (sibling && !sibling.classList.contains('tcat')) {
-          if (sibling.classList.contains('tlink')) {
-            links.push(sibling);
+          if (sibling.classList.contains('tlink') || sibling.classList.contains('section-content')) {
+            content.push(sibling);
           }
           sibling = sibling.nextElementSibling;
         }
-        return links;
+        return content;
       }
 
       // Collapsible section headers - works on all screen sizes
@@ -516,13 +518,13 @@
           e.preventDefault();
 
           const isCollapsed = this.classList.toggle('collapsed');
-          const links = getSectionLinks(this);
+          const content = getSectionContent(this);
 
-          links.forEach(link => {
+          content.forEach(item => {
             if (isCollapsed) {
-              link.classList.add('section-hidden');
+              item.classList.add('section-hidden');
             } else {
-              link.classList.remove('section-hidden');
+              item.classList.remove('section-hidden');
             }
           });
         });
