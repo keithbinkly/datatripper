@@ -1,0 +1,995 @@
+# Resources Database
+# Single source of truth for all knowledge base resources
+#
+# Schema:
+#   id: stable identifier (kebab-case)
+#   url: canonical URL
+#   preferredLabel: authoritative title
+#   alternateLabels: synonyms, acronyms, search variations
+#   definition: precise description with semantic boundaries
+#
+#   Provenance:
+#     author: author ID (references authors.yaml)
+#     source: platform/publication name
+#     contentType: essay | podcast | video | documentation | blog | paper
+#     publishedDate: YYYY-MM-DD (if known)
+#     dateAdded: YYYY-MM-DD
+#
+#   Classification:
+#     domain: top-level knowledge domain
+#     category: sub-category within domain
+#     granularity: foundational | conceptual | implementation | advanced
+#
+#   Relationships:
+#     - type: broader | narrower | related | requires-prerequisite | governed-by | is-example-of
+#       target: resource-id
+#
+#   Quality:
+#     validationStatus: unvalidated | reviewed | tested
+#
+#   Display:
+#     readingTime: estimated time (e.g., "10m", "45m")
+#     color: hex color for visual categorization
+#
+# ═══════════════════════════════════════════════════════════════════════════════
+
+metadata:
+  version: "1.0"
+  lastUpdated: 2024-12-13
+  totalResources: 27
+
+domains:
+  - id: knowledge-engineering
+    name: Knowledge Engineering
+    description: >
+      AI projects fail because corporate data lacks business context.
+      Traditional pipelines decouple data from meaning—creating an AI Context Gap.
+    color: "#06b6d4"
+    categories:
+      - Core Architecture
+      - Semantic Layer
+      - Knowledge Graphs
+      - Semantic Foundations
+      - Agentic Systems
+      - Process Knowledge
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# RESOURCES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+resources:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Core Architecture
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: ai-ready-data-technical-assessment
+    url: https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment
+    preferredLabel: "AI-Ready Data: Technical Assessment"
+    alternateLabels:
+      - AI data readiness
+      - data architecture assessment
+      - AI-ready data framework
+    definition: >
+      Practical framework for assessing and improving data readiness
+      for AI applications.
+
+    # Provenance
+    author: s-paul
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Core Architecture
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 10m
+    color: "#06b6d4"
+
+  - id: context-engineering-ai-agents-manus
+    url: https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus
+    preferredLabel: Context Engineering for AI Agents
+    alternateLabels:
+      - context engineering
+      - AI agent context
+      - Manus context lessons
+    definition: >
+      Lessons from building Manus on how to engineer context for AI agent systems.
+
+    # Provenance
+    author: manus-team
+    source: Manus
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Core Architecture
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 15m
+    color: "#06b6d4"
+
+  - id: from-metadata-to-meaning
+    url: https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge
+    preferredLabel: From Metadata to Meaning
+    alternateLabels:
+      - metadata meaning
+      - knowledge architecture
+      - metadata to semantics
+    definition: >
+      How knowledge architecture bridges the gap between raw metadata and business meaning.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Core Architecture
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 12m
+    color: "#a855f7"
+
+  - id: missing-line-item-ai-budget
+    url: https://atlan.com/know/closing-the-context-gap/
+    preferredLabel: Missing Line Item in 2026 AI Budget
+    alternateLabels:
+      - context gap budget
+      - AI budget planning
+      - context engineering investment
+    definition: >
+      Why context engineering should be a dedicated budget item for enterprise AI initiatives.
+
+    # Provenance
+    author: p-sankar
+    source: Atlan
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Core Architecture
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 8m
+    color: "#3b82f6"
+
+  - id: the-semantic-gap
+    url: https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room
+    preferredLabel: The Semantic Gap
+    alternateLabels:
+      - semantic gap AI
+      - AI context understanding
+      - organizational context AI
+    definition: >
+      Understanding why AI systems struggle with organizational context and nuance.
+
+    # Provenance
+    author: v-dacanay
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Core Architecture
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 7m
+    color: "#a855f7"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Semantic Layer
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: semantics-in-data-modeling
+    url: https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling
+    preferredLabel: Semantics in Data Modeling
+    alternateLabels:
+      - semantic data modeling
+      - meaning in data models
+      - data model semantics
+    definition: >
+      Why semantics matter in data modeling and how to incorporate meaning into your models.
+
+    # Provenance
+    author: j-reis
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Layer
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 9m
+    color: "#a855f7"
+
+  - id: semantic-layers-for-control
+    url: https://www.atscale.com/blog/golden-age-of-the-semantic-layer/
+    preferredLabel: Semantic Layers for Control
+    alternateLabels:
+      - semantic layer governance
+      - metric control
+      - business metrics layer
+    definition: >
+      How semantic layers provide governance and control over business metrics.
+
+    # Provenance
+    author: atscale-team
+    source: AtScale
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Layer
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 6m
+    color: "#fbbf24"
+
+  - id: dbt-consume-metrics
+    url: https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics
+    preferredLabel: Consume Metrics
+    alternateLabels:
+      - dbt metrics consumption
+      - query semantic layer
+      - dbt metric queries
+    definition: >
+      How to query and consume metrics from the dbt Semantic Layer.
+
+    # Provenance
+    author: dbt-labs
+    source: dbt Docs
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Layer
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: related
+        target: dbt-administer-semantic-layer
+      - type: related
+        target: dbt-deploy-metrics
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 4m
+    color: "#ff692e"
+
+  - id: dbt-administer-semantic-layer
+    url: https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl
+    preferredLabel: Administer Semantic Layer
+    alternateLabels:
+      - dbt semantic layer setup
+      - semantic layer administration
+      - dbt SL config
+    definition: >
+      Setup and administration guide for the dbt Semantic Layer.
+
+    # Provenance
+    author: dbt-labs
+    source: dbt Docs
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Layer
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: related
+        target: dbt-consume-metrics
+      - type: related
+        target: dbt-deploy-metrics
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 5m
+    color: "#ff692e"
+
+  - id: dbt-deploy-metrics
+    url: https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl
+    preferredLabel: Deploy Metrics
+    alternateLabels:
+      - dbt metrics deployment
+      - deploy semantic layer
+      - dbt metric publishing
+    definition: >
+      How to deploy metrics definitions to your semantic layer.
+
+    # Provenance
+    author: dbt-labs
+    source: dbt Docs
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Layer
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: related
+        target: dbt-consume-metrics
+      - type: related
+        target: dbt-administer-semantic-layer
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 3m
+    color: "#ff692e"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Knowledge Graphs
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: grounding-llms-with-knowledge-graphs
+    url: https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs
+    preferredLabel: Grounding LLMs with KG
+    alternateLabels:
+      - LLM knowledge graph grounding
+      - knowledge graph AI foundation
+      - KG for LLMs
+    definition: >
+      Why knowledge graphs are essential for grounding LLM outputs in factual data.
+
+    # Provenance
+    author: a-negro
+    source: Medium
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Knowledge Graphs
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 14m
+    color: "#06b6d4"
+
+  - id: building-knowledge-graphs
+    url: https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/
+    preferredLabel: Building Knowledge Graphs
+    alternateLabels:
+      - what is knowledge graph
+      - KG construction
+      - enterprise knowledge graphs
+    definition: >
+      Practical tips and patterns for building enterprise knowledge graphs.
+
+    # Provenance
+    author: k-cagle
+    source: Blog
+    contentType: blog
+    publishedDate: 2023-04-18
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Knowledge Graphs
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 11m
+    color: "#10b981"
+
+  - id: enterprise-needs-ontology
+    url: https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs
+    preferredLabel: Enterprise Needs Ontology
+    alternateLabels:
+      - agentic enterprise ontology
+      - ontology for AI agents
+      - enterprise ontology design
+    definition: >
+      Making the case for ontologies in agentic enterprise architectures.
+
+    # Provenance
+    author: v-vashishta
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Knowledge Graphs
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 10m
+    color: "#3b82f6"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Semantic Foundations
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: the-ontology-pipeline
+    url: https://jessicatalisman.substack.com/p/the-ontology-pipeline
+    preferredLabel: The Ontology Pipeline
+    alternateLabels:
+      - ontology development
+      - ontology workflow
+      - building ontologies
+    definition: >
+      A systematic approach to building and maintaining ontologies.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: related
+        target: concept-models-vs-ontologies
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 13m
+    color: "#22c55e"
+
+  - id: concept-models-vs-ontologies
+    url: https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint
+    preferredLabel: Concept Models vs Ontologies
+    alternateLabels:
+      - concept model ontology difference
+      - sketch vs blueprint
+      - semantic modeling levels
+    definition: >
+      Understanding the difference between sketches and blueprints in semantic modeling.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: related
+        target: the-ontology-pipeline
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 11m
+    color: "#a855f7"
+
+  - id: controlled-vocabularies-i
+    url: https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i
+    preferredLabel: Controlled Vocabularies I
+    alternateLabels:
+      - controlled vocabulary intro
+      - CV basics
+      - vocabulary governance
+    definition: >
+      Introduction to controlled vocabularies and their role in data governance.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: foundational
+
+    # Relationships
+    relationships:
+      - type: broader
+        target: controlled-vocabularies-ii
+      - type: broader
+        target: controlled-vocabularies-iii
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 9m
+    color: "#fb923c"
+
+  - id: controlled-vocabularies-ii
+    url: https://jessicatalisman.substack.com/p/controlled-vocabularies
+    preferredLabel: Controlled Vocabularies II
+    alternateLabels:
+      - controlled vocabulary scale
+      - CV maintenance
+      - vocabulary management
+    definition: >
+      Building and maintaining controlled vocabularies at scale.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: narrower
+        target: controlled-vocabularies-i
+      - type: broader
+        target: controlled-vocabularies-iii
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 8m
+    color: "#fb923c"
+
+  - id: controlled-vocabularies-iii
+    url: https://jessicatalisman.substack.com/p/controlled-vocabularies
+    preferredLabel: Controlled Vocabularies III
+    alternateLabels:
+      - advanced controlled vocabulary
+      - CV governance patterns
+      - vocabulary evolution
+    definition: >
+      Advanced patterns for vocabulary governance and evolution.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: advanced
+
+    # Relationships
+    relationships:
+      - type: narrower
+        target: controlled-vocabularies-i
+      - type: narrower
+        target: controlled-vocabularies-ii
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 10m
+    color: "#fb923c"
+
+  - id: metadata-as-data-model-i
+    url: https://jessicatalisman.substack.com/p/metadata-as-a-data-model
+    preferredLabel: Metadata as Data Model I
+    alternateLabels:
+      - metadata modeling
+      - metadata first-class
+      - metadata governance model
+    definition: >
+      Treating metadata as a first-class data model for better governance.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: broader
+        target: metadata-as-data-model-ii
+      - type: broader
+        target: metadata-application-profiles
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 12m
+    color: "#fb923c"
+
+  - id: metadata-as-data-model-ii
+    url: https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68
+    preferredLabel: Metadata as Data Model II
+    alternateLabels:
+      - metadata implementation
+      - metadata model practice
+      - applied metadata modeling
+    definition: >
+      Implementing metadata models in practice.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: narrower
+        target: metadata-as-data-model-i
+      - type: related
+        target: metadata-application-profiles
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 11m
+    color: "#fb923c"
+
+  - id: metadata-application-profiles
+    url: https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0
+    preferredLabel: Metadata Application Profiles
+    alternateLabels:
+      - application profiles
+      - metadata contextualization
+      - metadata standards profiles
+    definition: >
+      Using application profiles to contextualize metadata standards.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: advanced
+
+    # Relationships
+    relationships:
+      - type: narrower
+        target: metadata-as-data-model-i
+      - type: related
+        target: metadata-as-data-model-ii
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 9m
+    color: "#10b981"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Agentic Systems
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: building-analyst-agent-dbt
+    url: https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics
+    preferredLabel: Building Analyst Agent with dbt
+    alternateLabels:
+      - dbt AI agent
+      - analytics agent dbt
+      - trusted AI analytics
+    definition: >
+      How to build trusted AI analytics agents using dbt's semantic layer.
+
+    # Provenance
+    author: j-sobel
+    source: dbt Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Agentic Systems
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: related
+        target: dbt-consume-metrics
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 8m
+    color: "#10b981"
+
+  - id: context-engineering-discipline
+    url: https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove
+    preferredLabel: Context Engineering Discipline
+    alternateLabels:
+      - context engineering podcast
+      - context engineering profession
+      - data engineering podcast context
+    definition: >
+      Deep dive into context engineering as an emerging discipline.
+
+    # Provenance
+    author: t-macey
+    source: Podcast
+    contentType: podcast
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Agentic Systems
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 45m
+    color: "#94a3b8"
+
+  - id: agentic-data-analyst-ramp
+    url: https://engineering.ramp.com/post/meet-ramp-research
+    preferredLabel: Agentic Data Analyst
+    alternateLabels:
+      - Ramp research agent
+      - internal data analyst AI
+      - agentic analytics
+    definition: >
+      How Ramp built an agentic data analyst for internal research.
+
+    # Provenance
+    author: ramp-team
+    source: Ramp Eng
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Agentic Systems
+    granularity: implementation
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 7m
+    color: "#f472b6"
+
+  - id: librarians-reference-interview
+    url: https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview
+    preferredLabel: Librarian's Reference Interview
+    alternateLabels:
+      - reference interview AI
+      - librarian techniques AI
+      - data discovery interview
+    definition: >
+      Applying librarian techniques to AI data discovery and retrieval.
+
+    # Provenance
+    author: j-jordan
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Agentic Systems
+    granularity: conceptual
+
+    # Relationships
+    relationships: []
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 6m
+    color: "#94a3b8"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Process Knowledge
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: process-knowledge-management-i
+    url: https://jessicatalisman.substack.com/p/process-knowledge-management-part-i
+    preferredLabel: Process Knowledge Mgmt I
+    alternateLabels:
+      - process knowledge capture
+      - organizational process knowledge
+      - tacit knowledge management
+    definition: >
+      Capturing and codifying organizational process knowledge.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Process Knowledge
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: broader
+        target: process-knowledge-management-ii
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 10m
+    color: "#fb923c"
+
+  - id: process-knowledge-management-ii
+    url: https://jessicatalisman.substack.com/p/process-knowledge-management-part-ii
+    preferredLabel: Process Knowledge Mgmt II
+    alternateLabels:
+      - tacit to explicit knowledge
+      - process knowledge actionable
+      - knowledge externalization
+    definition: >
+      Making tacit process knowledge explicit and actionable.
+
+    # Provenance
+    author: j-talisman
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2024-12-13
+
+    # Classification
+    domain: knowledge-engineering
+    category: Process Knowledge
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: narrower
+        target: process-knowledge-management-i
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 12m
+    color: "#fb923c"

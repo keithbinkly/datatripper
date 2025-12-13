@@ -1,0 +1,375 @@
+# Authors Database
+# Demographic metadata for knowledge base contributors
+# Fields marked with ~ are unknown/to be researched
+#
+# This file enables demographic analysis of knowledge sources:
+# - Whose voices are represented?
+# - What perspectives are missing?
+# - Geographic and institutional diversity
+
+authors:
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Individual Authors
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: s-paul
+    name: S. Paul
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data Architecture
+    affiliation: Modern Data 101
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: ~
+    bioSource: https://moderndata101.substack.com/
+
+  - id: j-talisman
+    name: Jessica Talisman
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: female
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: Senior Information Architect
+    industry: Knowledge Management / Information Architecture
+    affiliation: Adobe
+    perspectiveType: practitioner
+    yearsInField: 25
+    # Background
+    education: >
+      Master of Library and Information Science (MLIS), concentration in Informatics;
+      MicroMasters in Design Thinking
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    linkedInTopVoice: Data Architecture
+    bio: >
+      Senior Information Architect at Adobe with 25+ years building information systems
+      for human and machine retrieval. LinkedIn Top Voice in Data Architecture.
+      Runs "The Ontology Pipeline" newsletter. Expert in taxonomies, ontologies,
+      and knowledge graphs. Working on a book about information architecture.
+    bioSource: https://www.linkedin.com/in/jmtalisman/
+
+  - id: p-sankar
+    name: P. Sankar
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data Management
+    affiliation: Atlan
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: ~
+    bioSource: https://atlan.com/
+
+  - id: v-dacanay
+    name: V. Dacanay
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data Management
+    affiliation: Metadata Weekly
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: ~
+    bioSource: https://metadataweekly.substack.com/
+
+  - id: j-reis
+    name: Joe Reis
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Salt Lake City
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: CEO / Co-founder / Professor
+    industry: Data Engineering
+    affiliation: Ternary Data
+    perspectiveType: practitioner
+    yearsInField: 20
+    # Background
+    education: ~
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    bio: >
+      CEO and co-founder of Ternary Data, a data engineering and architecture
+      consulting firm. Co-author of the best-selling "Fundamentals of Data Engineering"
+      (O'Reilly, 2022). Teaches at University of Utah. Host of The Joe Reis Show podcast.
+      Self-described "recovering data scientist" with 20 years in the data industry.
+    bioSource: https://joereis.substack.com/
+
+  - id: a-negro
+    name: Alessandro Negro
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Knowledge Graphs / AI
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: Knowledge graph and AI expert
+    bioSource: https://medium.com/@alessandro-negro
+
+  - id: k-cagle
+    name: Kurt Cagle
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Issaquah
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: Founder / CEO / Editor
+    industry: Semantic Web / Knowledge Graphs
+    affiliation: Semantical, LLC
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: BS Physics, University of Illinois at Urbana-Champaign
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    booksAuthored: 22
+    bio: >
+      Founder and CEO of Semantical, LLC. CTO of Semantic Data Group.
+      Author of 22 books on technologies including SVG, XQuery, and semantic web.
+      Written 1000+ articles for Forbes and Data Science Central. Managing editor
+      of Cognitive World. Writes "The Cagle Report" newsletter. Developed data
+      governance strategies for Fortune 500 companies in healthcare, finance,
+      media, and government (including the Affordable Care Act).
+    bioSource: https://www.linkedin.com/in/kurtcagle/
+
+  - id: v-vashishta
+    name: Vin Vashishta
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: CEO / Founder
+    industry: AI Strategy
+    affiliation: V Squared AI
+    perspectiveType: practitioner
+    yearsInField: 12  # since 2012
+    # Background
+    education: ~
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    partnerships:
+      - Dell Pro Max Ambassador
+      - Gartner Ambassador
+    bio: >
+      CEO of V Squared AI, one of the first pure-play data and AI consulting firms.
+      3X founder with successful exit. Best-selling author of "From Data to Profit".
+      Since 2012, has helped enterprises deliver over $3.7 billion in value from
+      data and AI initiatives. Clients include Airbus, Siemens, Walmart, JPMC, SLB.
+      Known for bridging technical teams and boardroom strategy.
+    bioSource: https://www.linkedin.com/in/vineetvashishta
+
+  - id: j-sobel
+    name: J. Sobel
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data Engineering
+    affiliation: dbt Labs
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: ~
+    bioSource: https://www.getdbt.com/
+
+  - id: t-macey
+    name: Tobias Macey
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: Podcast Host / Engineer
+    industry: Data Engineering
+    affiliation: Data Engineering Podcast
+    perspectiveType: journalist
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    bio: Host of the Data Engineering Podcast
+    bioSource: https://www.dataengineeringpodcast.com/
+
+  - id: j-jordan
+    name: J. Jordan
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data Management
+    affiliation: Data Intelligence Platform
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: ~
+    bioSource: https://dataintelligenceplatform.substack.com/
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Organizations
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: manus-team
+    name: Manus Team
+    type: organization
+    # Demographics (org-level)
+    foundedYear: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    industry: AI/Technology
+    affiliation: Manus
+    perspectiveType: practitioner
+    # Meta
+    bio: AI agent development company
+    bioSource: https://manus.im/
+
+  - id: atscale-team
+    name: AtScale
+    type: organization
+    # Demographics (org-level)
+    foundedYear: 2013
+    location:
+      city: San Mateo
+      country: USA
+      continent: North America
+    # Professional
+    industry: Business Intelligence
+    affiliation: AtScale
+    perspectiveType: vendor
+    # Meta
+    bio: Enterprise semantic layer platform
+    bioSource: https://www.atscale.com/
+
+  - id: dbt-labs
+    name: dbt Labs
+    type: organization
+    # Demographics (org-level)
+    foundedYear: 2016
+    location:
+      city: Philadelphia
+      country: USA
+      continent: North America
+    # Professional
+    industry: Data Engineering
+    affiliation: dbt Labs
+    perspectiveType: vendor
+    # Meta
+    bio: Creators of dbt (data build tool)
+    bioSource: https://www.getdbt.com/
+
+  - id: ramp-team
+    name: Ramp Engineering
+    type: organization
+    # Demographics (org-level)
+    foundedYear: 2019
+    location:
+      city: New York
+      country: USA
+      continent: North America
+    # Professional
+    industry: FinTech
+    affiliation: Ramp
+    perspectiveType: practitioner
+    # Meta
+    bio: Corporate card and spend management platform
+    bioSource: https://ramp.com/

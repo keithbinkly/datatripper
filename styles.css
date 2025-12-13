@@ -2337,3 +2337,240 @@ body.dashboard.topic-page {
     font-size: 0.55rem;
   }
 }
+
+/* ========================================
+   Insights Panel - TUI-style Dashboard
+   ======================================== */
+
+.topic-grid.with-insights {
+  grid-template-columns: 280px 1fr 260px;
+}
+
+.topic-insights {
+  padding: 1rem;
+  border-left: 1px solid var(--border);
+  background: rgba(0,0,0,0.2);
+  font-size: 0.75rem;
+  overflow-y: auto;
+}
+
+.insights-section {
+  margin-bottom: 1.25rem;
+}
+
+.insights-section:last-child {
+  margin-bottom: 0;
+}
+
+.insights-title {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Bar charts */
+.insights-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.35rem;
+}
+
+.insights-bar-label {
+  min-width: 55px;
+  color: var(--text-dim);
+  font-size: 0.7rem;
+}
+
+.insights-bar-track {
+  flex: 1;
+  height: 8px;
+  background: var(--bg-dark);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.insights-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.insights-bar-fill.geo-usa { background: #06b6d4; }
+.insights-bar-fill.geo-eu { background: #8b5cf6; }
+.insights-bar-fill.geo-asia { background: #f59e0b; }
+.insights-bar-fill.geo-unknown { background: #64748b; }
+
+.insights-bar-value {
+  min-width: 32px;
+  text-align: right;
+  color: var(--text-dim);
+  font-size: 0.65rem;
+}
+
+/* Gender/Voice breakdown */
+.insights-voices {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.insights-voice {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.75rem;
+}
+
+.insights-voice-icon {
+  font-size: 0.9rem;
+}
+
+.insights-voice-icon.male { color: #3b82f6; }
+.insights-voice-icon.female { color: #ec4899; }
+.insights-voice-icon.unknown { color: #64748b; }
+
+/* Perspective type mini bars */
+.insights-perspective {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.7rem;
+}
+
+.insights-perspective-label {
+  min-width: 70px;
+  color: var(--text-dim);
+}
+
+.insights-perspective-bar {
+  display: flex;
+  gap: 2px;
+}
+
+.insights-pip {
+  width: 8px;
+  height: 8px;
+  background: var(--accent-semantic);
+  border-radius: 1px;
+}
+
+.insights-pip.empty {
+  background: var(--bg-dark);
+}
+
+/* Top contributors */
+.insights-contributor {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+  font-size: 0.7rem;
+}
+
+.insights-contributor-name {
+  flex: 1;
+  color: var(--text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.insights-contributor-count {
+  color: var(--text-dim);
+  font-size: 0.65rem;
+}
+
+.insights-contributor-bar {
+  display: flex;
+  gap: 2px;
+}
+
+.insights-contributor-pip {
+  width: 6px;
+  height: 10px;
+  background: #22c55e;
+  border-radius: 1px;
+}
+
+/* Content type grid */
+.insights-types {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.3rem;
+}
+
+.insights-type {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.4rem;
+  background: var(--bg-dark);
+  border-radius: 3px;
+}
+
+.insights-type-label {
+  color: var(--text-dim);
+}
+
+.insights-type-count {
+  color: var(--text);
+  font-weight: 500;
+}
+
+/* Alert/Gap callout */
+.insights-gap {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 4px;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  color: #fca5a5;
+  margin-top: 0.5rem;
+}
+
+.insights-gap-icon {
+  margin-right: 0.3rem;
+}
+
+/* Recent activity */
+.insights-recent {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+}
+
+.insights-recent-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.25rem;
+}
+
+.insights-recent-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+}
+
+/* Responsive: hide on smaller screens */
+@media (max-width: 1200px) {
+  .topic-grid.with-insights {
+    grid-template-columns: 280px 1fr;
+  }
+
+  .topic-insights {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .topic-grid.with-insights {
+    grid-template-columns: 1fr;
+  }
+}
