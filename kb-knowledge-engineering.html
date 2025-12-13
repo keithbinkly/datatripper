@@ -493,7 +493,7 @@
   </footer>
 
   <script>
-    // Mobile interactions
+    // Interactive behaviors
     (function() {
       const isMobile = () => window.innerWidth <= 900;
 
@@ -510,10 +510,9 @@
         return links;
       }
 
-      // Collapsible section headers
+      // Collapsible section headers - works on all screen sizes
       document.querySelectorAll('.tcat').forEach(header => {
         header.addEventListener('click', function(e) {
-          if (!isMobile()) return;
           e.preventDefault();
 
           const isCollapsed = this.classList.toggle('collapsed');
@@ -529,7 +528,7 @@
         });
       });
 
-      // Tap-to-expand links: first tap expands, second tap navigates
+      // Tap-to-expand links: mobile only (first tap expands, second tap navigates)
       document.querySelectorAll('.tlink').forEach(link => {
         link.addEventListener('click', function(e) {
           if (!isMobile()) return;
@@ -546,7 +545,7 @@
         });
       });
 
-      // Tap outside to collapse expanded links
+      // Tap outside to collapse expanded links (mobile)
       document.addEventListener('click', function(e) {
         if (!isMobile()) return;
         if (!e.target.closest('.tlink')) {

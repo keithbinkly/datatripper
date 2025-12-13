@@ -2112,7 +2112,7 @@ body.dashboard.topic-page {
   flex-direction: column;
 }
 
-/* Category Title */
+/* Category Title - Sticky & Collapsible */
 .tcat {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.6rem;
@@ -2121,12 +2121,44 @@ body.dashboard.topic-page {
   letter-spacing: 0.08em;
   color: var(--text-dim);
   margin: 0.75rem 0 0.35rem 0;
-  padding-bottom: 0.25rem;
+  padding: 0.4rem 0;
   border-bottom: 1px solid var(--border);
+  /* Sticky behavior */
+  position: sticky;
+  top: 0;
+  background: var(--bg-card);
+  z-index: 10;
+  /* Collapsible */
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .tcat:first-child {
   margin-top: 0;
+}
+
+.tcat::after {
+  content: '−';
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+  opacity: 0.5;
+  transition: opacity 0.2s ease;
+}
+
+.tcat:hover::after {
+  opacity: 1;
+}
+
+.tcat.collapsed::after {
+  content: '+';
+}
+
+/* Links in collapsed sections */
+.tlink.section-hidden {
+  display: none;
 }
 
 /* Link Rows - Ultra Compact */
@@ -2539,48 +2571,19 @@ body.dashboard.topic-page {
     padding: 1rem;
   }
 
-  /* Sticky section headers */
+  /* Tighter sticky headers on mobile */
   .tcat {
-    position: sticky;
-    top: 0;
     background: var(--bg-dark);
-    z-index: 10;
-    padding: 0.5rem 0;
     margin: 0 -1rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    border-bottom: 1px solid var(--border);
   }
 
-  /* Collapsible sections */
+  /* Section separators on mobile */
   .topic-reading-col {
     border-bottom: 1px solid var(--border);
     padding-bottom: 0.5rem;
     margin-bottom: 0.5rem;
-  }
-
-  .tcat {
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .tcat::after {
-    content: '−';
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 1rem;
-    color: var(--text-dim);
-    transition: transform 0.2s ease;
-  }
-
-  .tcat.collapsed::after {
-    content: '+';
-  }
-
-  /* Links in collapsed sections hidden via JS class */
-  .tlink.section-hidden {
-    display: none;
   }
 }
 
