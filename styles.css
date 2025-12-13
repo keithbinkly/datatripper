@@ -2140,6 +2140,7 @@ body.dashboard.topic-page {
   font-size: 0.75rem;
   transition: all 0.1s ease;
   border-bottom: 1px solid rgba(255,255,255,0.03);
+  position: relative;
 }
 
 .tlink:last-of-type {
@@ -2176,6 +2177,15 @@ body.dashboard.topic-page {
   text-overflow: ellipsis;
 }
 
+.tlink-author {
+  font-size: 0.55rem;
+  color: var(--text-dim);
+  min-width: 70px;
+  text-align: right;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
 .tlink-time {
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.55rem;
@@ -2187,6 +2197,34 @@ body.dashboard.topic-page {
 
 .tlink:hover .tlink-time {
   color: var(--accent);
+}
+
+/* Link Description - Hover tooltip */
+.tlink-desc {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.65rem;
+  line-height: 1.5;
+  color: var(--text-dim);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition: all 0.15s ease;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  pointer-events: none;
+}
+
+.tlink:hover .tlink-desc {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(2px);
 }
 
 /* Status Bar Footer */
@@ -2256,15 +2294,42 @@ body.dashboard.topic-page {
 
   .tlink {
     padding: 0.4rem 0;
+    flex-wrap: wrap;
   }
 
-  .tlink-src {
+  .tlink-src,
+  .tlink-author {
     display: none;
   }
 
   .tlink-title {
     white-space: normal;
     font-size: 0.7rem;
+  }
+
+  /* Mobile tap-to-expand descriptions */
+  .tlink-desc {
+    position: static;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    width: 100%;
+    transition: all 0.2s ease;
+    transform: none;
+    background: transparent;
+    margin-top: 0;
+  }
+
+  .tlink:focus .tlink-desc,
+  .tlink:active .tlink-desc {
+    max-height: 100px;
+    opacity: 1;
+    padding: 0.4rem 0 0 0;
+    visibility: visible;
   }
 
   .topic-status {
