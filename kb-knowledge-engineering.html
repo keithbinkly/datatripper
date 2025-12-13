@@ -492,5 +492,71 @@
     <span class="status-section status-right">data-centered</span>
   </footer>
 
+  <script>
+    // Mobile interactions
+    (function() {
+      const isMobile = () => window.innerWidth <= 900;
+
+      // Get links belonging to a section header
+      function getSectionLinks(header) {
+        const links = [];
+        let sibling = header.nextElementSibling;
+        while (sibling && !sibling.classList.contains('tcat')) {
+          if (sibling.classList.contains('tlink')) {
+            links.push(sibling);
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        return links;
+      }
+
+      // Collapsible section headers
+      document.querySelectorAll('.tcat').forEach(header => {
+        header.addEventListener('click', function(e) {
+          if (!isMobile()) return;
+          e.preventDefault();
+
+          const isCollapsed = this.classList.toggle('collapsed');
+          const links = getSectionLinks(this);
+
+          links.forEach(link => {
+            if (isCollapsed) {
+              link.classList.add('section-hidden');
+            } else {
+              link.classList.remove('section-hidden');
+            }
+          });
+        });
+      });
+
+      // Tap-to-expand links: first tap expands, second tap navigates
+      document.querySelectorAll('.tlink').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (!isMobile()) return;
+
+          if (!this.classList.contains('expanded')) {
+            e.preventDefault();
+            // Collapse any other expanded links
+            document.querySelectorAll('.tlink.expanded').forEach(other => {
+              if (other !== this) other.classList.remove('expanded');
+            });
+            this.classList.add('expanded');
+          }
+          // If already expanded, let the click through to navigate
+        });
+      });
+
+      // Tap outside to collapse expanded links
+      document.addEventListener('click', function(e) {
+        if (!isMobile()) return;
+        if (!e.target.closest('.tlink')) {
+          document.querySelectorAll('.tlink.expanded').forEach(link => {
+            link.classList.remove('expanded');
+          });
+        }
+      });
+    })();
+  </script>
+
 </body>
 </html>
