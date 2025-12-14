@@ -23,20 +23,20 @@
     <!-- Left Panel: Context -->
     <aside class="topic-aside">
       <h3 class="tcat">Context</h3>
-      <p class="topic-lede section-content">AI projects fail because corporate data lacks business context. Traditional pipelines decouple data from meaning—creating an <strong>AI Context Gap</strong>.</p>
+      <p class="topic-lede section-content">Knowledge Engineering builds an <strong>Enterprise Context Layer</strong>—embedding definitions, rules, and meaning directly into data architecture. <strong>95% of AI projects fail</strong> because traditional systems leave data semantically ambiguous, creating the <strong>AI Context Gap</strong>.</p>
 
       <div class="topic-stat-box section-content">
-        <span class="topic-stat-num">95%</span>
-        <span class="topic-stat-label">of AI projects stall due to data readiness</span>
+        <span class="topic-stat-num">99%+</span>
+        <span class="topic-stat-label">data reliability needed for production AI</span>
       </div>
 
       <h3 class="tcat">Key Terms</h3>
       <div class="topic-terms-grid section-content">
-        <div class="tterm"><span class="tterm-name">Context Gap</span><span class="tterm-def">Space between model + org context</span></div>
-        <div class="tterm"><span class="tterm-name">Action-Ready</span><span class="tterm-def">Data with embedded business context</span></div>
-        <div class="tterm"><span class="tterm-name">Semantic Layer</span><span class="tterm-def">Authoritative source of context</span></div>
-        <div class="tterm"><span class="tterm-name">Ontology</span><span class="tterm-def">Formal spec of entities & relations</span></div>
-        <div class="tterm"><span class="tterm-name">Controlled Vocab</span><span class="tterm-def">Curated list of approved terms</span></div>
+        <div class="tterm"><span class="tterm-name">AI Context Gap</span><span class="tterm-def">Gap between model knowledge and organizational context (metrics, rules, semantics)</span></div>
+        <div class="tterm"><span class="tterm-name">Controlled Vocab</span><span class="tterm-def">Curated list of approved terms, each with one intended meaning</span></div>
+        <div class="tterm"><span class="tterm-name">Semantic Layer</span><span class="tterm-def">Authoritative source of business meaning that persists across system changes</span></div>
+        <div class="tterm"><span class="tterm-name">Ontology</span><span class="tterm-def">Formal specification of entities, relationships, and constraints for machine reasoning</span></div>
+        <div class="tterm"><span class="tterm-name">Inline Governance</span><span class="tterm-def">Embedding quality thresholds and business rules directly into data products</span></div>
       </div>
 
       <h3 class="tcat">Slides</h3>
@@ -531,11 +531,12 @@
         });
       });
 
-      // Add "open link" button to each link for mobile
+      // Add open icon to each link for mobile
       document.querySelectorAll('.tlink').forEach(link => {
         const openBtn = document.createElement('span');
         openBtn.className = 'tlink-open';
-        openBtn.textContent = 'Open link';
+        openBtn.innerHTML = '↗';
+        openBtn.title = 'Open link';
         openBtn.dataset.href = link.href;
         link.appendChild(openBtn);
       });
