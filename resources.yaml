@@ -27,6 +27,15 @@
 #   Quality:
 #     validationStatus: unvalidated | reviewed | tested
 #
+#   Ontology Mappings (optional, for linked data interoperability):
+#     ontologyMappings:
+#       exactMatch: URI for equivalent concept (skos:exactMatch)
+#       closeMatch: URI for similar concept (skos:closeMatch)
+#       wikidataId: Wikidata entity ID (e.g., Q33002955)
+#       dbpediaUri: DBpedia resource URI
+#       lcsh: Library of Congress Subject Heading URI
+#       schemaType: Schema.org type (e.g., Article, TechArticle, LearningResource)
+#
 #   Display:
 #     readingTime: estimated time (e.g., "10m", "45m")
 #     color: hex color for visual categorization
@@ -460,6 +469,12 @@ resources:
 
     # Relationships
     relationships: []
+
+    # Ontology Mappings
+    ontologyMappings:
+      wikidataId: Q33002955
+      dbpediaUri: http://dbpedia.org/resource/Knowledge_graph
+      schemaType: TechArticle
 
     # Quality
     validationStatus: unvalidated
