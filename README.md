@@ -2,7 +2,7 @@
 
 **[View Site](https://keithbinkly.github.io/datatripper/)**
 
-A knowledge base for data engineering and knowledge engineering topics, built on a files-over-CMS philosophy.
+A digital garden built on a files-over-CMS philosophy. Topics span technology, culture, ideas—whatever's worth tending.
 
 ## Why Files Over CMS?
 
@@ -19,9 +19,9 @@ Our reasoning:
 
 ```
 datatripper/
-├── resources.yaml      # All knowledge base resources (source of truth)
+├── resources.yaml      # All resources across topics (source of truth)
 ├── authors.yaml        # Contributor metadata & demographics
-├── kb-*.html           # Topic pages (Knowledge Engineering, etc.)
+├── kb-*.html           # Topic pages (any subject worth exploring)
 └── styles.css          # TUI-inspired design system
 ```
 
