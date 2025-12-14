@@ -124,6 +124,41 @@ For each new author:
 | `governed-by` | Target provides standards/rules |
 | `is-example-of` | Target is the general pattern |
 
+## Ontology Mappings (Optional)
+
+For linked data interoperability, resources can map to external ontologies/vocabularies:
+
+```yaml
+  # Ontology Mappings
+  ontologyMappings:
+    exactMatch: http://dbpedia.org/resource/Knowledge_graph
+    closeMatch: http://www.wikidata.org/entity/Q33002955
+    wikidataId: Q33002955
+    dbpediaUri: http://dbpedia.org/resource/Knowledge_graph
+    lcsh: http://id.loc.gov/authorities/subjects/sh2019001234
+    schemaType: TechArticle
+```
+
+| Field | Purpose | Example |
+|-------|---------|---------|
+| `exactMatch` | Equivalent concept (skos:exactMatch) | DBpedia or other ontology URI |
+| `closeMatch` | Similar but not identical (skos:closeMatch) | Related Wikidata entity |
+| `wikidataId` | Wikidata entity ID | `Q33002955` (Knowledge graph) |
+| `dbpediaUri` | DBpedia resource URI | `http://dbpedia.org/resource/Ontology` |
+| `lcsh` | Library of Congress Subject Heading | `http://id.loc.gov/authorities/subjects/...` |
+| `schemaType` | Schema.org type | `Article`, `TechArticle`, `LearningResource` |
+
+**How to find mappings:**
+1. Search Wikidata for the concept: https://www.wikidata.org
+2. Check DBpedia for equivalent: https://dbpedia.org
+3. Search LCSH: https://id.loc.gov/authorities/subjects.html
+4. Reference Schema.org types: https://schema.org/docs/full.html
+
+**When to add mappings:**
+- Resources about well-defined concepts (knowledge graphs, ontologies, taxonomies)
+- Topics with clear Wikidata/Wikipedia entries
+- Skip for highly specific or proprietary content
+
 ## Example: Processing a Dump
 
 User provides:
