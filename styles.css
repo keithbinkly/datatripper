@@ -3564,42 +3564,78 @@ body.dashboard.topic-page.tui .insights-title::before {
 }
 
 @media (max-width: 800px) {
+  /* Single column layout on mobile - make body scroll instead of grid */
   .topic-grid,
   .topic-grid.with-insights {
     grid-template-columns: 1fr;
+    height: auto;
+    min-height: calc(100vh - 42px);
+    overflow: visible;
   }
 
   .topic-aside {
     border-right: none;
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
     padding: 1rem;
+    padding-top: 0.5rem;
+    overflow: visible;
+  }
+
+  .topic-reading {
+    overflow: visible;
+    padding-top: 0.5rem;
   }
 
   .topic-reading-cols {
     max-width: none;
   }
 
-  /* Remove overflow so sticky works relative to viewport */
-  .topic-reading {
-    overflow: visible;
-  }
-
-  .topic-aside {
-    overflow: visible;
-  }
-
-  /* Category headers on mobile */
+  /* Category headers on mobile - sticky to viewport */
   .tcat {
     background: var(--bg-dark);
     margin: 0 -1rem;
     padding-left: 1rem;
     padding-right: 1rem;
+    position: sticky;
+    top: 42px; /* Account for fixed header */
+    z-index: 20;
   }
 
   /* Section separators on mobile */
   .topic-reading-col {
     border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .topic-reading-col:last-child {
+    border-bottom: none;
+  }
+
+  /* Hide insights panel on mobile - show via toggle as overlay */
+  .topic-grid.with-insights .topic-insights {
+    display: none;
+    position: fixed;
+    top: 42px;
+    right: 0;
+    bottom: 60px;
+    width: 85%;
+    max-width: 320px;
+    z-index: 90;
+    border-left: 1px solid var(--border);
+    background: var(--bg-dark);
+    overflow-y: auto;
+    box-shadow: -4px 0 20px rgba(0,0,0,0.5);
+  }
+
+  /* Show insights panel when toggled on mobile */
+  .topic-grid.with-insights.insights-visible .topic-insights {
+    display: block;
+  }
+
+  /* Insights toggle always visible on mobile */
+  .insights-toggle {
+    display: flex;
+    align-items: center;
   }
 }

@@ -579,28 +579,65 @@
       });
     })();
 
-    // Insights panel toggle
+    // Insights panel toggle - handles both desktop and mobile differently
     (function() {
       const toggle = document.getElementById('insights-toggle');
       const grid = document.getElementById('topic-grid');
-      
-      // Only hide if explicitly saved as hidden
-      // Default is to show the panel
-      const savedState = localStorage.getItem('insights-hidden');
-      if (savedState === 'true') {
-        grid.classList.add('insights-hidden');
-        toggle.classList.add('active');
-      } else {
-        // Ensure visible by default (clear any stale state)
-        grid.classList.remove('insights-hidden');
-        toggle.classList.remove('active');
+      const mobileBreakpoint = 800;
+
+      function isMobile() {
+        return window.innerWidth <= mobileBreakpoint;
       }
-      
+
+      function updateState() {
+        if (isMobile()) {
+          // On mobile: default hidden, toggle shows as overlay
+          grid.classList.remove('insights-hidden');
+          // Check if mobile-visible state is saved
+          const mobileVisible = localStorage.getItem('insights-mobile-visible') === 'true';
+          if (mobileVisible) {
+            grid.classList.add('insights-visible');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-visible');
+            toggle.classList.remove('active');
+          }
+        } else {
+          // On desktop: default visible, toggle hides
+          grid.classList.remove('insights-visible');
+          const savedState = localStorage.getItem('insights-hidden');
+          if (savedState === 'true') {
+            grid.classList.add('insights-hidden');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-hidden');
+            toggle.classList.remove('active');
+          }
+        }
+      }
+
+      // Initial state
+      updateState();
+
+      // Handle resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateState, 100);
+      });
+
       toggle.addEventListener('click', function() {
-        grid.classList.toggle('insights-hidden');
-        toggle.classList.toggle('active');
-        // Save state
-        localStorage.setItem('insights-hidden', grid.classList.contains('insights-hidden'));
+        if (isMobile()) {
+          // Mobile: toggle visibility overlay
+          grid.classList.toggle('insights-visible');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-mobile-visible', grid.classList.contains('insights-visible'));
+        } else {
+          // Desktop: toggle hidden state
+          grid.classList.toggle('insights-hidden');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-hidden', grid.classList.contains('insights-hidden'));
+        }
       });
     })();
   </script>
