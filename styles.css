@@ -3605,8 +3605,9 @@ body.dashboard.topic-page.tui .insights-title::before {
   .topic-grid.with-insights {
     grid-template-columns: 1fr;
     height: auto;
-    min-height: calc(100vh - 28px);
-    margin-top: 28px !important;
+    min-height: 100vh;
+    /* Header height (28px) + safe area inset for notch/dynamic island */
+    margin-top: calc(28px + env(safe-area-inset-top, 0px)) !important;
     padding-top: 0;
     overflow: visible;
   }
@@ -3635,7 +3636,8 @@ body.dashboard.topic-page.tui .insights-title::before {
     padding-left: 1rem;
     padding-right: 1rem;
     position: sticky;
-    top: 28px; /* Account for compact fixed header */
+    /* Header height (28px) + safe area inset */
+    top: calc(28px + env(safe-area-inset-top, 0px));
     z-index: 20;
   }
 
@@ -3654,7 +3656,7 @@ body.dashboard.topic-page.tui .insights-title::before {
   .topic-grid.with-insights .topic-insights {
     display: none;
     position: fixed;
-    top: 28px;
+    top: calc(28px + env(safe-area-inset-top, 0px));
     right: 0;
     bottom: 60px;
     width: 85%;
@@ -3675,5 +3677,24 @@ body.dashboard.topic-page.tui .insights-title::before {
   .insights-toggle {
     display: flex;
     align-items: center;
+  }
+
+  /* Footer bar fixed at bottom on mobile */
+  .topic-status {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 80;
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding-bottom: max(0.3rem, env(safe-area-inset-bottom));
+  }
+
+  /* Add bottom padding to main content so it's not hidden behind footer */
+  .topic-grid,
+  .topic-grid.with-insights {
+    padding-bottom: 50px;
   }
 }
