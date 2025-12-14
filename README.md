@@ -1,6 +1,6 @@
 # data-centered
 
-**[View Site](https://keithbinkly.github.io/datatripper/)**
+**[View Site](https://keithbinkly.github.io/data-centered/)**
 
 A digital garden built on a files-over-CMS philosophy. Topics span technology, culture, ideas—whatever's worth tending.
 
@@ -18,7 +18,7 @@ Our reasoning:
 ## Data Architecture
 
 ```
-datatripper/
+data-centered/
 ├── resources.yaml      # All resources across topics (source of truth)
 ├── authors.yaml        # Contributor metadata & demographics
 ├── kb-*.html           # Topic pages (any subject worth exploring)

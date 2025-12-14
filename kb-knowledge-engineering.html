@@ -583,11 +583,16 @@
       const toggle = document.getElementById('insights-toggle');
       const grid = document.getElementById('topic-grid');
       
-      // Check localStorage for saved state
+      // Only hide if explicitly saved as hidden
+      // Default is to show the panel
       const savedState = localStorage.getItem('insights-hidden');
       if (savedState === 'true') {
         grid.classList.add('insights-hidden');
         toggle.classList.add('active');
+      } else {
+        // Ensure visible by default (clear any stale state)
+        grid.classList.remove('insights-hidden');
+        toggle.classList.remove('active');
       }
       
       toggle.addEventListener('click', function() {

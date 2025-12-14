@@ -2315,34 +2315,7 @@ body.dashboard.topic-page {
   color: var(--accent);
 }
 
-/* Topic Page Mobile */
-@media (max-width: 1100px) {
-  /* At medium width, hide insights and show 2 columns */
-  .topic-grid.with-insights {
-    grid-template-columns: minmax(200px, 260px) 1fr;
-  }
-
-  .topic-grid.with-insights .topic-insights {
-    display: none;
-  }
-}
-
-@media (max-width: 800px) {
-  .topic-grid,
-  .topic-grid.with-insights {
-    grid-template-columns: 1fr;
-  }
-
-  .topic-aside {
-    border-right: none;
-    border-bottom: 1px solid var(--border);
-    padding: 1rem;
-  }
-
-  .topic-reading-cols {
-    max-width: none;
-  }
-}
+/* Mobile breakpoints moved after base insights rules - see bottom of file */
 
 @media (max-width: 600px) {
   .topic-header {
@@ -2587,39 +2560,7 @@ body.dashboard.topic-page {
   background: #22c55e;
 }
 
-/* Responsive: insights panel behavior */
-@media (max-width: 1100px) {
-  /* Already handled above - insights hidden */
-}
-
-@media (max-width: 800px) {
-  /* Remove overflow so sticky works relative to viewport */
-  .topic-reading {
-    overflow: visible;
-  }
-
-  .topic-aside {
-    overflow: visible;
-  }
-
-  /* Sticky headers on mobile - stick to viewport */
-  .tcat {
-    background: var(--bg-dark);
-    margin: 0 -1rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    position: sticky;
-    top: 0;
-    z-index: 20;
-  }
-
-  /* Section separators on mobile */
-  .topic-reading-col {
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-}
+/* Responsive rules consolidated at end of file */
 
 @media (max-width: 600px) {
   /* Mobile-friendly link rows - titles always visible */
@@ -3573,4 +3514,62 @@ body.dashboard.topic-page.tui .insights-title::before {
 
 .insights-toggle.active::before {
   content: '◑ ';
+}
+
+/* ========================================
+   Topic Page Responsive Breakpoints
+   ======================================== */
+@media (max-width: 1100px) {
+  /* At medium width, hide insights and show 2 columns */
+  .topic-grid.with-insights {
+    grid-template-columns: minmax(200px, 260px) 1fr;
+  }
+
+  .topic-grid.with-insights .topic-insights {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .topic-grid,
+  .topic-grid.with-insights {
+    grid-template-columns: 1fr;
+  }
+
+  .topic-aside {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 1rem;
+  }
+
+  .topic-reading-cols {
+    max-width: none;
+  }
+
+  /* Remove overflow so sticky works relative to viewport */
+  .topic-reading {
+    overflow: visible;
+  }
+
+  .topic-aside {
+    overflow: visible;
+  }
+
+  /* Sticky headers on mobile - stick to viewport */
+  .tcat {
+    background: var(--bg-dark);
+    margin: 0 -1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+  }
+
+  /* Section separators on mobile */
+  .topic-reading-col {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
 }
