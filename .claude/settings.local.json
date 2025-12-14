@@ -3,7 +3,8 @@
     "allow": [
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl:*)",
-      "WebFetch(domain:docs.exa.ai)"
+      "WebFetch(domain:docs.exa.ai)",
+      "Bash(grep:*)"
     ]
   }
 }

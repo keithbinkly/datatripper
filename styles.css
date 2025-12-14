@@ -2070,7 +2070,7 @@ body.dashboard.topic-page {
 .topic-terms-grid {
   display: grid;
   grid-template-columns: auto 1fr;
-  gap: 0.25rem 0.6rem;
+  gap: 0.4rem 0.75rem;
   align-items: baseline;
 }
 
@@ -2080,16 +2080,16 @@ body.dashboard.topic-page {
 
 .tterm-name {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text);
   white-space: nowrap;
 }
 
 .tterm-def {
-  font-size: 0.55rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 /* Slides Links */
@@ -2298,7 +2298,7 @@ body.dashboard.topic-page {
   visibility: hidden;
   transform: translateY(-4px);
   transition: all 0.15s ease;
-  z-index: 10;
+  z-index: 20; /* Above sticky headers */
   box-shadow: 0 4px 12px rgba(0,0,0,0.4);
   pointer-events: none;
 }
@@ -2701,15 +2701,15 @@ body.dashboard.topic-page {
   /* Key terms horizontal on mobile too */
   /* Key terms stay as grid on mobile */
   .topic-terms-grid {
-    gap: 0.2rem 0.4rem;
+    gap: 0.3rem 0.5rem;
   }
 
   .tterm-name {
-    font-size: 0.55rem;
+    font-size: 0.65rem;
   }
 
   .tterm-def {
-    font-size: 0.5rem;
+    font-size: 0.6rem;
   }
 
   /* Compact insights on mobile */
@@ -3449,11 +3449,11 @@ body.dashboard.topic-page.tui .topic-stat-num {
 /* TUI Terms */
 body.dashboard.topic-page.tui .tterm-name {
   color: var(--accent-semantic);
-  font-size: 0.6rem;
+  font-size: 0.7rem;
 }
 
 body.dashboard.topic-page.tui .tterm-def {
-  font-size: 0.55rem;
+  font-size: 0.65rem;
   color: var(--text-dim);
 }
 
