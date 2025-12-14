@@ -2013,24 +2013,25 @@ body.dashboard.topic-page {
 /* Stat Box */
 .topic-stat-box {
   display: flex;
-  align-items: baseline;
-  gap: 0.5rem;
-  padding: 0.6rem 0;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 
 .topic-stat-num {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--accent);
+  line-height: 1;
 }
 
 .topic-stat-label {
-  font-size: 0.65rem;
+  font-size: 0.6rem;
   color: var(--text-dim);
-  line-height: 1.4;
+  line-height: 1.3;
 }
 
 /* Terms Grid - 2 column aligned layout */
