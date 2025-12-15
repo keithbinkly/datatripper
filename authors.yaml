@@ -903,3 +903,283 @@ authors:
     perspectiveType: researcher
     bio: Research team behind Spark shared memory for coding agents
     bioSource: https://arxiv.org/html/2511.08301v1
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # NEW AUTHORS - Added 2025-12-14 from Substack bookmarks research
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: a-kumar
+    name: Animesh Kumar
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    jobTitle: Founder / Data Leader
+    industry: Data Architecture
+    affiliation: The Modern Data Company
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: ~
+    socialFollowing: large
+    bio: >
+      Founder of Modern Data 101 community (10K+ subscribers). Newsletter features
+      60+ contributing authors. Part of Data Contracts book review team.
+      Focus: Modern data challenges, solutions, and innovations.
+    bioSource: https://substack.com/@moderndata101
+
+  - id: b-rogojan
+    name: Benjamin Rogojan
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Denver
+      country: USA
+      continent: North America
+    jobTitle: Data Engineering Consultant
+    industry: Data Engineering
+    affiliation: Seattle Data Guy / Acheron Analytics
+    perspectiveType: practitioner
+    yearsInField: 10
+    education: ~
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      Ex-Meta, Netflix, Airbnb data engineer. 100K YouTube followers, 100K LinkedIn.
+      45K Substack subscribers. Runs Seattle Data Guy consulting practice.
+      Focus: Data engineering career advice, pipelines, best practices.
+    bioSource: https://www.linkedin.com/in/benjaminrogojan
+
+  - id: z-wilson
+    name: Zach Wilson
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    jobTitle: Founder / Data Engineering Educator
+    industry: Data Engineering
+    affiliation: DataExpert.io
+    perspectiveType: practitioner
+    yearsInField: 10
+    education: Weber State University
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      250K+ LinkedIn followers. Ex-Facebook, Netflix, Airbnb. Runs free data
+      engineering bootcamp at DataExpert.io. Known for data engineering and
+      mental health content. Created Data Engineer Handbook GitHub repo.
+    bioSource: https://www.linkedin.com/in/eczachly/
+
+  - id: a-romero
+    name: Alberto Romero
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: Spain
+      continent: Europe
+    jobTitle: Writer / AI Analyst
+    industry: AI/Technology
+    affiliation: Independent
+    perspectiveType: journalist
+    yearsInField: ~
+    education: ~
+    nativeLanguage: Spanish
+    socialFollowing: large
+    bio: >
+      Author of The Algorithmic Bridge (41K+ subscribers, #45 Technology on Substack).
+      "A writer who once tried to be an engineer." Bridges AI and humanities.
+      Mission: bring AI to the masses with informed, morally grounded takes.
+    bioSource: https://www.thealgorithmicbridge.com/about
+
+  - id: b-lorica
+    name: Ben Lorica
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    jobTitle: AI Conference Chair / Podcast Host
+    industry: AI/ML
+    affiliation: Various (The AI Conference, Linux Foundation)
+    perspectiveType: journalist
+    yearsInField: ~
+    education: ~
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      Chair of The AI Conference and The Agent Conference. Host of Data Exchange podcast.
+      Strategic Content Chair for AI at Linux Foundation. Gradient Flow newsletter.
+      Focus: Putting data, ML, and AI to work.
+    bioSource: https://gradientflow.substack.com/about
+
+  - id: b-stancil
+    name: Benn Stancil
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Brooklyn
+      country: USA
+      continent: North America
+    jobTitle: Field CTO
+    industry: Analytics / BI
+    affiliation: ThoughtSpot (via Mode acquisition)
+    perspectiveType: practitioner
+    yearsInField: 12
+    education: Wake Forest University
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      Co-founder of Mode Analytics (2013). Previously Chief Analytics Officer
+      at Mode for 9 years. Now Field CTO at ThoughtSpot. Writes influential
+      benn.substack on analytics, BI, and the future of data tools.
+    bioSource: https://www.linkedin.com/in/benn-stancil/
+
+  - id: j-sequeda
+    name: Juan Sequeda
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Austin
+      country: USA
+      continent: North America
+    jobTitle: Principal Scientist & Head of AI Lab
+    industry: Knowledge Graphs / AI
+    affiliation: data.world
+    perspectiveType: practitioner
+    yearsInField: 15
+    education: ~
+    nativeLanguage: ~
+    socialFollowing: medium
+    bio: >
+      15+ years semantic web advocate. Co-host of Catalog & Cocktails podcast.
+      SIGMOD Best Industry Paper. UltrawrapOBDA inventor. Research: Knowledge
+      Graphs + LLMs for enterprise accuracy and explainability.
+    bioSource: https://www.linkedin.com/in/juansequeda/
+
+  - id: d-koe
+    name: Dan Koe
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Scottsdale
+      country: USA
+      continent: North America
+    jobTitle: Author / Creator / Brand Advisor
+    industry: Creator Economy
+    affiliation: Kortex / Eden
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      2.6M+ followers across platforms. Author of 'The Art of Focus'.
+      Co-founder of Eden. Focus: Human potential, modern entrepreneurship,
+      digital leverage. Former brand advisor for 6-7 figure creators.
+    bioSource: https://www.linkedin.com/in/thedankoe/
+
+  - id: k-kelly
+    name: Kevin Kelly
+    birthYear: 1952
+    generation: boomer
+    gender: male
+    location:
+      city: Pacifica
+      country: USA
+      continent: North America
+    jobTitle: Senior Maverick / Author
+    industry: Technology / Publishing
+    affiliation: Wired / The Long Now Foundation
+    perspectiveType: thought-leader
+    yearsInField: 50
+    education: Westfield High School, NJ (1970)
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      Co-founder of Wired (1992), WELL, Cool Tools. Co-chair Long Now Foundation.
+      Books: The Inevitable, Out of Control, Vanishing Asia, What Technology Wants.
+      Motto: "Over the long term, the future is decided by optimists."
+    bioSource: https://kk.org/biography
+
+  - id: d-amodei
+    name: Dario Amodei
+    birthYear: 1983
+    generation: millennial
+    gender: male
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    jobTitle: CEO & Co-Founder
+    industry: AI Safety
+    affiliation: Anthropic
+    perspectiveType: thought-leader
+    yearsInField: 15
+    education: Stanford (Physics), Princeton PhD (Physics)
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      Founded Anthropic 2021 with sister Daniela. Ex-VP Research at OpenAI.
+      Co-inventor of RLHF. Led development of GPT-2 and GPT-3.
+      Author of "Machines of Loving Grace" essay.
+    bioSource: https://www.darioamodei.com/
+
+  - id: f-li
+    name: Fei-Fei Li
+    birthYear: ~
+    generation: ~
+    gender: female
+    location:
+      city: Stanford
+      country: USA
+      continent: North America
+    jobTitle: Professor / CEO
+    industry: AI Research
+    affiliation: Stanford University / World Labs
+    perspectiveType: researcher
+    yearsInField: 20
+    education: ~
+    nativeLanguage: Chinese
+    socialFollowing: large
+    bio: >
+      Inventor of ImageNet. Sequoia Professor at Stanford. Co-founder/CEO of
+      World Labs (spatial intelligence). TIME 2025 Person of the Year.
+      Ex-Google Cloud Chief Scientist. Co-Director Stanford HAI.
+    bioSource: https://hai.stanford.edu/people/fei-fei-li
+
+  - id: c-doctorow
+    name: Cory Doctorow
+    birthYear: 1971
+    generation: gen-x
+    gender: male
+    location:
+      city: Los Angeles
+      country: USA
+      continent: North America
+    jobTitle: Author / Activist / Journalist
+    industry: Technology Criticism
+    affiliation: EFF / Cornell University
+    perspectiveType: journalist
+    yearsInField: 30
+    education: ~
+    nativeLanguage: English
+    socialFollowing: large
+    bio: >
+      Born Toronto, moved to LA 2015. Ex-Boing Boing. A.D. White Professor at Cornell.
+      MIT Media Lab affiliate. Daily blogger at Pluralistic.net. EFF staff.
+      Coined "enshittification." Author of Little Brother, Walkaway, etc.
+    bioSource: https://craphound.com/bio/
