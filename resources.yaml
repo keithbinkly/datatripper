@@ -44,8 +44,8 @@
 
 metadata:
   version: "1.0"
-  lastUpdated: 2024-12-13
-  totalResources: 27
+  lastUpdated: 2025-12-13
+  totalResources: 54
 
 domains:
   - id: knowledge-engineering
@@ -61,6 +61,62 @@ domains:
       - Semantic Foundations
       - Agentic Systems
       - Process Knowledge
+      - Context Engineering
+      - Agent Memory
+      - Knowledge Quality
+
+  - id: data-visualization
+    name: Data Visualization
+    description: >
+      Design patterns, exemplars, and best practices for effective data visualization
+      and dashboard design.
+    color: "#8b5cf6"
+    categories:
+      - Chart Design
+      - Dashboard Exemplars
+      - UI/UX Principles
+
+  - id: data-storytelling
+    name: Data Storytelling
+    description: >
+      Techniques for narrative data journalism, scrollytelling, and compelling
+      data-driven stories.
+    color: "#ec4899"
+    categories:
+      - Process Guides
+      - Scrollytelling
+      - Data Journalism
+
+  - id: ai-tools
+    name: AI Tools & Infrastructure
+    description: >
+      Tools, frameworks, and infrastructure for building AI applications
+      and agent systems.
+    color: "#10b981"
+    categories:
+      - Prompt Engineering
+      - Agent Infrastructure
+      - Memory Systems
+      - Development Tools
+
+  - id: data-engineering
+    name: Data Engineering
+    description: >
+      Best practices for data transformation, modeling, and pipeline development.
+    color: "#f97316"
+    categories:
+      - dbt Practices
+      - Data Modeling
+      - Pipeline Tools
+
+  - id: career-development
+    name: Career Development
+    description: >
+      Resources for data career growth, portfolio building, and professional development.
+    color: "#6366f1"
+    categories:
+      - Portfolio Building
+      - Career Strategy
 
 # ═══════════════════════════════════════════════════════════════════════════════
 # RESOURCES
@@ -1008,3 +1064,947 @@ resources:
     # Display
     readingTime: 12m
     color: "#fb923c"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Visualization - Dashboard Exemplars
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: visual-vocabulary-tableau
+    url: https://public.tableau.com/app/profile/andy.kriebel/viz/VisualVocabulary/VisualVocabulary
+    preferredLabel: Visual Vocabulary
+    alternateLabels:
+      - chart type selection
+      - visualization picker
+      - chart chooser
+    definition: >
+      Interactive guide for selecting the right chart type based on
+      the data relationship you want to show.
+
+    author: a-kriebel
+    source: Tableau Public
+    contentType: dashboard
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: Dashboard Exemplars
+    granularity: foundational
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 5m
+    color: "#8b5cf6"
+
+  - id: bar-design-guide
+    url: https://public.tableau.com/app/profile/john.johansson/viz/BarDesignGuide/BarDesignGuide
+    preferredLabel: Bar Design Guide
+    alternateLabels:
+      - bar chart best practices
+      - bar chart design patterns
+    definition: >
+      Comprehensive guide to bar chart design best practices in Tableau.
+
+    author: j-johansson
+    source: Tableau Public
+    contentType: dashboard
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: Dashboard Exemplars
+    granularity: implementation
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 5m
+    color: "#8b5cf6"
+
+  - id: 10-commandments-big-numbers
+    url: https://public.tableau.com/app/profile/felipe.sebben/viz/The10CommandmentsofBigNumbersinPractice/The10CommandmentsofBigNumbers
+    preferredLabel: 10 Commandments of Big Numbers
+    alternateLabels:
+      - KPI card design
+      - big number design
+      - metric card best practices
+    definition: >
+      Design principles for effective KPI and big number cards in dashboards.
+
+    author: f-sebben
+    source: Tableau Public
+    contentType: dashboard
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: Dashboard Exemplars
+    granularity: implementation
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 5m
+    color: "#8b5cf6"
+
+  - id: tableau-chart-catalog
+    url: https://public.tableau.com/app/profile/kevin.flerlage/viz/TheTableauChartCatalog/TableauChartExamples
+    preferredLabel: Tableau Chart Catalog
+    alternateLabels:
+      - chart examples
+      - visualization catalog
+      - Tableau chart types
+    definition: >
+      Comprehensive catalog of chart types and visualization examples in Tableau.
+
+    author: k-flerlage
+    source: Tableau Public
+    contentType: dashboard
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: Dashboard Exemplars
+    granularity: foundational
+
+    relationships:
+      - type: related
+        target: visual-vocabulary-tableau
+
+    validationStatus: unvalidated
+    readingTime: 10m
+    color: "#8b5cf6"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Visualization - UI/UX Principles
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: 10-ui-design-principles
+    url: https://x.com/kieranklaassen/status/1992350089118183433
+    preferredLabel: 10 UI Design Principles
+    alternateLabels:
+      - UI design rules
+      - whitespace design
+      - minimal UI
+    definition: >
+      Core UI design principles: fewer colors, larger fonts, whitespace,
+      system fonts, high contrast.
+
+    author: k-klaassen
+    source: X/Twitter
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: UI/UX Principles
+    granularity: foundational
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 3m
+    color: "#8b5cf6"
+
+  - id: avoiding-ai-slop-design
+    url: https://x.com/mengto/status/1992213336205951143
+    preferredLabel: Avoiding AI Slop Design
+    alternateLabels:
+      - anti-AI aesthetic
+      - Swiss design
+      - Japanese minimalism
+    definition: >
+      How to avoid generic AI-generated aesthetic by drawing from
+      Swiss design, Japanese minimalism, and Apple's design system.
+
+    author: m-mengto
+    source: X/Twitter
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: UI/UX Principles
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: 10-ui-design-principles
+
+    validationStatus: unvalidated
+    readingTime: 3m
+    color: "#8b5cf6"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Storytelling - Process Guides
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: pudding-dope-shit-1
+    url: https://pudding.cool/process/how-to-make-dope-shit-part-1/
+    preferredLabel: How to Make Dope Shit Part 1
+    alternateLabels:
+      - data storytelling process
+      - Pudding methodology
+      - visual essay creation
+    definition: >
+      The Pudding's guide to creating compelling data stories - Part 1 on
+      ideation and concept development.
+
+    author: the-pudding
+    source: The Pudding
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-storytelling
+    category: Process Guides
+    granularity: foundational
+
+    relationships:
+      - type: broader
+        target: pudding-dope-shit-2
+      - type: broader
+        target: pudding-dope-shit-3
+
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#ec4899"
+
+  - id: pudding-dope-shit-2
+    url: https://pudding.cool/process/how-to-make-dope-shit-part-2/
+    preferredLabel: How to Make Dope Shit Part 2
+    alternateLabels:
+      - data story development
+      - Pudding process
+    definition: >
+      The Pudding's guide to creating compelling data stories - Part 2 on
+      data gathering and analysis.
+
+    author: the-pudding
+    source: The Pudding
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-storytelling
+    category: Process Guides
+    granularity: conceptual
+
+    relationships:
+      - type: narrower
+        target: pudding-dope-shit-1
+      - type: broader
+        target: pudding-dope-shit-3
+
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#ec4899"
+
+  - id: pudding-dope-shit-3
+    url: https://pudding.cool/process/how-to-make-dope-shit-part-3/
+    preferredLabel: How to Make Dope Shit Part 3
+    alternateLabels:
+      - data story production
+      - visual essay production
+    definition: >
+      The Pudding's guide to creating compelling data stories - Part 3 on
+      production and publishing.
+
+    author: the-pudding
+    source: The Pudding
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-storytelling
+    category: Process Guides
+    granularity: implementation
+
+    relationships:
+      - type: narrower
+        target: pudding-dope-shit-1
+      - type: narrower
+        target: pudding-dope-shit-2
+
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#ec4899"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Storytelling - Scrollytelling
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: pudding-scrollytelling-implementation
+    url: https://pudding.cool/process/how-to-implement-scrollytelling/
+    preferredLabel: Scrollytelling Implementation
+    alternateLabels:
+      - scroll-driven storytelling
+      - scrollytelling tutorial
+      - scroll interaction design
+    definition: >
+      Technical guide to implementing scroll-driven data storytelling
+      with step-by-step code examples.
+
+    author: the-pudding
+    source: The Pudding
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-storytelling
+    category: Scrollytelling
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: pudding-responsive-scrollytelling
+
+    validationStatus: unvalidated
+    readingTime: 20m
+    color: "#ec4899"
+
+  - id: pudding-responsive-scrollytelling
+    url: https://pudding.cool/process/responsive-scrollytelling/
+    preferredLabel: Responsive Scrollytelling
+    alternateLabels:
+      - mobile scrollytelling
+      - responsive data stories
+    definition: >
+      Making scroll-driven stories work across devices and screen sizes.
+
+    author: the-pudding
+    source: The Pudding
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-storytelling
+    category: Scrollytelling
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: pudding-scrollytelling-implementation
+
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#ec4899"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Knowledge Engineering - Context Engineering
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: context-engineering-agents-langchain
+    url: https://blog.langchain.com/context-engineering-for-agents/
+    preferredLabel: Context Engineering for Agents (LangChain)
+    alternateLabels:
+      - agent context strategies
+      - Write Select Compress Isolate
+      - context failure modes
+    definition: >
+      Comprehensive framework for agent context management with 4 strategies
+      (Write, Select, Compress, Isolate) and failure mode taxonomy.
+
+    author: langchain-team
+    source: LangChain Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Context Engineering
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: context-engineering-weaviate
+
+    validationStatus: reviewed
+    readingTime: 15m
+    color: "#06b6d4"
+
+  - id: context-engineering-weaviate
+    url: https://weaviate.io/blog/context-engineering
+    preferredLabel: Context Engineering Deep Dive (Weaviate)
+    alternateLabels:
+      - context engineering framework
+      - agent failure analysis
+    definition: >
+      Framework covering Write/Select/Compress/Isolate strategies. Key finding:
+      87.5% of agent failures are context problems, not model capability.
+
+    author: weaviate-team
+    source: Weaviate Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Context Engineering
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: context-engineering-agents-langchain
+
+    validationStatus: reviewed
+    readingTime: 12m
+    color: "#06b6d4"
+
+  - id: how-prompt-caching-works
+    url: https://sankalp.bearblog.dev/how-prompt-caching-works/
+    preferredLabel: How Prompt Caching Works
+    alternateLabels:
+      - prompt caching
+      - LLM caching
+      - Anthropic caching
+    definition: >
+      Technical deep dive on prompt caching implementations across Anthropic,
+      OpenAI, and Gemini. Key pattern: stable prefixes for ~90% cost reduction.
+
+    author: s-agarwal
+    source: Bear Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Context Engineering
+    granularity: implementation
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#06b6d4"
+
+  - id: filesystems-context-engineering
+    url: https://blog.langchain.com/how-agents-can-use-filesystems-for-context-engineering/
+    preferredLabel: Filesystems for Context Engineering
+    alternateLabels:
+      - agent filesystem patterns
+      - persistent agent context
+    definition: >
+      How AI agents can use filesystems as a context management mechanism
+      for persistent memory and state.
+
+    author: langchain-team
+    source: LangChain Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Context Engineering
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: context-engineering-agents-langchain
+
+    validationStatus: unvalidated
+    readingTime: 10m
+    color: "#06b6d4"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Knowledge Engineering - Agent Memory
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: momo-context-engineering-research
+    url: https://github.com/momo-personal-assistant/momo-research
+    preferredLabel: Momo Research - Context Engineering
+    alternateLabels:
+      - AI agent memory framework
+      - 5-layer memory stack
+      - memory compaction
+    definition: >
+      Complete framework for AI agent memory across sessions. Defines 5-layer
+      memory stack, compaction strategies, and memory-as-a-tool pattern.
+
+    author: momo-research
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Agent Memory
+    granularity: advanced
+
+    relationships:
+      - type: related
+        target: spark-shared-memory-agents
+
+    validationStatus: reviewed
+    readingTime: 30m
+    color: "#06b6d4"
+
+  - id: spark-shared-memory-agents
+    url: https://arxiv.org/html/2511.08301v1
+    preferredLabel: "Spark: Shared Memory for Coding Agents"
+    alternateLabels:
+      - collective agent memory
+      - shared agent knowledge
+      - cross-agent learning
+    definition: >
+      Shared memory architecture enabling agents to learn from each other.
+      Key finding: small models benefit most (+0.66 pts vs +0.05 for GPT-5).
+
+    author: spark-research
+    source: arXiv
+    contentType: paper
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Agent Memory
+    granularity: advanced
+
+    relationships:
+      - type: related
+        target: momo-context-engineering-research
+
+    validationStatus: reviewed
+    readingTime: 45m
+    color: "#06b6d4"
+
+  - id: memory-in-ai-agents
+    url: https://www.leoniemonigatti.com/blog/memory-in-ai-agents.html
+    preferredLabel: Memory in AI Agents
+    alternateLabels:
+      - CoALA framework
+      - Letta architecture
+      - agent memory taxonomy
+    definition: >
+      Clear taxonomy of memory types using CoALA framework and Letta architecture.
+      Covers working, semantic, episodic, and procedural memory.
+
+    author: l-monigatti
+    source: Personal Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Agent Memory
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: momo-context-engineering-research
+
+    validationStatus: reviewed
+    readingTime: 12m
+    color: "#06b6d4"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Knowledge Engineering - Knowledge Quality
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: semiosis-kb-unit-testing
+    url: https://github.com/AnswerLayer/semiosis
+    preferredLabel: "Semiosis: KB Unit Testing"
+    alternateLabels:
+      - knowledge base testing
+      - documentation quality metrics
+      - semantic density
+    definition: >
+      Unit testing framework for knowledge bases. Measures completeness,
+      redundancy, semantic density, and critical boundary thresholds.
+
+    author: answerlayer-team
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Knowledge Quality
+    granularity: implementation
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 20m
+    color: "#06b6d4"
+
+  - id: holy-trinity-enterprise-data
+    url: https://substack.com/inbox/post/179387219
+    preferredLabel: Holy Trinity for Enterprise Data
+    alternateLabels:
+      - Meta Grid pattern
+      - metadata repository coordination
+      - enterprise data governance
+    definition: >
+      Meta Grid pattern for coordinating multiple metadata repositories.
+      Key insight: LLMs trained on fragmented glossaries will hallucinate.
+
+    author: ~
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: knowledge-engineering
+    category: Knowledge Quality
+    granularity: conceptual
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#06b6d4"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # AI Tools - Agent Infrastructure
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: ade-bench-dbt
+    url: https://github.com/dbt-labs/ade-bench
+    preferredLabel: ADE-Bench (dbt Labs)
+    alternateLabels:
+      - AI data engineering benchmark
+      - dbt agent evaluation
+      - agent benchmark
+    definition: >
+      Official dbt Labs benchmark for AI data engineering agents. 8 challenge
+      categories with 60+ tasks covering migrations, modeling, testing, and more.
+
+    author: dbt-labs
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: implementation
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 20m
+    color: "#10b981"
+
+  - id: llm-council-karpathy
+    url: https://github.com/karpathy/llm-council
+    preferredLabel: LLM Council (Karpathy)
+    alternateLabels:
+      - multi-LLM comparison
+      - LLM voting
+      - model ensemble
+    definition: >
+      Tool for querying multiple LLMs simultaneously and comparing their responses.
+
+    author: a-karpathy
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: implementation
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 10m
+    color: "#10b981"
+
+  - id: advanced-tool-use-anthropic
+    url: https://www.anthropic.com/engineering/advanced-tool-use
+    preferredLabel: Advanced Tool Use (Anthropic)
+    alternateLabels:
+      - tool search tool
+      - programmatic tool calling
+      - tool use examples
+    definition: >
+      Three features for scaling tool use: Tool Search Tool (85% token reduction),
+      Programmatic Tool Calling, and Tool Use Examples (72%→90% accuracy).
+
+    author: anthropic-team
+    source: Anthropic
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: advanced
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#10b981"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # AI Tools - Development Tools
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: mdflow-executable-markdown
+    url: https://github.com/johnlindquist/mdflow
+    preferredLabel: mdflow - Executable Markdown
+    alternateLabels:
+      - markdown CLI
+      - executable prompts
+      - prompt templating
+    definition: >
+      CLI tool that transforms markdown files into executable AI prompts.
+      Key feature: file imports with @./path/**/*.sql for auto-inlining.
+
+    author: j-lindquist
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: ai-tools
+    category: Development Tools
+    granularity: implementation
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#10b981"
+
+  - id: claude-mem-persistent-memory
+    url: https://github.com/thedotmack/claude-mem
+    preferredLabel: claude-mem - Persistent Memory
+    alternateLabels:
+      - Claude memory plugin
+      - session persistence
+      - context injection
+    definition: >
+      Persistent memory plugin for Claude Code with automatic context injection
+      between sessions. Features Endless Mode for extended sessions.
+
+    author: thedotmack
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: ai-tools
+    category: Development Tools
+    granularity: implementation
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#10b981"
+
+  - id: consistent-hero-images-workflow
+    url: https://open.substack.com/pub/jennyouyang/p/how-i-create-consistent-hero-images-and-why-i-havent-switched-to-nanobanana
+    preferredLabel: Consistent Hero Images Workflow
+    alternateLabels:
+      - AI image workflow
+      - consistent image assets
+    definition: >
+      Process for creating consistent hero images and visual assets using AI tools.
+
+    author: j-ouyang
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: ai-tools
+    category: Development Tools
+    granularity: implementation
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 8m
+    color: "#10b981"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Engineering - dbt Practices
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: modeling-success-dbt
+    url: https://www.getdbt.com/blog/modeling-success-dbt
+    preferredLabel: Modeling Success with dbt
+    alternateLabels:
+      - dbt data modeling
+      - dbt architecture guide
+      - conformed dimensions
+    definition: >
+      dbt Labs guide on data modeling architecture. Key insights: architecture
+      before implementation, grain is critical, conformed dimensions.
+
+    author: dbt-labs
+    source: dbt Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-engineering
+    category: dbt Practices
+    granularity: conceptual
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 15m
+    color: "#f97316"
+
+  - id: dbt-mcp-conversational-analytics
+    url: https://www.getdbt.com/blog/dbt-mcp-server-conversational-analytics
+    preferredLabel: dbt MCP Server Conversational Analytics
+    alternateLabels:
+      - dbt MCP
+      - conversational BI
+      - Norlys case study
+    definition: >
+      Norlys case study on AI + dbt integration. Key insight: metrics-first
+      approach with upfront data quality investment.
+
+    author: dbt-labs
+    source: dbt Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-engineering
+    category: dbt Practices
+    granularity: implementation
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 12m
+    color: "#f97316"
+
+  - id: understanding-data-marts
+    url: https://jimmypang.substack.com/p/understanding-data-marts-in-modern
+    preferredLabel: Understanding Data Marts
+    alternateLabels:
+      - modern mart architecture
+      - 5 mart types
+      - denormalization for cloud
+    definition: >
+      Modern data mart architecture guide. Covers 5 mart types, tag-based
+      execution patterns, and denormalization strategies for cloud warehouses.
+
+    author: j-pang
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-engineering
+    category: dbt Practices
+    granularity: conceptual
+
+    relationships: []
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#f97316"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Engineering - Pipeline Tools
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: dbt-incremental-ci
+    url: https://github.com/ponderedw/dbt-incremental-ci
+    preferredLabel: dbt-incremental-ci
+    alternateLabels:
+      - CI testing with prod data
+      - dbt CI optimization
+    definition: >
+      dbt package that copies prod data into CI schema for faster, more accurate
+      testing against real production data.
+
+    author: ponderedw
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-engineering
+    category: Pipeline Tools
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: upstream-prod
+
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#f97316"
+
+  - id: upstream-prod
+    url: https://github.com/gouline/upstream-prod
+    preferredLabel: upstream-prod
+    alternateLabels:
+      - dbt prod data in dev
+      - ref_upstream macro
+    definition: >
+      dbt package for using prod data in dev. Intelligently redirects refs
+      for -97% dev cycle time (55 sec vs 15-30 min).
+
+    author: gouline
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-engineering
+    category: Pipeline Tools
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: dbt-incremental-ci
+
+    validationStatus: reviewed
+    readingTime: 10m
+    color: "#f97316"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Career Development
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: data-portfolio-that-works
+    url: https://open.substack.com/pub/thedatahustle/p/the-data-portfolio-that-actually
+    preferredLabel: The Data Portfolio That Actually Works
+    alternateLabels:
+      - data portfolio guide
+      - portfolio building
+      - data career advice
+    definition: >
+      Guide to building an effective data portfolio for career advancement.
+
+    author: the-data-hustle
+    source: Substack
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: career-development
+    category: Portfolio Building
+    granularity: foundational
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: 12m
+    color: "#6366f1"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Visualization - Reference Guides
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: tableau-reference-guide-shaffer
+    url: https://www.intotableaudata.com/
+    preferredLabel: Tableau Reference Guide (Shaffer)
+    alternateLabels:
+      - Tableau links library
+      - accordion-style organization
+    definition: >
+      Comprehensive Tableau reference guide with accordion-style organization.
+      Good model for organizing large link libraries.
+
+    author: j-shaffer
+    source: Personal Site
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-13
+
+    domain: data-visualization
+    category: Chart Design
+    granularity: foundational
+
+    relationships: []
+    validationStatus: unvalidated
+    readingTime: ~
+    color: "#8b5cf6"

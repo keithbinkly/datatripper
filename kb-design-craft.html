@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Design Craft | data-centered</title>
+  <meta name="description" content="Curated resources on data visualization, dashboard design, UI principles, and data storytelling.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard topic-page tui">
+
+  <header class="topic-header">
+    <a href="index.html" class="topic-back">&larr;</a>
+    <span class="topic-indicator" style="background: #8b5cf6"></span>
+    <h1 class="topic-title">Design Craft</h1>
+    <span class="topic-count">12 resources</span>
+    <button class="insights-toggle" id="insights-toggle" title="Toggle stats panel">stats</button>
+  </header>
+
+  <main class="topic-grid with-insights" id="topic-grid">
+
+    <!-- Left Panel: Context -->
+    <aside class="topic-aside">
+      <h3 class="tcat">Context</h3>
+      <p class="topic-lede section-content">Design Craft bridges <strong>visualization</strong> and <strong>storytelling</strong>—the art of making data comprehensible and compelling. Great design isn't decoration; it's the mechanism that transforms raw numbers into understanding and action.</p>
+
+      <div class="topic-stat-box section-content">
+        <span class="topic-stat-num">3s</span>
+        <span class="topic-stat-label">time to form first impression of a dashboard</span>
+      </div>
+
+      <h3 class="tcat">Key Terms</h3>
+      <div class="topic-terms-grid section-content">
+        <div class="tterm"><span class="tterm-name">Visual Vocabulary</span><span class="tterm-def">Matching chart types to the relationship you want to show</span></div>
+        <div class="tterm"><span class="tterm-name">Scrollytelling</span><span class="tterm-def">Scroll-driven narrative that reveals data progressively</span></div>
+        <div class="tterm"><span class="tterm-name">Data-Ink Ratio</span><span class="tterm-def">Proportion of ink devoted to data vs non-data elements</span></div>
+        <div class="tterm"><span class="tterm-name">Big Number</span><span class="tterm-def">Hero KPI card designed for immediate comprehension</span></div>
+        <div class="tterm"><span class="tterm-name">AI Slop</span><span class="tterm-def">Generic, over-designed aesthetic common in AI-generated UIs</span></div>
+      </div>
+
+      <h3 class="tcat">Design Principles</h3>
+      <div class="topic-terms-grid section-content">
+        <div class="tterm"><span class="tterm-name">Less is more</span><span class="tterm-def">Fewer colors, larger fonts, generous whitespace</span></div>
+        <div class="tterm"><span class="tterm-name">Clarity over decoration</span><span class="tterm-def">Every visual element should serve comprehension</span></div>
+        <div class="tterm"><span class="tterm-name">Narrative arc</span><span class="tterm-def">Guide the viewer through a logical story progression</span></div>
+      </div>
+    </aside>
+
+    <!-- Main: Reading List -->
+    <section class="topic-reading">
+      <div class="topic-reading-cols">
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">Dashboard Exemplars</h3>
+          <a href="https://public.tableau.com/app/profile/andy.kriebel/viz/VisualVocabulary/VisualVocabulary" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">Tableau Public</span>
+            <span class="tlink-title">Visual Vocabulary</span>
+            <span class="tlink-author">A. Kriebel</span>
+            <span class="tlink-time">5m</span>
+            <span class="tlink-desc">Interactive guide for selecting the right chart type based on data relationship.</span>
+          </a>
+          <a href="https://public.tableau.com/app/profile/john.johansson/viz/BarDesignGuide/BarDesignGuide" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">Tableau Public</span>
+            <span class="tlink-title">Bar Design Guide</span>
+            <span class="tlink-author">J. Johansson</span>
+            <span class="tlink-time">5m</span>
+            <span class="tlink-desc">Comprehensive guide to bar chart design best practices.</span>
+          </a>
+          <a href="https://public.tableau.com/app/profile/felipe.sebben/viz/The10CommandmentsofBigNumbersinPractice/The10CommandmentsofBigNumbers" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">Tableau Public</span>
+            <span class="tlink-title">10 Commandments of Big Numbers</span>
+            <span class="tlink-author">F. Sebben</span>
+            <span class="tlink-time">5m</span>
+            <span class="tlink-desc">Design principles for effective KPI and metric cards.</span>
+          </a>
+          <a href="https://public.tableau.com/app/profile/kevin.flerlage/viz/TheTableauChartCatalog/TableauChartExamples" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">Tableau Public</span>
+            <span class="tlink-title">Tableau Chart Catalog</span>
+            <span class="tlink-author">K. Flerlage</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Comprehensive catalog of chart types and visualization examples.</span>
+          </a>
+
+          <h3 class="tcat">UI/UX Principles</h3>
+          <a href="https://x.com/kieranklaassen/status/1992350089118183433" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">X/Twitter</span>
+            <span class="tlink-title">10 UI Design Principles</span>
+            <span class="tlink-author">K. Klaassen</span>
+            <span class="tlink-time">3m</span>
+            <span class="tlink-desc">Fewer colors, larger fonts, whitespace, system fonts, high contrast.</span>
+          </a>
+          <a href="https://x.com/mengto/status/1992213336205951143" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">X/Twitter</span>
+            <span class="tlink-title">Avoiding AI Slop Design</span>
+            <span class="tlink-author">M. To</span>
+            <span class="tlink-time">3m</span>
+            <span class="tlink-desc">Draw from Swiss design, Japanese minimalism, and Apple's design system.</span>
+          </a>
+          <a href="https://www.intotableaudata.com/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#8b5cf6"></span>
+            <span class="tlink-src">Personal Site</span>
+            <span class="tlink-title">Tableau Reference Guide</span>
+            <span class="tlink-author">J. Shaffer</span>
+            <span class="tlink-time">ref</span>
+            <span class="tlink-desc">Comprehensive accordion-style reference for Tableau resources.</span>
+          </a>
+        </div>
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">Data Story Process</h3>
+          <a href="https://pudding.cool/process/how-to-make-dope-shit-part-1/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">The Pudding</span>
+            <span class="tlink-title">How to Make Dope Shit Pt 1</span>
+            <span class="tlink-author">The Pudding</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Ideation and concept development for compelling data stories.</span>
+          </a>
+          <a href="https://pudding.cool/process/how-to-make-dope-shit-part-2/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">The Pudding</span>
+            <span class="tlink-title">How to Make Dope Shit Pt 2</span>
+            <span class="tlink-author">The Pudding</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Data gathering and analysis for data stories.</span>
+          </a>
+          <a href="https://pudding.cool/process/how-to-make-dope-shit-part-3/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">The Pudding</span>
+            <span class="tlink-title">How to Make Dope Shit Pt 3</span>
+            <span class="tlink-author">The Pudding</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Production and publishing data stories.</span>
+          </a>
+
+          <h3 class="tcat">Scrollytelling</h3>
+          <a href="https://pudding.cool/process/how-to-implement-scrollytelling/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">The Pudding</span>
+            <span class="tlink-title">Scrollytelling Implementation</span>
+            <span class="tlink-author">The Pudding</span>
+            <span class="tlink-time">20m</span>
+            <span class="tlink-desc">Technical guide with step-by-step code examples.</span>
+          </a>
+          <a href="https://pudding.cool/process/responsive-scrollytelling/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">The Pudding</span>
+            <span class="tlink-title">Responsive Scrollytelling</span>
+            <span class="tlink-author">The Pudding</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Making scroll-driven stories work across devices and screen sizes.</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Right Panel: Insights Dashboard -->
+    <aside class="topic-insights">
+
+      <!-- Geography -->
+      <div class="insights-section">
+        <div class="insights-title">Sources by Geography</div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">USA</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-usa" style="width: 75%"></div>
+          </div>
+          <span class="insights-bar-value">75%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Europe</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-eu" style="width: 17%"></div>
+          </div>
+          <span class="insights-bar-value">17%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Unknown</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-unknown" style="width: 8%"></div>
+          </div>
+          <span class="insights-bar-value">8%</span>
+        </div>
+      </div>
+
+      <!-- Voices -->
+      <div class="insights-section">
+        <div class="insights-title">Voices</div>
+        <div class="insights-voices">
+          <div class="insights-voice">
+            <span class="insights-voice-icon male">&#9794;</span>
+            <span>6</span>
+          </div>
+          <div class="insights-voice">
+            <span class="insights-voice-icon female">&#9792;</span>
+            <span>0</span>
+          </div>
+          <div class="insights-voice">
+            <span class="insights-voice-icon unknown">?</span>
+            <span>1</span>
+          </div>
+        </div>
+        <div class="insights-gap">
+          <span class="insights-gap-icon">!</span>
+          0 female voices in this topic
+        </div>
+      </div>
+
+      <!-- Perspective -->
+      <div class="insights-section">
+        <div class="insights-title">Perspective Type</div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Practitioner</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+          </div>
+        </div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Publication</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Contributors -->
+      <div class="insights-section">
+        <div class="insights-title">Top Contributors</div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">The Pudding</span>
+          <span class="insights-contributor-count">5</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">A. Kriebel</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">K. Flerlage</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Types -->
+      <div class="insights-section">
+        <div class="insights-title">Content Types</div>
+        <div class="insights-types">
+          <div class="insights-type">
+            <span class="insights-type-label">Dashboard</span>
+            <span class="insights-type-count">4</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Essay</span>
+            <span class="insights-type-count">7</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Reference</span>
+            <span class="insights-type-count">1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="insights-section">
+        <div class="insights-title">Added</div>
+        <div class="insights-recent">
+          <div class="insights-recent-item">
+            <span class="insights-recent-dot"></span>
+            <span>Dec 13 — 12 resources</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <footer class="topic-status">
+    <span class="status-section">12 resources</span>
+    <span class="status-section">~2 hrs total</span>
+    <span class="status-section status-right">data-centered</span>
+  </footer>
+
+  <script>
+    // Interactive behaviors
+    (function() {
+      const isMobile = () => window.innerWidth <= 900;
+
+      // Get all content belonging to a section header (links or section-content)
+      function getSectionContent(header) {
+        const content = [];
+        let sibling = header.nextElementSibling;
+        while (sibling && !sibling.classList.contains('tcat')) {
+          if (sibling.classList.contains('tlink') || sibling.classList.contains('section-content')) {
+            content.push(sibling);
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        return content;
+      }
+
+      // Collapsible section headers - works on all screen sizes
+      document.querySelectorAll('.tcat').forEach(header => {
+        header.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          const isCollapsed = this.classList.toggle('collapsed');
+          const content = getSectionContent(this);
+
+          content.forEach(item => {
+            if (isCollapsed) {
+              item.classList.add('section-hidden');
+            } else {
+              item.classList.remove('section-hidden');
+            }
+          });
+        });
+      });
+
+      // Add open icon to each link for mobile
+      document.querySelectorAll('.tlink').forEach(link => {
+        const openBtn = document.createElement('span');
+        openBtn.className = 'tlink-open';
+        openBtn.innerHTML = '&nearr;';
+        openBtn.title = 'Open link';
+        openBtn.dataset.href = link.href;
+        link.appendChild(openBtn);
+      });
+
+      // Tap-to-expand links: mobile only
+      document.querySelectorAll('.tlink').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (!isMobile()) return;
+
+          // If clicking the open button, navigate
+          if (e.target.classList.contains('tlink-open')) {
+            window.open(this.href, '_blank');
+            e.preventDefault();
+            return;
+          }
+
+          e.preventDefault();
+
+          if (this.classList.contains('expanded')) {
+            // Second tap collapses
+            this.classList.remove('expanded');
+          } else {
+            // First tap expands, collapse others
+            document.querySelectorAll('.tlink.expanded').forEach(other => {
+              if (other !== this) other.classList.remove('expanded');
+            });
+            this.classList.add('expanded');
+          }
+        });
+      });
+
+      // Tap outside to collapse expanded links (mobile)
+      document.addEventListener('click', function(e) {
+        if (!isMobile()) return;
+        if (!e.target.closest('.tlink')) {
+          document.querySelectorAll('.tlink.expanded').forEach(link => {
+            link.classList.remove('expanded');
+          });
+        }
+      });
+    })();
+
+    // Insights panel toggle - handles both desktop and mobile differently
+    (function() {
+      const toggle = document.getElementById('insights-toggle');
+      const grid = document.getElementById('topic-grid');
+      const mobileBreakpoint = 800;
+
+      function isMobile() {
+        return window.innerWidth <= mobileBreakpoint;
+      }
+
+      function updateState() {
+        if (isMobile()) {
+          // On mobile: default hidden, toggle shows as overlay
+          grid.classList.remove('insights-hidden');
+          // Check if mobile-visible state is saved
+          const mobileVisible = localStorage.getItem('insights-mobile-visible') === 'true';
+          if (mobileVisible) {
+            grid.classList.add('insights-visible');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-visible');
+            toggle.classList.remove('active');
+          }
+        } else {
+          // On desktop: default visible, toggle hides
+          grid.classList.remove('insights-visible');
+          const savedState = localStorage.getItem('insights-hidden');
+          if (savedState === 'true') {
+            grid.classList.add('insights-hidden');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-hidden');
+            toggle.classList.remove('active');
+          }
+        }
+      }
+
+      // Initial state
+      updateState();
+
+      // Handle resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateState, 100);
+      });
+
+      toggle.addEventListener('click', function() {
+        if (isMobile()) {
+          // Mobile: toggle visibility overlay
+          grid.classList.toggle('insights-visible');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-mobile-visible', grid.classList.contains('insights-visible'));
+        } else {
+          // Desktop: toggle hidden state
+          grid.classList.toggle('insights-hidden');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-hidden', grid.classList.contains('insights-hidden'));
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

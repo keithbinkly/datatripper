@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Data Engineering | data-centered</title>
+  <meta name="description" content="Curated resources on dbt best practices, data modeling, and pipeline development tools.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard topic-page tui">
+
+  <header class="topic-header">
+    <a href="index.html" class="topic-back">&larr;</a>
+    <span class="topic-indicator" style="background: #f97316"></span>
+    <h1 class="topic-title">Data Engineering</h1>
+    <span class="topic-count">5 resources</span>
+    <button class="insights-toggle" id="insights-toggle" title="Toggle stats panel">stats</button>
+  </header>
+
+  <main class="topic-grid with-insights" id="topic-grid">
+
+    <!-- Left Panel: Context -->
+    <aside class="topic-aside">
+      <h3 class="tcat">Context</h3>
+      <p class="topic-lede section-content">Data Engineering is the foundation of modern analytics—transforming raw data into reliable, tested, documented datasets. <strong>dbt</strong> has become the lingua franca for data transformation, enabling <strong>version control</strong>, <strong>testing</strong>, and <strong>documentation</strong> as first-class citizens.</p>
+
+      <div class="topic-stat-box section-content">
+        <span class="topic-stat-num">-97%</span>
+        <span class="topic-stat-label">dev cycle time with prod data in dev (55s vs 15-30m)</span>
+      </div>
+
+      <h3 class="tcat">Key Terms</h3>
+      <div class="topic-terms-grid section-content">
+        <div class="tterm"><span class="tterm-name">dbt</span><span class="tterm-def">Data Build Tool - SQL-first transformation framework with testing and docs</span></div>
+        <div class="tterm"><span class="tterm-name">Data Mart</span><span class="tterm-def">Purpose-built dataset optimized for specific analytical use cases</span></div>
+        <div class="tterm"><span class="tterm-name">Conformed Dimension</span><span class="tterm-def">Shared dimension used consistently across multiple fact tables</span></div>
+        <div class="tterm"><span class="tterm-name">Incremental Model</span><span class="tterm-def">Model that only processes new/changed records, not full refresh</span></div>
+        <div class="tterm"><span class="tterm-name">ref()</span><span class="tterm-def">dbt function creating dependencies between models</span></div>
+      </div>
+
+      <h3 class="tcat">Architecture Patterns</h3>
+      <div class="topic-terms-grid section-content">
+        <div class="tterm"><span class="tterm-name">Staging</span><span class="tterm-def">Light transformations on raw source data</span></div>
+        <div class="tterm"><span class="tterm-name">Intermediate</span><span class="tterm-def">Business logic and joins, not exposed to BI</span></div>
+        <div class="tterm"><span class="tterm-name">Marts</span><span class="tterm-def">Final, consumable tables for analytics</span></div>
+      </div>
+    </aside>
+
+    <!-- Main: Reading List -->
+    <section class="topic-reading">
+      <div class="topic-reading-cols">
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">dbt Practices</h3>
+          <a href="https://www.getdbt.com/blog/modeling-success-dbt" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#f97316"></span>
+            <span class="tlink-src">dbt Blog</span>
+            <span class="tlink-title">Modeling Success with dbt</span>
+            <span class="tlink-author">dbt Labs</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Architecture before implementation, grain is critical, conformed dimensions.</span>
+          </a>
+          <a href="https://www.getdbt.com/blog/dbt-mcp-server-conversational-analytics" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#f97316"></span>
+            <span class="tlink-src">dbt Blog</span>
+            <span class="tlink-title">dbt MCP Conversational Analytics</span>
+            <span class="tlink-author">dbt Labs</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Norlys case study: metrics-first approach with upfront data quality investment.</span>
+          </a>
+          <a href="https://jimmypang.substack.com/p/understanding-data-marts-in-modern" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#f97316"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Understanding Data Marts</span>
+            <span class="tlink-author">J. Pang</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">5 mart types, tag-based execution, denormalization for cloud warehouses.</span>
+          </a>
+        </div>
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">Pipeline Tools</h3>
+          <a href="https://github.com/ponderedw/dbt-incremental-ci" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#f97316"></span>
+            <span class="tlink-src">GitHub</span>
+            <span class="tlink-title">dbt-incremental-ci</span>
+            <span class="tlink-author">ponderedw</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Copy prod data into CI schema for faster, more accurate testing.</span>
+          </a>
+          <a href="https://github.com/gouline/upstream-prod" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#f97316"></span>
+            <span class="tlink-src">GitHub</span>
+            <span class="tlink-title">upstream-prod</span>
+            <span class="tlink-author">M. Gouline</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Use prod data in dev with intelligent ref redirects. -97% dev cycle time.</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Right Panel: Insights Dashboard -->
+    <aside class="topic-insights">
+
+      <!-- Geography -->
+      <div class="insights-section">
+        <div class="insights-title">Sources by Geography</div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">USA</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-usa" style="width: 60%"></div>
+          </div>
+          <span class="insights-bar-value">60%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Australia</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-asia" style="width: 20%"></div>
+          </div>
+          <span class="insights-bar-value">20%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Unknown</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-unknown" style="width: 20%"></div>
+          </div>
+          <span class="insights-bar-value">20%</span>
+        </div>
+      </div>
+
+      <!-- Voices -->
+      <div class="insights-section">
+        <div class="insights-title">Voices</div>
+        <div class="insights-voices">
+          <div class="insights-voice">
+            <span class="insights-voice-icon male">&#9794;</span>
+            <span>2</span>
+          </div>
+          <div class="insights-voice">
+            <span class="insights-voice-icon female">&#9792;</span>
+            <span>0</span>
+          </div>
+          <div class="insights-voice">
+            <span class="insights-voice-icon unknown">?</span>
+            <span>2</span>
+          </div>
+        </div>
+        <div class="insights-gap">
+          <span class="insights-gap-icon">!</span>
+          0 female voices in this topic
+        </div>
+      </div>
+
+      <!-- Perspective -->
+      <div class="insights-section">
+        <div class="insights-title">Perspective Type</div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Practitioner</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+          </div>
+        </div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Vendor</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Contributors -->
+      <div class="insights-section">
+        <div class="insights-title">Top Contributors</div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">dbt Labs</span>
+          <span class="insights-contributor-count">2</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">J. Pang</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">M. Gouline</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Types -->
+      <div class="insights-section">
+        <div class="insights-title">Content Types</div>
+        <div class="insights-types">
+          <div class="insights-type">
+            <span class="insights-type-label">Blog</span>
+            <span class="insights-type-count">2</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Essay</span>
+            <span class="insights-type-count">1</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Docs</span>
+            <span class="insights-type-count">2</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="insights-section">
+        <div class="insights-title">Added</div>
+        <div class="insights-recent">
+          <div class="insights-recent-item">
+            <span class="insights-recent-dot"></span>
+            <span>Dec 13 — 5 resources</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <footer class="topic-status">
+    <span class="status-section">5 resources</span>
+    <span class="status-section">~1 hr total</span>
+    <span class="status-section status-right">data-centered</span>
+  </footer>
+
+  <script>
+    // Interactive behaviors
+    (function() {
+      const isMobile = () => window.innerWidth <= 900;
+
+      // Get all content belonging to a section header (links or section-content)
+      function getSectionContent(header) {
+        const content = [];
+        let sibling = header.nextElementSibling;
+        while (sibling && !sibling.classList.contains('tcat')) {
+          if (sibling.classList.contains('tlink') || sibling.classList.contains('section-content')) {
+            content.push(sibling);
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        return content;
+      }
+
+      // Collapsible section headers - works on all screen sizes
+      document.querySelectorAll('.tcat').forEach(header => {
+        header.addEventListener('click', function(e) {
+          e.preventDefault();
+
+          const isCollapsed = this.classList.toggle('collapsed');
+          const content = getSectionContent(this);
+
+          content.forEach(item => {
+            if (isCollapsed) {
+              item.classList.add('section-hidden');
+            } else {
+              item.classList.remove('section-hidden');
+            }
+          });
+        });
+      });
+
+      // Add open icon to each link for mobile
+      document.querySelectorAll('.tlink').forEach(link => {
+        const openBtn = document.createElement('span');
+        openBtn.className = 'tlink-open';
+        openBtn.innerHTML = '&nearr;';
+        openBtn.title = 'Open link';
+        openBtn.dataset.href = link.href;
+        link.appendChild(openBtn);
+      });
+
+      // Tap-to-expand links: mobile only
+      document.querySelectorAll('.tlink').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (!isMobile()) return;
+
+          // If clicking the open button, navigate
+          if (e.target.classList.contains('tlink-open')) {
+            window.open(this.href, '_blank');
+            e.preventDefault();
+            return;
+          }
+
+          e.preventDefault();
+
+          if (this.classList.contains('expanded')) {
+            // Second tap collapses
+            this.classList.remove('expanded');
+          } else {
+            // First tap expands, collapse others
+            document.querySelectorAll('.tlink.expanded').forEach(other => {
+              if (other !== this) other.classList.remove('expanded');
+            });
+            this.classList.add('expanded');
+          }
+        });
+      });
+
+      // Tap outside to collapse expanded links (mobile)
+      document.addEventListener('click', function(e) {
+        if (!isMobile()) return;
+        if (!e.target.closest('.tlink')) {
+          document.querySelectorAll('.tlink.expanded').forEach(link => {
+            link.classList.remove('expanded');
+          });
+        }
+      });
+    })();
+
+    // Insights panel toggle - handles both desktop and mobile differently
+    (function() {
+      const toggle = document.getElementById('insights-toggle');
+      const grid = document.getElementById('topic-grid');
+      const mobileBreakpoint = 800;
+
+      function isMobile() {
+        return window.innerWidth <= mobileBreakpoint;
+      }
+
+      function updateState() {
+        if (isMobile()) {
+          // On mobile: default hidden, toggle shows as overlay
+          grid.classList.remove('insights-hidden');
+          // Check if mobile-visible state is saved
+          const mobileVisible = localStorage.getItem('insights-mobile-visible') === 'true';
+          if (mobileVisible) {
+            grid.classList.add('insights-visible');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-visible');
+            toggle.classList.remove('active');
+          }
+        } else {
+          // On desktop: default visible, toggle hides
+          grid.classList.remove('insights-visible');
+          const savedState = localStorage.getItem('insights-hidden');
+          if (savedState === 'true') {
+            grid.classList.add('insights-hidden');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-hidden');
+            toggle.classList.remove('active');
+          }
+        }
+      }
+
+      // Initial state
+      updateState();
+
+      // Handle resize
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateState, 100);
+      });
+
+      toggle.addEventListener('click', function() {
+        if (isMobile()) {
+          // Mobile: toggle visibility overlay
+          grid.classList.toggle('insights-visible');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-mobile-visible', grid.classList.contains('insights-visible'));
+        } else {
+          // Desktop: toggle hidden state
+          grid.classList.toggle('insights-hidden');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-hidden', grid.classList.contains('insights-hidden'));
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

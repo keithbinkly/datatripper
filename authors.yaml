@@ -12,6 +12,9 @@ authors:
   # Individual Authors
   # ═══════════════════════════════════════════════════════════════════════════
 
+  # Note: Modern Data 101 is managed by The Modern Data Company team
+  # Key contributors include Vivek Dubey and Abhyudai Verma
+  # s-paul may need verification or reassignment to specific author
   - id: s-paul
     name: S. Paul
     # Demographics
@@ -20,20 +23,22 @@ authors:
     gender: ~
     location:
       city: ~
-      country: ~
-      continent: ~
+      country: USA
+      continent: North America
     # Professional
     jobTitle: ~
     industry: Data Architecture
-    affiliation: Modern Data 101
+    affiliation: Modern Data 101 / The Modern Data Company
     perspectiveType: practitioner
     yearsInField: ~
     # Background
     education: ~
     nativeLanguage: ~
     # Meta
-    socialFollowing: ~
-    bio: ~
+    socialFollowing: medium
+    bio: >
+      Modern Data 101 is a community publication for data leaders and practitioners.
+      15,000+ subscribers. Covers data products, platforms, and modern data practices.
     bioSource: https://moderndata101.substack.com/
 
   - id: j-talisman
@@ -43,7 +48,7 @@ authors:
     generation: ~
     gender: female
     location:
-      city: ~
+      city: Santa Cruz
       country: USA
       continent: North America
     # Professional
@@ -68,29 +73,41 @@ authors:
     bioSource: https://www.linkedin.com/in/jmtalisman/
 
   - id: p-sankar
-    name: P. Sankar
+    name: Prukalpa Sankar
     # Demographics
     birthYear: ~
     generation: ~
-    gender: ~
+    gender: female
     location:
-      city: ~
-      country: ~
-      continent: ~
+      city: San Francisco
+      country: USA
+      continent: North America
     # Professional
-    jobTitle: ~
+    jobTitle: Co-Founder & Co-CEO
     industry: Data Management
     affiliation: Atlan
     perspectiveType: practitioner
-    yearsInField: ~
+    yearsInField: 12
     # Background
     education: ~
     nativeLanguage: ~
     # Meta
-    socialFollowing: ~
-    bio: ~
-    bioSource: https://atlan.com/
+    socialFollowing: large
+    accolades:
+      - Forbes 30 Under 30
+      - Fortune 40 Under 40
+      - TED Speaker
+      - Economic Times Emerging Entrepreneur of the Year
+    bio: >
+      Co-Founder & Co-CEO of Atlan, the metadata cloud for data and AI teams.
+      Previously co-founded SocialCops (World Economic Forum Tech Pioneer).
+      Atlan is a Forrester Wave leader for Data Catalogs and Gartner MQ Visionary.
+      Writes Metadata Weekly newsletter.
+    bioSource: https://www.linkedin.com/in/prukalpa
 
+  # Note: v-dacanay may be the same as p-sankar (Prukalpa Sankar)
+  # Metadata Weekly is authored by Prukalpa at Atlan
+  # Keeping this entry for now but may need deduplication
   - id: v-dacanay
     name: V. Dacanay
     # Demographics
@@ -151,21 +168,24 @@ authors:
     gender: male
     location:
       city: ~
-      country: ~
-      continent: ~
+      country: UK
+      continent: Europe
     # Professional
-    jobTitle: ~
+    jobTitle: Chief Scientist
     industry: Knowledge Graphs / AI
-    affiliation: ~
+    affiliation: GraphAware
     perspectiveType: practitioner
-    yearsInField: ~
+    yearsInField: 15
     # Background
     education: ~
-    nativeLanguage: ~
+    nativeLanguage: Italian
     # Meta
     socialFollowing: ~
-    bio: Knowledge graph and AI expert
-    bioSource: https://medium.com/@alessandro-negro
+    bio: >
+      Chief Scientist at GraphAware. Author of "Graph-Powered Machine Learning" (Manning, 2021)
+      and "Knowledge Graphs and LLMs in Action" (Manning, in progress). 15+ years working with
+      graph technologies and knowledge graphs.
+    bioSource: https://www.linkedin.com/in/alessandronegro
 
   - id: k-cagle
     name: Kurt Cagle
@@ -205,7 +225,7 @@ authors:
     generation: ~
     gender: male
     location:
-      city: ~
+      city: Reno
       country: USA
       continent: North America
     # Professional
@@ -261,13 +281,13 @@ authors:
     generation: ~
     gender: male
     location:
-      city: ~
+      city: Boston
       country: USA
       continent: North America
     # Professional
-    jobTitle: Podcast Host / Engineer
+    jobTitle: Technical Operations Manager / Podcast Host
     industry: Data Engineering
-    affiliation: Data Engineering Podcast
+    affiliation: MIT Open Learning
     perspectiveType: journalist
     yearsInField: ~
     # Background
@@ -275,32 +295,37 @@ authors:
     nativeLanguage: English
     # Meta
     socialFollowing: ~
-    bio: Host of the Data Engineering Podcast
+    bio: >
+      Host of the Data Engineering Podcast. Manages Technical Operations at MIT Open Learning.
+      Also runs Boundless Notions LLC offering data infrastructure consulting.
     bioSource: https://www.dataengineeringpodcast.com/
 
-  - id: j-jordan
-    name: J. Jordan
+  - id: o-olesen-bagneux
+    name: Ole Olesen-Bagneux
     # Demographics
     birthYear: ~
     generation: ~
-    gender: ~
+    gender: male
     location:
-      city: ~
-      country: ~
-      continent: ~
+      city: Copenhagen
+      country: Denmark
+      continent: Europe
     # Professional
-    jobTitle: ~
+    jobTitle: Chief Evangelist
     industry: Data Management
-    affiliation: Data Intelligence Platform
+    affiliation: Actian (Zeenea)
     perspectiveType: practitioner
     yearsInField: ~
     # Background
     education: ~
-    nativeLanguage: ~
+    nativeLanguage: Danish
     # Meta
     socialFollowing: ~
-    bio: ~
-    bioSource: https://dataintelligenceplatform.substack.com/
+    bio: >
+      Chief Evangelist at Actian/Zeenea. Author of O'Reilly book on Data Catalogs.
+      Background in Library and Information Science applied to data catalogs.
+      Writes The Data Intelligence Platform Substack.
+    bioSource: https://www.linkedin.com/in/ole-olesen-bagneux
 
   # ═══════════════════════════════════════════════════════════════════════════
   # Organizations
@@ -373,3 +398,508 @@ authors:
     # Meta
     bio: Corporate card and spend management platform
     bioSource: https://ramp.com/
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Data Visualization Authors
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: a-kriebel
+    name: Andy Kriebel
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: London
+      country: UK
+      continent: Europe
+    # Professional
+    jobTitle: Head of Data Visualization
+    industry: Data Visualization
+    affiliation: Exasol
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    bio: >
+      Tableau Zen Master, creator of Makeover Monday. Head of Data Visualization
+      at Exasol. Prolific Tableau Public contributor.
+    bioSource: https://public.tableau.com/app/profile/andy.kriebel
+
+  - id: j-johansson
+    name: John Johansson
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data Visualization
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: ~
+    bio: Tableau Public contributor specializing in chart design guides
+    bioSource: https://public.tableau.com/app/profile/john.johansson
+
+  - id: f-sebben
+    name: Felipe Sebben
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: Brazil
+      continent: South America
+    # Professional
+    jobTitle: ~
+    industry: Data Visualization
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: Portuguese
+    # Meta
+    socialFollowing: ~
+    bio: >
+      Tableau Public contributor known for KPI design best practices.
+      Creates data visualizations exploring Brazilian football analytics
+      and currency trends.
+    bioSource: https://www.linkedin.com/in/felipe-sebben
+
+  - id: k-flerlage
+    name: Kevin Flerlage
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: Tableau Evangelist / Data Visualization Consultant
+    industry: Data Visualization
+    affiliation: Moxy Analytics
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: English
+    # Meta
+    socialFollowing: ~
+    bio: >
+      Tableau Zen Master, co-author of Flerlage Twins blog. Known for
+      creative Tableau techniques and comprehensive visualization catalogs.
+    bioSource: https://public.tableau.com/app/profile/kevin.flerlage
+
+  - id: k-klaassen
+    name: Kieran Klaassen
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Los Angeles
+      country: USA
+      continent: North America
+    # Professional
+    jobTitle: GM of Cora / EIR
+    industry: AI / Tech
+    affiliation: Every Inc.
+    perspectiveType: practitioner
+    yearsInField: 21
+    # Background
+    education: Berklee College of Music (Orchestration), Conservatorium van Amsterdam (Classical Composition)
+    nativeLanguage: Dutch
+    # Meta
+    socialFollowing: ~
+    bio: >
+      Product-focused engineering leader. GM of Cora and EIR at Every Inc.
+      Previously co-founded Occasion and Vinebase. Former JetBrains engineer.
+      Background in music composition turned software engineering.
+    bioSource: https://www.linkedin.com/in/kieran-klaassen
+
+  - id: m-mengto
+    name: Meng To
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Montreal
+      country: Canada
+      continent: North America
+    # Professional
+    jobTitle: Founder / Designer / Educator
+    industry: Design Education
+    affiliation: Design+Code
+    perspectiveType: practitioner
+    yearsInField: 17
+    # Background
+    education: Self-taught designer
+    nativeLanguage: ~
+    # Meta
+    socialFollowing: large
+    bio: >
+      Founder of Design+Code (2007). Author of book with 35,000+ readers.
+      Teaches SwiftUI, iOS design, and AI-assisted development.
+      40+ courses with 193 hours of content.
+    bioSource: https://www.linkedin.com/in/mengto
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Data Storytelling Authors
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: the-pudding
+    name: The Pudding
+    type: organization
+    foundedYear: 2017
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    industry: Data Journalism
+    affiliation: Polygraph
+    perspectiveType: practitioner
+    bio: >
+      Visual essay publication that uses data visualization and storytelling
+      to explain ideas debated in culture. Known for innovative scrollytelling
+      and data-driven narratives.
+    bioSource: https://pudding.cool/
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # AI/LLM Tools Authors
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: langchain-team
+    name: LangChain
+    type: organization
+    foundedYear: 2022
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    industry: AI/ML Infrastructure
+    affiliation: LangChain
+    perspectiveType: vendor
+    bio: >
+      Creators of LangChain framework for building applications with LLMs.
+      Open-source tools for context management, agents, and RAG.
+    bioSource: https://langchain.com/
+
+  - id: weaviate-team
+    name: Weaviate
+    type: organization
+    foundedYear: 2019
+    location:
+      city: Amsterdam
+      country: Netherlands
+      continent: Europe
+    industry: Vector Database
+    affiliation: Weaviate
+    perspectiveType: vendor
+    bio: Open-source vector database for AI applications
+    bioSource: https://weaviate.io/
+
+  - id: s-agarwal
+    name: Sankalp Agarwal
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    jobTitle: ~
+    industry: AI/ML
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: ~
+    socialFollowing: ~
+    bio: Technical writer on AI infrastructure topics
+    bioSource: https://sankalp.bearblog.dev/
+
+  - id: momo-research
+    name: Momo Research
+    type: organization
+    foundedYear: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    industry: AI Research
+    affiliation: Momo Personal Assistant
+    perspectiveType: researcher
+    bio: Research team behind Momo personal assistant, focused on AI memory systems
+    bioSource: https://github.com/momo-personal-assistant
+
+  - id: l-monigatti
+    name: Leonie Monigatti
+    birthYear: ~
+    generation: ~
+    gender: female
+    location:
+      city: ~
+      country: Germany
+      continent: Europe
+    jobTitle: Developer Advocate
+    industry: Vector Database / AI
+    affiliation: Weaviate
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: German
+    socialFollowing: medium
+    bio: >
+      Developer Advocate at Weaviate. Writes about AI agent memory, vector search,
+      RAG, and rerankers. Active technical blogger with 19K+ LinkedIn followers.
+    bioSource: https://www.linkedin.com/in/804250ab
+
+  - id: answerlayer-team
+    name: AnswerLayer
+    type: organization
+    foundedYear: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    industry: AI/Knowledge Management
+    affiliation: AnswerLayer
+    perspectiveType: vendor
+    bio: Creators of Semiosis KB testing framework
+    bioSource: https://github.com/AnswerLayer
+
+  - id: a-karpathy
+    name: Andrej Karpathy
+    birthYear: 1986
+    generation: millennial
+    gender: male
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    jobTitle: AI Researcher / Educator
+    industry: AI/ML
+    affiliation: Independent
+    perspectiveType: researcher
+    yearsInField: 15
+    education: PhD Computer Science, Stanford
+    nativeLanguage: English
+    socialFollowing: high
+    bio: >
+      Former Director of AI at Tesla, founding member of OpenAI.
+      Known for educational content on deep learning and neural networks.
+    bioSource: https://karpathy.ai/
+
+  - id: anthropic-team
+    name: Anthropic
+    type: organization
+    foundedYear: 2021
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    industry: AI Safety / LLM
+    affiliation: Anthropic
+    perspectiveType: vendor
+    bio: AI safety company, creators of Claude
+    bioSource: https://www.anthropic.com/
+
+  - id: j-ouyang
+    name: Jenny Ouyang
+    birthYear: ~
+    generation: ~
+    gender: female
+    location:
+      city: ~
+      country: USA
+      continent: North America
+    jobTitle: Software Engineer / Founder
+    industry: Content / AI
+    affiliation: Build to Launch / Adimab
+    perspectiveType: practitioner
+    yearsInField: 11
+    education: PhD in STEM (Dartmouth College)
+    nativeLanguage: ~
+    socialFollowing: ~
+    bio: >
+      Software Engineer at Adimab (biotech). Founder of "Build to Launch" Substack.
+      Self-taught software developer with PhD in STEM. Writes about AI tools, SEO for AI,
+      and building in public.
+    bioSource: https://www.linkedin.com/in/jenny-ouyang
+
+  - id: j-pang
+    name: Jimmy Pang
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Berlin
+      country: Germany
+      continent: Europe
+    jobTitle: Data Leader
+    industry: Data Engineering
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: 7
+    education: ~
+    nativeLanguage: ~
+    socialFollowing: ~
+    bio: >
+      Data leader with 7+ years experience across Hong Kong and Berlin.
+      Previously at foodpanda and Vestiaire Collective. Writes "Data Biz" Substack
+      on data leadership, strategy, and bridging data with business impact.
+    bioSource: https://www.linkedin.com/in/jimmy-pang-hk603
+
+  - id: j-shaffer
+    name: Jeffrey Shaffer
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Cincinnati
+      country: USA
+      continent: North America
+    jobTitle: COO / VP of IT and Analytics
+    industry: Data Visualization
+    affiliation: Unifund
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: English
+    socialFollowing: ~
+    bio: >
+      Tableau Zen Master. COO and VP of IT & Analytics at Unifund. Adjunct Professor
+      at University of Cincinnati (2016 Adjunct Faculty of Year Award). Co-author of
+      "The Big Book of Dashboards". Founder of dataplusscience.com.
+    bioSource: https://www.dataplusscience.com/
+
+  - id: the-data-hustle
+    name: The Data Hustle
+    type: organization
+    foundedYear: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    industry: Data Career / Education
+    affiliation: The Data Hustle
+    perspectiveType: practitioner
+    bio: Publication focused on data career development and portfolio building
+    bioSource: https://thedatahustle.substack.com/
+
+  - id: j-lindquist
+    name: John Lindquist
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Lehi
+      country: USA
+      continent: North America
+    jobTitle: Co-founder / Head Instructor
+    industry: Developer Tools
+    affiliation: Egghead.io
+    perspectiveType: practitioner
+    yearsInField: 23
+    education: ~
+    nativeLanguage: English
+    socialFollowing: ~
+    bio: >
+      Co-founder of Egghead.io (2013). Former JetBrains WebStorm Evangelist.
+      Creator of 40+ courses with 193+ hours of content. Currently teaching
+      Claude Code and Cursor workshops.
+    bioSource: https://www.linkedin.com/in/john-lindquist-84230766
+
+  - id: thedotmack
+    name: Mack Talcott
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    jobTitle: ~
+    industry: AI Tools
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: ~
+    socialFollowing: ~
+    bio: Creator of claude-mem persistent memory plugin
+    bioSource: https://github.com/thedotmack
+
+  - id: ponderedw
+    name: ponderedw
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    jobTitle: ~
+    industry: Data Engineering
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    education: ~
+    nativeLanguage: ~
+    socialFollowing: ~
+    bio: Creator of dbt-incremental-ci package
+    bioSource: https://github.com/ponderedw
+
+  - id: gouline
+    name: Mike Gouline
+    birthYear: ~
+    generation: ~
+    gender: male
+    location:
+      city: Sydney
+      country: Australia
+      continent: Oceania
+    jobTitle: Data & AI Consultant
+    industry: Data Engineering
+    affiliation: Self-employed (Consultant)
+    perspectiveType: practitioner
+    yearsInField: 15
+    education: ~
+    nativeLanguage: English
+    socialFollowing: ~
+    bio: >
+      Technical leader and data/AI platform architect. Former Head of Data/ML at mx51.
+      Built data platforms on Snowflake, Databricks, dbt, Airflow. Creator of
+      upstream-prod dbt package. Experience in Python, Go, Java, Terraform on AWS/GCP.
+    bioSource: https://www.linkedin.com/in/gouline
+
+  - id: spark-research
+    name: Spark Research Team
+    type: organization
+    foundedYear: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    industry: AI Research
+    affiliation: ~
+    perspectiveType: researcher
+    bio: Research team behind Spark shared memory for coding agents
+    bioSource: https://arxiv.org/html/2511.08301v1
