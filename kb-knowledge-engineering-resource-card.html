@@ -1956,9 +1956,7 @@
 
       let hoverTimer = null;
       let longPressTimer = null;
-      let touchStartPos = null;
       let activeLink = null;
-      let longPressTriggered = false;
 
       // Source icons
       const sourceIcons = {
@@ -2202,39 +2200,37 @@
 
       // Mobile: Long-press behavior
       function setupMobileTouch(link) {
-        link.addEventListener('touchstart', (e) => {
-          touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-          longPressTriggered = false;
+        let linkLongPressed = false;
+        let startPos = null;
 
+        link.addEventListener('touchstart', (e) => {
+          linkLongPressed = false;
+          startPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
           longPressTimer = setTimeout(() => {
-            longPressTriggered = true;
+            linkLongPressed = true;
             showCard(link);
             if (navigator.vibrate) navigator.vibrate(50);
           }, LONG_PRESS_DURATION);
-        }, { passive: true });
+        });
 
         link.addEventListener('touchmove', (e) => {
-          if (touchStartPos) {
-            const dx = Math.abs(e.touches[0].clientX - touchStartPos.x);
-            const dy = Math.abs(e.touches[0].clientY - touchStartPos.y);
+          if (startPos) {
+            const dx = Math.abs(e.touches[0].clientX - startPos.x);
+            const dy = Math.abs(e.touches[0].clientY - startPos.y);
             if (dx > MOVE_THRESHOLD || dy > MOVE_THRESHOLD) {
               clearTimeout(longPressTimer);
             }
           }
         });
 
-        link.addEventListener('touchend', () => {
+        // preventDefault on touchend stops the synthetic click event
+        link.addEventListener('touchend', (e) => {
           clearTimeout(longPressTimer);
-          touchStartPos = null;
-        });
-
-        // Prevent click navigation if long press opened the card
-        link.addEventListener('click', (e) => {
-          if (longPressTriggered) {
+          startPos = null;
+          if (linkLongPressed) {
             e.preventDefault();
-            longPressTriggered = false;
           }
-        });
+        }, { passive: false });
       }
 
       // Close on backdrop tap
