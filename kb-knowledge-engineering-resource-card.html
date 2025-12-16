@@ -1,0 +1,2371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Knowledge Engineering | data-centered</title>
+  <meta name="description" content="Curated resources on context engineering, semantic layers, ontologies, and making enterprise data AI-ready.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* ============================================
+       RESOURCE CARD - Ontology-Guided Enhancement
+       ============================================ */
+
+    /* Hide original descriptions - replaced by resource card */
+    .tlink-desc {
+      display: none !important;
+    }
+
+    /* Resource Card Popup */
+    .resource-card {
+      position: fixed;
+      z-index: 1000;
+      width: 380px;
+      max-width: calc(100vw - 2rem);
+      background: linear-gradient(145deg, #1a1a2e 0%, #0f0f1a 100%);
+      border: 1px solid rgba(0, 255, 136, 0.3);
+      border-radius: 8px;
+      box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(0, 255, 136, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(8px);
+      transition: all 0.2s ease;
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+    }
+
+    .resource-card.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    /* Card Header - Compact */
+    .rc-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.4rem 0.75rem;
+      background: rgba(0, 255, 136, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .rc-source {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .rc-source-icon {
+      font-size: 0.75rem;
+    }
+
+    .rc-source-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: var(--accent, #00ff88);
+      letter-spacing: 0.03em;
+    }
+
+    .rc-header-right {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .rc-header-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--text-muted, #666);
+    }
+
+    .rc-id {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.55rem;
+      color: var(--text-muted, #666);
+      padding: 0.1rem 0.3rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 3px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .rc-id:hover {
+      background: rgba(0, 255, 136, 0.2);
+      color: var(--accent, #00ff88);
+    }
+
+    /* Card Title Section - Compact */
+    .rc-title-section {
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .rc-title {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #fff;
+      margin: 0 0 0.35rem 0;
+      line-height: 1.25;
+    }
+
+    .rc-scope-note {
+      font-size: 0.7rem;
+      color: var(--text-dim, #999);
+      line-height: 1.4;
+      margin: 0;
+    }
+
+    /* Card Metadata Row - Compact */
+    .rc-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .rc-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.6rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 3px;
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-dim, #999);
+    }
+
+    .rc-badge.domain {
+      background: rgba(6, 182, 212, 0.15);
+      color: #06b6d4;
+    }
+
+    .rc-badge.granularity-foundational {
+      background: rgba(34, 197, 94, 0.15);
+      color: #22c55e;
+    }
+
+    .rc-badge.granularity-conceptual {
+      background: rgba(6, 182, 212, 0.15);
+      color: #06b6d4;
+    }
+
+    .rc-badge.granularity-implementation {
+      background: rgba(168, 85, 247, 0.15);
+      color: #a855f7;
+    }
+
+    .rc-badge.granularity-advanced {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+    }
+
+    .rc-badge.time {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+
+    /* Author Section - Compact */
+    .rc-author {
+      padding: 0.4rem 0.75rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .rc-author-header {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      margin-bottom: 0.15rem;
+    }
+
+    .rc-author-icon {
+      font-size: 0.7rem;
+      opacity: 0.7;
+    }
+
+    .rc-author-name {
+      font-weight: 600;
+      font-size: 0.75rem;
+      color: #fff;
+    }
+
+    .rc-author-details {
+      font-size: 0.6rem;
+      color: var(--text-dim, #999);
+      margin-left: 1.05rem;
+    }
+
+    /* Relationships Section - Compact */
+    .rc-relationships {
+      padding: 0.5rem 0.75rem;
+    }
+
+    .rc-rel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      font-size: 0.6rem;
+      font-weight: 600;
+      color: var(--text-muted, #666);
+      margin-bottom: 0.35rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .rc-rel-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .rc-rel-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.65rem;
+    }
+
+    .rc-rel-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.5rem;
+      color: var(--text-muted, #666);
+      min-width: 50px;
+    }
+
+    .rc-rel-link {
+      color: var(--accent, #00ff88);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .rc-rel-link:hover {
+      text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
+    }
+
+    /* Visual indicator for links with enhanced cards */
+    .tlink[data-resource-id]::before {
+      content: '';
+      position: absolute;
+      left: -2px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2px;
+      height: 0;
+      background: var(--accent, #00ff88);
+      transition: height 0.15s ease;
+      opacity: 0;
+    }
+
+    .tlink[data-resource-id]:hover::before {
+      height: 60%;
+      opacity: 0.5;
+    }
+
+    .tlink.card-active::before {
+      height: 80%;
+      opacity: 1;
+      box-shadow: 0 0 8px var(--accent, #00ff88);
+    }
+
+    /* Mobile: Bottom sheet style */
+    @media (max-width: 900px) {
+      .resource-card {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        max-width: 100%;
+        border-radius: 16px 16px 0 0;
+        transform: translateY(100%);
+        max-height: 75vh;
+        overflow-y: auto;
+      }
+
+      .resource-card.visible {
+        transform: translateY(0);
+      }
+
+      .rc-header {
+        padding: 1rem;
+      }
+
+      .rc-title-section {
+        padding: 1rem 1rem 0.75rem;
+      }
+
+      /* Pull indicator for mobile sheet */
+      .resource-card::before {
+        content: '';
+        display: block;
+        width: 40px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
+        margin: 0.5rem auto;
+      }
+
+      /* Backdrop */
+      .resource-card-backdrop {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.2s ease;
+      }
+
+      .resource-card-backdrop.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  </style>
+</head>
+<body class="dashboard topic-page tui">
+
+  <!-- DATA INJECTION - Enhanced Ontology Schema -->
+  <script>
+    window.KB_DATA = {
+      // Concepts for relationship targets
+      concepts: [
+        { id: "data-quality", label: "Data Quality" },
+        { id: "semantic-layer", label: "Semantic Layer" },
+        { id: "metadata-mgmt", label: "Metadata Management" },
+        { id: "context-engineering", label: "Context Engineering" },
+        { id: "knowledge-graphs", label: "Knowledge Graphs" },
+        { id: "ontology", label: "Ontology" },
+        { id: "llm-grounding", label: "LLM Grounding" },
+        { id: "agentic-systems", label: "Agentic Systems" },
+        { id: "controlled-vocab", label: "Controlled Vocabularies" },
+        { id: "process-knowledge", label: "Process Knowledge" },
+        { id: "agent-memory", label: "Agent Memory" }
+      ],
+
+      // Authors with enhanced metadata
+      authors: {
+        "s-paul": { name: "Sanjay Paul", perspectiveType: "practitioner", affiliation: "Modern Data 101" },
+        "manus": { name: "Manus Team", perspectiveType: "vendor", affiliation: "Manus AI" },
+        "j-talisman": { name: "Jessica Talisman", perspectiveType: "practitioner", affiliation: "Adobe", yearsInField: 25 },
+        "p-sankar": { name: "Prukalpa Sankar", perspectiveType: "vendor", affiliation: "Atlan" },
+        "v-dacanay": { name: "Vince Dacanay", perspectiveType: "practitioner", affiliation: "Metadata Weekly" },
+        "j-reis": { name: "Joe Reis", perspectiveType: "practitioner", affiliation: "Ternary Data", yearsInField: 20 },
+        "atscale": { name: "AtScale", perspectiveType: "vendor", affiliation: "AtScale" },
+        "dbt": { name: "dbt Labs", perspectiveType: "vendor", affiliation: "dbt Labs" },
+        "a-negro": { name: "Alessandro Negro", perspectiveType: "practitioner", affiliation: "GraphAware" },
+        "k-cagle": { name: "Kurt Cagle", perspectiveType: "practitioner", affiliation: "Semantical", yearsInField: 30 },
+        "v-vashishta": { name: "Vin Vashishta", perspectiveType: "practitioner", affiliation: "V Squared", yearsInField: 12 },
+        "j-sobel": { name: "Jordan Sobel", perspectiveType: "practitioner", affiliation: "dbt Labs" },
+        "t-macey": { name: "Tobias Macey", perspectiveType: "journalist", affiliation: "Data Eng Podcast" },
+        "ramp": { name: "Ramp Engineering", perspectiveType: "practitioner", affiliation: "Ramp" },
+        "j-jordan": { name: "Jenna Jordan", perspectiveType: "practitioner", affiliation: "Data Intel" },
+        "langchain": { name: "LangChain", perspectiveType: "vendor", affiliation: "LangChain" },
+        "weaviate": { name: "Weaviate", perspectiveType: "vendor", affiliation: "Weaviate" },
+        "momo": { name: "Momo Team", perspectiveType: "vendor", affiliation: "Momo" },
+        "l-monigatti": { name: "Leonie Monigatti", perspectiveType: "practitioner", affiliation: "Weaviate" },
+        "j-sequeda": { name: "Juan Sequeda", perspectiveType: "academic", affiliation: "data.world" },
+        "r-ctruta": { name: "Ramona Ctruta", perspectiveType: "practitioner", affiliation: "Independent" },
+        "s-agarwal": { name: "Sankalp Agarwal", perspectiveType: "practitioner", affiliation: "Independent" },
+        "spark-research": { name: "Spark Research", perspectiveType: "academic", affiliation: "Academia" },
+        "answerlayer": { name: "AnswerLayer", perspectiveType: "vendor", affiliation: "AnswerLayer" },
+        "unknown": { name: "Unknown", perspectiveType: "practitioner", affiliation: "Unknown" },
+        "data-jargon": { name: "Data Jargon", perspectiveType: "practitioner", affiliation: "Data Jargon" },
+        "wondering-ai": { name: "Wondering AI", perspectiveType: "practitioner", affiliation: "Independent" },
+        "k-kelly": { name: "Kevin Kelly", perspectiveType: "practitioner", affiliation: "Wired", yearsInField: 40 },
+        "ft": { name: "Financial Times", perspectiveType: "journalist", affiliation: "FT" },
+        "hybrid-horizons": { name: "Hybrid Horizons", perspectiveType: "practitioner", affiliation: "Independent" },
+        "kaguura": { name: "Kaguura", perspectiveType: "practitioner", affiliation: "Independent" },
+        "d-bau": { name: "David Bau", perspectiveType: "academic", affiliation: "Northeastern" },
+        "m-correll": { name: "Michael Correll", perspectiveType: "practitioner", affiliation: "Tableau" },
+        "think-growth": { name: "Think Growth", perspectiveType: "practitioner", affiliation: "Medium" },
+        "a-nedopekina": { name: "Angela Nedopekina", perspectiveType: "practitioner", affiliation: "Independent" },
+        "data-tinkerer": { name: "Data Tinkerer", perspectiveType: "practitioner", affiliation: "Independent" },
+        "c-handmer": { name: "Casey Handmer", perspectiveType: "practitioner", affiliation: "Terraform Industries" },
+        "futureproof-ds": { name: "Future Proof DS", perspectiveType: "practitioner", affiliation: "Independent" },
+        "r-engelbrecht": { name: "Rasmus Engelbrecht", perspectiveType: "practitioner", affiliation: "Independent" },
+        "pipeline2insights": { name: "Pipeline2Insights", perspectiveType: "practitioner", affiliation: "Independent" },
+        "motherduck": { name: "MotherDuck", perspectiveType: "vendor", affiliation: "MotherDuck" },
+        "nastengraph": { name: "nastengraph", perspectiveType: "practitioner", affiliation: "Independent" }
+      },
+
+      // Resources with full ontology metadata (sample - key resources enriched)
+      resources: {
+        "ke-001": {
+          id: "ke-001",
+          title: "AI-Ready Data: Technical Assessment",
+          scopeNote: "Argues enterprises must redesign data infrastructure around AI needs—67% of AI projects fail due to data readiness issues. Identifies four barriers: semantic ambiguity, quality degradation (accuracy eroding from 95% to 60-70% through pipelines), temporal misalignment, and format inconsistency. Solution: AI-native data products with inline governance and semantic layers, reducing project timelines from 6-8 months to 2-3 months.",
+          authorId: "s-paul",
+          granularity: "implementation",
+          publishedAt: "2024-08",
+          relationships: {
+            broader: ["data-quality"],
+            related: ["ke-002", "ke-004"],
+            exemplifies: ["context-engineering"]
+          }
+        },
+        "ke-002": {
+          id: "ke-002",
+          title: "Context Engineering for AI Agents",
+          scopeNote: "From Manus team: context engineering is essential for agent systems over custom model training. Prioritizes KV-cache hit rates (Claude Sonnet shows 10x cost difference cached vs uncached), stable prompt prefixes, file-system memory, and preserving error traces. Key insight: Manus agents average 100:1 input-to-output token ratio, making context efficiency critical.",
+          authorId: "manus",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-001", "ke-020"],
+            exemplifies: ["agentic-systems"]
+          }
+        },
+        "ke-003": {
+          id: "ke-003",
+          title: "From Metadata to Meaning",
+          scopeNote: "Organizations must shift from database-centric approaches to knowledge infrastructures for AI. 'Data alone is merely raw fuel—valuable but inert without context.' Key stats: 47% of professionals waste 1-5 hours daily searching for information; 85% of leaders identify data quality as biggest AI challenge for 2025. Semantic frameworks (ontologies, taxonomies, KGs) are essential.",
+          authorId: "j-talisman",
+          granularity: "foundational",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["metadata-mgmt"],
+            narrower: ["ke-010", "ke-011"],
+            related: ["ke-004"]
+          }
+        },
+        "ke-004": {
+          id: "ke-004",
+          title: "Missing Line Item in 2026 AI Budget",
+          scopeNote: "2026 marks AI's 'accountability cycle'—success requires measurable business impact. Introduces the Enterprise Context Layer: a dynamic system with four components (extraction, storage, retrieval, feedback loops). Stark finding: MIT Sloan reports 95% of AI projects never make it out of pilot. Context infrastructure is the missing budget line item.",
+          authorId: "p-sankar",
+          granularity: "conceptual",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-001", "ke-003"]
+          }
+        },
+        "ke-005": {
+          id: "ke-005",
+          title: "The Semantic Gap",
+          scopeNote: "AI excels at pattern recognition but lacks 'semantic density'—compressed cultural context, lived experience, and unspoken intent humans possess. Example: AI analyzing churn identifies sentiment patterns but won't sense accumulated frustration driving someone to leave. Key insight: treat the gap between data analysis and meaning-making as a design constraint, not a flaw to eliminate.",
+          authorId: "v-dacanay",
+          granularity: "conceptual",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-004", "ke-003"]
+          }
+        },
+        "ke-006": {
+          id: "ke-006",
+          title: "Semantics in Data Modeling",
+          scopeNote: "Joe Reis argues semantics—shared understanding of data meaning—is essential to modern data modeling. Introduces controlled vocabularies (standardized terms managing synonyms) and thesauruses (hierarchical concept relationships). Example: disambiguating 'client' vs 'customer' across systems. Critical for LLMs handling queries like 'show me top clients for region X'.",
+          authorId: "j-reis",
+          granularity: "implementation",
+          publishedAt: "2024-07",
+          relationships: {
+            broader: ["semantic-layer"],
+            prerequisite: ["ke-003"]
+          }
+        },
+        "ke-007": {
+          id: "ke-007",
+          title: "Semantic Layers for Control",
+          scopeNote: "AI models require a universal semantic layer—a governed foundation providing consistent context—to deliver reliable insights. Without structured context, AI reasoning fails regardless of model sophistication. AtScale recognized as Leader in 2025 GigaOm Radar Report. Core thesis: 'AI can't reason without context.'",
+          authorId: "atscale",
+          granularity: "conceptual",
+          publishedAt: "2024-05",
+          relationships: {
+            broader: ["semantic-layer"],
+            related: ["ke-006"]
+          }
+        },
+        "ke-010": {
+          id: "ke-010",
+          title: "The Ontology Pipeline",
+          scopeNote: "Systematic framework for building semantic knowledge systems through five iterative stages: controlled vocabularies → metadata standards → taxonomies → thesauri → ontologies → knowledge graphs. References ISO 25964-1 and ANSI/NISO Z39.19-2005 standards. Tools: Graphwise, TopQuadrant. Key insight: 'machines love ontologies' because high-fidelity disambiguation supports AI tasks like RAG.",
+          authorId: "j-talisman",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["ontology"],
+            narrower: ["ke-011"],
+            prerequisite: ["ke-003"]
+          }
+        },
+        "ke-011": {
+          id: "ke-011",
+          title: "Concept Models vs Ontologies",
+          scopeNote: "Distinguishes informal concept models (the sketch) from formal ontologies (the blueprint). Concept models capture early-stage understanding through boxes and arrows; ontologies formalize relationships with machine-readable precision. Use concept models for stakeholder alignment, ontologies for system integration.",
+          authorId: "j-talisman",
+          granularity: "conceptual",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["ontology"],
+            prerequisite: ["ke-010"]
+          }
+        },
+        "ke-012": {
+          id: "ke-012",
+          title: "Controlled Vocabularies I",
+          scopeNote: "Controlled vocabularies are 'a curated, finite list of approved terms, each with one intended meaning.' Build process: define purpose/scope, harvest candidate terms from CMSs/Jira/SharePoint, reconcile variants. Example: standardizing 'tee shirt/t-shirt/tshirt' into single term. Eliminates 'duplicate labels that fracture analytics.'",
+          authorId: "j-talisman",
+          granularity: "foundational",
+          publishedAt: "2024-08",
+          relationships: {
+            broader: ["controlled-vocab"],
+            narrower: ["ke-013", "ke-014"]
+          }
+        },
+        "ke-015": {
+          id: "ke-015",
+          title: "Grounding LLMs with KG",
+          scopeNote: "Technical patterns for using knowledge graphs to anchor LLM outputs and reduce hallucination. KGs provide structured facts that constrain model generation. Approach: embed KG entities in prompts, use graph traversal for context retrieval, validate outputs against known relationships.",
+          authorId: "a-negro",
+          granularity: "implementation",
+          publishedAt: "2024-06",
+          relationships: {
+            broader: ["knowledge-graphs", "llm-grounding"],
+            prerequisite: ["ke-010"]
+          }
+        },
+        "ke-016": {
+          id: "ke-016",
+          title: "Building Knowledge Graphs",
+          scopeNote: "Knowledge graphs defined by 7 core characteristics: canonical structure, global addressability (URIs), queryability, normalization, mutability, schematic transparency, and reifiability. Unlike relational DBs, KGs use 'Open World Assumption'—distributed, incomplete information is valid. Term 'knowledge graph' only emerged ~2017 despite 20 years of RDF work.",
+          authorId: "k-cagle",
+          granularity: "foundational",
+          publishedAt: "2023-04",
+          relationships: {
+            broader: ["knowledge-graphs"]
+          }
+        },
+        "ke-020": {
+          id: "ke-020",
+          title: "Building Analyst Agent with dbt",
+          scopeNote: "dbt Labs announces remote MCP server (GA) and dbt Agents (beta), establishing dbt as 'the standard context layer for agentic analytics.' Server exposes definitions, lineage, tests, semantics through secure endpoint. Analyst Agent and Discovery Agent operate within governance guardrails. Early adopters report 'adoption is 10× our previous catalog.'",
+          authorId: "j-sobel",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["agentic-systems"],
+            related: ["ke-021"],
+            prerequisite: ["ke-006"]
+          }
+        },
+        "ke-021": {
+          id: "ke-021",
+          title: "Agentic Data Analyst",
+          scopeNote: "Ramp built AI agent eliminating data bottleneck—employees ask analytics questions directly in Slack instead of queuing with analysts. Uses dbt, Looker, Snowflake metadata plus domain docs. Impact: 'Ramp Research answered 1,476 questions vs 66 in #help-data'—22× increase. Lowering the cost of asking questions reshapes decision-making culture.",
+          authorId: "ramp",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["agentic-systems"],
+            related: ["ke-020"]
+          }
+        },
+        "ke-025": {
+          id: "ke-025",
+          title: "Context Engineering for Agents",
+          scopeNote: "Four strategies for managing LLM context: Write (save externally), Select (retrieve relevant), Compress (summarize/trim), Isolate (split across agents). Examples: Claude Code's auto-compact, ChatGPT's memory. Anthropic's multi-agent researcher uses 'up to 15× more tokens than chat.' Warning: uncontrolled context retrieval feels invasive—contexts that 'no longer belong to them.'",
+          authorId: "langchain",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-026", "ke-002"]
+          }
+        },
+        "ke-026": {
+          id: "ke-026",
+          title: "Context Engineering Deep Dive",
+          scopeNote: "Six interdependent pillars: agents, query augmentation, retrieval, prompting, memory, tools. References Elysia (Weaviate's agentic RAG), Chain-of-Thought, ReAct, and Model Context Protocol (MCP). Key insight: 'larger models don't create better systems—better engineering does.' Critical failure mode: 'context poisoning' where bad info compounds as agents reuse it.",
+          authorId: "weaviate",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-025"]
+          }
+        },
+        "ke-030": {
+          id: "ke-030",
+          title: "Momo Research - Memory Framework",
+          scopeNote: "5-layer memory stack, compaction strategies, and memory-as-a-tool pattern. Reference architecture for agent memory.",
+          authorId: "momo",
+          granularity: "advanced",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["agent-memory"],
+            related: ["ke-031", "ke-032"]
+          }
+        },
+        "ke-032": {
+          id: "ke-032",
+          title: "Memory in AI Agents",
+          scopeNote: "Clear taxonomy using CoALA framework: working, semantic, episodic, procedural memory types.",
+          authorId: "l-monigatti",
+          granularity: "foundational",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["agent-memory"]
+          }
+        },
+        "ke-008": {
+          id: "ke-008",
+          title: "Consume Metrics",
+          scopeNote: "Guide to querying metrics after Semantic Layer deployment. Three consumption methods: integrations (Tableau, Google Sheets), APIs (JDBC, GraphQL) for programmatic access, and MetricFlow commands for development. JDBC API enables consistent metric delivery with full query syntax capabilities.",
+          authorId: "dbt",
+          granularity: "implementation",
+          publishedAt: "2024-06",
+          relationships: {
+            broader: ["semantic-layer"],
+            related: ["ke-009", "ke-040"]
+          }
+        },
+        "ke-009": {
+          id: "ke-009",
+          title: "Administer Semantic Layer",
+          scopeNote: "Setup guide for dbt's Semantic Layer enabling centralized metric definitions and self-service analytics. Requires deployment environment, platform credentials with minimal privileges, and service/personal access tokens. Key detail: each service token links to one credential per project; Enterprise plans support multiple credentials for team-based access.",
+          authorId: "dbt",
+          granularity: "implementation",
+          publishedAt: "2024-06",
+          relationships: {
+            broader: ["semantic-layer"],
+            related: ["ke-008", "ke-040"]
+          }
+        },
+        "ke-040": {
+          id: "ke-040",
+          title: "Deploy Metrics",
+          scopeNote: "Operationalizing metrics in dbt's Semantic Layer via deployment jobs. Process: commit metric definitions, create deployment environment with credentials, run 'dbt parse' to generate semantic_manifest.json artifact. Re-running jobs materializes dependent models and keeps manifest current for API consumption.",
+          authorId: "dbt",
+          granularity: "implementation",
+          publishedAt: "2024-06",
+          relationships: {
+            broader: ["semantic-layer"],
+            prerequisite: ["ke-009"]
+          }
+        },
+        "ke-013": {
+          id: "ke-013",
+          title: "Controlled Vocabularies II",
+          scopeNote: "Controlled vocabularies are now essential infrastructure for reliable AI systems. LLMs operate through probabilistic pattern-matching, creating 'probabilistic fog' where plausible outputs mask misunderstandings. Real-world systems: SNOMED CT, Getty vocabulary, NASA thesaurus. Practical technique: parenthetical qualifiers (ANSI Z39.19) for disambiguation across departments.",
+          authorId: "j-talisman",
+          granularity: "implementation",
+          publishedAt: "2024-08",
+          relationships: {
+            broader: ["controlled-vocab"],
+            prerequisite: ["ke-012"]
+          }
+        },
+        "ke-014": {
+          id: "ke-014",
+          title: "Controlled Vocabularies III",
+          scopeNote: "Advanced patterns for vocabulary governance, evolution, and cross-domain alignment.",
+          authorId: "j-talisman",
+          granularity: "advanced",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["controlled-vocab"],
+            prerequisite: ["ke-013"]
+          }
+        },
+        "ke-041": {
+          id: "ke-041",
+          title: "Metadata as Data Model I",
+          scopeNote: "Treat metadata as a holistic system, not an afterthought. Uses systems thinking (Arnold & Wade's elements, interconnections, function) to show why metadata requires integrated design. Historical anchor: Library of Alexandria tagged scrolls with titles, authors, subjects—practices that evolved into modern digital systems.",
+          authorId: "j-talisman",
+          granularity: "foundational",
+          publishedAt: "2024-07",
+          relationships: {
+            broader: ["metadata-mgmt"],
+            narrower: ["ke-042", "ke-043"]
+          }
+        },
+        "ke-042": {
+          id: "ke-042",
+          title: "Metadata as Data Model II",
+          scopeNote: "Enterprise metadata fails because organizations separate governance from semantic design. 'Every cataloging decision is a semantic decision—there is no such thing as neutral metadata governance.' References library science RDA rules integrating data quality with conceptual modeling. Core problem is conceptual, not technical.",
+          authorId: "j-talisman",
+          granularity: "implementation",
+          publishedAt: "2024-08",
+          relationships: {
+            broader: ["metadata-mgmt"],
+            prerequisite: ["ke-041"]
+          }
+        },
+        "ke-043": {
+          id: "ke-043",
+          title: "Metadata Application Profiles",
+          scopeNote: "Introduces Metadata Application Profile (MAP)—structured framework declaring which terms are used, how deployed, what constraints apply. MDM and semantic layers often fail due to incompatible standards. O'Reilly stat: 60% cite 'too many data sources' as primary challenge; data teams waste 30-40% of time on quality issues.",
+          authorId: "j-talisman",
+          granularity: "implementation",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["metadata-mgmt"],
+            prerequisite: ["ke-042"]
+          }
+        },
+        "ke-044": {
+          id: "ke-044",
+          title: "Process Knowledge Mgmt I",
+          scopeNote: "Capturing and codifying organizational process knowledge. Tacit to explicit knowledge conversion.",
+          authorId: "j-talisman",
+          granularity: "foundational",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["process-knowledge"],
+            narrower: ["ke-045"]
+          }
+        },
+        "ke-045": {
+          id: "ke-045",
+          title: "Process Knowledge Mgmt II",
+          scopeNote: "Making tacit process knowledge explicit and actionable through documentation patterns.",
+          authorId: "j-talisman",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["process-knowledge"],
+            prerequisite: ["ke-044"]
+          }
+        },
+        "ke-017": {
+          id: "ke-017",
+          title: "Enterprise Needs Ontology",
+          scopeNote: "Ontologies—shared maps of business entities and relationships—are essential for AI agents to deliver outcomes. Example: father and daughter research same car, one buys it; without context mapping, marketing wastes millions targeting both. Salesforce case study: one team 'cut custom code by ~90% and shrank lead creation from tens of minutes to ~20 seconds.'",
+          authorId: "v-vashishta",
+          granularity: "conceptual",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["ontology"],
+            related: ["ke-010"]
+          }
+        },
+        "ke-022": {
+          id: "ke-022",
+          title: "Context Engineering Discipline",
+          scopeNote: "Deep dive podcast on context engineering as an emerging discipline. Expert discussion.",
+          authorId: "t-macey",
+          granularity: "conceptual",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-025", "ke-026"]
+          }
+        },
+        "ke-023": {
+          id: "ke-023",
+          title: "Librarian's Reference Interview",
+          scopeNote: "Applying librarian reference interview techniques to AI data discovery and retrieval.",
+          authorId: "j-jordan",
+          granularity: "conceptual",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-046"]
+          }
+        },
+        "ke-027": {
+          id: "ke-027",
+          title: "How Prompt Caching Works",
+          scopeNote: "Technical deep dive on prompt caching. Stable prefixes for ~90% cost reduction.",
+          authorId: "s-agarwal",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"]
+          }
+        },
+        "ke-028": {
+          id: "ke-028",
+          title: "Filesystems for Context",
+          scopeNote: "Using filesystems as context management for persistent agent memory. Practical patterns.",
+          authorId: "langchain",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering", "agent-memory"],
+            related: ["ke-025"]
+          }
+        },
+        "ke-031": {
+          id: "ke-031",
+          title: "Spark: Shared Memory for Agents",
+          scopeNote: "Small models benefit most from shared memory (+0.66 pts vs +0.05 for GPT-5). Academic research.",
+          authorId: "spark-research",
+          granularity: "advanced",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["agent-memory"],
+            related: ["ke-030", "ke-032"]
+          }
+        },
+        "ke-033": {
+          id: "ke-033",
+          title: "Semiosis: KB Unit Testing",
+          scopeNote: "Measures completeness, redundancy, semantic density, and boundary thresholds for knowledge bases.",
+          authorId: "answerlayer",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["knowledge-graphs"]
+          }
+        },
+        "ke-034": {
+          id: "ke-034",
+          title: "Holy Trinity for Enterprise Data",
+          scopeNote: "Meta Grid pattern: LLMs trained on fragmented glossaries will hallucinate. Integration strategy.",
+          authorId: "unknown",
+          granularity: "conceptual",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"]
+          }
+        },
+        "ke-046": {
+          id: "ke-046",
+          title: "Reference Interview for Data Teams",
+          scopeNote: "Librarian's reference interview technique applied to data teams. Practical guide.",
+          authorId: "j-jordan",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["context-engineering"],
+            related: ["ke-023"]
+          }
+        },
+        "ke-047": {
+          id: "ke-047",
+          title: "Knowing What Good Looks Like",
+          scopeNote: "Standards and benchmarks for quality knowledge work. Defining excellence.",
+          authorId: "data-jargon",
+          granularity: "conceptual",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["context-engineering"]
+          }
+        },
+        "ke-048": {
+          id: "ke-048",
+          title: "Process Knowledge Management II",
+          scopeNote: "Process knowledge management in enterprise settings. Part 2 continuation.",
+          authorId: "j-talisman",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["process-knowledge"],
+            prerequisite: ["ke-044"]
+          }
+        },
+        "ke-049": {
+          id: "ke-049",
+          title: "Pedantic Medallion",
+          scopeNote: "Knowledge architect's playbook. The pedantic medallion pattern for data modeling.",
+          authorId: "r-ctruta",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["ontology"]
+          }
+        },
+        "ke-050": {
+          id: "ke-050",
+          title: "ISWC 2025 Trip Report",
+          scopeNote: "International Semantic Web Conference highlights and trends from leading researcher.",
+          authorId: "j-sequeda",
+          granularity: "conceptual",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["knowledge-graphs", "ontology"]
+          }
+        },
+        "ke-051": {
+          id: "ke-051",
+          title: "1,200+ Substack Subscriptions",
+          scopeNote: "Managing information overload with custom tooling. Personal knowledge management at scale.",
+          authorId: "wondering-ai",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["metadata-mgmt"]
+          }
+        },
+        "ke-052": {
+          id: "ke-052",
+          title: "49,000 Substack Articles",
+          scopeNote: "Data analysis of newsletter niche discovery. Large-scale content analysis.",
+          authorId: "wondering-ai",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["metadata-mgmt"],
+            related: ["ke-051"]
+          }
+        },
+        "ke-053": {
+          id: "ke-053",
+          title: "Everything About Self-Publishing",
+          scopeNote: "Kevin Kelly's complete guide to self-publishing. Knowledge dissemination strategies.",
+          authorId: "k-kelly",
+          granularity: "foundational",
+          publishedAt: "2024-10",
+          relationships: {}
+        },
+        "ke-054": {
+          id: "ke-054",
+          title: "For-Profit Cities",
+          scopeNote: "Tech elites starting their own for-profit cities. Societal implications of tech power.",
+          authorId: "ft",
+          granularity: "conceptual",
+          publishedAt: "2024-12",
+          relationships: {}
+        },
+        "ke-055": {
+          id: "ke-055",
+          title: "End of One World",
+          scopeNote: "We're living through the end of one world and nobody wants to say it. Tech society critique.",
+          authorId: "hybrid-horizons",
+          granularity: "conceptual",
+          publishedAt: "2024-12",
+          relationships: {}
+        },
+        "ke-056": {
+          id: "ke-056",
+          title: "Mortal to Demigod",
+          scopeNote: "Lessons from the new Olympus of tech power. Cultural analysis of tech influence.",
+          authorId: "kaguura",
+          granularity: "conceptual",
+          publishedAt: "2024-12",
+          relationships: {}
+        },
+        "ke-057": {
+          id: "ke-057",
+          title: "In Defense of Curiosity",
+          scopeNote: "Why curiosity matters more than ever in AI age. Philosophical perspective.",
+          authorId: "d-bau",
+          granularity: "foundational",
+          publishedAt: "2024-12",
+          relationships: {}
+        },
+        "ke-058": {
+          id: "ke-058",
+          title: "Potemkin Data Science",
+          scopeNote: "When data science is more facade than substance. Critical analysis of DS practices.",
+          authorId: "m-correll",
+          granularity: "conceptual",
+          publishedAt: "2024-08",
+          relationships: {}
+        },
+        "ke-059": {
+          id: "ke-059",
+          title: "Founder's Guide to Analytics",
+          scopeNote: "Analytics strategy for startup founders. Metrics that matter.",
+          authorId: "think-growth",
+          granularity: "implementation",
+          publishedAt: "2024-06",
+          relationships: {}
+        },
+        "ke-060": {
+          id: "ke-060",
+          title: "How to Analyze Metrics",
+          scopeNote: "Practical metrics analysis techniques. Step-by-step methodology.",
+          authorId: "a-nedopekina",
+          granularity: "implementation",
+          publishedAt: "2024-07",
+          relationships: {}
+        },
+        "ke-061": {
+          id: "ke-061",
+          title: "Data Crowd Reading July 2025",
+          scopeNote: "What the data community was reading in July 2025. Curated digest.",
+          authorId: "data-tinkerer",
+          granularity: "foundational",
+          publishedAt: "2025-07",
+          relationships: {}
+        },
+        "ke-062": {
+          id: "ke-062",
+          title: "Energy Predictions 2025",
+          scopeNote: "Energy landscape predictions and analysis. Tech infrastructure implications.",
+          authorId: "c-handmer",
+          granularity: "conceptual",
+          publishedAt: "2024-12",
+          relationships: {}
+        },
+        "ke-070": {
+          id: "ke-070",
+          title: "Semantic Layers & Agentic Analytics",
+          scopeNote: "The future of semantic layers with AI agents. How semantic definitions enable reliable agentic analytics workflows.",
+          authorId: "futureproof-ds",
+          granularity: "conceptual",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["semantic-layer"],
+            related: ["ke-007", "ke-020"]
+          }
+        },
+        "ke-071": {
+          id: "ke-071",
+          title: "MCP-Powered AI Analyst",
+          scopeNote: "Practical guide Part 2: Building AI analyst with Model Context Protocol. Hands-on implementation patterns.",
+          authorId: "r-engelbrecht",
+          granularity: "implementation",
+          publishedAt: "2024-11",
+          relationships: {
+            broader: ["semantic-layer", "agentic-systems"],
+            related: ["ke-020", "ke-026"]
+          }
+        },
+        "ke-072": {
+          id: "ke-072",
+          title: "Semantic Models for Modern Stack",
+          scopeNote: "Data modeling patterns for modern data stack. How semantic models bridge raw data and business meaning.",
+          authorId: "pipeline2insights",
+          granularity: "implementation",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["semantic-layer"],
+            related: ["ke-006"]
+          }
+        },
+        "ke-073": {
+          id: "ke-073",
+          title: "Semantic Layer with DuckDB",
+          scopeNote: "Tutorial building minimal semantic layer using YAML, Python, DuckDB and Ibis to query 20M NYC taxi records. Semantic layers aren't needed for early-stage analytics but become invaluable for consistent KPIs in mature environments.",
+          authorId: "motherduck",
+          granularity: "implementation",
+          publishedAt: "2024-09",
+          relationships: {
+            broader: ["semantic-layer"]
+          }
+        },
+        "ke-074": {
+          id: "ke-074",
+          title: "AI Fails Without Semantic Layer",
+          scopeNote: "AI requires semantic layer—centralized framework defining metrics and business logic—to deliver reliable results. Without it, AI confidently generates inaccurate outputs. Example: undefined 'adjusted revenue' leads AI to recommend overinvesting in poorly performing products.",
+          authorId: "dbt",
+          granularity: "conceptual",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["semantic-layer"],
+            related: ["ke-007", "ke-020"]
+          }
+        },
+        "ke-075": {
+          id: "ke-075",
+          title: "AI Fluency & DWH Layers",
+          scopeNote: "AI fluency in data warehouse layers. How different DWH architectural layers support AI comprehension. And Pokemons.",
+          authorId: "nastengraph",
+          granularity: "conceptual",
+          publishedAt: "2024-10",
+          relationships: {
+            broader: ["semantic-layer"]
+          }
+        }
+      },
+
+      // URL to resource ID mapping
+      urlMap: {
+        "https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment": "ke-001",
+        "https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus": "ke-002",
+        "https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge": "ke-003",
+        "https://atlan.com/know/closing-the-context-gap/": "ke-004",
+        "https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room": "ke-005",
+        "https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling": "ke-006",
+        "https://www.atscale.com/blog/golden-age-of-the-semantic-layer/": "ke-007",
+        "https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics": "ke-008",
+        "https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl": "ke-009",
+        "https://jessicatalisman.substack.com/p/the-ontology-pipeline": "ke-010",
+        "https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint": "ke-011",
+        "https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i": "ke-012",
+        "https://jessicatalisman.substack.com/p/controlled-vocabularies": "ke-013",
+        "https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs": "ke-015",
+        "https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/": "ke-016",
+        "https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs": "ke-017",
+        "https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics": "ke-020",
+        "https://engineering.ramp.com/post/meet-ramp-research": "ke-021",
+        "https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove": "ke-022",
+        "https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview": "ke-023",
+        "https://blog.langchain.com/context-engineering-for-agents/": "ke-025",
+        "https://weaviate.io/blog/context-engineering": "ke-026",
+        "https://sankalp.bearblog.dev/how-prompt-caching-works/": "ke-027",
+        "https://blog.langchain.com/how-agents-can-use-filesystems-for-context-engineering/": "ke-028",
+        "https://github.com/momo-personal-assistant/momo-research": "ke-030",
+        "https://arxiv.org/html/2511.08301v1": "ke-031",
+        "https://www.leoniemonigatti.com/blog/memory-in-ai-agents.html": "ke-032",
+        "https://github.com/AnswerLayer/semiosis": "ke-033",
+        "https://substack.com/inbox/post/179387219": "ke-034",
+        "https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl": "ke-040",
+        "https://jessicatalisman.substack.com/p/metadata-as-a-data-model": "ke-041",
+        "https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68": "ke-042",
+        "https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0": "ke-043",
+        "https://jessicatalisman.substack.com/p/process-knowledge-management-part-i": "ke-044",
+        "https://jessicatalisman.substack.com/p/process-knowledge-management-part-ii": "ke-045",
+        "https://jennajordan.me/blog/reference-interview-for-data-teams": "ke-046",
+        "https://datajargon.substack.com/p/knowing-what-good-looks-like": "ke-047",
+        "https://open.substack.com/pub/jessicatalisman/p/process-knowledge-management-part": "ke-048",
+        "https://open.substack.com/pub/ramonactruta/p/the-knowledge-architects-playbook": "ke-049",
+        "https://open.substack.com/pub/juansequeda/p/trip-report-iswc2025": "ke-050",
+        "https://open.substack.com/pub/wonderingaboutai/p/i-built-a-chrome-extension-to-manage": "ke-051",
+        "https://open.substack.com/pub/wonderingaboutai/p/what-49000-substack-articles-taught": "ke-052",
+        "https://open.substack.com/pub/kevinkelly/p/everything-i-know-about-self-publishing": "ke-053",
+        "https://www.ft.com/content/b127ee7a-5ac4-4730-a395-c9f9619615c7": "ke-054",
+        "https://open.substack.com/pub/hybridhorizons/p/were-living-through-the-end-of-one": "ke-055",
+        "https://open.substack.com/pub/kaguura/p/mortal-to-demigod-lessons-from-the": "ke-056",
+        "https://davidbau.com/archives/2025/12/09/in_defense_of_curiosity.html": "ke-057",
+        "https://mcorrell.medium.com/potemkin-data-science-fba2b5ba5cc6": "ke-058",
+        "https://thinkgrowth.org/the-startup-founders-guide-to-analytics-1d2176f20ac1": "ke-059",
+        "https://medium.com/@angela.nedopekina/how-to-analyze-metrics-fda0e4de668d": "ke-060",
+        "https://open.substack.com/pub/datatinkerer/p/july-2025-data-and-ai-digest": "ke-061",
+        "https://caseyhandmer.wordpress.com/2025/12/08/energy-predictions-2025/": "ke-062",
+        "https://open.substack.com/pub/futureproofdatascience/p/semantic-layers-and-the-future-of-agentic-analytics": "ke-070",
+        "https://open.substack.com/pub/rasmusengelbrecht/p/practical-guide-to-semantic-layers-34d": "ke-071",
+        "https://open.substack.com/pub/pipeline2insights/p/semantic-models-data-modelling-for-modern-data-stack": "ke-072",
+        "https://motherduck.com/blog/semantic-layer-duckdb-tutorial/": "ke-073",
+        "https://www.getdbt.com/blog/why-your-ai-will-fail-without-a-semantic-layer": "ke-074",
+        "https://open.substack.com/pub/nastengraph/p/ai-fluency-dwh-layers-and-pokemons": "ke-075"
+      }
+    };
+  </script>
+
+  <header class="topic-header">
+    <a href="index.html" class="topic-back">&larr;</a>
+    <span class="topic-indicator" style="background: #06b6d4"></span>
+    <h1 class="topic-title">Knowledge Engineering</h1>
+    <span class="topic-count">54 resources</span>
+    <button class="insights-toggle" id="insights-toggle" title="Toggle stats panel">stats</button>
+  </header>
+
+  <main class="topic-grid with-insights" id="topic-grid">
+
+    <!-- Left Panel: Context -->
+    <aside class="topic-aside">
+      <h3 class="tcat">Context</h3>
+      <p class="topic-lede section-content">Knowledge Engineering builds an <strong>Enterprise Context Layer</strong>—embedding definitions, rules, and meaning directly into data architecture. <strong>95% of AI projects fail</strong> because traditional systems leave data semantically ambiguous, creating the <strong>AI Context Gap</strong>.</p>
+
+      <div class="topic-stat-box section-content">
+        <span class="topic-stat-num">99%+</span>
+        <span class="topic-stat-label">data reliability needed for production AI</span>
+      </div>
+
+      <h3 class="tcat">Key Terms</h3>
+      <div class="topic-terms-grid section-content">
+        <div class="tterm"><span class="tterm-name">AI Context Gap</span><span class="tterm-def">Gap between model knowledge and organizational context (metrics, rules, semantics)</span></div>
+        <div class="tterm"><span class="tterm-name">Controlled Vocab</span><span class="tterm-def">Curated list of approved terms, each with one intended meaning</span></div>
+        <div class="tterm"><span class="tterm-name">Semantic Layer</span><span class="tterm-def">Authoritative source of business meaning that persists across system changes</span></div>
+        <div class="tterm"><span class="tterm-name">Ontology</span><span class="tterm-def">Formal specification of entities, relationships, and constraints for machine reasoning</span></div>
+        <div class="tterm"><span class="tterm-name">Inline Governance</span><span class="tterm-def">Embedding quality thresholds and business rules directly into data products</span></div>
+      </div>
+
+      <h3 class="tcat">Slides</h3>
+      <div class="topic-slides-links section-content">
+        <a href="slides/Context_Engineering_Unlocking_AI_Value.pdf" target="_blank" class="slide-link">Unlocking AI Value</a>
+        <a href="slides/AI_Context_Gap.pdf" target="_blank" class="slide-link">Context Gap</a>
+        <a href="slides/AI_Value_Chasm.pdf" target="_blank" class="slide-link">Value Chasm</a>
+      </div>
+
+      <h3 class="tcat">Card Legend</h3>
+      <div class="section-content" style="font-size: 0.7rem; color: var(--text-dim);">
+        <div style="margin-bottom: 0.3rem;"><strong>Desktop:</strong> Hover 400ms for card</div>
+        <div><strong>Mobile:</strong> Long-press 500ms for card</div>
+      </div>
+    </aside>
+
+    <!-- Main: Reading List - single column -->
+    <section class="topic-reading">
+      <div class="topic-reading-cols">
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">Core Architecture</h3>
+          <a href="https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">AI-Ready Data: Technical Assessment</span>
+            <span class="tlink-author">S. Paul</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Practical framework for assessing and improving data readiness for AI applications.</span>
+          </a>
+          <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Manus</span>
+            <span class="tlink-title">Context Engineering for AI Agents</span>
+            <span class="tlink-author">Manus</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Lessons from building Manus on how to engineer context for AI agent systems.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#a855f7"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">From Metadata to Meaning</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">How knowledge architecture bridges the gap between raw metadata and business meaning.</span>
+          </a>
+          <a href="https://atlan.com/know/closing-the-context-gap/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#3b82f6"></span>
+            <span class="tlink-src">Atlan</span>
+            <span class="tlink-title">Missing Line Item in 2026 AI Budget</span>
+            <span class="tlink-author">P. Sankar</span>
+            <span class="tlink-time">8m</span>
+            <span class="tlink-desc">Why context engineering should be a dedicated budget item for enterprise AI initiatives.</span>
+          </a>
+          <a href="https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#a855f7"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">The Semantic Gap</span>
+            <span class="tlink-author">V. Dacanay</span>
+            <span class="tlink-time">7m</span>
+            <span class="tlink-desc">Understanding why AI systems struggle with organizational context and nuance.</span>
+          </a>
+
+          <h3 class="tcat">Semantic Layer</h3>
+          <a href="https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#a855f7"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Semantics in Data Modeling</span>
+            <span class="tlink-author">J. Reis</span>
+            <span class="tlink-time">9m</span>
+            <span class="tlink-desc">Why semantics matter in data modeling and how to incorporate meaning into your models.</span>
+          </a>
+          <a href="https://www.atscale.com/blog/golden-age-of-the-semantic-layer/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fbbf24"></span>
+            <span class="tlink-src">AtScale</span>
+            <span class="tlink-title">Semantic Layers for Control</span>
+            <span class="tlink-author">AtScale</span>
+            <span class="tlink-time">6m</span>
+            <span class="tlink-desc">How semantic layers provide governance and control over business metrics.</span>
+          </a>
+          <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ff692e"></span>
+            <span class="tlink-src">dbt Docs</span>
+            <span class="tlink-title">Consume Metrics</span>
+            <span class="tlink-author">dbt</span>
+            <span class="tlink-time">4m</span>
+            <span class="tlink-desc">How to query and consume metrics from the dbt Semantic Layer.</span>
+          </a>
+          <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ff692e"></span>
+            <span class="tlink-src">dbt Docs</span>
+            <span class="tlink-title">Administer Semantic Layer</span>
+            <span class="tlink-author">dbt</span>
+            <span class="tlink-time">5m</span>
+            <span class="tlink-desc">Setup and administration guide for the dbt Semantic Layer.</span>
+          </a>
+          <a href="https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ff692e"></span>
+            <span class="tlink-src">dbt Docs</span>
+            <span class="tlink-title">Deploy Metrics</span>
+            <span class="tlink-author">dbt</span>
+            <span class="tlink-time">3m</span>
+            <span class="tlink-desc">How to deploy metrics definitions to your semantic layer.</span>
+          </a>
+          <a href="https://www.getdbt.com/blog/why-your-ai-will-fail-without-a-semantic-layer" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ff692e"></span>
+            <span class="tlink-src">dbt Blog</span>
+            <span class="tlink-title">AI Fails Without Semantic Layer</span>
+            <span class="tlink-author">dbt Labs</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Why AI requires semantic layer for reliable results.</span>
+          </a>
+          <a href="https://open.substack.com/pub/futureproofdatascience/p/semantic-layers-and-the-future-of-agentic-analytics" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Semantic Layers & Agentic Analytics</span>
+            <span class="tlink-author">Future Proof DS</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">The future of semantic layers with AI agents.</span>
+          </a>
+          <a href="https://open.substack.com/pub/rasmusengelbrecht/p/practical-guide-to-semantic-layers-34d" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">MCP-Powered AI Analyst</span>
+            <span class="tlink-author">R. Engelbrecht</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Practical guide Part 2: Building with MCP.</span>
+          </a>
+          <a href="https://open.substack.com/pub/pipeline2insights/p/semantic-models-data-modelling-for-modern-data-stack" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Semantic Models for Modern Stack</span>
+            <span class="tlink-author">Pipeline2Insights</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Data modeling patterns for modern data stack.</span>
+          </a>
+          <a href="https://motherduck.com/blog/semantic-layer-duckdb-tutorial/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#22c55e"></span>
+            <span class="tlink-src">MotherDuck</span>
+            <span class="tlink-title">Semantic Layer with DuckDB</span>
+            <span class="tlink-author">MotherDuck</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Tutorial with DuckDB and 20M taxi records.</span>
+          </a>
+          <a href="https://open.substack.com/pub/nastengraph/p/ai-fluency-dwh-layers-and-pokemons" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">AI Fluency & DWH Layers</span>
+            <span class="tlink-author">nastengraph</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">AI fluency in data warehouse layers.</span>
+          </a>
+
+          <h3 class="tcat">Knowledge Graphs</h3>
+          <a href="https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Medium</span>
+            <span class="tlink-title">Grounding LLMs with KG</span>
+            <span class="tlink-author">A. Negro</span>
+            <span class="tlink-time">14m</span>
+            <span class="tlink-desc">Why knowledge graphs are essential for grounding LLM outputs in factual data.</span>
+          </a>
+          <a href="https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#10b981"></span>
+            <span class="tlink-src">Blog</span>
+            <span class="tlink-title">Building Knowledge Graphs</span>
+            <span class="tlink-author">K. Cagle</span>
+            <span class="tlink-time">11m</span>
+            <span class="tlink-desc">Practical tips and patterns for building enterprise knowledge graphs.</span>
+          </a>
+          <a href="https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#3b82f6"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Enterprise Needs Ontology</span>
+            <span class="tlink-author">V. Vashishta</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Making the case for ontologies in agentic enterprise architectures.</span>
+          </a>
+        </div>
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">Semantic Foundations</h3>
+          <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#22c55e"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">The Ontology Pipeline</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">13m</span>
+            <span class="tlink-desc">A systematic approach to building and maintaining ontologies.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#a855f7"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Concept Models vs Ontologies</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">11m</span>
+            <span class="tlink-desc">Understanding the difference between sketches and blueprints in semantic modeling.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Controlled Vocabularies I</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">9m</span>
+            <span class="tlink-desc">Introduction to controlled vocabularies and their role in data governance.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Controlled Vocabularies II</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">8m</span>
+            <span class="tlink-desc">Building and maintaining controlled vocabularies at scale.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/controlled-vocabularies" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Controlled Vocabularies III</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Advanced patterns for vocabulary governance and evolution.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Metadata as Data Model I</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Treating metadata as a first-class data model for better governance.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Metadata as Data Model II</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">11m</span>
+            <span class="tlink-desc">Implementing metadata models in practice.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#10b981"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Metadata Application Profiles</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">9m</span>
+            <span class="tlink-desc">Using application profiles to contextualize metadata standards.</span>
+          </a>
+
+          <h3 class="tcat">Agentic Systems</h3>
+          <a href="https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#10b981"></span>
+            <span class="tlink-src">dbt Blog</span>
+            <span class="tlink-title">Building Analyst Agent with dbt</span>
+            <span class="tlink-author">J. Sobel</span>
+            <span class="tlink-time">8m</span>
+            <span class="tlink-desc">How to build trusted AI analytics agents using dbt's semantic layer.</span>
+          </a>
+          <a href="https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#94a3b8"></span>
+            <span class="tlink-src">Podcast</span>
+            <span class="tlink-title">Context Engineering Discipline</span>
+            <span class="tlink-author">T. Macey</span>
+            <span class="tlink-time">45m</span>
+            <span class="tlink-desc">Deep dive into context engineering as an emerging discipline.</span>
+          </a>
+          <a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#f472b6"></span>
+            <span class="tlink-src">Ramp Eng</span>
+            <span class="tlink-title">Agentic Data Analyst</span>
+            <span class="tlink-author">Ramp</span>
+            <span class="tlink-time">7m</span>
+            <span class="tlink-desc">How Ramp built an agentic data analyst for internal research.</span>
+          </a>
+          <a href="https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#94a3b8"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Librarian's Reference Interview</span>
+            <span class="tlink-author">J. Jordan</span>
+            <span class="tlink-time">6m</span>
+            <span class="tlink-desc">Applying librarian techniques to AI data discovery and retrieval.</span>
+          </a>
+
+          <h3 class="tcat">Process Knowledge</h3>
+          <a href="https://jessicatalisman.substack.com/p/process-knowledge-management-part-i" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Process Knowledge Mgmt I</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Capturing and codifying organizational process knowledge.</span>
+          </a>
+          <a href="https://jessicatalisman.substack.com/p/process-knowledge-management-part-ii" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#fb923c"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Process Knowledge Mgmt II</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Making tacit process knowledge explicit and actionable.</span>
+          </a>
+
+          <h3 class="tcat">Context Engineering</h3>
+          <a href="https://blog.langchain.com/context-engineering-for-agents/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">LangChain</span>
+            <span class="tlink-title">Context Engineering for Agents</span>
+            <span class="tlink-author">LangChain</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Framework for agent context with 4 strategies: Write, Select, Compress, Isolate.</span>
+          </a>
+          <a href="https://weaviate.io/blog/context-engineering" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Weaviate</span>
+            <span class="tlink-title">Context Engineering Deep Dive</span>
+            <span class="tlink-author">Weaviate</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Key finding: 87.5% of agent failures are context problems, not model capability.</span>
+          </a>
+          <a href="https://sankalp.bearblog.dev/how-prompt-caching-works/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Bear Blog</span>
+            <span class="tlink-title">How Prompt Caching Works</span>
+            <span class="tlink-author">S. Agarwal</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Technical deep dive: stable prefixes for ~90% cost reduction.</span>
+          </a>
+          <a href="https://blog.langchain.com/how-agents-can-use-filesystems-for-context-engineering/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">LangChain</span>
+            <span class="tlink-title">Filesystems for Context</span>
+            <span class="tlink-author">LangChain</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Using filesystems as context management for persistent agent memory.</span>
+          </a>
+
+          <h3 class="tcat">Agent Memory</h3>
+          <a href="https://github.com/momo-personal-assistant/momo-research" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">GitHub</span>
+            <span class="tlink-title">Momo Research - Memory Framework</span>
+            <span class="tlink-author">Momo</span>
+            <span class="tlink-time">30m</span>
+            <span class="tlink-desc">5-layer memory stack, compaction strategies, and memory-as-a-tool pattern.</span>
+          </a>
+          <a href="https://arxiv.org/html/2511.08301v1" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">arXiv</span>
+            <span class="tlink-title">Spark: Shared Memory for Agents</span>
+            <span class="tlink-author">Spark Research</span>
+            <span class="tlink-time">45m</span>
+            <span class="tlink-desc">Small models benefit most from shared memory (+0.66 pts vs +0.05 for GPT-5).</span>
+          </a>
+          <a href="https://www.leoniemonigatti.com/blog/memory-in-ai-agents.html" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Blog</span>
+            <span class="tlink-title">Memory in AI Agents</span>
+            <span class="tlink-author">L. Monigatti</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Clear taxonomy using CoALA framework: working, semantic, episodic, procedural.</span>
+          </a>
+
+          <h3 class="tcat">Knowledge Quality</h3>
+          <a href="https://github.com/AnswerLayer/semiosis" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">GitHub</span>
+            <span class="tlink-title">Semiosis: KB Unit Testing</span>
+            <span class="tlink-author">AnswerLayer</span>
+            <span class="tlink-time">20m</span>
+            <span class="tlink-desc">Measures completeness, redundancy, semantic density, and boundary thresholds.</span>
+          </a>
+          <a href="https://substack.com/inbox/post/179387219" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Holy Trinity for Enterprise Data</span>
+            <span class="tlink-author">Unknown</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Meta Grid pattern: LLMs trained on fragmented glossaries will hallucinate.</span>
+          </a>
+
+          <h3 class="tcat">Knowledge Architecture</h3>
+          <a href="https://open.substack.com/pub/jessicatalisman/p/process-knowledge-management-part" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Process Knowledge Management II</span>
+            <span class="tlink-author">J. Talisman</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Process knowledge management in enterprise settings. Part 2.</span>
+          </a>
+          <a href="https://open.substack.com/pub/ramonactruta/p/the-knowledge-architects-playbook" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Pedantic Medallion</span>
+            <span class="tlink-author">R. Ctruta</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Knowledge architect's playbook. The pedantic medallion pattern.</span>
+          </a>
+          <a href="https://open.substack.com/pub/juansequeda/p/trip-report-iswc2025" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">ISWC 2025 Trip Report</span>
+            <span class="tlink-author">J. Sequeda</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">International Semantic Web Conference highlights and trends.</span>
+          </a>
+          <a href="https://jennajordan.me/blog/reference-interview-for-data-teams" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Blog</span>
+            <span class="tlink-title">Reference Interview for Data Teams</span>
+            <span class="tlink-author">J. Jordan</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Librarian's reference interview technique applied to data teams.</span>
+          </a>
+          <a href="https://datajargon.substack.com/p/knowing-what-good-looks-like" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#06b6d4"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Knowing What Good Looks Like</span>
+            <span class="tlink-author">Data Jargon</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Standards and benchmarks for quality knowledge work.</span>
+          </a>
+        </div>
+
+        <div class="topic-reading-col">
+          <h3 class="tcat">Information Management</h3>
+          <a href="https://open.substack.com/pub/wonderingaboutai/p/i-built-a-chrome-extension-to-manage" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#10b981"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">1,200+ Substack Subscriptions</span>
+            <span class="tlink-author">Wondering AI</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Managing information overload with custom tooling.</span>
+          </a>
+          <a href="https://open.substack.com/pub/wonderingaboutai/p/what-49000-substack-articles-taught" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#10b981"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">49,000 Substack Articles</span>
+            <span class="tlink-author">Wondering AI</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">Data analysis of newsletter niche discovery.</span>
+          </a>
+          <a href="https://open.substack.com/pub/kevinkelly/p/everything-i-know-about-self-publishing" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#10b981"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Everything About Self-Publishing</span>
+            <span class="tlink-author">K. Kelly</span>
+            <span class="tlink-time">20m</span>
+            <span class="tlink-desc">Kevin Kelly's complete guide to self-publishing.</span>
+          </a>
+
+          <h3 class="tcat">Tech & Society</h3>
+          <a href="https://www.ft.com/content/b127ee7a-5ac4-4730-a395-c9f9619615c7" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">FT</span>
+            <span class="tlink-title">For-Profit Cities</span>
+            <span class="tlink-author">FT</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Tech elites starting their own for-profit cities.</span>
+          </a>
+          <a href="https://open.substack.com/pub/hybridhorizons/p/were-living-through-the-end-of-one" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">End of One World</span>
+            <span class="tlink-author">Hybrid Horizons</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">We're living through the end of one world and nobody wants to say it.</span>
+          </a>
+          <a href="https://open.substack.com/pub/kaguura/p/mortal-to-demigod-lessons-from-the" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Mortal to Demigod</span>
+            <span class="tlink-author">Kaguura</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Lessons from the new Olympus of tech power.</span>
+          </a>
+          <a href="https://davidbau.com/archives/2025/12/09/in_defense_of_curiosity.html" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Blog</span>
+            <span class="tlink-title">In Defense of Curiosity</span>
+            <span class="tlink-author">D. Bau</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Why curiosity matters more than ever in AI age.</span>
+          </a>
+
+          <h3 class="tcat">Data Journalism</h3>
+          <a href="https://mcorrell.medium.com/potemkin-data-science-fba2b5ba5cc6" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Medium</span>
+            <span class="tlink-title">Potemkin Data Science</span>
+            <span class="tlink-author">M. Correll</span>
+            <span class="tlink-time">12m</span>
+            <span class="tlink-desc">When data science is more facade than substance.</span>
+          </a>
+          <a href="https://thinkgrowth.org/the-startup-founders-guide-to-analytics-1d2176f20ac1" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Medium</span>
+            <span class="tlink-title">Founder's Guide to Analytics</span>
+            <span class="tlink-author">Think Growth</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Analytics strategy for startup founders.</span>
+          </a>
+          <a href="https://medium.com/@angela.nedopekina/how-to-analyze-metrics-fda0e4de668d" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Medium</span>
+            <span class="tlink-title">How to Analyze Metrics</span>
+            <span class="tlink-author">A. Nedopekina</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">Practical metrics analysis techniques.</span>
+          </a>
+          <a href="https://open.substack.com/pub/datatinkerer/p/july-2025-data-and-ai-digest" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Substack</span>
+            <span class="tlink-title">Data Crowd Reading July 2025</span>
+            <span class="tlink-author">Data Tinkerer</span>
+            <span class="tlink-time">10m</span>
+            <span class="tlink-desc">What the data community was reading in July 2025.</span>
+          </a>
+          <a href="https://caseyhandmer.wordpress.com/2025/12/08/energy-predictions-2025/" target="_blank" class="tlink">
+            <span class="tlink-dot" style="background:#ec4899"></span>
+            <span class="tlink-src">Blog</span>
+            <span class="tlink-title">Energy Predictions 2025</span>
+            <span class="tlink-author">C. Handmer</span>
+            <span class="tlink-time">15m</span>
+            <span class="tlink-desc">Energy landscape predictions and analysis.</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Right Panel: Insights Dashboard -->
+    <aside class="topic-insights">
+
+      <!-- Geography -->
+      <div class="insights-section">
+        <div class="insights-title">Sources by Geography</div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">USA</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-usa" style="width: 85%"></div>
+          </div>
+          <span class="insights-bar-value">85%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Europe</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-eu" style="width: 0%"></div>
+          </div>
+          <span class="insights-bar-value">0%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Asia</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-asia" style="width: 0%"></div>
+          </div>
+          <span class="insights-bar-value">0%</span>
+        </div>
+        <div class="insights-bar">
+          <span class="insights-bar-label">Unknown</span>
+          <div class="insights-bar-track">
+            <div class="insights-bar-fill geo-unknown" style="width: 15%"></div>
+          </div>
+          <span class="insights-bar-value">15%</span>
+        </div>
+        <div class="insights-gap">
+          <span class="insights-gap-icon">!</span>
+          0 sources from EU, Asia, Africa, or South America
+        </div>
+      </div>
+
+      <!-- Voices -->
+      <div class="insights-section">
+        <div class="insights-title">Voices</div>
+        <div class="insights-voices">
+          <div class="insights-voice">
+            <span class="insights-voice-icon male">&#9794;</span>
+            <span>5</span>
+          </div>
+          <div class="insights-voice">
+            <span class="insights-voice-icon female">&#9792;</span>
+            <span>1</span>
+          </div>
+          <div class="insights-voice">
+            <span class="insights-voice-icon unknown">?</span>
+            <span>5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Perspective -->
+      <div class="insights-section">
+        <div class="insights-title">Perspective Type</div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Practitioner</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+          </div>
+        </div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Vendor</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+          </div>
+        </div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Journalist</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+          </div>
+        </div>
+        <div class="insights-perspective">
+          <span class="insights-perspective-label">Academic</span>
+          <div class="insights-perspective-bar">
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+            <span class="insights-pip empty"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Top Contributors -->
+      <div class="insights-section">
+        <div class="insights-title">Top Contributors</div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">J. Talisman</span>
+          <span class="insights-contributor-count">11</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">dbt Labs</span>
+          <span class="insights-contributor-count">4</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">K. Cagle</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">V. Vashishta</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+        <div class="insights-contributor">
+          <span class="insights-contributor-name">J. Reis</span>
+          <span class="insights-contributor-count">1</span>
+          <div class="insights-contributor-bar">
+            <span class="insights-contributor-pip"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Content Types -->
+      <div class="insights-section">
+        <div class="insights-title">Content Types</div>
+        <div class="insights-types">
+          <div class="insights-type">
+            <span class="insights-type-label">Essay</span>
+            <span class="insights-type-count">15</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Blog</span>
+            <span class="insights-type-count">4</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Docs</span>
+            <span class="insights-type-count">3</span>
+          </div>
+          <div class="insights-type">
+            <span class="insights-type-label">Podcast</span>
+            <span class="insights-type-count">1</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Activity -->
+      <div class="insights-section">
+        <div class="insights-title">Added</div>
+        <div class="insights-recent">
+          <div class="insights-recent-item">
+            <span class="insights-recent-dot"></span>
+            <span>Dec 13 — 36 resources</span>
+          </div>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <footer class="topic-status">
+    <span class="status-section">54 resources</span>
+    <span class="status-section">~6 hrs total</span>
+    <span class="status-section status-right">data-centered</span>
+  </footer>
+
+  <!-- Resource Card Popup -->
+  <div class="resource-card-backdrop" id="resource-card-backdrop"></div>
+  <div id="resource-card" class="resource-card">
+    <div class="rc-header">
+      <div class="rc-source">
+        <span class="rc-source-icon"></span>
+        <span class="rc-source-label"></span>
+      </div>
+      <div class="rc-header-right">
+        <span class="rc-header-date"></span>
+        <span class="rc-id" title="Copy resource ID"></span>
+      </div>
+    </div>
+    <div class="rc-title-section">
+      <h4 class="rc-title"></h4>
+      <p class="rc-scope-note"></p>
+    </div>
+    <div class="rc-meta">
+      <span class="rc-badge domain">knowledge engineering</span>
+      <span class="rc-badge granularity"></span>
+      <span class="rc-badge time"></span>
+    </div>
+    <div class="rc-author">
+      <div class="rc-author-header">
+        <span class="rc-author-icon">&#128100;</span>
+        <span class="rc-author-name"></span>
+      </div>
+      <div class="rc-author-details"></div>
+    </div>
+    <div class="rc-relationships">
+      <div class="rc-rel-header">
+        <span>&#128279;</span> Related
+      </div>
+      <div class="rc-rel-list"></div>
+    </div>
+  </div>
+
+  <script>
+    /**
+     * Resource Card Controller
+     * Enhances existing links with ontology-guided preview cards
+     */
+    (function() {
+      const isMobile = () => window.innerWidth <= 900;
+      const HOVER_DELAY = 400;
+      const LONG_PRESS_DURATION = 500;
+      const MOVE_THRESHOLD = 10;
+
+      const data = window.KB_DATA;
+      const card = document.getElementById('resource-card');
+      const backdrop = document.getElementById('resource-card-backdrop');
+
+      let hoverTimer = null;
+      let longPressTimer = null;
+      let touchStartPos = null;
+      let activeLink = null;
+
+      // Source icons
+      const sourceIcons = {
+        'substack': '&#128240;',
+        'blog': '&#128221;',
+        'medium': '&#128240;',
+        'dbt': '&#128297;',
+        'github': '&#128187;',
+        'arxiv': '&#128218;',
+        'podcast': '&#127897;',
+        'atlan': '&#127970;',
+        'atscale': '&#127970;',
+        'langchain': '&#9889;',
+        'weaviate': '&#128269;',
+        'ramp': '&#128200;',
+        'manus': '&#129302;',
+        'ft': '&#128240;',
+        'bear blog': '&#128059;'
+      };
+
+      // Get resource by URL
+      function getResourceByUrl(url) {
+        const id = data.urlMap[url];
+        return id ? data.resources[id] : null;
+      }
+
+      // Get author
+      function getAuthor(id) {
+        return data.authors[id];
+      }
+
+      // Get concept
+      function getConcept(id) {
+        return data.concepts.find(c => c.id === id);
+      }
+
+      // Show resource card
+      function showCard(link) {
+        const url = link.href;
+        const resource = getResourceByUrl(url);
+
+        // Extract data from link HTML
+        const srcText = link.querySelector('.tlink-src')?.textContent.toLowerCase() || 'blog';
+        const titleText = link.querySelector('.tlink-title')?.textContent || '';
+        const authorText = link.querySelector('.tlink-author')?.textContent || '';
+        const timeText = link.querySelector('.tlink-time')?.textContent || '';
+
+        // Populate card header
+        card.querySelector('.rc-source-icon').innerHTML = sourceIcons[srcText] || '&#128196;';
+        card.querySelector('.rc-source-label').textContent = srcText.toUpperCase();
+
+        if (resource) {
+          // ENRICHED: Full card with KB_DATA
+          const author = getAuthor(resource.authorId);
+
+          card.querySelector('.rc-id').textContent = resource.id;
+          card.querySelector('.rc-id').style.display = '';
+          card.querySelector('.rc-id').onclick = (e) => {
+            e.stopPropagation();
+            navigator.clipboard.writeText(resource.id);
+            card.querySelector('.rc-id').textContent = 'copied!';
+            setTimeout(() => card.querySelector('.rc-id').textContent = resource.id, 1000);
+          };
+
+          card.querySelector('.rc-title').textContent = resource.title;
+          card.querySelector('.rc-scope-note').textContent = resource.scopeNote;
+          card.querySelector('.rc-scope-note').style.display = '';
+
+          card.querySelector('.rc-header-date').textContent = resource.publishedAt || '';
+
+          // Granularity badge
+          const granBadge = card.querySelector('.rc-badge.granularity');
+          granBadge.textContent = resource.granularity;
+          granBadge.className = `rc-badge granularity granularity-${resource.granularity}`;
+          granBadge.style.display = '';
+
+          // Author
+          card.querySelector('.rc-author-name').textContent = author?.name || authorText;
+          const details = [];
+          if (author?.affiliation) details.push(author.affiliation);
+          if (author?.perspectiveType) details.push(author.perspectiveType);
+          if (author?.yearsInField) details.push(`${author.yearsInField}y exp`);
+          card.querySelector('.rc-author-details').textContent = details.join(' · ');
+
+          // Relationships
+          renderRelationships(resource);
+          card.querySelector('.rc-relationships').style.display = '';
+
+        } else {
+          // FALLBACK: Basic card from link HTML only
+          card.querySelector('.rc-id').style.display = 'none';
+          card.querySelector('.rc-title').textContent = titleText;
+          card.querySelector('.rc-scope-note').style.display = 'none';
+          card.querySelector('.rc-header-date').textContent = '';
+
+          // Hide granularity for fallback
+          card.querySelector('.rc-badge.granularity').style.display = 'none';
+
+          // Author from link
+          card.querySelector('.rc-author-name').textContent = authorText;
+          card.querySelector('.rc-author-details').textContent = '';
+
+          // Hide relationships for fallback
+          card.querySelector('.rc-relationships').style.display = 'none';
+        }
+
+        card.querySelector('.rc-badge.time').textContent = timeText + ' read';
+
+        // Position and show
+        positionCard(link);
+        card.classList.add('visible');
+        if (isMobile()) backdrop.classList.add('visible');
+
+        activeLink = link;
+        link.classList.add('card-active');
+      }
+
+      function renderRelationships(resource) {
+        const container = card.querySelector('.rc-rel-list');
+        const rels = resource.relationships || {};
+        let html = '';
+
+        // Broader concepts
+        if (rels.broader?.length) {
+          rels.broader.forEach(id => {
+            const concept = getConcept(id);
+            if (concept) {
+              html += `<div class="rc-rel-item">
+                <span class="rc-rel-type">&uarr; broader</span>
+                <span class="rc-rel-link">${concept.label}</span>
+              </div>`;
+            }
+          });
+        }
+
+        // Related resources
+        if (rels.related?.length) {
+          rels.related.slice(0, 2).forEach(id => {
+            const related = data.resources[id];
+            if (related) {
+              html += `<div class="rc-rel-item">
+                <span class="rc-rel-type">&rarr; related</span>
+                <span class="rc-rel-link">${related.title}</span>
+              </div>`;
+            }
+          });
+        }
+
+        // Prerequisites
+        if (rels.prerequisite?.length) {
+          rels.prerequisite.slice(0, 1).forEach(id => {
+            const prereq = data.resources[id];
+            if (prereq) {
+              html += `<div class="rc-rel-item">
+                <span class="rc-rel-type">&#9889; prereq</span>
+                <span class="rc-rel-link">${prereq.title}</span>
+              </div>`;
+            }
+          });
+        }
+
+        // Exemplifies
+        if (rels.exemplifies?.length) {
+          rels.exemplifies.slice(0, 1).forEach(id => {
+            const concept = getConcept(id);
+            if (concept) {
+              html += `<div class="rc-rel-item">
+                <span class="rc-rel-type">&#9733; shows</span>
+                <span class="rc-rel-link">${concept.label}</span>
+              </div>`;
+            }
+          });
+        }
+
+        container.innerHTML = html || '<div class="rc-rel-item" style="color: var(--text-muted);">No relationships defined</div>';
+      }
+
+      function positionCard(link) {
+        if (isMobile()) {
+          // Mobile: bottom sheet
+          card.style.top = 'auto';
+          card.style.left = '0';
+        } else {
+          // Desktop: position relative to viewport (fixed positioning)
+          const rect = link.getBoundingClientRect();
+          const cardWidth = 380;
+          const cardHeight = 400;
+
+          let left = rect.left;
+          let top = rect.bottom + 8;
+
+          // Prevent right overflow
+          if (left + cardWidth > window.innerWidth - 20) {
+            left = window.innerWidth - cardWidth - 20;
+          }
+          // Prevent left overflow
+          if (left < 10) left = 10;
+
+          // If card would go below viewport, show above the link
+          if (top + cardHeight > window.innerHeight - 20) {
+            top = rect.top - cardHeight - 8;
+          }
+          // If still off screen, clamp to top
+          if (top < 10) top = 10;
+
+          card.style.left = `${left}px`;
+          card.style.top = `${top}px`;
+        }
+      }
+
+      function hideCard() {
+        card.classList.remove('visible');
+        backdrop.classList.remove('visible');
+        if (activeLink) {
+          activeLink.classList.remove('card-active');
+          activeLink = null;
+        }
+      }
+
+      // Desktop: Hover behavior
+      function setupDesktopHover(link) {
+        link.addEventListener('mouseenter', () => {
+          if (isMobile()) return;
+          hoverTimer = setTimeout(() => showCard(link), HOVER_DELAY);
+        });
+
+        link.addEventListener('mouseleave', () => {
+          clearTimeout(hoverTimer);
+          // Delay hide to allow moving to card
+          setTimeout(() => {
+            if (!card.matches(':hover')) {
+              hideCard();
+            }
+          }, 100);
+        });
+      }
+
+      card.addEventListener('mouseleave', () => {
+        if (!isMobile()) hideCard();
+      });
+
+      // Mobile: Long-press behavior
+      function setupMobileTouch(link) {
+        link.addEventListener('touchstart', (e) => {
+          touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+
+          longPressTimer = setTimeout(() => {
+            e.preventDefault();
+            showCard(link);
+            if (navigator.vibrate) navigator.vibrate(50);
+          }, LONG_PRESS_DURATION);
+        }, { passive: false });
+
+        link.addEventListener('touchmove', (e) => {
+          if (touchStartPos) {
+            const dx = Math.abs(e.touches[0].clientX - touchStartPos.x);
+            const dy = Math.abs(e.touches[0].clientY - touchStartPos.y);
+            if (dx > MOVE_THRESHOLD || dy > MOVE_THRESHOLD) {
+              clearTimeout(longPressTimer);
+            }
+          }
+        });
+
+        link.addEventListener('touchend', () => {
+          clearTimeout(longPressTimer);
+          touchStartPos = null;
+        });
+      }
+
+      // Close on backdrop tap
+      backdrop.addEventListener('click', hideCard);
+
+      // Close on escape
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') hideCard();
+      });
+
+      // Initialize all links
+      document.querySelectorAll('.tlink').forEach(link => {
+        // Check if this link has enhanced data
+        const hasData = !!getResourceByUrl(link.href);
+        if (hasData) {
+          link.setAttribute('data-resource-id', data.urlMap[link.href]);
+        }
+
+        setupDesktopHover(link);
+        setupMobileTouch(link);
+      });
+
+      // --- Existing behaviors from production page ---
+
+      // Get all content belonging to a section header
+      function getSectionContent(header) {
+        const content = [];
+        let sibling = header.nextElementSibling;
+        while (sibling && !sibling.classList.contains('tcat')) {
+          if (sibling.classList.contains('tlink') || sibling.classList.contains('section-content')) {
+            content.push(sibling);
+          }
+          sibling = sibling.nextElementSibling;
+        }
+        return content;
+      }
+
+      // Collapsible section headers
+      document.querySelectorAll('.tcat').forEach(header => {
+        header.addEventListener('click', function(e) {
+          e.preventDefault();
+          const isCollapsed = this.classList.toggle('collapsed');
+          const content = getSectionContent(this);
+          content.forEach(item => {
+            if (isCollapsed) {
+              item.classList.add('section-hidden');
+            } else {
+              item.classList.remove('section-hidden');
+            }
+          });
+        });
+      });
+
+      // Add open icon to each link
+      document.querySelectorAll('.tlink').forEach(link => {
+        const openBtn = document.createElement('span');
+        openBtn.className = 'tlink-open';
+        openBtn.innerHTML = '&#8599;';
+        openBtn.title = 'Open link';
+        openBtn.dataset.href = link.href;
+        link.appendChild(openBtn);
+      });
+
+      // Mobile click handler - open button navigation
+      document.querySelectorAll('.tlink').forEach(link => {
+        link.addEventListener('click', function(e) {
+          if (!isMobile()) return;
+
+          // If card is showing, close it and prevent navigation
+          if (card.classList.contains('visible')) {
+            hideCard();
+            e.preventDefault();
+            return;
+          }
+
+          // If clicking the open button, navigate
+          if (e.target.classList.contains('tlink-open')) {
+            window.open(this.href, '_blank');
+            e.preventDefault();
+            return;
+          }
+        });
+      });
+
+    })();
+
+    // Insights panel toggle
+    (function() {
+      const toggle = document.getElementById('insights-toggle');
+      const grid = document.getElementById('topic-grid');
+      const mobileBreakpoint = 800;
+
+      function isMobile() {
+        return window.innerWidth <= mobileBreakpoint;
+      }
+
+      function updateState() {
+        if (isMobile()) {
+          grid.classList.remove('insights-hidden');
+          const mobileVisible = localStorage.getItem('insights-mobile-visible') === 'true';
+          if (mobileVisible) {
+            grid.classList.add('insights-visible');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-visible');
+            toggle.classList.remove('active');
+          }
+        } else {
+          grid.classList.remove('insights-visible');
+          const savedState = localStorage.getItem('insights-hidden');
+          if (savedState === 'true') {
+            grid.classList.add('insights-hidden');
+            toggle.classList.add('active');
+          } else {
+            grid.classList.remove('insights-hidden');
+            toggle.classList.remove('active');
+          }
+        }
+      }
+
+      updateState();
+
+      let resizeTimeout;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateState, 100);
+      });
+
+      toggle.addEventListener('click', function() {
+        if (isMobile()) {
+          grid.classList.toggle('insights-visible');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-mobile-visible', grid.classList.contains('insights-visible'));
+        } else {
+          grid.classList.toggle('insights-hidden');
+          toggle.classList.toggle('active');
+          localStorage.setItem('insights-hidden', grid.classList.contains('insights-hidden'));
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>
