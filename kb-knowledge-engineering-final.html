@@ -363,20 +363,68 @@
       display: block;
     }
 
-    /* Slide deck specific */
-    .slide-thumbnail img {
-      height: 32px;
-      background: var(--bg-elevated);
+    /* Slide deck preview */
+    .slide-preview {
+      background: linear-gradient(135deg, var(--bg-elevated) 0%, var(--bg-base) 100%);
+      border: 1px solid var(--border-dim);
+      border-radius: 6px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 0.5rem;
+      transition: all 0.2s;
     }
 
-    .slide-title {
-      font-size: 9px;
+    .slide-preview:hover {
+      border-color: var(--amber);
+      background: linear-gradient(135deg, var(--bg-base) 0%, rgba(245,158,11,0.1) 100%);
+    }
+
+    .slide-preview-icon {
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .slide-preview-title {
+      font-size: var(--font-base);
+      font-weight: 600;
+      color: var(--text-bright);
+      margin-bottom: 0.25rem;
+    }
+
+    .slide-preview-hint {
+      font-size: var(--font-xs);
       color: var(--text-dim);
+    }
+
+    .slide-tabs {
+      display: flex;
+      gap: 0.35rem;
+    }
+
+    .slide-tab {
+      flex: 1;
+      padding: 0.35rem 0.25rem;
+      font-size: 10px;
       text-align: center;
-      padding: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-dim);
+      border-radius: 4px;
+      cursor: pointer;
+      color: var(--text-dim);
+      transition: all 0.2s;
+    }
+
+    .slide-tab:hover {
+      color: var(--text-mid);
+      border-color: var(--text-dim);
+    }
+
+    .slide-tab.active {
+      background: var(--amber);
+      color: var(--bg-base);
+      border-color: var(--amber);
+      font-weight: 600;
     }
 
     /* Lightbox */
@@ -1215,19 +1263,15 @@
               <span>SLIDE DECKS</span>
             </div>
             <div class="panel-body">
-              <div class="main-viewer" onclick="openLightbox('slides')">
-                <img src="slides/context_gap.png" alt="Slide Deck Preview" id="main-slide" style="object-fit: contain; background: var(--bg-base);">
+              <div class="slide-preview" onclick="openLightbox('slides')">
+                <div class="slide-preview-icon">📊</div>
+                <div class="slide-preview-title" id="slide-title">AI Context Gap</div>
+                <div class="slide-preview-hint">click to view PDF</div>
               </div>
-              <div class="thumbnail-row">
-                <div class="thumbnail slide-thumbnail active" onclick="selectSlide(0)">
-                  <img src="slides/context_gap.png" alt="AI Context Gap">
-                </div>
-                <div class="thumbnail slide-thumbnail" onclick="selectSlide(1)">
-                  <img src="slides/bridging_the_context_gap.png" alt="AI Value Chasm">
-                </div>
-                <div class="thumbnail slide-thumbnail" onclick="selectSlide(2)">
-                  <img src="slides/semantic_layer_infographic.png" alt="Context Engineering">
-                </div>
+              <div class="slide-tabs">
+                <div class="slide-tab active" onclick="selectSlide(0)">Context Gap</div>
+                <div class="slide-tab" onclick="selectSlide(1)">Value Chasm</div>
+                <div class="slide-tab" onclick="selectSlide(2)">Unlocking AI</div>
               </div>
             </div>
             <div class="panel-bottom">╰────────────────────────╯</div>
@@ -1948,9 +1992,9 @@
 
     function selectSlide(index) {
       currentSlide = index;
-      document.getElementById('main-slide').src = slideDecks[index].img;
-      document.querySelectorAll('.slide-thumbnail').forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === index);
+      document.getElementById('slide-title').textContent = slideDecks[index].title;
+      document.querySelectorAll('.slide-tab').forEach((tab, i) => {
+        tab.classList.toggle('active', i === index);
       });
     }
 
