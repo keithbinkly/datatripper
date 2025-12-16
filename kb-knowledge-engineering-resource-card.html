@@ -252,6 +252,48 @@
       text-shadow: 0 0 8px rgba(0, 255, 136, 0.5);
     }
 
+    /* Card action buttons */
+    .rc-actions {
+      display: flex;
+      gap: 0.5rem;
+      padding: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .rc-btn {
+      flex: 1;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .rc-btn-open {
+      background: var(--accent, #00ff88);
+      color: #000;
+      border-color: var(--accent, #00ff88);
+    }
+
+    .rc-btn-open:hover {
+      background: #00cc6a;
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.4);
+    }
+
+    .rc-btn-close {
+      background: transparent;
+      color: var(--text-muted, #888);
+    }
+
+    .rc-btn-close:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
     /* Visual indicator for links with enhanced cards */
     .tlink[data-resource-id]::before {
       content: '';
@@ -1937,6 +1979,10 @@
       </div>
       <div class="rc-rel-list"></div>
     </div>
+    <div class="rc-actions">
+      <button class="rc-btn rc-btn-open">Open ↗</button>
+      <button class="rc-btn rc-btn-close">Close</button>
+    </div>
   </div>
 
   <script>
@@ -1947,15 +1993,12 @@
     (function() {
       const isMobile = () => window.innerWidth <= 900;
       const HOVER_DELAY = 400;
-      const LONG_PRESS_DURATION = 500;
-      const MOVE_THRESHOLD = 10;
 
       const data = window.KB_DATA;
       const card = document.getElementById('resource-card');
       const backdrop = document.getElementById('resource-card-backdrop');
 
       let hoverTimer = null;
-      let longPressTimer = null;
       let activeLink = null;
 
       // Source icons
@@ -2198,40 +2241,28 @@
         if (!isMobile()) hideCard();
       });
 
-      // Mobile: Long-press behavior
-      function setupMobileTouch(link) {
-        let linkLongPressed = false;
-        let startPos = null;
-
-        link.addEventListener('touchstart', (e) => {
-          linkLongPressed = false;
-          startPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
-          longPressTimer = setTimeout(() => {
-            linkLongPressed = true;
-            showCard(link);
-            if (navigator.vibrate) navigator.vibrate(50);
-          }, LONG_PRESS_DURATION);
-        });
-
-        link.addEventListener('touchmove', (e) => {
-          if (startPos) {
-            const dx = Math.abs(e.touches[0].clientX - startPos.x);
-            const dy = Math.abs(e.touches[0].clientY - startPos.y);
-            if (dx > MOVE_THRESHOLD || dy > MOVE_THRESHOLD) {
-              clearTimeout(longPressTimer);
-            }
-          }
-        });
-
-        // preventDefault on touchend stops the synthetic click event
-        link.addEventListener('touchend', (e) => {
-          clearTimeout(longPressTimer);
-          startPos = null;
-          if (linkLongPressed) {
+      // Mobile: Tap to show card (prevent navigation)
+      function setupMobileTap(link) {
+        link.addEventListener('click', (e) => {
+          if (isMobile()) {
             e.preventDefault();
+            showCard(link);
           }
-        }, { passive: false });
+        });
       }
+
+      // Card action buttons
+      const openBtn = card.querySelector('.rc-btn-open');
+      const closeBtn = card.querySelector('.rc-btn-close');
+
+      openBtn.addEventListener('click', () => {
+        if (activeLink) {
+          window.open(activeLink.href, '_blank');
+        }
+        hideCard();
+      });
+
+      closeBtn.addEventListener('click', hideCard);
 
       // Close on backdrop tap
       backdrop.addEventListener('click', hideCard);
@@ -2250,7 +2281,7 @@
         }
 
         setupDesktopHover(link);
-        setupMobileTouch(link);
+        setupMobileTap(link);
       });
 
       // --- Existing behaviors from production page ---
