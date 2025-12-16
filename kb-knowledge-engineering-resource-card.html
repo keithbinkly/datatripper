@@ -1958,6 +1958,7 @@
       let longPressTimer = null;
       let touchStartPos = null;
       let activeLink = null;
+      let longPressTriggered = false;
 
       // Source icons
       const sourceIcons = {
@@ -2203,13 +2204,14 @@
       function setupMobileTouch(link) {
         link.addEventListener('touchstart', (e) => {
           touchStartPos = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+          longPressTriggered = false;
 
           longPressTimer = setTimeout(() => {
-            e.preventDefault();
+            longPressTriggered = true;
             showCard(link);
             if (navigator.vibrate) navigator.vibrate(50);
           }, LONG_PRESS_DURATION);
-        }, { passive: false });
+        }, { passive: true });
 
         link.addEventListener('touchmove', (e) => {
           if (touchStartPos) {
@@ -2224,6 +2226,14 @@
         link.addEventListener('touchend', () => {
           clearTimeout(longPressTimer);
           touchStartPos = null;
+        });
+
+        // Prevent click navigation if long press opened the card
+        link.addEventListener('click', (e) => {
+          if (longPressTriggered) {
+            e.preventDefault();
+            longPressTriggered = false;
+          }
         });
       }
 
