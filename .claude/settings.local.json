@@ -56,7 +56,8 @@
       "Bash(beads list:*)",
       "Bash(beads add:*)",
       "Bash(git ls-tree:*)",
-      "Bash(git push)"
+      "Bash(git push)",
+      "Bash(npx playwright:*)"
     ]
   }
 }
