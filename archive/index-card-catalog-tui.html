@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data-centered | Card Catalog</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-panel: #111111;
+      --bg-card: #1a1a1a;
+      --bg-hover: #222222;
+
+      --border-dim: #333333;
+      --border-mid: #444444;
+      --border-bright: #666666;
+
+      --text-dim: #555555;
+      --text-mid: #888888;
+      --text-bright: #cccccc;
+      --text-white: #eeeeee;
+
+      --accent-amber: #d4a84b;
+      --accent-cyan: #5ccfe6;
+      --accent-green: #87c38a;
+      --accent-red: #e06c75;
+      --accent-purple: #c9a0dc;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-dark);
+      color: var(--text-bright);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* ══════════════════════════════════════
+       ASCII FRAME HEADER
+       ══════════════════════════════════════ */
+
+    .header-frame {
+      margin-bottom: 1.5rem;
+    }
+
+    .ascii-border {
+      color: var(--border-mid);
+      font-size: 12px;
+      line-height: 1;
+      white-space: pre;
+      user-select: none;
+    }
+
+    .header-content {
+      padding: 0.75rem 1rem;
+      border-left: 1px solid var(--border-mid);
+      border-right: 1px solid var(--border-mid);
+    }
+
+    .header-title {
+      color: var(--accent-amber);
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .header-subtitle {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      margin-top: 0.25rem;
+      letter-spacing: 0.15em;
+    }
+
+    /* ══════════════════════════════════════
+       CATALOG GRID
+       ══════════════════════════════════════ */
+
+    .catalog-label {
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      margin-bottom: 0.5rem;
+      padding-left: 0.5rem;
+    }
+
+    .catalog-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 0;
+    }
+
+    /* ══════════════════════════════════════
+       DRAWER COMPONENT
+       ══════════════════════════════════════ */
+
+    .drawer {
+      position: relative;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .drawer:hover {
+      background: var(--bg-hover);
+    }
+
+    .drawer:hover .drawer-label-text {
+      color: var(--text-white);
+    }
+
+    .drawer:hover .drawer-border {
+      color: var(--border-bright);
+    }
+
+    .drawer-ascii {
+      font-size: 11px;
+      line-height: 1.2;
+      white-space: pre;
+      color: var(--border-dim);
+      transition: color 0.15s ease;
+    }
+
+    .drawer-border {
+      color: var(--border-dim);
+      transition: color 0.15s ease;
+    }
+
+    .drawer-inner {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0 0.5rem;
+    }
+
+    .drawer-handle {
+      color: var(--text-dim);
+      font-size: 11px;
+    }
+
+    .drawer:hover .drawer-handle {
+      color: var(--accent-amber);
+    }
+
+    .drawer-label-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drawer-label-text {
+      color: var(--text-mid);
+      font-size: 0.8rem;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .drawer-range {
+      color: var(--text-dim);
+      font-size: 0.65rem;
+    }
+
+    .drawer-count {
+      color: var(--accent-cyan);
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    .drawer.coming-soon {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .drawer.coming-soon:hover {
+      background: transparent;
+    }
+
+    .drawer.coming-soon .drawer-label-text {
+      color: var(--text-dim);
+    }
+
+    .coming-soon-tag {
+      color: var(--text-dim);
+      font-size: 0.6rem;
+      font-style: italic;
+    }
+
+    /* Drawer accent colors */
+    .drawer[data-accent="cyan"]:hover .drawer-count,
+    .drawer[data-accent="cyan"]:hover .drawer-handle { color: var(--accent-cyan); }
+
+    .drawer[data-accent="green"]:hover .drawer-count,
+    .drawer[data-accent="green"]:hover .drawer-handle { color: var(--accent-green); }
+
+    .drawer[data-accent="amber"]:hover .drawer-count,
+    .drawer[data-accent="amber"]:hover .drawer-handle { color: var(--accent-amber); }
+
+    .drawer[data-accent="purple"]:hover .drawer-count,
+    .drawer[data-accent="purple"]:hover .drawer-handle { color: var(--accent-purple); }
+
+    /* ══════════════════════════════════════
+       FOOTER STATUS BAR
+       ══════════════════════════════════════ */
+
+    .status-bar {
+      margin-top: 2rem;
+      padding: 0.5rem;
+      border-top: 1px solid var(--border-dim);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.65rem;
+      color: var(--text-dim);
+    }
+
+    .status-left {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-green);
+      box-shadow: 0 0 6px var(--accent-green);
+    }
+
+    .status-key {
+      color: var(--text-dim);
+      padding: 1px 4px;
+      border: 1px solid var(--border-dim);
+      border-radius: 2px;
+      font-size: 0.6rem;
+    }
+
+    /* ══════════════════════════════════════
+       TRANSITION OVERLAY
+       ══════════════════════════════════════ */
+
+    .transition-overlay {
+      position: fixed;
+      inset: 0;
+      background: var(--bg-dark);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .transition-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .transition-content {
+      text-align: center;
+    }
+
+    .transition-drawer {
+      font-size: 11px;
+      color: var(--border-mid);
+      white-space: pre;
+      line-height: 1.2;
+      animation: slideOut 0.6s ease forwards;
+    }
+
+    @keyframes slideOut {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(-20px); opacity: 0.5; }
+    }
+
+    .transition-label {
+      color: var(--accent-amber);
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      animation: pulse 0.8s ease infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
+
+    @media (max-width: 600px) {
+      .catalog-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header-title {
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header Frame -->
+    <header class="header-frame">
+      <div class="ascii-border">╔══════════════════════════════════════════════════════════════════════════════╗</div>
+      <div class="header-content">
+        <div class="header-title">DATA-CENTERED</div>
+        <div class="header-subtitle">CURATED RESOURCES FOR DATA & AI PRACTITIONERS</div>
+      </div>
+      <div class="ascii-border">╠══════════════════════════════════════════════════════════════════════════════╣</div>
+    </header>
+
+    <!-- Catalog Label -->
+    <div class="catalog-label">CARD CATALOG</div>
+
+    <!-- Catalog Grid -->
+    <div class="catalog-grid">
+
+      <!-- Drawer: Knowledge Engineering -->
+      <div class="drawer" data-href="kb-knowledge-engineering-card-catalog-tui.html" data-accent="cyan">
+        <div class="drawer-ascii drawer-border">┌──────────────────────────────────────────┐</div>
+        <div class="drawer-inner">
+          <span class="drawer-handle">├──○</span>
+          <div class="drawer-label-box">
+            <div>
+              <span class="drawer-label-text">KNOWLEDGE_ENGINEERING</span>
+              <span class="drawer-range"> 001-099</span>
+            </div>
+            <span class="drawer-count">32</span>
+          </div>
+        </div>
+        <div class="drawer-ascii drawer-border">└──────────────────────────────────────────┘</div>
+      </div>
+
+      <!-- Drawer: Data Engineering -->
+      <div class="drawer" data-href="kb-data-engineering.html" data-accent="green">
+        <div class="drawer-ascii drawer-border">┌──────────────────────────────────────────┐</div>
+        <div class="drawer-inner">
+          <span class="drawer-handle">├──○</span>
+          <div class="drawer-label-box">
+            <div>
+              <span class="drawer-label-text">DATA_ENGINEERING</span>
+              <span class="drawer-range"> 100-199</span>
+            </div>
+            <span class="drawer-count">24</span>
+          </div>
+        </div>
+        <div class="drawer-ascii drawer-border">└──────────────────────────────────────────┘</div>
+      </div>
+
+      <!-- Drawer: Data Visualization (coming soon) -->
+      <div class="drawer coming-soon">
+        <div class="drawer-ascii drawer-border">┌──────────────────────────────────────────┐</div>
+        <div class="drawer-inner">
+          <span class="drawer-handle">├──○</span>
+          <div class="drawer-label-box">
+            <div>
+              <span class="drawer-label-text">DATA_VISUALIZATION</span>
+              <span class="drawer-range"> 200-299</span>
+            </div>
+            <span class="coming-soon-tag">cataloging...</span>
+          </div>
+        </div>
+        <div class="drawer-ascii drawer-border">└──────────────────────────────────────────┘</div>
+      </div>
+
+      <!-- Drawer: Agentic Memory (coming soon) -->
+      <div class="drawer coming-soon">
+        <div class="drawer-ascii drawer-border">┌──────────────────────────────────────────┐</div>
+        <div class="drawer-inner">
+          <span class="drawer-handle">├──○</span>
+          <div class="drawer-label-box">
+            <div>
+              <span class="drawer-label-text">AGENTIC_MEMORY</span>
+              <span class="drawer-range"> 300-399</span>
+            </div>
+            <span class="coming-soon-tag">cataloging...</span>
+          </div>
+        </div>
+        <div class="drawer-ascii drawer-border">└──────────────────────────────────────────┘</div>
+      </div>
+
+      <!-- Drawer: Design & Craft -->
+      <div class="drawer" data-href="kb-design-craft.html" data-accent="amber">
+        <div class="drawer-ascii drawer-border">┌──────────────────────────────────────────┐</div>
+        <div class="drawer-inner">
+          <span class="drawer-handle">├──○</span>
+          <div class="drawer-label-box">
+            <div>
+              <span class="drawer-label-text">DESIGN_CRAFT</span>
+              <span class="drawer-range"> 400-499</span>
+            </div>
+            <span class="drawer-count">18</span>
+          </div>
+        </div>
+        <div class="drawer-ascii drawer-border">└──────────────────────────────────────────┘</div>
+      </div>
+
+      <!-- Drawer: Personal Growth -->
+      <div class="drawer" data-href="kb-personal-growth.html" data-accent="purple">
+        <div class="drawer-ascii drawer-border">┌──────────────────────────────────────────┐</div>
+        <div class="drawer-inner">
+          <span class="drawer-handle">├──○</span>
+          <div class="drawer-label-box">
+            <div>
+              <span class="drawer-label-text">PERSONAL_GROWTH</span>
+              <span class="drawer-range"> 500-599</span>
+            </div>
+            <span class="drawer-count">12</span>
+          </div>
+        </div>
+        <div class="drawer-ascii drawer-border">└──────────────────────────────────────────┘</div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="ascii-border" style="margin-top: 1rem;">╚══════════════════════════════════════════════════════════════════════════════╝</div>
+
+    <!-- Status Bar -->
+    <footer class="status-bar">
+      <div class="status-left">
+        <div class="status-item">
+          <span class="status-dot"></span>
+          <span>ONLINE</span>
+        </div>
+        <div class="status-item">
+          <span>6 drawers</span>
+        </div>
+        <div class="status-item">
+          <span>86 cards</span>
+        </div>
+      </div>
+      <div class="status-right">
+        <span class="status-key">↑↓</span> navigate
+        <span class="status-key" style="margin-left: 0.5rem;">ENTER</span> open
+        <span class="status-key" style="margin-left: 0.5rem;">ESC</span> back
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Transition Overlay -->
+  <div class="transition-overlay" id="transition">
+    <div class="transition-content">
+      <div class="transition-drawer">
+┌────────────────────────────────────┐
+│  ┌──────────────────────────────┐  │
+│  │                              │  │
+│  │    ░░░░░░░░░░░░░░░░░░░░░░    │  │
+│  │    ░░░░░░░░░░░░░░░░░░░░░░    │  │
+│  │    ░░░░░░░░░░░░░░░░░░░░░░    │  │
+│  │                              │  │
+│  └──────────────────────────────┘  │
+├──○                                 │
+└────────────────────────────────────┘
+      </div>
+      <div class="transition-label">opening drawer...</div>
+    </div>
+  </div>
+
+  <script>
+    // Drawer click handler
+    document.querySelectorAll('.drawer:not(.coming-soon)').forEach(drawer => {
+      drawer.addEventListener('click', function() {
+        const href = this.dataset.href;
+        const overlay = document.getElementById('transition');
+
+        overlay.classList.add('active');
+
+        setTimeout(() => {
+          window.location.href = href;
+        }, 800);
+      });
+    });
+
+    // Keyboard navigation
+    let selectedIndex = 0;
+    const drawers = document.querySelectorAll('.drawer:not(.coming-soon)');
+
+    function updateSelection() {
+      drawers.forEach((d, i) => {
+        d.style.background = i === selectedIndex ? 'var(--bg-hover)' : '';
+      });
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'j') {
+        selectedIndex = Math.min(selectedIndex + 1, drawers.length - 1);
+        updateSelection();
+      }
+      if (e.key === 'ArrowUp' || e.key === 'k') {
+        selectedIndex = Math.max(selectedIndex - 1, 0);
+        updateSelection();
+      }
+      if (e.key === 'Enter') {
+        drawers[selectedIndex]?.click();
+      }
+    });
+  </script>
+</body>
+</html>

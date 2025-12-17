@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data-centered</title>
+  <meta name="description" content="Curated resources on knowledge engineering, data visualization, and AI systems.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0c0c0c;
+      --bg-surface: #111111;
+      --bg-hover: #1a1a1a;
+
+      --border-dim: #2a2a2a;
+      --border-mid: #3a3a3a;
+      --border-bright: #555;
+
+      --text-dim: #555;
+      --text-mid: #888;
+      --text-bright: #bbb;
+      --text-white: #eee;
+
+      --cyan: #5ccfe6;
+      --orange: #ffab70;
+      --green: #87c38a;
+      --purple: #c9a0dc;
+      --amber: #d4a84b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-base);
+      color: var(--text-bright);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       HEADER - Lip Gloss style with rounded border
+       ═══════════════════════════════════════════ */
+
+    .header {
+      margin-bottom: 2rem;
+    }
+
+    .header-border {
+      color: var(--border-mid);
+      font-size: 12px;
+      line-height: 1;
+      white-space: pre;
+      user-select: none;
+    }
+
+    .header-content {
+      padding: 0.75rem 1rem;
+      border-left: 1px solid var(--border-mid);
+      border-right: 1px solid var(--border-mid);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      color: var(--amber);
+      font-weight: 600;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .tagline {
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+    }
+
+    .clock {
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    /* ═══════════════════════════════════════════
+       MAIN GRID
+       ═══════════════════════════════════════════ */
+
+    .main-grid {
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 700px) {
+      .main-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ═══════════════════════════════════════════
+       PANEL COMPONENT - Rounded Lip Gloss style
+       ═══════════════════════════════════════════ */
+
+    .panel {
+      margin-bottom: 1rem;
+    }
+
+    .panel-top {
+      color: var(--border-mid);
+      font-size: 11px;
+      white-space: pre;
+      line-height: 1;
+    }
+
+    .panel-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 0.75rem;
+      border-left: 1px solid var(--border-mid);
+      border-right: 1px solid var(--border-mid);
+      font-size: 0.7rem;
+      color: var(--text-mid);
+      letter-spacing: 0.1em;
+    }
+
+    .panel-icon {
+      font-size: 0.8rem;
+    }
+
+    .panel.accent-cyan .panel-icon { color: var(--cyan); }
+    .panel.accent-green .panel-icon { color: var(--green); }
+    .panel.accent-purple .panel-icon { color: var(--purple); }
+
+    .panel-body {
+      border-left: 1px solid var(--border-mid);
+      border-right: 1px solid var(--border-mid);
+      padding: 0.5rem 0;
+    }
+
+    .panel-bottom {
+      color: var(--border-mid);
+      font-size: 11px;
+      white-space: pre;
+      line-height: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       TOPICS LIST - Tree style with handles
+       ═══════════════════════════════════════════ */
+
+    .topics-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 0 0.75rem 0.5rem;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      letter-spacing: 0.15em;
+      border-bottom: 1px dashed var(--border-dim);
+      margin-bottom: 0.25rem;
+    }
+
+    .topics-header-right {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .topic-row {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      position: relative;
+    }
+
+    .topic-row:hover {
+      background: var(--bg-hover);
+    }
+
+    /* Tree connector - the ├──○ handle */
+    .topic-tree {
+      color: var(--border-dim);
+      font-size: 11px;
+      margin-right: 0.5rem;
+      transition: color 0.15s ease;
+      white-space: pre;
+    }
+
+    .topic-row:hover .topic-tree {
+      color: var(--border-bright);
+    }
+
+    /* Last item uses └── */
+    .topic-row:last-child .topic-tree {
+      /* └── instead of ├── */
+    }
+
+    .topic-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      margin-right: 0.75rem;
+      flex-shrink: 0;
+    }
+
+    .topic-dot.cyan { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+    .topic-dot.orange { background: var(--orange); box-shadow: 0 0 8px var(--orange); }
+    .topic-dot.green { background: var(--green); box-shadow: 0 0 8px var(--green); }
+    .topic-dot.purple { background: var(--purple); box-shadow: 0 0 8px var(--purple); }
+
+    .topic-title {
+      flex: 1;
+      color: var(--text-bright);
+      font-size: 0.8rem;
+      transition: color 0.15s ease;
+    }
+
+    .topic-row:hover .topic-title {
+      color: var(--text-white);
+    }
+
+    .topic-count {
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      min-width: 2.5rem;
+      text-align: right;
+    }
+
+    .topic-new {
+      color: var(--green);
+      font-size: 0.65rem;
+      min-width: 2.5rem;
+      text-align: right;
+    }
+
+    .topic-arrow {
+      color: var(--text-dim);
+      margin-left: 0.5rem;
+      opacity: 0;
+      transform: translateX(-4px);
+      transition: all 0.15s ease;
+    }
+
+    .topic-row:hover .topic-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ═══════════════════════════════════════════
+       GUIDE ROW
+       ═══════════════════════════════════════════ */
+
+    .guide-row {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      text-decoration: none;
+      transition: background 0.15s ease;
+    }
+
+    .guide-row:hover {
+      background: var(--bg-hover);
+    }
+
+    .guide-tree {
+      color: var(--border-dim);
+      font-size: 11px;
+      margin-right: 0.5rem;
+    }
+
+    .guide-row:hover .guide-tree {
+      color: var(--border-bright);
+    }
+
+    .guide-title {
+      flex: 1;
+      color: var(--text-bright);
+      font-size: 0.8rem;
+    }
+
+    .guide-row:hover .guide-title {
+      color: var(--text-white);
+    }
+
+    .guide-arrow {
+      color: var(--text-dim);
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .guide-row:hover .guide-arrow {
+      opacity: 1;
+    }
+
+    /* ═══════════════════════════════════════════
+       PLACEHOLDER
+       ═══════════════════════════════════════════ */
+
+    .placeholder {
+      padding: 1rem 0.75rem;
+      color: var(--text-dim);
+      font-size: 0.7rem;
+      font-style: italic;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER STATUS BAR
+       ═══════════════════════════════════════════ */
+
+    .footer {
+      margin-top: 1.5rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-dim);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .status-group {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .status-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .status-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 6px var(--green);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Header with rounded Lip Gloss border -->
+    <header class="header">
+      <div class="header-border">╭──────────────────────────────────────────────────────────────────────────────╮</div>
+      <div class="header-content">
+        <div>
+          <div class="brand">data-centered</div>
+          <div class="tagline">CURATED RESOURCES FOR DATA & AI PRACTITIONERS</div>
+        </div>
+        <div class="clock" id="clock"></div>
+      </div>
+      <div class="header-border">╰──────────────────────────────────────────────────────────────────────────────╯</div>
+    </header>
+
+    <!-- Main Grid -->
+    <main class="main-grid">
+
+      <!-- Topics Panel -->
+      <div class="panel accent-cyan">
+        <div class="panel-top">╭─────────────────────────────────────────────────────────────╮</div>
+        <div class="panel-header">
+          <span class="panel-icon">◇</span>
+          <span>TOPICS</span>
+        </div>
+        <div class="panel-body">
+          <div class="topics-header">
+            <span>KNOWLEDGE AREAS</span>
+            <div class="topics-header-right">
+              <span>CNT</span>
+              <span>NEW</span>
+            </div>
+          </div>
+
+          <a href="kb-knowledge-engineering.html" class="topic-row">
+            <span class="topic-tree">├──○</span>
+            <span class="topic-dot cyan"></span>
+            <span class="topic-title">Knowledge Engineering</span>
+            <span class="topic-count">54</span>
+            <span class="topic-new">+18</span>
+            <span class="topic-arrow">→</span>
+          </a>
+
+          <a href="kb-data-engineering.html" class="topic-row">
+            <span class="topic-tree">├──○</span>
+            <span class="topic-dot orange"></span>
+            <span class="topic-title">Data Engineering</span>
+            <span class="topic-count">73</span>
+            <span class="topic-new">+48</span>
+            <span class="topic-arrow">→</span>
+          </a>
+
+          <a href="kb-personal-growth.html" class="topic-row">
+            <span class="topic-tree">├──○</span>
+            <span class="topic-dot green"></span>
+            <span class="topic-title">Personal Growth</span>
+            <span class="topic-count">46</span>
+            <span class="topic-new">+46</span>
+            <span class="topic-arrow">→</span>
+          </a>
+
+          <a href="kb-design-craft.html" class="topic-row">
+            <span class="topic-tree">└──○</span>
+            <span class="topic-dot purple"></span>
+            <span class="topic-title">Design Craft</span>
+            <span class="topic-count">12</span>
+            <span class="topic-new">+12</span>
+            <span class="topic-arrow">→</span>
+          </a>
+
+        </div>
+        <div class="panel-bottom">╰─────────────────────────────────────────────────────────────╯</div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <!-- Guides Panel -->
+        <div class="panel accent-green">
+          <div class="panel-top">╭────────────────────────────────╮</div>
+          <div class="panel-header">
+            <span class="panel-icon">▤</span>
+            <span>GUIDES</span>
+          </div>
+          <div class="panel-body">
+            <a href="terminal-stack-guide.html" class="guide-row">
+              <span class="guide-tree">└──</span>
+              <span class="guide-title">Terminal Dev Stack</span>
+              <span class="guide-arrow">→</span>
+            </a>
+          </div>
+          <div class="panel-bottom">╰────────────────────────────────╯</div>
+        </div>
+
+        <!-- Visualizations Panel -->
+        <div class="panel accent-purple">
+          <div class="panel-top">╭────────────────────────────────╮</div>
+          <div class="panel-header">
+            <span class="panel-icon">◐</span>
+            <span>VISUALIZATIONS</span>
+          </div>
+          <div class="panel-body">
+            <div class="placeholder">coming soon...</div>
+          </div>
+          <div class="panel-bottom">╰────────────────────────────────╯</div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="status-group">
+        <div class="status-item">
+          <span class="status-dot"></span>
+          <span>online</span>
+        </div>
+        <div class="status-item">4 topics</div>
+        <div class="status-item">185 resources</div>
+      </div>
+      <div>curated knowledge base</div>
+    </footer>
+
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+      document.getElementById('clock').textContent = time;
+    }
+    updateClock();
+    setInterval(updateClock, 60000);
+  </script>
+</body>
+</html>

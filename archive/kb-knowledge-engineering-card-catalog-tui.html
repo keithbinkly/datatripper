@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Engineering | Card Catalog</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0a0a;
+      --bg-panel: #111111;
+      --bg-card: #151515;
+      --bg-hover: #1a1a1a;
+
+      --border-dim: #2a2a2a;
+      --border-mid: #3a3a3a;
+      --border-bright: #555555;
+
+      --text-dim: #555555;
+      --text-mid: #888888;
+      --text-bright: #bbbbbb;
+      --text-white: #eeeeee;
+
+      --accent-amber: #d4a84b;
+      --accent-cyan: #5ccfe6;
+      --accent-green: #87c38a;
+      --accent-red: #e06c75;
+
+      --card-bg: #0d0d0d;
+      --card-line: #1a1a1a;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-dark);
+      color: var(--text-bright);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    /* ══════════════════════════════════════
+       DRAWER HEADER (open state)
+       ══════════════════════════════════════ */
+
+    .drawer-header {
+      margin-bottom: 1rem;
+    }
+
+    .drawer-top {
+      color: var(--border-mid);
+      font-size: 11px;
+      white-space: pre;
+      line-height: 1.2;
+    }
+
+    .drawer-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-left: 1px solid var(--border-mid);
+      border-right: 1px solid var(--border-mid);
+    }
+
+    .back-link {
+      color: var(--text-dim);
+      text-decoration: none;
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+      transition: color 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-link:hover {
+      color: var(--accent-amber);
+    }
+
+    .drawer-title {
+      color: var(--accent-cyan);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+
+    .drawer-meta {
+      color: var(--text-dim);
+      font-size: 0.65rem;
+    }
+
+    /* ══════════════════════════════════════
+       FILTERS
+       ══════════════════════════════════════ */
+
+    .filters {
+      display: flex;
+      gap: 1rem;
+      padding: 0.5rem;
+      border-left: 1px solid var(--border-mid);
+      border-right: 1px solid var(--border-mid);
+      margin-bottom: 0.5rem;
+    }
+
+    .filter-label {
+      color: var(--text-dim);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+    }
+
+    .filter-options {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    .filter-btn {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      font-family: inherit;
+      font-size: 0.65rem;
+      cursor: pointer;
+      padding: 0;
+      transition: color 0.15s ease;
+    }
+
+    .filter-btn:hover {
+      color: var(--text-bright);
+    }
+
+    .filter-btn.active {
+      color: var(--text-bright);
+    }
+
+    .filter-btn.active .check {
+      color: var(--accent-green);
+    }
+
+    /* ══════════════════════════════════════
+       CARD SECTIONS
+       ══════════════════════════════════════ */
+
+    .drawer-interior {
+      border: 1px solid var(--border-mid);
+      background: var(--bg-panel);
+      min-height: 60vh;
+    }
+
+    .section {
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem 0.75rem;
+      background: var(--bg-dark);
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .section-tab {
+      color: var(--accent-amber);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+    }
+
+    .section-count {
+      color: var(--text-dim);
+      font-size: 0.6rem;
+      margin-left: auto;
+    }
+
+    /* ══════════════════════════════════════
+       INDEX CARDS (ASCII style)
+       ══════════════════════════════════════ */
+
+    .card-list {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .index-card {
+      display: block;
+      text-decoration: none;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px dashed var(--border-dim);
+      transition: background 0.15s ease;
+      position: relative;
+    }
+
+    .index-card:last-child {
+      border-bottom: none;
+    }
+
+    .index-card:hover {
+      background: var(--bg-hover);
+    }
+
+    .index-card:hover .card-title {
+      color: var(--text-white);
+    }
+
+    .index-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* Card structure - mimics ruled lines */
+    .card-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75rem;
+    }
+
+    .card-num {
+      color: var(--text-dim);
+      font-size: 0.6rem;
+      min-width: 2.5rem;
+      opacity: 0.6;
+    }
+
+    .card-src {
+      color: var(--bg-dark);
+      background: var(--text-dim);
+      font-size: 0.55rem;
+      padding: 1px 4px;
+      letter-spacing: 0.05em;
+      min-width: 4.5rem;
+      text-align: center;
+    }
+
+    .card-title {
+      flex: 1;
+      color: var(--text-bright);
+      font-size: 0.8rem;
+      transition: color 0.15s ease;
+    }
+
+    .card-meta {
+      display: flex;
+      gap: 1rem;
+      color: var(--text-dim);
+      font-size: 0.65rem;
+    }
+
+    .card-author {
+      color: var(--accent-cyan);
+      opacity: 0.8;
+    }
+
+    .card-time {
+      opacity: 0.6;
+    }
+
+    .card-arrow {
+      color: var(--accent-amber);
+      font-size: 0.75rem;
+      opacity: 0;
+      transform: translateX(-5px);
+      transition: all 0.15s ease;
+    }
+
+    /* ASCII decoration on hover */
+    .index-card::before {
+      content: '│';
+      position: absolute;
+      left: 4px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--border-dim);
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+    }
+
+    .index-card:hover::before {
+      opacity: 1;
+      color: var(--accent-cyan);
+    }
+
+    /* ══════════════════════════════════════
+       FOOTER
+       ══════════════════════════════════════ */
+
+    .drawer-footer {
+      color: var(--border-mid);
+      font-size: 11px;
+      white-space: pre;
+      line-height: 1.2;
+    }
+
+    .status-bar {
+      margin-top: 1rem;
+      padding: 0.5rem;
+      border-top: 1px solid var(--border-dim);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .status-left {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .time-budget {
+      color: var(--accent-green);
+    }
+
+    .status-key {
+      padding: 1px 4px;
+      border: 1px solid var(--border-dim);
+      border-radius: 2px;
+      margin-right: 0.25rem;
+    }
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+       ══════════════════════════════════════ */
+
+    @media (max-width: 600px) {
+      .card-row {
+        flex-wrap: wrap;
+      }
+
+      .card-meta {
+        width: 100%;
+        margin-top: 0.25rem;
+        padding-left: 3.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- Drawer Header -->
+    <header class="drawer-header">
+      <div class="drawer-top">╔════════════════════════════════════════════════════════════════════════════╗
+║  ┌────────────────────────────────────────────────────────────────────────┐  ║
+║  │                                                                        │  ║</div>
+
+      <div class="drawer-nav">
+        <a href="index-card-catalog-tui.html" class="back-link">
+          <span>←</span>
+          <span>CATALOG</span>
+        </a>
+        <div style="text-align: center;">
+          <div class="drawer-title">KNOWLEDGE_ENGINEERING</div>
+          <div class="drawer-meta">001-099 | 32 cards</div>
+        </div>
+        <div style="width: 80px;"></div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <span class="filter-label">FILTER:</span>
+        <div class="filter-options">
+          <button class="filter-btn active" data-type="practitioner">
+            <span class="check">[x]</span> practitioner
+          </button>
+          <button class="filter-btn active" data-type="vendor">
+            <span class="check">[x]</span> vendor
+          </button>
+          <button class="filter-btn active" data-type="journalist">
+            <span class="check">[x]</span> journalist
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Drawer Interior -->
+    <div class="drawer-interior">
+
+      <!-- Section 1: Core Architecture -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tab">01_CORE_ARCHITECTURE</span>
+          <span class="section-count">4 cards</span>
+        </div>
+        <div class="card-list">
+
+          <a href="https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">001</span>
+              <span class="card-src">SUBSTACK</span>
+              <span class="card-title">AI-Ready Data: Technical Assessment</span>
+              <div class="card-meta">
+                <span class="card-author">S. Paul</span>
+                <span class="card-time">10m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" class="index-card" data-perspective="vendor">
+            <div class="card-row">
+              <span class="card-num">002</span>
+              <span class="card-src">BLOG</span>
+              <span class="card-title">Context Engineering for AI Agents</span>
+              <div class="card-meta">
+                <span class="card-author">Manus</span>
+                <span class="card-time">15m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">003</span>
+              <span class="card-src">SUBSTACK</span>
+              <span class="card-title">From Metadata to Meaning</span>
+              <div class="card-meta">
+                <span class="card-author">J. Talisman</span>
+                <span class="card-time">12m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://atlan.com/know/closing-the-context-gap/" target="_blank" class="index-card" data-perspective="vendor">
+            <div class="card-row">
+              <span class="card-num">004</span>
+              <span class="card-src">ATLAN</span>
+              <span class="card-title">Missing Line Item in 2026 AI Budget</span>
+              <div class="card-meta">
+                <span class="card-author">P. Sankar</span>
+                <span class="card-time">8m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Section 2: Semantic Layer -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tab">02_SEMANTIC_LAYER</span>
+          <span class="section-count">2 cards</span>
+        </div>
+        <div class="card-list">
+
+          <a href="https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">010</span>
+              <span class="card-src">SUBSTACK</span>
+              <span class="card-title">Semantics in Data Modeling</span>
+              <div class="card-meta">
+                <span class="card-author">J. Reis</span>
+                <span class="card-time">9m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://www.atscale.com/blog/golden-age-of-the-semantic-layer/" target="_blank" class="index-card" data-perspective="vendor">
+            <div class="card-row">
+              <span class="card-num">011</span>
+              <span class="card-src">ATSCALE</span>
+              <span class="card-title">Semantic Layers for Control</span>
+              <div class="card-meta">
+                <span class="card-author">AtScale</span>
+                <span class="card-time">6m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Section 3: Semantic Foundations -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tab">03_SEMANTIC_FOUNDATIONS</span>
+          <span class="section-count">2 cards</span>
+        </div>
+        <div class="card-list">
+
+          <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">020</span>
+              <span class="card-src">SUBSTACK</span>
+              <span class="card-title">The Ontology Pipeline</span>
+              <div class="card-meta">
+                <span class="card-author">J. Talisman</span>
+                <span class="card-time">13m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">021</span>
+              <span class="card-src">SUBSTACK</span>
+              <span class="card-title">Concept Models vs Ontologies</span>
+              <div class="card-meta">
+                <span class="card-author">J. Talisman</span>
+                <span class="card-time">11m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Section 4: Knowledge Graphs -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tab">04_KNOWLEDGE_GRAPHS</span>
+          <span class="section-count">2 cards</span>
+        </div>
+        <div class="card-list">
+
+          <a href="https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">030</span>
+              <span class="card-src">MEDIUM</span>
+              <span class="card-title">Grounding LLMs with Knowledge Graphs</span>
+              <div class="card-meta">
+                <span class="card-author">A. Negro</span>
+                <span class="card-time">14m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">031</span>
+              <span class="card-src">BLOG</span>
+              <span class="card-title">Building Knowledge Graphs</span>
+              <div class="card-meta">
+                <span class="card-author">K. Cagle</span>
+                <span class="card-time">11m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Section 5: Agentic Systems -->
+      <div class="section">
+        <div class="section-header">
+          <span class="section-tab">05_AGENTIC_SYSTEMS</span>
+          <span class="section-count">2 cards</span>
+        </div>
+        <div class="card-list">
+
+          <a href="https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics" target="_blank" class="index-card" data-perspective="vendor">
+            <div class="card-row">
+              <span class="card-num">040</span>
+              <span class="card-src">DBT</span>
+              <span class="card-title">Building Analyst Agent with dbt</span>
+              <div class="card-meta">
+                <span class="card-author">J. Sobel</span>
+                <span class="card-time">8m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+          <a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" class="index-card" data-perspective="practitioner">
+            <div class="card-row">
+              <span class="card-num">041</span>
+              <span class="card-src">RAMP</span>
+              <span class="card-title">Agentic Data Analyst</span>
+              <div class="card-meta">
+                <span class="card-author">Ramp</span>
+                <span class="card-time">7m</span>
+              </div>
+              <span class="card-arrow">→</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="drawer-footer">║  │                                                                        │  ║
+║  └────────────────────────────────────────────────────────────────────────┘  ║
+╚════════════════════════════════════════════════════════════════════════════╝</div>
+
+    <!-- Status Bar -->
+    <footer class="status-bar">
+      <div class="status-left">
+        <span>12 cards</span>
+        <span>TIME BUDGET: <span class="time-budget">~2h 4m</span></span>
+      </div>
+      <div>
+        <span class="status-key">j/k</span> navigate
+        <span class="status-key">ESC</span> back
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Filter functionality
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        this.classList.toggle('active');
+        const check = this.querySelector('.check');
+        check.textContent = this.classList.contains('active') ? '[x]' : '[ ]';
+
+        const activeFilters = Array.from(document.querySelectorAll('.filter-btn.active'))
+          .map(f => f.dataset.type);
+
+        document.querySelectorAll('.index-card').forEach(card => {
+          const perspective = card.dataset.perspective;
+          card.style.display = activeFilters.includes(perspective) ? 'block' : 'none';
+        });
+
+        // Update count
+        const visible = document.querySelectorAll('.index-card[style="display: block"], .index-card:not([style])').length;
+        document.querySelector('.status-left span').textContent = `${visible} cards`;
+      });
+    });
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.location.href = 'index-card-catalog-tui.html';
+      }
+    });
+  </script>
+</body>
+</html>

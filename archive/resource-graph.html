@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resource Graph | data-centered</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0c0c0c;
+      --bg-surface: #111111;
+      --bg-hover: #1a1a1a;
+      --border-dim: #2a2a2a;
+      --border-mid: #3a3a3a;
+      --text-dim: #555;
+      --text-mid: #888;
+      --text-bright: #bbb;
+      --text-white: #eee;
+      --cyan: #5ccfe6;
+      --orange: #ffab70;
+      --green: #87c38a;
+      --purple: #c9a0dc;
+      --amber: #d4a84b;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'JetBrains Mono', monospace;
+      background: var(--bg-base);
+      color: var(--text-bright);
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      height: 100vh;
+    }
+
+    #sidebar {
+      width: 300px;
+      background: var(--bg-surface);
+      border-right: 1px solid var(--border-mid);
+      padding: 1rem;
+      overflow-y: auto;
+      flex-shrink: 0;
+    }
+
+    .sidebar-header {
+      margin-bottom: 1rem;
+      padding-bottom: 0.75rem;
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .back-link {
+      color: var(--text-dim);
+      font-size: 0.65rem;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .back-link:hover { color: var(--cyan); }
+
+    .sidebar-title {
+      color: var(--amber);
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .sidebar-subtitle {
+      color: var(--text-dim);
+      font-size: 0.6rem;
+      margin-top: 0.25rem;
+    }
+
+    .stats {
+      background: var(--bg-hover);
+      border-radius: 4px;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      font-size: 0.65rem;
+      border-bottom: 1px dashed var(--border-dim);
+    }
+
+    .stat-row:last-child { border-bottom: none; }
+
+    .stat-value {
+      color: var(--cyan);
+      font-weight: 600;
+    }
+
+    .legend-title {
+      color: var(--text-dim);
+      font-size: 0.6rem;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.5rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem;
+      font-size: 0.65rem;
+      border-radius: 3px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .legend-item:hover { background: var(--bg-hover); }
+    .legend-item.active { background: var(--border-dim); }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-right: 0.5rem;
+    }
+
+    .legend-count {
+      margin-left: auto;
+      color: var(--text-dim);
+    }
+
+    .source-legend {
+      margin-top: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .source-item {
+      display: flex;
+      align-items: center;
+      padding: 0.25rem 0.4rem;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .source-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 2px;
+      margin-right: 0.5rem;
+    }
+
+    .controls {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .control-group {
+      margin-bottom: 0.75rem;
+    }
+
+    .control-label {
+      display: block;
+      font-size: 0.6rem;
+      color: var(--text-dim);
+      margin-bottom: 0.3rem;
+    }
+
+    input[type="range"] {
+      width: 100%;
+      accent-color: var(--cyan);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 0.5rem;
+      margin: 0.25rem 0;
+      background: var(--border-dim);
+      border: none;
+      border-radius: 4px;
+      color: var(--text-bright);
+      font-family: inherit;
+      font-size: 0.65rem;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .btn:hover { background: var(--border-mid); }
+
+    #node-info {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--bg-hover);
+      border-radius: 4px;
+      display: none;
+    }
+
+    #node-info.visible { display: block; }
+
+    #node-info h3 {
+      color: var(--cyan);
+      font-size: 0.7rem;
+      margin-bottom: 0.5rem;
+      word-break: break-word;
+      line-height: 1.4;
+    }
+
+    .node-meta {
+      font-size: 0.6rem;
+      color: var(--text-dim);
+    }
+
+    .node-meta-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.2rem 0;
+    }
+
+    .node-link {
+      display: block;
+      margin-top: 0.5rem;
+      color: var(--cyan);
+      font-size: 0.6rem;
+      word-break: break-all;
+    }
+
+    .node-link:hover { color: var(--text-white); }
+
+    #graph {
+      flex: 1;
+      position: relative;
+    }
+
+    #graph svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    .node {
+      cursor: pointer;
+    }
+
+    .node circle {
+      stroke: var(--bg-base);
+      stroke-width: 1px;
+      transition: r 0.2s;
+    }
+
+    .node:hover circle {
+      stroke: var(--text-white);
+      stroke-width: 2px;
+    }
+
+    .node-label {
+      font-size: 7px;
+      fill: var(--text-mid);
+      pointer-events: none;
+      text-shadow: 0 0 3px var(--bg-base), 0 0 3px var(--bg-base);
+    }
+
+    .link {
+      stroke: var(--border-dim);
+      stroke-opacity: 0.3;
+    }
+
+    .link.cross-topic {
+      stroke: var(--purple);
+      stroke-opacity: 0.5;
+      stroke-dasharray: 3,3;
+    }
+
+    #loading {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: var(--text-dim);
+      font-size: 0.75rem;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid var(--border-dim);
+      border-top-color: var(--cyan);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin-right: 0.5rem;
+      vertical-align: middle;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .search-box {
+      margin-bottom: 1rem;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 0.5rem;
+      background: var(--bg-hover);
+      border: 1px solid var(--border-dim);
+      border-radius: 4px;
+      color: var(--text-bright);
+      font-family: inherit;
+      font-size: 0.65rem;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--cyan);
+    }
+
+    .search-input::placeholder {
+      color: var(--text-dim);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <aside id="sidebar">
+      <div class="sidebar-header">
+        <a href="index-complete.html" class="back-link">← back to catalog</a>
+        <div class="sidebar-title">Resource Graph</div>
+        <div class="sidebar-subtitle">185 RESOURCES VISUALIZED</div>
+      </div>
+
+      <div class="search-box">
+        <input type="text" class="search-input" id="search" placeholder="search resources...">
+      </div>
+
+      <div class="stats">
+        <div class="stat-row">
+          <span>Resources</span>
+          <span class="stat-value" id="total-count">--</span>
+        </div>
+        <div class="stat-row">
+          <span>Connections</span>
+          <span class="stat-value" id="edge-count">--</span>
+        </div>
+        <div class="stat-row">
+          <span>Sources</span>
+          <span class="stat-value" id="source-count">--</span>
+        </div>
+      </div>
+
+      <div class="legend-title">TOPICS</div>
+      <div id="legend"></div>
+
+      <div class="source-legend">
+        <div class="legend-title">SOURCES</div>
+        <div id="source-legend"></div>
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <label class="control-label">Cluster Strength</label>
+          <input type="range" id="cluster-strength" min="0" max="100" value="40">
+        </div>
+        <div class="control-group">
+          <label class="control-label">Repulsion</label>
+          <input type="range" id="repulsion" min="50" max="500" value="150">
+        </div>
+        <button class="btn" id="reset-btn">Reset View</button>
+      </div>
+
+      <div id="node-info">
+        <h3 id="node-title">--</h3>
+        <div class="node-meta">
+          <div class="node-meta-row">
+            <span>Topic</span>
+            <span id="node-topic">--</span>
+          </div>
+          <div class="node-meta-row">
+            <span>Source</span>
+            <span id="node-source">--</span>
+          </div>
+        </div>
+        <a id="node-url" class="node-link" href="#" target="_blank">open link →</a>
+      </div>
+    </aside>
+
+    <main id="graph">
+      <div id="loading">
+        <span class="spinner"></span>
+        Building graph...
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Topic colors
+    const topicColors = {
+      'Knowledge Engineering': '#5ccfe6',
+      'Data Engineering': '#ffab70',
+      'Personal Growth': '#87c38a',
+      'Design Craft': '#c9a0dc'
+    };
+
+    // Source colors
+    const sourceColors = {
+      'substack': '#ff6719',
+      'getdbt': '#ff694a',
+      'medium': '#00ab6c',
+      'github': '#6e5494',
+      'anthropic': '#d4a84b',
+      'tableau': '#e97627',
+      'pudding': '#f7c948',
+      'other': '#888888'
+    };
+
+    function getSource(url) {
+      if (url.includes('substack.com')) return 'substack';
+      if (url.includes('getdbt.com')) return 'getdbt';
+      if (url.includes('medium.com')) return 'medium';
+      if (url.includes('github.com')) return 'github';
+      if (url.includes('anthropic.com')) return 'anthropic';
+      if (url.includes('tableau.com')) return 'tableau';
+      if (url.includes('pudding.cool')) return 'pudding';
+      return 'other';
+    }
+
+    function extractName(url) {
+      try {
+        const parts = url.split('/');
+        let name = parts[parts.length - 1] || parts[parts.length - 2];
+        name = name.replace(/-/g, ' ').replace(/\.html?$/, '');
+        if (name.length > 35) name = name.substring(0, 35) + '...';
+        return name;
+      } catch {
+        return url.substring(0, 30);
+      }
+    }
+
+    // Real resource data extracted from KB pages
+    const RESOURCES = {
+      'Knowledge Engineering': [
+        'https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment',
+        'https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus',
+        'https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge',
+        'https://atlan.com/know/closing-the-context-gap/',
+        'https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling',
+        'https://www.atscale.com/blog/golden-age-of-the-semantic-layer/',
+        'https://jessicatalisman.substack.com/p/the-ontology-pipeline',
+        'https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint',
+        'https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs',
+        'https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/',
+        'https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics',
+        'https://engineering.ramp.com/post/meet-ramp-research',
+        'https://blog.langchain.com/context-engineering-for-agents/',
+        'https://jessicatalisman.substack.com/p/controlled-vocabularies',
+        'https://jessicatalisman.substack.com/p/metadata-as-a-data-model',
+        'https://jessicatalisman.substack.com/p/process-knowledge-management-part-i',
+        'https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs',
+        'https://weaviate.io/blog/context-engineering',
+        'https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl',
+        'https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room',
+        'https://www.leoniemonigatti.com/blog/memory-in-ai-agents.html',
+        'https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview',
+        'https://jennajordan.me/blog/reference-interview-for-data-teams',
+        'https://arxiv.org/html/2511.08301v1'
+      ],
+      'Data Engineering': [
+        'https://www.getdbt.com/blog/modeling-success-dbt',
+        'https://www.getdbt.com/blog/dbt-mcp-server-conversational-analytics',
+        'https://jimmypang.substack.com/p/understanding-data-marts-in-modern',
+        'https://github.com/ponderedw/dbt-incremental-ci',
+        'https://github.com/gouline/upstream-prod',
+        'https://duckdb.org/2025/05/27/ducklake.html',
+        'https://alirezasadeghi1.medium.com/open-source-data-engineering-landscape-2025-9c76011ff6c1',
+        'https://open.substack.com/pub/seattledataguy/p/why-your-data-pipeline-probably-isnt',
+        'https://open.substack.com/pub/seattledataguy/p/best-practices-for-simplifying-complex',
+        'https://open.substack.com/pub/moderndata101/p/reverse-sampling-rethinking-data-pipelines',
+        'https://open.substack.com/pub/dbtips/p/the-core-principles-of-robust-data',
+        'https://open.substack.com/pub/learnanalyticsengineering/p/7-foundational-data-modeling-concepts',
+        'https://open.substack.com/pub/eczachly/p/the-data-warehouse-setup-no-one-taught',
+        'https://seattledataguy.substack.com/p/becoming-a-data-engineering-force',
+        'https://moderndata101.substack.com/p/key-data-roles-and-distribution-of-responsibilities',
+        'https://moderndata101.substack.com/p/the-role-of-the-data-architect',
+        'https://open.substack.com/pub/jaysobel/p/building-an-analyst-agents-with-dbt',
+        'https://gradientflow.substack.com/p/inside-the-race-to-build-agent-native',
+        'https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents',
+        'https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents',
+        'https://tylerfolkman.substack.com/p/the-complete-guide-to-claude-skills',
+        'https://ampcode.com/200k-tokens-is-plenty',
+        'https://sankalp.bearblog.dev/how-prompt-caching-works/',
+        'https://open.substack.com/pub/benn/p/no-really-everything-becomes-bi',
+        'https://sloanreview.mit.edu/article/vibe-analytics-vibe-codings-new-cousin-unlocks-insights/',
+        'https://www.getdbt.com/blog/understanding-data-governance-ai',
+        'https://www.getdbt.com/blog/modern-data-strategy-ai',
+        'https://www.getdbt.com/blog/build-data-product',
+        'https://jeff4exenio.substack.com/p/the-physics-of-enterprise-data',
+        'https://moderndata101.substack.com/p/data-quality-a-cultural-device'
+      ],
+      'Personal Growth': [
+        'https://borretti.me/article/notes-on-managing-adhd',
+        'https://every.to/chain-of-thought/seeing-creativity-like-a-language-model',
+        'https://kind.engineering',
+        'https://letters.thedankoe.com/p/how-to-articulate-yourself-intelligently',
+        'https://locallyoptimistic.com/post/glue-work/',
+        'https://martinfowler.com/bliki/TeamTopologies.html',
+        'https://newsletter.techworld-with-milan.com/p/the-habits-of-highly-effective-people',
+        'https://open.substack.com/pub/experimentalhistory/p/new-paradigm-for-psychology-just',
+        'https://open.substack.com/pub/giacomofalcone/p/6-how-to-learn-10x-faster-according',
+        'https://open.substack.com/pub/gideonheugh/p/how-to-unburden-yourself',
+        'https://open.substack.com/pub/gregorojstersek/p/engineering-leaders-guide-how-to',
+        'https://open.substack.com/pub/learnanalyticsengineering/p/3-cold-hard-truths-about-this-job',
+        'https://open.substack.com/pub/maalvika/p/being-too-ambitious-is-a-clever-form',
+        'https://open.substack.com/pub/mindcraft1/p/how-to-brilliantly-articulate-your',
+        'https://open.substack.com/pub/seattledataguy/p/so-you-think-you-want-to-quit-your',
+        'https://open.substack.com/pub/strategizeyourcareer/p/why-most-engineers-fail-at-knowledge',
+        'https://open.substack.com/pub/thealgorithmicbridge/p/you-will-die-mid-scroll',
+        'https://open.substack.com/pub/thebeautyofsaas/p/becoming-unapologetically-you',
+        'https://open.substack.com/pub/thedankoe/p/purpose-and-profit-a-guide-to-discovering',
+        'https://open.substack.com/pub/theshadowedarchive/p/an-existential-guide-to-making-friends',
+        'https://open.substack.com/pub/thinkingondata/p/bayesian-reasoning-for-daily-decisions',
+        'https://open.substack.com/pub/topaisjobs/p/83-engineering-blogs-from-top-tech',
+        'https://open.substack.com/pub/uncynical/p/questions-to-ask-your-friends'
+      ],
+      'Design Craft': [
+        'https://public.tableau.com/app/profile/andy.kriebel/viz/VisualVocabulary/VisualVocabulary',
+        'https://public.tableau.com/app/profile/john.johansson/viz/BarDesignGuide/BarDesignGuide',
+        'https://public.tableau.com/app/profile/felipe.sebben/viz/The10CommandmentsofBigNumbersinPractice/The10CommandmentsofBigNumbers',
+        'https://public.tableau.com/app/profile/kevin.flerlage/viz/TheTableauChartCatalog/TableauChartExamples',
+        'https://www.intotableaudata.com/',
+        'https://pudding.cool/process/how-to-make-dope-shit-part-1/',
+        'https://pudding.cool/process/how-to-make-dope-shit-part-2/',
+        'https://pudding.cool/process/how-to-make-dope-shit-part-3/',
+        'https://pudding.cool/process/how-to-implement-scrollytelling/',
+        'https://pudding.cool/process/responsive-scrollytelling/'
+      ]
+    };
+
+    // Build graph data
+    function buildGraphData() {
+      const nodes = [];
+      const links = [];
+      const nodeMap = new Map();
+      let nodeId = 0;
+
+      // Create nodes
+      Object.entries(RESOURCES).forEach(([topic, urls]) => {
+        urls.forEach(url => {
+          const id = `n${nodeId++}`;
+          const node = {
+            id,
+            url,
+            name: extractName(url),
+            topic,
+            source: getSource(url)
+          };
+          nodes.push(node);
+          nodeMap.set(url, node);
+        });
+      });
+
+      // Create links within same topic (same source = stronger connection)
+      Object.entries(RESOURCES).forEach(([topic, urls]) => {
+        const topicNodes = urls.map(u => nodeMap.get(u)).filter(Boolean);
+
+        // Connect nodes from same source
+        const bySource = {};
+        topicNodes.forEach(n => {
+          if (!bySource[n.source]) bySource[n.source] = [];
+          bySource[n.source].push(n);
+        });
+
+        Object.values(bySource).forEach(sourceNodes => {
+          for (let i = 0; i < sourceNodes.length - 1; i++) {
+            links.push({
+              source: sourceNodes[i].id,
+              target: sourceNodes[i + 1].id,
+              type: 'same-source'
+            });
+          }
+        });
+
+        // Connect first few nodes of each source group (hub pattern)
+        const sourceGroups = Object.values(bySource);
+        for (let i = 0; i < sourceGroups.length - 1; i++) {
+          if (sourceGroups[i][0] && sourceGroups[i + 1][0]) {
+            links.push({
+              source: sourceGroups[i][0].id,
+              target: sourceGroups[i + 1][0].id,
+              type: 'same-topic'
+            });
+          }
+        }
+      });
+
+      // Cross-topic links for shared authors/sources
+      const topics = Object.keys(RESOURCES);
+      for (let i = 0; i < topics.length; i++) {
+        for (let j = i + 1; j < topics.length; j++) {
+          const t1Nodes = RESOURCES[topics[i]].map(u => nodeMap.get(u)).filter(Boolean);
+          const t2Nodes = RESOURCES[topics[j]].map(u => nodeMap.get(u)).filter(Boolean);
+
+          // Find shared sources
+          const t1Sources = new Set(t1Nodes.map(n => n.source));
+          const t2Sources = new Set(t2Nodes.map(n => n.source));
+
+          t1Sources.forEach(source => {
+            if (t2Sources.has(source) && source !== 'other') {
+              const n1 = t1Nodes.find(n => n.source === source);
+              const n2 = t2Nodes.find(n => n.source === source);
+              if (n1 && n2) {
+                links.push({
+                  source: n1.id,
+                  target: n2.id,
+                  type: 'cross-topic'
+                });
+              }
+            }
+          });
+        }
+      }
+
+      return { nodes, links };
+    }
+
+    // Initialize visualization
+    function createVisualization() {
+      document.getElementById('loading').style.display = 'none';
+
+      const graphData = buildGraphData();
+      const container = document.getElementById('graph');
+      const width = container.clientWidth;
+      const height = container.clientHeight;
+
+      // Update stats
+      document.getElementById('total-count').textContent = graphData.nodes.length;
+      document.getElementById('edge-count').textContent = graphData.links.length;
+
+      const sources = new Set(graphData.nodes.map(n => n.source));
+      document.getElementById('source-count').textContent = sources.size;
+
+      // Build topic legend
+      const topicCounts = {};
+      graphData.nodes.forEach(n => {
+        topicCounts[n.topic] = (topicCounts[n.topic] || 0) + 1;
+      });
+
+      const legend = document.getElementById('legend');
+      Object.entries(topicCounts).forEach(([topic, count]) => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.innerHTML = `
+          <div class="legend-dot" style="background: ${topicColors[topic]}"></div>
+          <span>${topic}</span>
+          <span class="legend-count">${count}</span>
+        `;
+        item.onclick = () => highlightTopic(topic);
+        legend.appendChild(item);
+      });
+
+      // Build source legend
+      const sourceCounts = {};
+      graphData.nodes.forEach(n => {
+        sourceCounts[n.source] = (sourceCounts[n.source] || 0) + 1;
+      });
+
+      const sourceLegend = document.getElementById('source-legend');
+      Object.entries(sourceCounts).sort((a, b) => b[1] - a[1]).forEach(([source, count]) => {
+        const item = document.createElement('div');
+        item.className = 'source-item';
+        item.innerHTML = `
+          <div class="source-dot" style="background: ${sourceColors[source] || sourceColors.other}"></div>
+          <span>${source}</span>
+          <span class="legend-count">${count}</span>
+        `;
+        sourceLegend.appendChild(item);
+      });
+
+      // Create SVG
+      const svg = d3.select('#graph')
+        .append('svg')
+        .attr('width', width)
+        .attr('height', height);
+
+      const g = svg.append('g');
+
+      // Zoom
+      const zoom = d3.zoom()
+        .scaleExtent([0.1, 4])
+        .on('zoom', (event) => g.attr('transform', event.transform));
+      svg.call(zoom);
+
+      // Cluster centers
+      const topics = Object.keys(topicColors);
+      const clusterCenters = {};
+      const angleStep = (2 * Math.PI) / topics.length;
+      const clusterRadius = Math.min(width, height) * 0.3;
+
+      topics.forEach((topic, i) => {
+        clusterCenters[topic] = {
+          x: width / 2 + clusterRadius * Math.cos(i * angleStep - Math.PI / 2),
+          y: height / 2 + clusterRadius * Math.sin(i * angleStep - Math.PI / 2)
+        };
+      });
+
+      // Force simulation
+      let clusterStrength = 0.4;
+      let repulsion = 150;
+
+      const simulation = d3.forceSimulation(graphData.nodes)
+        .force('link', d3.forceLink(graphData.links).id(d => d.id).distance(25).strength(0.2))
+        .force('charge', d3.forceManyBody().strength(-repulsion))
+        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collision', d3.forceCollide().radius(12))
+        .force('cluster', alpha => {
+          graphData.nodes.forEach(d => {
+            const center = clusterCenters[d.topic];
+            if (center) {
+              d.vx -= (d.x - center.x) * alpha * clusterStrength;
+              d.vy -= (d.y - center.y) * alpha * clusterStrength;
+            }
+          });
+        });
+
+      // Draw links
+      const link = g.append('g')
+        .selectAll('line')
+        .data(graphData.links)
+        .enter()
+        .append('line')
+        .attr('class', d => `link ${d.type === 'cross-topic' ? 'cross-topic' : ''}`);
+
+      // Draw nodes
+      const node = g.append('g')
+        .selectAll('g')
+        .data(graphData.nodes)
+        .enter()
+        .append('g')
+        .attr('class', 'node')
+        .call(d3.drag()
+          .on('start', dragstarted)
+          .on('drag', dragged)
+          .on('end', dragended));
+
+      node.append('circle')
+        .attr('r', 5)
+        .attr('fill', d => topicColors[d.topic]);
+
+      node.append('text')
+        .attr('class', 'node-label')
+        .attr('dy', -8)
+        .attr('text-anchor', 'middle')
+        .text(d => d.name.length > 20 ? d.name.substring(0, 20) + '...' : d.name);
+
+      // Node click
+      node.on('click', (event, d) => {
+        const info = document.getElementById('node-info');
+        info.classList.add('visible');
+        document.getElementById('node-title').textContent = d.name;
+        document.getElementById('node-topic').textContent = d.topic;
+        document.getElementById('node-source').textContent = d.source;
+        document.getElementById('node-url').href = d.url;
+        document.getElementById('node-url').textContent = 'open link →';
+      });
+
+      // Tick
+      simulation.on('tick', () => {
+        link
+          .attr('x1', d => d.source.x)
+          .attr('y1', d => d.source.y)
+          .attr('x2', d => d.target.x)
+          .attr('y2', d => d.target.y);
+
+        node.attr('transform', d => `translate(${d.x},${d.y})`);
+      });
+
+      // Drag
+      function dragstarted(event, d) {
+        if (!event.active) simulation.alphaTarget(0.3).restart();
+        d.fx = d.x;
+        d.fy = d.y;
+      }
+
+      function dragged(event, d) {
+        d.fx = event.x;
+        d.fy = event.y;
+      }
+
+      function dragended(event, d) {
+        if (!event.active) simulation.alphaTarget(0);
+        d.fx = null;
+        d.fy = null;
+      }
+
+      // Highlight topic
+      window.highlightTopic = function(topic) {
+        node.selectAll('circle')
+          .attr('opacity', d => d.topic === topic ? 1 : 0.15);
+        node.selectAll('text')
+          .attr('opacity', d => d.topic === topic ? 1 : 0.15);
+        link.attr('opacity', d =>
+          d.source.topic === topic || d.target.topic === topic ? 0.8 : 0.05
+        );
+
+        document.querySelectorAll('.legend-item').forEach(item => {
+          item.classList.toggle('active', item.textContent.includes(topic));
+        });
+
+        setTimeout(() => {
+          document.addEventListener('click', function reset(e) {
+            if (!e.target.closest('.legend-item')) {
+              node.selectAll('circle').attr('opacity', 1);
+              node.selectAll('text').attr('opacity', 1);
+              link.attr('opacity', 1);
+              document.querySelectorAll('.legend-item').forEach(i => i.classList.remove('active'));
+              document.removeEventListener('click', reset);
+            }
+          });
+        }, 100);
+      };
+
+      // Search
+      document.getElementById('search').addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        if (!query) {
+          node.selectAll('circle').attr('opacity', 1);
+          node.selectAll('text').attr('opacity', 1);
+          return;
+        }
+        node.selectAll('circle')
+          .attr('opacity', d => d.name.toLowerCase().includes(query) || d.url.toLowerCase().includes(query) ? 1 : 0.1);
+        node.selectAll('text')
+          .attr('opacity', d => d.name.toLowerCase().includes(query) || d.url.toLowerCase().includes(query) ? 1 : 0.1);
+      });
+
+      // Controls
+      document.getElementById('cluster-strength').addEventListener('input', (e) => {
+        clusterStrength = e.target.value / 100;
+        simulation.alpha(0.5).restart();
+      });
+
+      document.getElementById('repulsion').addEventListener('input', (e) => {
+        repulsion = +e.target.value;
+        simulation.force('charge', d3.forceManyBody().strength(-repulsion));
+        simulation.alpha(0.5).restart();
+      });
+
+      document.getElementById('reset-btn').addEventListener('click', () => {
+        svg.transition().duration(500).call(zoom.transform, d3.zoomIdentity);
+        node.selectAll('circle').attr('opacity', 1);
+        node.selectAll('text').attr('opacity', 1);
+        link.attr('opacity', 1);
+        document.getElementById('node-info').classList.remove('visible');
+        document.getElementById('search').value = '';
+      });
+    }
+
+    createVisualization();
+  </script>
+</body>
+</html>

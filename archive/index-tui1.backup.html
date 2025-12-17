@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data-centered | Frontier TUI</title>
+  <meta name="description" content="Curated resources on knowledge engineering, data visualization, and AI systems.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="dashboard tui">
+
+  <!-- HEADER -->
+  <header class="dash-header">
+    <div class="dash-brand">data-centered</div>
+    <div class="dash-tagline">curated resources for data & AI practitioners</div>
+    <div class="tui-header-right">
+      <span class="tui-time" id="tui-clock"></span>
+    </div>
+  </header>
+  <script>
+    // TUI clock
+    function updateClock() {
+      const now = new Date();
+      const time = now.toLocaleTimeString('en-US', { hour12: false, hour: '2-digit', minute: '2-digit' });
+      document.getElementById('tui-clock').textContent = time;
+    }
+    updateClock();
+    setInterval(updateClock, 60000);
+  </script>
+
+  <!-- MAIN LAYOUT -->
+  <main class="dash-layout">
+
+    <!-- Topics Column -->
+    <section class="dash-col dash-col-main">
+      <div class="tui-panel accent-cyan">
+        <div class="tui-panel-header">
+          <span class="panel-icon">◈</span> TOPICS
+        </div>
+        <div class="tui-panel-content">
+          <div class="dash-section-header">
+            <h2>KNOWLEDGE AREAS</h2>
+            <div class="dash-col-labels">
+              <span>CNT</span>
+              <span>NEW</span>
+            </div>
+          </div>
+
+          <div class="dash-topics">
+            <a href="kb-knowledge-engineering.html" class="dash-topic-row">
+              <span class="dash-topic-indicator" style="background: var(--accent-cyan); box-shadow: 0 0 10px var(--accent-cyan)"></span>
+              <span class="dash-topic-title tui-mono">KNOWLEDGE_ENGINEERING</span>
+              <span class="dash-topic-count">32</span>
+              <span class="dash-topic-new">+4</span>
+            </a>
+
+            <div class="dash-topic-row coming-soon">
+              <span class="dash-topic-indicator" style="background: var(--accent-purple)"></span>
+              <span class="dash-topic-title tui-mono">DATA_VISUALIZATION</span>
+              <span class="dash-topic-count dim">--</span>
+              <span class="dash-topic-new dim">--</span>
+            </div>
+
+            <div class="dash-topic-row coming-soon">
+              <span class="dash-topic-indicator" style="background: var(--accent-amber)"></span>
+              <span class="dash-topic-title tui-mono">AGENTIC_MEMORY</span>
+              <span class="dash-topic-count dim">--</span>
+              <span class="dash-topic-new dim">--</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Guides Column -->
+    <section class="dash-col dash-col-side">
+      <div class="tui-panel accent-green">
+        <div class="tui-panel-header">
+          <span class="panel-icon">▤</span> GUIDES
+        </div>
+        <div class="tui-panel-content">
+          <div class="dash-section-header">
+            <h2>REFERENCE DOCS</h2>
+          </div>
+
+          <div class="dash-guides">
+            <a href="terminal-stack-guide.html" class="dash-guide-row">
+              <span class="dash-guide-title tui-mono">TERMINAL_DEV_STACK</span>
+              <span class="dash-guide-arrow">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="tui-panel accent-purple">
+        <div class="tui-panel-header">
+          <span class="panel-icon">◐</span> VISUALIZATIONS
+        </div>
+        <div class="tui-panel-content">
+          <div class="dash-viz-placeholder">
+            <span class="dim">NO_DATA_STREAM</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="powerline-bar">
+    <div class="powerline-segment active">ONLINE</div>
+    <div class="powerline-segment">data-centered</div>
+    <div class="powerline-right">
+      <div class="powerline-segment">v2.4.0</div>
+    </div>
+  </footer>
+
+</body>
+</html>

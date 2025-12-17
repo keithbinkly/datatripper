@@ -211,8 +211,8 @@
       font-family: 'JetBrains Mono', monospace;
       font-size: 10px;
       white-space: nowrap;
-      line-height: 1;
       overflow: hidden;
+      line-height: 1;
     }
 
     .panel-header {
@@ -841,6 +841,8 @@
       padding: 0 0.75rem;
       background: var(--bg-elevated);
       line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
     }
 
     .rc-header {
@@ -1290,7 +1292,7 @@
 
         <!-- Context Panel -->
         <div class="panel accent-cyan">
-          <div class="panel-top">╭─────────────────────────────────╮</div>
+          <div class="panel-top">╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</div>
           <div class="panel-header">
             <span class="panel-icon">◇</span>
             <span>CONTEXT</span>
@@ -1302,47 +1304,47 @@
               <span class="stat-label">DATA RELIABILITY FOR PRODUCTION AI</span>
             </div>
           </div>
-          <div class="panel-bottom">╰─────────────────────────────────╯</div>
+          <div class="panel-bottom">╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</div>
         </div>
 
         <!-- Viewers Row: Infographics + Slide Decks -->
         <div class="viewers-row">
           <!-- Infographics -->
           <div class="panel accent-purple viewer-panel">
-            <div class="panel-top">╭────────────────────────╮</div>
+            <div class="panel-top">╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</div>
             <div class="panel-header">
               <span class="panel-icon">▣</span>
               <span>INFOGRAPHICS</span>
             </div>
             <div class="panel-body">
               <div class="main-viewer" onclick="openLightbox('infographic')">
-                <img src="slides/semantic_layer_infographic.png" alt="Infographic" id="main-img">
+                <img src="../slides/semantic_layer_infographic.png" alt="Infographic" id="main-img">
               </div>
               <div class="thumbnail-row">
                 <div class="thumbnail active" onclick="selectInfographic(0)">
-                  <img src="slides/semantic_layer_infographic.png" alt="Semantic Layer">
+                  <img src="../slides/semantic_layer_infographic.png" alt="Semantic Layer">
                 </div>
                 <div class="thumbnail" onclick="selectInfographic(1)">
-                  <img src="slides/context_gap.png" alt="Context Gap">
+                  <img src="../slides/context_gap.png" alt="Context Gap">
                 </div>
                 <div class="thumbnail" onclick="selectInfographic(2)">
-                  <img src="slides/bridging_the_context_gap.png" alt="Bridging Gap">
+                  <img src="../slides/bridging_the_context_gap.png" alt="Bridging Gap">
                 </div>
               </div>
             </div>
-            <div class="panel-bottom">╰────────────────────────╯</div>
+            <div class="panel-bottom">╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</div>
           </div>
 
           <!-- Slide Decks -->
           <div class="panel accent-amber viewer-panel">
-            <div class="panel-top">╭────────────────────────╮</div>
+            <div class="panel-top">╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</div>
             <div class="panel-header">
               <span class="panel-icon">▤</span>
               <span>SLIDE DECKS</span>
             </div>
             <div class="panel-body">
               <div class="pdf-preview" onclick="openLightbox('slides')">
-                <iframe src="slides/AI_Context_Gap.pdf#view=FitH&toolbar=0&navpanes=0" id="pdf-preview-frame"></iframe>
+                <iframe src="../slides/AI_Context_Gap.pdf#view=FitH&toolbar=0&navpanes=0" id="pdf-preview-frame"></iframe>
                 <div class="pdf-overlay">click to expand</div>
               </div>
               <div class="slide-tabs">
@@ -1351,13 +1353,13 @@
                 <div class="slide-tab" onclick="selectSlide(2)">Unlocking AI</div>
               </div>
             </div>
-            <div class="panel-bottom">╰────────────────────────╯</div>
+            <div class="panel-bottom">╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</div>
           </div>
         </div>
 
         <!-- Key Terms -->
         <div class="panel accent-green">
-          <div class="panel-top">╭─────────────────────────────────╮</div>
+          <div class="panel-top">╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</div>
           <div class="panel-header">
             <span class="panel-icon">◈</span>
             <span>KEY TERMS</span>
@@ -1394,7 +1396,7 @@
               </div>
             </div>
           </div>
-          <div class="panel-bottom">╰─────────────────────────────────╯</div>
+          <div class="panel-bottom">╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</div>
         </div>
 
       </aside>
@@ -1799,7 +1801,7 @@
       <!-- Right Column: Insights -->
       <aside class="insights-panel">
         <div class="panel accent-orange">
-          <div class="panel-top">╭────────────────────────────────────╮</div>
+          <div class="panel-top">╭────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</div>
           <div class="panel-header">
             <span class="panel-icon">◉</span>
             <span>INSIGHTS</span>
@@ -1884,7 +1886,7 @@
               </div>
             </div>
           </div>
-          <div class="panel-bottom">╰────────────────────────────────────╯</div>
+          <div class="panel-bottom">╰────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯</div>
         </div>
       </aside>
 
@@ -1908,7 +1910,7 @@
   <!-- Resource Card Popup -->
   <div class="resource-card-backdrop" id="card-backdrop"></div>
   <div class="resource-card" id="resource-card">
-    <div class="rc-border-top">╭────────────────────────────────────────────────────────╮</div>
+    <div class="rc-border-top">╭──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮</div>
     <div class="rc-header">
       <div class="rc-source">
         <span class="rc-source-icon">◈</span>
@@ -2007,34 +2009,34 @@
 
     const resourceData = {
       // Core Architecture
-      'ke-001': { title: 'AI-Ready Data: Technical Assessment', source: 'Substack', author: 'S. Paul', authorDetails: 'Practitioner · Modern Data 101', granularity: 'implementation', scope: 'Argues enterprises must redesign data infrastructure around AI needs—67% of AI projects fail due to data readiness issues. Identifies four barriers: semantic ambiguity, quality degradation, temporal misalignment, and format inconsistency.', url: 'https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment', relationships: [{ type: 'broader', label: 'Data Quality' }, { type: 'related', label: 'Context Engineering' }] },
-      'ke-002': { title: 'Context Engineering for AI Agents', source: 'Manus', author: 'Manus Team', authorDetails: 'Vendor · Manus AI', granularity: 'implementation', scope: 'From Manus team: context engineering is essential for agent systems over custom model training. Prioritizes KV-cache hit rates, stable prompt prefixes, and file-system memory.', url: 'https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus', relationships: [{ type: 'broader', label: 'Context Engineering' }, { type: 'exemplifies', label: 'Agentic Systems' }] },
-      'ke-003': { title: 'From Metadata to Meaning', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Organizations must shift from database-centric approaches to knowledge infrastructures for AI. Key stats: 47% of professionals waste 1-5 hours daily searching for information.', url: 'https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge', relationships: [{ type: 'broader', label: 'Metadata Management' }] },
-      'ke-004': { title: 'Missing Line Item in 2026 AI Budget', source: 'Atlan', author: 'P. Sankar', authorDetails: 'Vendor · Atlan', granularity: 'conceptual', scope: '2026 marks AI\'s accountability cycle—success requires measurable business impact. MIT Sloan reports 95% of AI projects never make it out of pilot.', url: 'https://atlan.com/know/closing-the-context-gap/', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
-      'ke-005': { title: 'The Semantic Gap', source: 'Substack', author: 'V. Dacanay', authorDetails: 'Practitioner · Metadata Weekly', granularity: 'conceptual', scope: 'AI excels at pattern recognition but lacks semantic density—compressed cultural context and unspoken intent humans possess.', url: 'https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
+      'ke-001': { title: 'AI-Ready Data: Technical Assessment', source: 'Substack', author: 'S. Paul', authorDetails: 'Practitioner · Modern Data 101', granularity: 'implementation', scope: 'Highlights four technical barriers to scalable AI: semantic ambiguity, data quality degradation, temporal misalignment, and format inconsistency. Advocates for AI-native data product architectures and inline governance to achieve 99%+ reliability required for production AI.', url: 'https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment', relationships: [{ type: 'broader', label: 'Data Quality' }, { type: 'related', label: 'Context Engineering' }] },
+      'ke-002': { title: 'Context Engineering for AI Agents', source: 'Manus', author: 'Manus Team', authorDetails: 'Vendor · Manus AI', granularity: 'implementation', scope: 'Defines the AI Context Gap and mandates Context Engineering to build a semantic scaffold for AI Analysts, detailing layers of context needed and multi-layered reasoning steps (Intent, Business Definition, Data Definition, Response).', url: 'https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus', relationships: [{ type: 'broader', label: 'Context Engineering' }, { type: 'exemplifies', label: 'Agentic Systems' }] },
+      'ke-003': { title: 'From Metadata to Meaning', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Argues organizations suffer from information/knowledge deserts and must transition from data infrastructure to knowledge infrastructure (institutional memory) to meet AI demands—data alone is inert without semantics.', url: 'https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge', relationships: [{ type: 'broader', label: 'Metadata Management' }] },
+      'ke-004': { title: 'Missing Line Item in 2026 AI Budget', source: 'Atlan', author: 'P. Sankar', authorDetails: 'Vendor · Atlan', granularity: 'conceptual', scope: 'Identifies the AI Context Gap as why 95% of AI projects fail. Proposes the Enterprise Context Layer as a new system of record built on Context Extraction, Store, Retrieval, and Feedback Loops.', url: 'https://atlan.com/know/closing-the-context-gap/', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
+      'ke-005': { title: 'The Semantic Gap', source: 'Substack', author: 'V. Dacanay', authorDetails: 'Practitioner · Metadata Weekly', granularity: 'conceptual', scope: 'Defines Semantic Density as compressed context, culture, and intuition humans bring but LLMs lack. Argues successful AI systems are designed for constraint, not capability—amplifying human judgment rather than mimicking it.', url: 'https://metadataweekly.substack.com/p/the-semantic-gap-why-your-ai-still-cant-read-the-room', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
       // Semantic Layer
-      'ke-006': { title: 'Semantics in Data Modeling', source: 'Substack', author: 'J. Reis', authorDetails: 'Practitioner · Author', granularity: 'conceptual', scope: 'Explores how semantic clarity in data modeling enables better AI outcomes. Covers naming conventions, relationship definitions, and business context preservation.', url: 'https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling', relationships: [{ type: 'broader', label: 'Data Modeling' }] },
-      'ke-007': { title: 'Semantic Layers for Control', source: 'AtScale', author: 'AtScale', authorDetails: 'Vendor · AtScale', granularity: 'conceptual', scope: 'The golden age of semantic layers: how centralized business definitions create consistency across BI tools and AI applications.', url: 'https://www.atscale.com/blog/golden-age-of-the-semantic-layer/', relationships: [{ type: 'broader', label: 'Semantic Layer' }] },
-      'ke-008': { title: 'Consume Metrics', source: 'dbt Docs', author: 'dbt', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Official guide to consuming metrics from the dbt Semantic Layer. Covers API access, integrations, and query patterns.', url: 'https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics', relationships: [{ type: 'broader', label: 'dbt Semantic Layer' }] },
-      'ke-009': { title: 'Administer Semantic Layer', source: 'dbt Docs', author: 'dbt', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Setup and administration guide for dbt Semantic Layer. Covers configuration, permissions, and deployment.', url: 'https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl', relationships: [{ type: 'broader', label: 'dbt Semantic Layer' }] },
-      'ke-040': { title: 'Deploy Metrics', source: 'dbt Docs', author: 'dbt', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Deployment patterns for dbt Semantic Layer metrics. Covers CI/CD integration and production deployment.', url: 'https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl', relationships: [{ type: 'broader', label: 'dbt Semantic Layer' }] },
+      'ke-006': { title: 'Semantics in Data Modeling', source: 'Substack', author: 'J. Reis', authorDetails: 'Practitioner · Author', granularity: 'conceptual', scope: 'Discusses semantics as the heart of data modeling, establishing shared understanding for people and machines. Defines controlled vocabulary (pre-defined, authorized list) and thesaurus (advanced CV defining semantic relationships).', url: 'https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling', relationships: [{ type: 'broader', label: 'Data Modeling' }] },
+      'ke-007': { title: 'Semantic Layers for Control', source: 'Substack', author: 'Bagofwords', authorDetails: 'Practitioner · Analyst', granularity: 'conceptual', scope: 'Argues traditional BI semantic layers are too rigid and suffocate AI reasoning because they focus on "reporting truth." Advocates for lighter scaffolding that guides reasoning without dictating how it unfolds.', url: 'https://bagofwords.substack.com/', relationships: [{ type: 'broader', label: 'Semantic Layer' }] },
+      'ke-008': { title: 'Consume Metrics', source: 'dbt Docs', author: 'dbt', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Links to resources for querying metrics from dbt Semantic Layer across integrations (Tableau, Excel) and programmatic APIs (JDBC, GraphQL, Python SDK).', url: 'https://docs.getdbt.com/docs/use-dbt-semantic-layer/consume-metrics', relationships: [{ type: 'broader', label: 'dbt Semantic Layer' }] },
+      'ke-009': { title: 'Administer Semantic Layer', source: 'dbt Docs', author: 'dbt', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Instructions for configuring credentials and tokens (service/personal) to administer and enable the dbt Semantic Layer for querying, ensuring consistent and tailored access.', url: 'https://docs.getdbt.com/docs/use-dbt-semantic-layer/setup-sl', relationships: [{ type: 'broader', label: 'dbt Semantic Layer' }] },
+      'ke-040': { title: 'Deploy Metrics', source: 'dbt Docs', author: 'dbt', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Explains the deployment process that generates semantic_manifest.json artifact, allowing Semantic Layer APIs to pull the most recent metric metadata.', url: 'https://docs.getdbt.com/docs/use-dbt-semantic-layer/deploy-sl', relationships: [{ type: 'broader', label: 'dbt Semantic Layer' }] },
       // Semantic Foundations
-      'ke-010': { title: 'The Ontology Pipeline', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'implementation', scope: 'Step-by-step process for building enterprise ontologies. Covers domain analysis, concept extraction, and relationship modeling.', url: 'https://jessicatalisman.substack.com/p/the-ontology-pipeline', relationships: [{ type: 'broader', label: 'Ontology' }] },
-      'ke-011': { title: 'Concept Models vs Ontologies', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'conceptual', scope: 'The sketch and the blueprint: when to use lightweight concept models vs formal ontologies. Covers use cases and trade-offs.', url: 'https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint', relationships: [{ type: 'broader', label: 'Ontology' }] },
-      'ke-012': { title: 'Controlled Vocabularies I', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Introduction to controlled vocabularies: term lists, taxonomies, and thesauri. The foundation for semantic consistency.', url: 'https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i', relationships: [{ type: 'broader', label: 'Vocabulary' }] },
-      'ke-013': { title: 'Controlled Vocabularies II', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Advanced vocabulary patterns: faceted classification, polyhierarchy, and vocabulary governance.', url: 'https://jessicatalisman.substack.com/p/controlled-vocabularies', relationships: [{ type: 'broader', label: 'Vocabulary' }] },
-      'ke-041': { title: 'Metadata as Data Model I', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Treating metadata as first-class data. Covers metadata schemas, standards, and interoperability.', url: 'https://jessicatalisman.substack.com/p/metadata-as-a-data-model', relationships: [{ type: 'broader', label: 'Metadata' }] },
-      'ke-042': { title: 'Metadata as Data Model II', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Metadata application profiles and crosswalks. How to map between different metadata standards.', url: 'https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68', relationships: [{ type: 'broader', label: 'Metadata' }] },
-      'ke-043': { title: 'Metadata Application Profiles', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'implementation', scope: 'Creating organization-specific metadata profiles that balance standardization with local requirements.', url: 'https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0', relationships: [{ type: 'broader', label: 'Metadata' }] },
+      'ke-010': { title: 'The Ontology Pipeline', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'implementation', scope: 'Presents the Ontology Pipeline as systematic, iterative framework (CV → Metadata Standards → Taxonomy → Thesaurus → Ontology → Knowledge Graph) derived from Library Science for building semantic knowledge systems.', url: 'https://jessicatalisman.substack.com/p/the-ontology-pipeline', relationships: [{ type: 'broader', label: 'Ontology' }] },
+      'ke-011': { title: 'Concept Models vs Ontologies', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'conceptual', scope: 'Distinguishes Concept Models (communication tool/sketch for human consensus) from Ontologies (formal, machine-readable logic model/blueprint) which encode rule bases, constraints using OWL and RDF.', url: 'https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint', relationships: [{ type: 'broader', label: 'Ontology' }] },
+      'ke-012': { title: 'Controlled Vocabularies I', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Defines the CV as smallest effective unit of semantic governance. Details foundational build: purpose, scope, Concept Discovery (Word Hunt), and normalizing terms with humans for machines.', url: 'https://jessicatalisman.substack.com/p/controlled-vocabulary-part-i', relationships: [{ type: 'broader', label: 'Vocabulary' }] },
+      'ke-013': { title: 'Controlled Vocabularies II', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Focuses on building Taxonomy and Thesaurus structures following Part I—the next logical phase in the Ontology Pipeline. Covers faceted classification and polyhierarchy.', url: 'https://jessicatalisman.substack.com/p/controlled-vocabularies', relationships: [{ type: 'broader', label: 'Vocabulary' }] },
+      'ke-041': { title: 'Metadata as Data Model I', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Contrasts Library Science\'s holistic, intellectual infrastructure approach to metadata with enterprise metadata being treated as an appendage or byproduct.', url: 'https://jessicatalisman.substack.com/p/metadata-as-a-data-model', relationships: [{ type: 'broader', label: 'Metadata' }] },
+      'ke-042': { title: 'Metadata as Data Model II', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'foundational', scope: 'Focuses on bridging the governance-semantics disconnect (semantic fragmentation), advocating Semantic-First Governance where every business rule is grounded in explicit semantic relationships.', url: 'https://jessicatalisman.substack.com/p/metadata-as-a-data-model-b68', relationships: [{ type: 'broader', label: 'Metadata' }] },
+      'ke-043': { title: 'Metadata Application Profiles', source: 'Substack', author: 'J. Talisman', authorDetails: 'Practitioner · Adobe · 25 yrs', granularity: 'implementation', scope: 'Introduces the Metadata Application Profile (MAP) as a semantic treaty using crosswalks (Canonical, Implementation, Translation layers) to reconcile metadata across disparate systems like MDM and semantic layers.', url: 'https://jessicatalisman.substack.com/p/metadata-as-a-data-model-ec0', relationships: [{ type: 'broader', label: 'Metadata' }] },
       // Knowledge Graphs
-      'ke-015': { title: 'Grounding LLMs with KG', source: 'Medium', author: 'A. Negro', authorDetails: 'Practitioner · Knowledge Graph Expert', granularity: 'conceptual', scope: 'Knowledge graphs provide the factual grounding LLMs need. Covers graph-RAG patterns and entity linking.', url: 'https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs', relationships: [{ type: 'broader', label: 'Knowledge Graph' }] },
-      'ke-016': { title: 'Building Knowledge Graphs', source: 'Blog', author: 'K. Cagle', authorDetails: 'Practitioner · Semanticist', granularity: 'foundational', scope: 'What is a knowledge graph really? Covers graph data models, RDF, property graphs, and practical construction.', url: 'https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/', relationships: [{ type: 'broader', label: 'Knowledge Graph' }] },
-      'ke-017': { title: 'Enterprise Needs Ontology', source: 'Substack', author: 'V. Vashishta', authorDetails: 'Practitioner · AI Strategist', granularity: 'conceptual', scope: 'Why agentic enterprises need formal ontologies. Covers reasoning, inference, and agent interoperability.', url: 'https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs', relationships: [{ type: 'broader', label: 'Ontology' }] },
+      'ke-015': { title: 'Grounding LLMs with KG', source: 'Medium', author: 'A. Negro', authorDetails: 'Practitioner · Knowledge Graph Expert', granularity: 'conceptual', scope: 'Uses the Schwartz hallucination case to argue LLMs need structured, verified factual grounding from Knowledge Graphs. Advocates hybrid approach: KGs provide auditable foundation, LLMs provide natural language interface.', url: 'https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs', relationships: [{ type: 'broader', label: 'Knowledge Graph' }] },
+      'ke-016': { title: 'Building Knowledge Graphs', source: 'Blog', author: 'K. Cagle', authorDetails: 'Practitioner · Semanticist', granularity: 'foundational', scope: 'Technical KG construction advice. Notes KGs scale better for highly interconnected data (above 30 classes). Advocates LLM-as-classifier pattern, passing SHACL file to constrain query generation to pre-defined SPARQL templates.', url: 'https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/', relationships: [{ type: 'broader', label: 'Knowledge Graph' }] },
+      'ke-017': { title: 'Enterprise Needs Ontology', source: 'Substack', author: 'V. Vashishta', authorDetails: 'Practitioner · AI Strategist', granularity: 'conceptual', scope: 'Argues Enterprise Ontology provides the shared map/playbook for Agentic Enterprises. Uses clinical-trial eligibility and car purchasing examples to show how ontologies layer context onto data streams for automation.', url: 'https://vinvashishta.substack.com/p/why-your-agentic-enterprise-needs', relationships: [{ type: 'broader', label: 'Ontology' }] },
       // Agentic Systems
-      'ke-020': { title: 'Building Analyst Agent with dbt', source: 'dbt Blog', author: 'J. Sobel', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'How dbt Agents use the semantic layer for trusted analytics. Covers MCP server integration and guardrails.', url: 'https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics', relationships: [{ type: 'broader', label: 'dbt Agents' }] },
-      'ke-021': { title: 'Agentic Data Analyst', source: 'Ramp Eng', author: 'Ramp', authorDetails: 'Vendor · Ramp', granularity: 'implementation', scope: 'Ramp Research: building an agentic data analyst. Covers tool use, memory, and iterative refinement.', url: 'https://engineering.ramp.com/post/meet-ramp-research', relationships: [{ type: 'exemplifies', label: 'Agentic Systems' }] },
-      'ke-022': { title: 'Context Engineering Discipline', source: 'Podcast', author: 'T. Macey', authorDetails: 'Practitioner · Data Engineering Podcast', granularity: 'conceptual', scope: 'Context engineering as an emerging discipline. Covers governance, tooling, and organizational patterns.', url: 'https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
-      'ke-023': { title: 'Librarian\'s Reference Interview', source: 'Substack', author: 'J. Jordan', authorDetails: 'Practitioner · Data Intelligence', granularity: 'conceptual', scope: 'Applying library science reference interview techniques to AI query understanding. Human-centered approach to context.', url: 'https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview', relationships: [{ type: 'related', label: 'Context Engineering' }] },
+      'ke-020': { title: 'Building Analyst Agent with dbt', source: 'dbt Blog', author: 'J. Sobel', authorDetails: 'Vendor · dbt Labs', granularity: 'implementation', scope: 'Advises that Analyst Agent implementation belongs in the dbt project. Details using dbt models for tools and context artifacts like Domain Documents and Jargon Glossary.', url: 'https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics', relationships: [{ type: 'broader', label: 'dbt Agents' }] },
+      'ke-021': { title: 'Agentic Data Analyst', source: 'Ramp Eng', author: 'Ramp', authorDetails: 'Vendor · Ramp', granularity: 'implementation', scope: 'Case study on Ramp\'s in-house AI agent. Success relied on Domain Documents written by domain owners to impart expert-level context. Demonstrated 10-20x increase in questions asked by stakeholders.', url: 'https://engineering.ramp.com/post/meet-ramp-research', relationships: [{ type: 'exemplifies', label: 'Agentic Systems' }] },
+      'ke-022': { title: 'Context Engineering Discipline', source: 'Podcast', author: 'T. Macey', authorDetails: 'Practitioner · Data Engineering Podcast', granularity: 'conceptual', scope: 'Discussion of Compass, a Slack-native agentic analytics system. Focuses on Context Engineering using Git-governed context repository to capture knowledge, shifting analysts into data steward role.', url: 'https://www.dataengineeringpodcast.com/episodepage/context-engineering-as-a-discipline-building-gove', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
+      'ke-023': { title: 'Librarian\'s Reference Interview', source: 'Substack', author: 'J. Jordan', authorDetails: 'Practitioner · Data Intelligence', granularity: 'conceptual', scope: 'Advocates data teams adopt the Reference Interview framework to discover stakeholder\'s true information need. Analyst must adopt instructor role with empathetic, curious mindset.', url: 'https://dataintelligenceplatform.substack.com/p/the-librarians-reference-interview', relationships: [{ type: 'related', label: 'Context Engineering' }] },
       // Context Engineering
       'ke-025': { title: 'Context Engineering for Agents', source: 'LangChain', author: 'LangChain', authorDetails: 'Vendor · LangChain', granularity: 'implementation', scope: 'LangChain\'s guide to context engineering. Covers context window management, compression, and retrieval patterns.', url: 'https://blog.langchain.com/context-engineering-for-agents/', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
       'ke-026': { title: 'Context Engineering Deep Dive', source: 'Weaviate', author: 'Weaviate', authorDetails: 'Vendor · Weaviate', granularity: 'implementation', scope: 'Deep dive into context engineering with vector databases. Covers hybrid search, reranking, and context assembly.', url: 'https://weaviate.io/blog/context-engineering', relationships: [{ type: 'broader', label: 'Context Engineering' }] },
@@ -2075,9 +2077,9 @@
     // ═══════════════════════════════════════════
 
     const infographics = [
-      'slides/semantic_layer_infographic.png',
-      'slides/context_gap.png',
-      'slides/bridging_the_context_gap.png'
+      '../slides/semantic_layer_infographic.png',
+      '../slides/context_gap.png',
+      '../slides/bridging_the_context_gap.png'
     ];
     let currentInfographic = 0;
 
@@ -2094,9 +2096,9 @@
     // ═══════════════════════════════════════════
 
     const slideDecks = [
-      { img: 'slides/context_gap.png', pdf: 'slides/AI_Context_Gap.pdf', title: 'AI Context Gap' },
-      { img: 'slides/bridging_the_context_gap.png', pdf: 'slides/AI_Value_Chasm.pdf', title: 'AI Value Chasm' },
-      { img: 'slides/semantic_layer_infographic.png', pdf: 'slides/Context_Engineering_Unlocking_AI_Value.pdf', title: 'Context Engineering' }
+      { img: '../slides/context_gap.png', pdf: '../slides/AI_Context_Gap.pdf', title: 'AI Context Gap' },
+      { img: '../slides/bridging_the_context_gap.png', pdf: '../slides/AI_Value_Chasm.pdf', title: 'AI Value Chasm' },
+      { img: '../slides/semantic_layer_infographic.png', pdf: '../slides/Context_Engineering_Unlocking_AI_Value.pdf', title: 'Context Engineering' }
     ];
     let currentSlide = 0;
 

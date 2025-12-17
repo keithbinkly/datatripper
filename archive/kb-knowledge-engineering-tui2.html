@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Knowledge Engineering | data-centered</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js"></script>
+</head>
+<body class="dashboard tui">
+
+  <!-- DATA INJECTION -->
+  <script>
+    window.KB_DATA = {
+      authors: [
+        { id: "s-paul", name: "S. Paul", perspectiveType: "practitioner", affiliation: "Modern Data 101" },
+        { id: "j-talisman", name: "Jessica Talisman", perspectiveType: "practitioner", affiliation: "Adobe", location: {country: "USA"}, yearsInField: 25 },
+        { id: "p-sankar", name: "P. Sankar", perspectiveType: "vendor", affiliation: "Atlan" },
+        { id: "v-dacanay", name: "V. Dacanay", perspectiveType: "practitioner", affiliation: "Metadata Weekly" },
+        { id: "j-reis", name: "Joe Reis", perspectiveType: "practitioner", affiliation: "Ternary Data", location: {country: "USA"}, yearsInField: 20 },
+        { id: "atscale-team", name: "AtScale", perspectiveType: "vendor", affiliation: "AtScale" },
+        { id: "dbt-labs", name: "dbt Labs", perspectiveType: "vendor", affiliation: "dbt Labs" },
+        { id: "a-negro", name: "Alessandro Negro", perspectiveType: "practitioner", affiliation: "GraphAware" },
+        { id: "k-cagle", name: "Kurt Cagle", perspectiveType: "practitioner", affiliation: "Semantical", yearsInField: 30 },
+        { id: "v-vashishta", name: "Vin Vashishta", perspectiveType: "practitioner", affiliation: "V Squared", yearsInField: 12 },
+        { id: "j-sobel", name: "J. Sobel", perspectiveType: "practitioner", affiliation: "dbt Labs" },
+        { id: "t-macey", name: "Tobias Macey", perspectiveType: "journalist", affiliation: "Podcast" },
+        { id: "ramp-team", name: "Ramp Eng", perspectiveType: "practitioner", affiliation: "Ramp" },
+        { id: "j-jordan", name: "J. Jordan", perspectiveType: "practitioner", affiliation: "Data Intel" },
+        { id: "manus-team", name: "Manus", perspectiveType: "vendor", affiliation: "Manus AI" }
+      ]
+    };
+  </script>
+
+  <!-- APP ROOT -->
+  <div id="app-root">
+    
+    <!-- HEADER -->
+    <header class="topic-header">
+      <a href="index.html" class="topic-back">← KB</a>
+      <span class="topic-indicator" style="background: var(--accent-cyan)"></span>
+      <h1 class="topic-title">Knowledge Engineering</h1>
+      <span class="topic-count tui-mono">[PILOT]</span>
+    </header>
+
+    <!-- MAIN GRID -->
+    <main class="topic-grid">
+      
+      <!-- ASIDE: CONTROLS -->
+      <aside class="topic-aside">
+        <div class="tui-box">
+          <h3 class="tcat">PERSPECTIVE EQUALIZER</h3>
+          <div class="perspective-control">
+            <div class="perspective-toggle active" data-type="practitioner">
+              <span class="perspective-check">[x]</span> Practitioner
+            </div>
+            <div class="perspective-toggle active" data-type="vendor">
+              <span class="perspective-check">[x]</span> Vendor
+            </div>
+            <div class="perspective-toggle active" data-type="journalist">
+              <span class="perspective-check">[x]</span> Journalist
+            </div>
+            <div class="perspective-toggle active" data-type="academic">
+              <span class="perspective-check">[x]</span> Academic
+            </div>
+          </div>
+        </div>
+
+        <div class="tui-box" style="margin-top: 1rem;">
+          <h3 class="tcat">CONTEXT</h3>
+          <p class="topic-lede section-content">
+            Building the <strong>Enterprise Context Layer</strong>. 95% of AI projects fail due to semantic ambiguity.
+          </p>
+        </div>
+      </aside>
+
+      <!-- CENTER: READING LIST -->
+      <section class="topic-reading">
+        
+        <!-- SECTION 1 -->
+        <h3 class="tcat">01_CORE_ARCHITECTURE</h3>
+        <a href="https://moderndata101.substack.com/p/ai-ready-data-a-technical-assessment" target="_blank" class="tlink" data-author-id="s-paul" data-time="10">
+          <span class="tlink-src">SUBSTACK</span>
+          <span class="tlink-title">AI-Ready Data: Technical Assessment</span>
+          <span class="tlink-author" data-author-id="s-paul">S. Paul</span>
+          <span class="tlink-time">10m</span>
+        </a>
+        <a href="https://manus.im/blog/Context-Engineering-for-AI-Agents-Lessons-from-Building-Manus" target="_blank" class="tlink" data-author-id="manus-team" data-time="15">
+          <span class="tlink-src">BLOG</span>
+          <span class="tlink-title">Context Engineering for AI Agents</span>
+          <span class="tlink-author" data-author-id="manus-team">Manus</span>
+          <span class="tlink-time">15m</span>
+        </a>
+        <a href="https://jessicatalisman.substack.com/p/from-metadata-to-meaning-the-knowledge" target="_blank" class="tlink" data-author-id="j-talisman" data-time="12">
+          <span class="tlink-src">SUBSTACK</span>
+          <span class="tlink-title">From Metadata to Meaning</span>
+          <span class="tlink-author" data-author-id="j-talisman">J. Talisman</span>
+          <span class="tlink-time">12m</span>
+        </a>
+        <a href="https://atlan.com/know/closing-the-context-gap/" target="_blank" class="tlink" data-author-id="p-sankar" data-time="8">
+          <span class="tlink-src">ATLAN</span>
+          <span class="tlink-title">Missing Line Item in 2026 AI Budget</span>
+          <span class="tlink-author" data-author-id="p-sankar">P. Sankar</span>
+          <span class="tlink-time">8m</span>
+        </a>
+
+        <!-- SECTION 2 -->
+        <h3 class="tcat">02_SEMANTIC_LAYER</h3>
+        <a href="https://practicaldatamodeling.substack.com/p/semantics-in-data-modeling" target="_blank" class="tlink" data-author-id="j-reis" data-time="9">
+          <span class="tlink-src">SUBSTACK</span>
+          <span class="tlink-title">Semantics in Data Modeling</span>
+          <span class="tlink-author" data-author-id="j-reis">J. Reis</span>
+          <span class="tlink-time">9m</span>
+        </a>
+        <a href="https://www.atscale.com/blog/golden-age-of-the-semantic-layer/" target="_blank" class="tlink" data-author-id="atscale-team" data-time="6">
+          <span class="tlink-src">ATSCALE</span>
+          <span class="tlink-title">Semantic Layers for Control</span>
+          <span class="tlink-author" data-author-id="atscale-team">AtScale</span>
+          <span class="tlink-time">6m</span>
+        </a>
+
+        <!-- SECTION 3 -->
+        <h3 class="tcat">03_SEMANTIC_FOUNDATIONS</h3>
+        <a href="https://jessicatalisman.substack.com/p/the-ontology-pipeline" target="_blank" class="tlink" data-author-id="j-talisman" data-time="13">
+          <span class="tlink-src">SUBSTACK</span>
+          <span class="tlink-title">The Ontology Pipeline</span>
+          <span class="tlink-author" data-author-id="j-talisman">J. Talisman</span>
+          <span class="tlink-time">13m</span>
+        </a>
+        <a href="https://jessicatalisman.substack.com/p/concept-models-versus-ontologies-the-sketch-and-the-blueprint" target="_blank" class="tlink" data-author-id="j-talisman" data-time="11">
+          <span class="tlink-src">SUBSTACK</span>
+          <span class="tlink-title">Concept Models vs Ontologies</span>
+          <span class="tlink-author" data-author-id="j-talisman">J. Talisman</span>
+          <span class="tlink-time">11m</span>
+        </a>
+
+        <!-- SECTION 4 -->
+        <h3 class="tcat">04_KNOWLEDGE_GRAPHS</h3>
+        <a href="https://medium.com/@alessandro-negro/grounding-llms-the-knowledge-graph-foundation-every-ai-project-needs" target="_blank" class="tlink" data-author-id="a-negro" data-time="14">
+          <span class="tlink-src">MEDIUM</span>
+          <span class="tlink-title">Grounding LLMs with KG</span>
+          <span class="tlink-author" data-author-id="a-negro">A. Negro</span>
+          <span class="tlink-time">14m</span>
+        </a>
+        <a href="https://kurtcagle.wpcomstaging.com/2023/04/18/what-is-a-knowledge-graph-really/" target="_blank" class="tlink" data-author-id="k-cagle" data-time="11">
+          <span class="tlink-src">BLOG</span>
+          <span class="tlink-title">Building Knowledge Graphs</span>
+          <span class="tlink-author" data-author-id="k-cagle">K. Cagle</span>
+          <span class="tlink-time">11m</span>
+        </a>
+
+        <!-- SECTION 5 -->
+        <h3 class="tcat">05_AGENTIC_SYSTEMS</h3>
+        <a href="https://www.getdbt.com/blog/dbt-agents-remote-dbt-mcp-server-trusted-ai-for-analytics" target="_blank" class="tlink" data-author-id="j-sobel" data-time="8">
+          <span class="tlink-src">DBT</span>
+          <span class="tlink-title">Building Analyst Agent with dbt</span>
+          <span class="tlink-author" data-author-id="j-sobel">J. Sobel</span>
+          <span class="tlink-time">8m</span>
+        </a>
+        <a href="https://engineering.ramp.com/post/meet-ramp-research" target="_blank" class="tlink" data-author-id="ramp-team" data-time="7">
+          <span class="tlink-src">RAMP</span>
+          <span class="tlink-title">Agentic Data Analyst</span>
+          <span class="tlink-author" data-author-id="ramp-team">Ramp</span>
+          <span class="tlink-time">7m</span>
+        </a>
+
+      </section>
+
+      <!-- RIGHT: INSIGHTS -->
+      <aside class="topic-insights">
+        <div class="tui-box">
+          <h3 class="tcat">TOP CONTRIBUTOR</h3>
+          <div style="font-size: 0.8rem; margin-top: 0.5rem;">
+            <strong>J. Talisman</strong><br>
+            <span style="color: var(--text-muted)">11 Resources</span>
+          </div>
+        </div>
+      </aside>
+
+    </main>
+
+    <!-- FOOTER: POWERLINE -->
+    <footer class="powerline-bar">
+      <div class="powerline-segment active" id="status-mode">NORMAL</div>
+      <div class="powerline-segment">kb-knowledge-engineering</div>
+      <div class="powerline-segment" id="status-count">-- items</div>
+      <div class="powerline-right">
+        <div class="powerline-segment">TIME BUDGET:</div>
+        <div class="powerline-segment active" id="time-budget">--</div>
+      </div>
+    </footer>
+
+    <!-- POPUP: CONTEXT CARD -->
+    <div id="context-card" class="context-card">
+      <div class="context-card-header">
+        <span class="cc-name">Author Name</span>
+        <span class="cc-role context-card-role">Role</span>
+      </div>
+      <div class="context-card-body">
+        <div class="context-metric">
+          <span class="context-metric-label">ORG</span>
+          <span class="context-metric-value cc-org">--</span>
+        </div>
+        <div class="context-metric">
+          <span class="context-metric-label">LOC</span>
+          <span class="context-metric-value cc-loc">--</span>
+        </div>
+        <div class="context-metric">
+          <span class="context-metric-label">EXP</span>
+          <span class="context-metric-value cc-exp">--</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="tui.js"></script>
+</body>
+</html>
