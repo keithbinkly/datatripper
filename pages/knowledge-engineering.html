@@ -2527,21 +2527,31 @@
         window.open(currentResourceUrl, '_blank');
       };
 
-      // Position card centered over clicked row
-      var rect = element.getBoundingClientRect();
-      var cardWidth = 420;
-      var cardHeight = 450;
-      var left = rect.left + (rect.width / 2) - (cardWidth / 2);
-      var top = rect.bottom + 10;
+      // Position card - skip on mobile (CSS handles bottom sheet)
+      var isMobile = window.innerWidth <= 768;
 
-      // Clamp to viewport
-      if (left < 20) left = 20;
-      if (left + cardWidth > window.innerWidth - 20) left = window.innerWidth - cardWidth - 20;
-      if (top + cardHeight > window.innerHeight - 20) top = rect.top - cardHeight - 10;
-      if (top < 20) top = 20;
+      if (isMobile) {
+        // Clear any desktop positioning, let CSS handle it
+        resourceCard.style.left = '';
+        resourceCard.style.top = '';
+        resourceCard.style.bottom = '';
+      } else {
+        // Desktop: Position card centered over clicked row
+        var rect = element.getBoundingClientRect();
+        var cardWidth = 420;
+        var cardHeight = 450;
+        var left = rect.left + (rect.width / 2) - (cardWidth / 2);
+        var top = rect.bottom + 10;
 
-      resourceCard.style.left = left + 'px';
-      resourceCard.style.top = top + 'px';
+        // Clamp to viewport
+        if (left < 20) left = 20;
+        if (left + cardWidth > window.innerWidth - 20) left = window.innerWidth - cardWidth - 20;
+        if (top + cardHeight > window.innerHeight - 20) top = rect.top - cardHeight - 10;
+        if (top < 20) top = 20;
+
+        resourceCard.style.left = left + 'px';
+        resourceCard.style.top = top + 'px';
+      }
 
       // Show
       cardBackdrop.classList.add('visible');

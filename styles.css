@@ -3698,3 +3698,202 @@ body.dashboard.topic-page.tui .insights-title::before {
     padding-bottom: 50px;
   }
 }
+
+/* ═══════════════════════════════════════════
+   INDEX PAGE - About/Resume Styles
+   ═══════════════════════════════════════════ */
+
+.about-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 4px;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #d4a84b;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.about-name {
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.about-role {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+}
+
+.about-location {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.about-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.about-link {
+  color: var(--text-dim);
+  font-size: 0.75rem;
+  font-family: 'JetBrains Mono', monospace;
+  transition: color 0.15s;
+}
+
+.about-link:hover {
+  color: var(--accent);
+}
+
+/* Timeline */
+.timeline {
+  font-size: 0.7rem;
+}
+
+.timeline-item {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.4rem;
+}
+
+.timeline-sub {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.3rem;
+  font-size: 0.65rem;
+}
+
+.timeline-tree {
+  color: var(--border-bright);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  flex-shrink: 0;
+  white-space: pre;
+}
+
+.timeline-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.timeline-org {
+  color: var(--text);
+  font-weight: 500;
+}
+
+.timeline-role {
+  color: var(--text-dim);
+}
+
+.timeline-dates {
+  color: var(--text-muted);
+  font-size: 0.6rem;
+}
+
+/* Skills */
+.skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.skill-tag {
+  font-size: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-dim);
+  border: 1px solid var(--border);
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+/* Project Card */
+.project-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.75rem;
+}
+
+.project-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-name {
+  color: #d4a84b;
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.project-badge {
+  font-size: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--bg-dark);
+  background: var(--accent);
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+.project-desc {
+  color: var(--text-dim);
+  font-size: 0.7rem;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+
+.project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-tag {
+  font-size: 0.55rem;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  padding: 2px 5px;
+  border-radius: 2px;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.project-link {
+  color: var(--accent);
+  font-size: 0.7rem;
+  font-family: 'JetBrains Mono', monospace;
+  transition: color 0.15s;
+}
+
+.project-link:hover {
+  color: var(--text);
+}
+
+/* Viz placeholder */
+.viz-placeholder {
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
