@@ -813,18 +813,18 @@
     .resource-card {
       position: fixed;
       z-index: 1000;
-      width: 420px;
+      width: 380px;
       max-width: calc(100vw - 2rem);
       background: var(--bg-surface);
       border: 1px solid var(--border-mid);
-      border-radius: 8px;
+      border-radius: 6px;
       opacity: 0;
       visibility: hidden;
       transform: translateY(10px);
       transition: all 0.2s ease;
       font-family: 'IBM Plex Sans', sans-serif;
       overflow: hidden;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.5), 0 0 1px rgba(92,207,230,0.3);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
     }
 
     .resource-card.visible {
@@ -837,16 +837,17 @@
     .rc-border-top {
       color: var(--border-mid);
       font-family: 'JetBrains Mono', monospace;
-      font-size: 10px;
-      padding: 0 1rem;
+      font-size: 9px;
+      padding: 0 0.75rem;
       background: var(--bg-elevated);
+      line-height: 1.2;
     }
 
     .rc-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0.75rem 1rem;
+      padding: 0.4rem 0.75rem;
       background: var(--bg-elevated);
       border-bottom: 1px solid var(--border-dim);
     }
@@ -881,29 +882,29 @@
     .rc-close:hover { color: var(--red); }
 
     .rc-title-section {
-      padding: 1rem;
+      padding: 0.6rem 0.75rem;
       border-bottom: 1px solid var(--border-dim);
     }
 
     .rc-title {
-      font-size: var(--font-md);
+      font-size: var(--font-base);
       font-weight: 600;
       color: var(--text-white);
-      margin: 0 0 0.5rem 0;
-      line-height: 1.4;
+      margin: 0 0 0.35rem 0;
+      line-height: 1.3;
     }
 
     .rc-scope-note {
-      font-size: var(--font-sm);
+      font-size: var(--font-xs);
       color: var(--text-mid);
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
     .rc-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      padding: 0.75rem 1rem;
+      gap: 0.35rem;
+      padding: 0.5rem 0.75rem;
       background: var(--bg-base);
       border-bottom: 1px solid var(--border-dim);
     }
@@ -911,10 +912,10 @@
     .rc-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.25rem;
+      gap: 0.2rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: var(--font-xs);
-      padding: 0.25rem 0.5rem;
+      font-size: 10px;
+      padding: 0.15rem 0.4rem;
       border-radius: 3px;
       background: var(--bg-elevated);
       color: var(--text-mid);
@@ -952,47 +953,46 @@
     }
 
     .rc-author {
-      padding: 0.75rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-bottom: 1px solid var(--border-dim);
     }
 
     .rc-author-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.25rem;
+      gap: 0.35rem;
     }
 
     .rc-author-icon {
-      font-size: var(--font-sm);
+      font-size: var(--font-xs);
       opacity: 0.6;
     }
 
     .rc-author-name {
       font-weight: 600;
-      font-size: var(--font-sm);
+      font-size: var(--font-xs);
       color: var(--text-white);
     }
 
     .rc-author-details {
-      font-size: var(--font-xs);
+      font-size: 10px;
       color: var(--text-dim);
-      margin-left: 1.5rem;
+      margin-left: 0.35rem;
     }
 
     .rc-relationships {
-      padding: 0.75rem 1rem;
+      padding: 0.5rem 0.75rem;
       border-bottom: 1px solid var(--border-dim);
     }
 
     .rc-rel-header {
       display: flex;
       align-items: center;
-      gap: 0.35rem;
-      font-size: var(--font-xs);
+      gap: 0.25rem;
+      font-size: 10px;
       font-weight: 600;
       color: var(--text-dim);
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.35rem;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       font-family: 'JetBrains Mono', monospace;
@@ -1366,15 +1366,31 @@
             <div class="terms-grid">
               <div class="term-item">
                 <span class="term-name">AI Context Gap</span>
-                <span class="term-def">Gap between model knowledge and organizational context</span>
+                <span class="term-def">Space between what AI knows and what humans know but haven't documented—95% of AI projects fail here</span>
               </div>
               <div class="term-item">
                 <span class="term-name">Semantic Layer</span>
-                <span class="term-def">Authoritative source of business meaning</span>
+                <span class="term-def">Authoritative source of business meaning that persists across system transformations</span>
+              </div>
+              <div class="term-item">
+                <span class="term-name">Controlled Vocabulary</span>
+                <span class="term-def">Curated list of approved terms with one meaning each—the smallest unit of semantic governance</span>
               </div>
               <div class="term-item">
                 <span class="term-name">Ontology</span>
-                <span class="term-def">Formal specification for machine reasoning</span>
+                <span class="term-def">Machine-readable specification defining entities, relationships, and constraints for automated inference</span>
+              </div>
+              <div class="term-item">
+                <span class="term-name">Context Engineering</span>
+                <span class="term-def">Discipline of engineering explicit knowledge into AI systems to close the Context Gap</span>
+              </div>
+              <div class="term-item">
+                <span class="term-name">Action-Ready Data</span>
+                <span class="term-def">Data with embedded business context and rules required for automated AI decision-making</span>
+              </div>
+              <div class="term-item">
+                <span class="term-name">Semantic Ambiguity</span>
+                <span class="term-def">Data stripped of business context becomes meaningless to AI—does "A" mean Active or Approved?</span>
               </div>
             </div>
           </div>
@@ -1949,42 +1965,42 @@
     const categoryDescriptions = {
       'all': {
         title: 'All Resources',
-        description: 'Browse the complete collection of knowledge engineering resources spanning context engineering, semantic layers, ontologies, and AI-ready data architecture.',
-        count: 54
+        description: 'Knowledge Engineering transforms organizational data from supporting legacy reporting to powering trustworthy AI. 95% of AI projects fail due to the AI Context Gap—the space between model capability and organizational understanding.',
+        count: 32
       },
       'core-architecture': {
         title: 'Core Architecture',
-        description: 'Foundational patterns for building AI-ready data infrastructure. Covers data quality frameworks, context engineering fundamentals, and the semantic gap between raw data and business meaning.',
+        description: '95% of AI projects fail due to the AI Context Gap—where AI lacks organizational meaning, tacit rules, and semantic density that humans possess. The solution: AI-native data product architectures and an Enterprise Context Layer to inject structured business context.',
         count: 5
       },
       'semantic-layer': {
         title: 'Semantic Layer',
-        description: 'The authoritative source of business meaning that persists across system changes. Covers dbt Semantic Layer, MetricFlow, and metric governance patterns.',
+        description: 'Traditional semantic layers enable BI control but can suffocate AI reasoning. Modern semantic layers must function as lighter scaffolding—guiding, not dictating, AI thought while providing shared vocabulary and consistent definitions.',
         count: 5
       },
       'knowledge-graphs': {
         title: 'Knowledge Graphs',
-        description: 'Structured representations of entities and relationships that ground LLM outputs in factual data. Covers graph construction, ontology design, and enterprise integration.',
+        description: 'Knowledge Graphs provide structured, verifiable factual grounding to mitigate LLM hallucination. Enterprise Ontologies serve as the shared map defining entities, relationships, and constraints—enabling explainable, auditable inference for trustworthy AI systems.',
         count: 3
       },
       'semantic-foundations': {
         title: 'Semantic Foundations',
-        description: 'The building blocks: controlled vocabularies, taxonomies, thesauri, and metadata standards. Jessica Talisman\'s systematic approach to semantic infrastructure.',
-        count: 8
+        description: 'The Ontology Pipeline: a systematic framework progressing from Controlled Vocabularies through Metadata Standards, Taxonomy, Thesaurus, to Knowledge Graph. CVs shift AI from probabilistic inference (guessing) to semantic reference (verifiable lookup).',
+        count: 7
       },
       'agentic-systems': {
         title: 'Agentic Systems',
-        description: 'AI agents that operate within semantic guardrails. Covers dbt Agents, conversational BI, and patterns for building trusted analytics automation.',
+        description: 'Conversational AI interfaces (like Slack) drive 10-20x increases in questions asked by stakeholders. Success requires Domain Documents written by domain owners, and humans shifting from analyst to data steward—using the Librarian\'s Reference Interview to discover true information needs.',
         count: 4
       },
       'context-engineering': {
         title: 'Context Engineering',
-        description: 'The discipline of managing LLM context: write, select, compress, isolate. 87.5% of agent failures are context problems, not model capability.',
+        description: 'The discipline for closing the AI Context Gap. Requires a Context Supply Chain that continuously bootstraps metadata and refines definitions through human-AI feedback loops. Context must be structured, queryable metadata—not static prompts that cause scalability failures.',
         count: 4
       },
       'agent-memory': {
         title: 'Agent Memory',
-        description: 'Persistent memory systems for AI agents: working, semantic, episodic, procedural. Covers the CoALA framework and multi-agent memory sharing.',
+        description: 'Persistent memory systems for AI agents: working, semantic, episodic, procedural. Covers the CoALA framework, multi-agent memory sharing, and patterns for maintaining context across sessions.',
         count: 3
       }
     };
