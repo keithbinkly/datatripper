@@ -145,6 +145,12 @@ class TUIController {
     row.scrollIntoView({ behavior: 'smooth', block: 'center' });
     row.focus();
 
+    // Update preview pane if it exists (knowledge-engineering page)
+    const resourceId = row.dataset.resourceId;
+    if (resourceId && typeof updateResourcePreview === 'function') {
+      updateResourcePreview(resourceId);
+    }
+
     // Animate focus (if anime.js available)
     if (typeof anime !== 'undefined') {
       anime({
@@ -159,7 +165,14 @@ class TUIController {
   openFocusedRow() {
     if (this.focusedIndex >= 0) {
       const row = this.rows[this.focusedIndex];
-      const url = row.href || row.querySelector('a')?.href;
+      let url = row.href || row.querySelector('a')?.href;
+
+      // For knowledge-engineering, get URL from resourceData
+      const resourceId = row.dataset.resourceId;
+      if (!url && resourceId && typeof resourceData !== 'undefined' && resourceData[resourceId]) {
+        url = resourceData[resourceId].url;
+      }
+
       if (url) window.open(url, '_blank');
     }
   }
@@ -264,6 +277,14 @@ class TUIController {
   }
 
   toggleQuickPeek(row) {
+    // If page has showResourceCard (knowledge-engineering), use that instead
+    const resourceId = row.dataset.resourceId;
+    if (resourceId && typeof showResourceCard === 'function') {
+      showResourceCard(resourceId, row);
+      return;
+    }
+
+    // Otherwise use inline quick peek for .tlink pages
     if (row.classList.contains('quick-peek-active')) {
       this.closeQuickPeek();
     } else {
@@ -275,12 +296,19 @@ class TUIController {
     // Close any existing
     this.closeQuickPeek();
 
-    // Get description from existing .tlink-desc or create from data
+    // Get description from existing .tlink-desc
     const desc = row.querySelector('.tlink-desc');
     const title = row.querySelector('.tlink-title')?.textContent || '';
     const author = row.querySelector('.tlink-author')?.textContent || '';
     const time = row.querySelector('.tlink-time')?.textContent || '';
     const url = row.href;
+
+    // Only show inline peek if we have content
+    if (!desc?.textContent?.trim()) {
+      // No description - just open the resource
+      if (url) window.open(url, '_blank');
+      return;
+    }
 
     // Create quick peek content
     const peekContent = document.createElement('div');
@@ -291,7 +319,7 @@ class TUIController {
         <span class="qp-meta">${author} · ${time}</span>
       </div>
       <div class="qp-body">
-        ${desc ? desc.textContent : 'No description available.'}
+        ${desc.textContent}
       </div>
       <div class="qp-actions">
         <a href="${url}" target="_blank" class="qp-open">Open Resource →</a>
