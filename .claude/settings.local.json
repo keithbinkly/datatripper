@@ -64,7 +64,18 @@
       "WebFetch(domain:newsletter.pragmaticengineer.com)",
       "WebFetch(domain:williaminmon.substack.com)",
       "WebFetch(domain:manialabs.substack.com)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "WebFetch(domain:huyenchip.com)",
+      "WebFetch(domain:news.ycombinator.com)",
+      "WebFetch(domain:www.howtogeek.com)",
+      "WebFetch(domain:webtui.ironclad.sh)"
     ]
+  },
+  "mcpServers": {
+    "exa-search": {
+      "type": "http",
+      "url": "https://mcp.exa.ai/mcp?exaApiKey=b43aef41-8dec-4c12-a96e-15b3857a4e81",
+      "headers": {}
+    }
   }
 }
