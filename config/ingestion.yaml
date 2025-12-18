@@ -1,0 +1,24 @@
+# Ingestion Pipeline Configuration
+
+llm:
+  provider: anthropic
+  model: claude-sonnet-4-20250514
+  temperature: 0.3
+
+classification:
+  # Below this, flag for human review
+  confidence_threshold: 0.7
+  # Above this, auto-approve
+  auto_approve_threshold: 0.9
+
+extraction:
+  # Max chars to send to classifier
+  max_content_length: 4000
+  # Timeout for URL fetch (seconds)
+  fetch_timeout: 30
+
+relationships:
+  # Max relationships to suggest per resource
+  max_suggestions: 5
+  # Minimum similarity to suggest
+  similarity_threshold: 0.6
