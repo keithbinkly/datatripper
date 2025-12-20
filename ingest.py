@@ -3,13 +3,16 @@
 data-centered ingestion CLI
 
 Usage:
-    python ingest.py add <url>           Add a single URL
-    python ingest.py add <url> --dry-run Preview without writing
-    python ingest.py review              Review pending resources
+    python ingest.py add <url>              Add a single URL
+    python ingest.py add <url> --dry-run    Preview without writing
+    python ingest.py batch <file>           Process URLs from markdown file
+    python ingest.py batch <file> --dry-run Preview batch without processing
+    python ingest.py review                 Review pending resources
 
 Examples:
     python ingest.py add "https://pluralistic.net/2024/06/21/seedbed/"
     python ingest.py add "https://moderndata101.substack.com/p/ai-ready-data" --dry-run
+    python ingest.py batch intake-queue.md --dry-run
 """
 
 import argparse
@@ -281,6 +284,104 @@ def cmd_review():
     print(f"\n✓ Queue updated. {len(pending)} item(s) remaining.")
 
 
+def extract_markdown_links(content: str) -> list[tuple[str, str]]:
+    """Extract markdown links from content.
+
+    Returns:
+        List of (title, url) tuples
+    """
+    import re
+    # Match [title](url) pattern
+    pattern = r'\[([^\]]+)\]\(([^)]+)\)'
+    matches = re.findall(pattern, content)
+
+    # Filter to http(s) URLs only
+    return [(title, url) for title, url in matches if url.startswith(('http://', 'https://'))]
+
+
+def cmd_batch(file_path: str, dry_run: bool = False, auto_approve: bool = False):
+    """Process URLs from a markdown file."""
+    from pathlib import Path
+
+    file = Path(file_path)
+    if not file.exists():
+        print(f"✗ File not found: {file_path}")
+        sys.exit(1)
+
+    content = file.read_text()
+    links = extract_markdown_links(content)
+
+    if not links:
+        print("No markdown links found in file.")
+        return
+
+    print(f"\n📋 Found {len(links)} links in {file.name}")
+    print("─" * 60)
+
+    # Load existing URLs for duplicate check
+    existing_urls = load_existing_urls()
+
+    # Categorize links
+    new_links = []
+    duplicate_links = []
+
+    for title, url in links:
+        if dup_id := check_duplicate(url, existing_urls):
+            duplicate_links.append((title, url, dup_id))
+        else:
+            new_links.append((title, url))
+
+    print(f"\n✓ {len(new_links)} new URLs")
+    print(f"✗ {len(duplicate_links)} duplicates (will skip)")
+
+    if duplicate_links:
+        print("\nDuplicates:")
+        for title, url, dup_id in duplicate_links[:5]:
+            print(f"  - {title[:40]}... → {dup_id}")
+        if len(duplicate_links) > 5:
+            print(f"  ... and {len(duplicate_links) - 5} more")
+
+    if not new_links:
+        print("\nNo new URLs to process.")
+        return
+
+    print(f"\nNew URLs to process:")
+    for i, (title, url) in enumerate(new_links[:10], 1):
+        print(f"  {i}. {title[:50]}...")
+    if len(new_links) > 10:
+        print(f"  ... and {len(new_links) - 10} more")
+
+    if dry_run:
+        print(f"\n[dry-run] Would process {len(new_links)} URLs")
+        return
+
+    # Process each URL
+    print(f"\n📥 Processing {len(new_links)} URLs...")
+    print("─" * 60)
+
+    successes = 0
+    failures = []
+
+    for i, (title, url) in enumerate(new_links, 1):
+        print(f"\n[{i}/{len(new_links)}] {title[:40]}...")
+        try:
+            cmd_add(url, dry_run=False, auto_approve=auto_approve)
+            successes += 1
+        except SystemExit:
+            # cmd_add calls sys.exit on failure
+            failures.append((title, url))
+        except Exception as e:
+            print(f"  ✗ Error: {e}")
+            failures.append((title, url))
+
+    print(f"\n{'─' * 60}")
+    print(f"📊 Batch complete: {successes} succeeded, {len(failures)} failed")
+    if failures:
+        print("\nFailed URLs:")
+        for title, url in failures:
+            print(f"  - {url}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="data-centered knowledge base ingestion",
@@ -298,12 +399,20 @@ def main():
     # review command
     subparsers.add_parser("review", help="Review pending resources")
 
+    # batch command
+    batch_parser = subparsers.add_parser("batch", help="Process URLs from a markdown file")
+    batch_parser.add_argument("file", help="Markdown file containing URLs")
+    batch_parser.add_argument("--dry-run", action="store_true", help="Preview without processing")
+    batch_parser.add_argument("--auto-approve", action="store_true", help="Skip review queue")
+
     args = parser.parse_args()
 
     if args.command == "add":
         cmd_add(args.url, dry_run=args.dry_run, auto_approve=args.auto_approve)
     elif args.command == "review":
         cmd_review()
+    elif args.command == "batch":
+        cmd_batch(args.file, dry_run=args.dry_run, auto_approve=args.auto_approve)
 
 
 if __name__ == "__main__":
