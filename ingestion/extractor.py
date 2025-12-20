@@ -1,18 +1,17 @@
 """
-Content extraction using Unstructured
+Content extraction using summarize.sh CLI
 
-Extracts clean text and metadata from URLs, PDFs, and other sources.
+Extracts clean text and metadata from URLs, YouTube videos, and other sources.
+Uses summarize.sh (https://summarize.sh/) for robust extraction with fallbacks.
 """
 
+import json
 import re
+import subprocess
 from dataclasses import dataclass
 from datetime import datetime
 from typing import Optional
 from urllib.parse import urlparse
-
-import httpx
-from unstructured.partition.html import partition_html
-from unstructured.cleaners.core import clean, clean_extra_whitespace
 
 
 @dataclass
@@ -20,6 +19,7 @@ class ExtractedContent:
     """Structured content extracted from a source."""
     url: str
     title: Optional[str]
+    description: Optional[str]
     text: str
     author_name: Optional[str]
     published_date: Optional[str]
@@ -41,7 +41,7 @@ PLATFORM_PATTERNS = {
     "arxiv.org": "arXiv",
     "pluralistic.net": "Pluralistic",
     "every.to": "Every",
-    "a]16z.com": "a16z",
+    "a16z.com": "a16z",
     "anthropic.com": "Anthropic",
     "openai.com": "OpenAI",
     "getdbt.com": "dbt Blog",
@@ -49,11 +49,22 @@ PLATFORM_PATTERNS = {
     "tableau.com": "Tableau",
     "pudding.cool": "The Pudding",
     "quillette.com": "Quillette",
+    "langchain.com": "LangChain",
+    "weaviate.io": "Weaviate",
+    "cocoindex.io": "CocoIndex",
+    "relace.ai": "Relace",
 }
 
 
-def detect_platform(url: str) -> str:
-    """Detect the source platform from URL."""
+def detect_platform(url: str, site_name: Optional[str] = None) -> str:
+    """Detect the source platform from URL or site name."""
+    # Try site name first if provided
+    if site_name:
+        # Clean up common patterns
+        name = site_name.replace(".com", "").replace(".io", "").replace(".ai", "")
+        if name and len(name) < 30:
+            return name.title()
+
     parsed = urlparse(url)
     domain = parsed.netloc.lower().replace("www.", "")
 
@@ -68,58 +79,69 @@ def detect_platform(url: str) -> str:
     return "Website"
 
 
-def detect_content_type(elements: list, url: str) -> tuple[bool, bool]:
-    """Detect if content has code blocks or video embeds."""
-    text_content = " ".join(e.text for e in elements if hasattr(e, "text"))
-
+def detect_content_signals(text: str, url: str) -> tuple[bool, bool]:
+    """Detect if content has code blocks or is video content."""
     has_code = any([
-        "```" in text_content,
-        "<code>" in text_content.lower(),
-        "<pre>" in text_content.lower(),
-        bool(re.search(r'def \w+\(|function \w+\(|class \w+[:\(]', text_content)),
+        "```" in text,
+        re.search(r'def \w+\(|function \w+\(|class \w+[:\(]', text),
+        re.search(r'import \w+|from \w+ import', text),
+        "<code>" in text.lower(),
     ])
 
     has_video = any([
         "youtube.com" in url.lower(),
         "youtu.be" in url.lower(),
         "vimeo.com" in url.lower(),
-        "video" in url.lower(),
     ])
 
     return has_code, has_video
 
 
-def extract_author_from_elements(elements: list) -> Optional[str]:
-    """Try to extract author name from page elements."""
-    for el in elements:
-        text = getattr(el, "text", "")
-        # Common byline patterns
-        if match := re.search(r"(?:by|written by|author:?)\s+([A-Z][a-z]+ [A-Z][a-z]+)", text, re.I):
+def extract_author_from_text(text: str) -> Optional[str]:
+    """Try to extract author name from content text."""
+    # Look for common byline patterns in first 1000 chars
+    search_text = text[:1000]
+
+    patterns = [
+        r"(?:^|\n)\*\*([A-Z][a-z]+ [A-Z][a-z]+)\*\*\n",  # **Author Name** on own line
+        r"(?:by|written by|author:?)\s+([A-Z][a-z]+ [A-Z][a-z]+)",
+        r"(?:^|\n)([A-Z][a-z]+ [A-Z][a-z]+)\n(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)",
+    ]
+
+    for pattern in patterns:
+        if match := re.search(pattern, search_text, re.I | re.M):
             return match.group(1)
+
     return None
 
 
-def extract_date_from_elements(elements: list) -> Optional[str]:
-    """Try to extract publication date from page elements."""
-    for el in elements:
-        text = getattr(el, "text", "")
-        # ISO date pattern
-        if match := re.search(r"(\d{4}-\d{2}-\d{2})", text):
-            return match.group(1)
-        # Common date formats
-        if match := re.search(r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{1,2},? \d{4})", text, re.I):
-            try:
-                from dateutil import parser
-                dt = parser.parse(match.group(1))
-                return dt.strftime("%Y-%m-%d")
-            except:
-                pass
+def extract_date_from_text(text: str) -> Optional[str]:
+    """Try to extract publication date from content text."""
+    search_text = text[:2000]
+
+    # ISO date pattern
+    if match := re.search(r"(\d{4}-\d{2}-\d{2})", search_text):
+        return match.group(1)
+
+    # Common date formats: "Sep 11, 2025" or "September 11, 2025"
+    if match := re.search(
+        r"((?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-z]* \d{1,2},? \d{4})",
+        search_text,
+        re.I
+    ):
+        try:
+            from dateutil import parser
+            dt = parser.parse(match.group(1))
+            return dt.strftime("%Y-%m-%d")
+        except Exception:
+            pass
+
     return None
 
 
-def extract_url(url: str, timeout: int = 30) -> ExtractedContent:
+def extract_url(url: str, timeout: int = 120) -> ExtractedContent:
     """
-    Extract content from a URL using Unstructured.
+    Extract content from a URL using summarize.sh CLI.
 
     Args:
         url: The URL to extract content from
@@ -128,50 +150,54 @@ def extract_url(url: str, timeout: int = 30) -> ExtractedContent:
     Returns:
         ExtractedContent with extracted text and metadata
     """
-    # Fetch the page
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) data-centered-bot/1.0"
-    }
+    # Call summarize.sh with --extract-only --json
+    try:
+        result = subprocess.run(
+            ["summarize", url, "--extract-only", "--json", f"--timeout={timeout}s"],
+            capture_output=True,
+            text=True,
+            timeout=timeout + 10,
+        )
 
-    response = httpx.get(url, headers=headers, timeout=timeout, follow_redirects=True)
-    response.raise_for_status()
+        if result.returncode != 0:
+            raise RuntimeError(f"summarize failed: {result.stderr}")
 
-    # Parse with Unstructured
-    elements = partition_html(text=response.text)
+        data = json.loads(result.stdout)
+        extracted = data.get("extracted", {})
 
-    # Extract title
-    title = None
-    for el in elements:
-        if getattr(el, "category", None) == "Title":
-            title = clean_extra_whitespace(el.text)
-            break
+    except FileNotFoundError:
+        raise RuntimeError(
+            "summarize.sh not found. Install with: brew install steipete/tap/summarize"
+        )
+    except json.JSONDecodeError as e:
+        raise RuntimeError(f"Failed to parse summarize output: {e}")
 
-    # Extract body text
-    body_categories = {"NarrativeText", "ListItem", "UncategorizedText"}
-    body_elements = [e for e in elements if getattr(e, "category", None) in body_categories]
+    # Extract fields from JSON response
+    title = extracted.get("title")
+    description = extracted.get("description")
+    content = extracted.get("content", "")
+    word_count = extracted.get("wordCount", len(content.split()))
+    site_name = extracted.get("siteName")
 
-    text_parts = []
-    for el in body_elements:
-        cleaned = clean(el.text, extra_whitespace=True, trailing_punctuation=False)
-        if cleaned and len(cleaned) > 20:  # Skip tiny fragments
-            text_parts.append(cleaned)
+    # Detect metadata from content
+    has_code, has_video = detect_content_signals(content, url)
+    author = extract_author_from_text(content)
+    pub_date = extract_date_from_text(content)
+    platform = detect_platform(url, site_name)
 
-    full_text = "\n\n".join(text_parts)
-
-    # Detect metadata
-    has_code, has_video = detect_content_type(elements, url)
-    author = extract_author_from_elements(elements)
-    pub_date = extract_date_from_elements(elements)
-    platform = detect_platform(url)
+    # Check if this was a YouTube video (has transcript info)
+    if extracted.get("transcriptSource"):
+        has_video = True
 
     return ExtractedContent(
         url=url,
         title=title,
-        text=full_text,
+        description=description,
+        text=content,
         author_name=author,
         published_date=pub_date,
         source_platform=platform,
-        word_count=len(full_text.split()),
+        word_count=word_count,
         has_code=has_code,
         has_video=has_video,
         fetch_timestamp=datetime.utcnow().isoformat(),
