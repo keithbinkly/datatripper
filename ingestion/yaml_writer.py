@@ -162,7 +162,13 @@ def format_for_display(resource: ClassifiedResource) -> str:
         Formatted string for CLI output
     """
     confidence_bar = "█" * int(resource.confidence * 10) + "░" * (10 - int(resource.confidence * 10))
+    def_score_bar = "█" * int(resource.definition_score * 10) + "░" * (10 - int(resource.definition_score * 10))
     review_flag = " ⚠️  NEEDS REVIEW" if resource.needs_review else " ✓"
+
+    # Format definition feedback if available
+    feedback_line = ""
+    if resource.definition_feedback:
+        feedback_line = f"\n│ Feedback:    {resource.definition_feedback[:60]}..."
 
     return f"""
 ┌─────────────────────────────────────────────────────────────────────────────
@@ -177,6 +183,8 @@ def format_for_display(resource: ClassifiedResource) -> str:
 │
 │ Definition:
 │   {resource.definition[:200]}...
+│
+│ Def Score:   [{def_score_bar}] {resource.definition_score:.0%}{feedback_line}
 │
 │ Alt Labels:  {', '.join(resource.alternate_labels)}
 │

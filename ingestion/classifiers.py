@@ -167,6 +167,30 @@ class GenerateResourceId(dspy.Signature):
     )
 
 
+class ScoreDefinition(dspy.Signature):
+    """Score a definition for quality.
+
+    Good definitions:
+    1. Explain what the resource IS (core thesis/content)
+    2. Clarify scope boundaries (what it is NOT or doesn't cover)
+    3. State why it matters (value proposition)
+    4. Are concise (2-3 sentences, under 100 words)
+    5. Use clear, accessible language
+    """
+
+    definition: str = dspy.InputField(desc="The definition to score")
+    title: str = dspy.InputField(desc="Resource title for context")
+    domain: str = dspy.InputField(desc="Domain for context")
+
+    covers_what: bool = dspy.OutputField(desc="True if definition explains what the resource IS")
+    covers_scope: bool = dspy.OutputField(desc="True if definition clarifies scope/boundaries")
+    covers_why: bool = dspy.OutputField(desc="True if definition states why it matters")
+    is_concise: bool = dspy.OutputField(desc="True if 2-3 sentences and under 100 words")
+    is_clear: bool = dspy.OutputField(desc="True if uses clear, accessible language")
+    score: float = dspy.OutputField(desc="Overall quality score from 0.0 to 1.0")
+    feedback: str = dspy.OutputField(desc="Brief feedback on how to improve the definition")
+
+
 # =============================================================================
 # DSPy MODULES
 # =============================================================================
@@ -295,6 +319,52 @@ class IdGenerator(dspy.Module):
         return resource_id[:50]
 
 
+class DefinitionScorer(dspy.Module):
+    """Scores definition quality."""
+
+    def __init__(self):
+        super().__init__()
+        self.score = dspy.Predict(ScoreDefinition)
+
+    def forward(self, definition: str, title: str, domain: str) -> dict:
+        result = self.score(
+            definition=definition,
+            title=title,
+            domain=domain,
+        )
+
+        # Calculate score from criteria
+        criteria = [
+            result.covers_what,
+            result.covers_scope,
+            result.covers_why,
+            result.is_concise,
+            result.is_clear,
+        ]
+        criteria_score = sum(1 for c in criteria if c) / len(criteria)
+
+        try:
+            llm_score = float(result.score)
+            llm_score = max(0.0, min(1.0, llm_score))
+        except:
+            llm_score = criteria_score
+
+        # Average of criteria and LLM score
+        final_score = (criteria_score + llm_score) / 2
+
+        return {
+            "score": round(final_score, 2),
+            "criteria": {
+                "covers_what": result.covers_what,
+                "covers_scope": result.covers_scope,
+                "covers_why": result.covers_why,
+                "is_concise": result.is_concise,
+                "is_clear": result.is_clear,
+            },
+            "feedback": result.feedback,
+        }
+
+
 # =============================================================================
 # PIPELINE
 # =============================================================================
@@ -327,6 +397,8 @@ class ClassifiedResource:
     confidence: float
     reasoning: str
     needs_review: bool
+    definition_score: float
+    definition_feedback: Optional[str]
 
     # Display
     reading_time: str
@@ -348,12 +420,14 @@ def configure_dspy(provider: str = "anthropic", model: str = "claude-sonnet-4-20
 class IngestionPipeline:
     """Full ingestion pipeline combining all modules."""
 
-    def __init__(self, existing_authors: Optional[set[str]] = None):
+    def __init__(self, existing_authors: Optional[set[str]] = None, score_definitions: bool = True):
         self.classifier = ResourceClassifier()
         self.definition_gen = DefinitionGenerator()
+        self.definition_scorer = DefinitionScorer() if score_definitions else None
         self.author_extractor = AuthorExtractor()
         self.id_generator = IdGenerator()
         self.existing_authors = existing_authors or set()
+        self.score_definitions = score_definitions
 
     def process(self, extracted) -> ClassifiedResource:
         """
@@ -382,6 +456,18 @@ class IngestionPipeline:
             category=classification["category"],
         )
 
+        # Step 2b: Score definition quality (optional)
+        definition_score = 1.0
+        definition_feedback = None
+        if self.definition_scorer:
+            score_result = self.definition_scorer(
+                definition=definition["definition"],
+                title=extracted.title or "Untitled",
+                domain=classification["domain"],
+            )
+            definition_score = score_result["score"]
+            definition_feedback = score_result["feedback"]
+
         # Step 3: Extract author
         author = self.author_extractor(
             content=extracted.text,
@@ -402,6 +488,9 @@ class IngestionPipeline:
         if extracted.has_video:
             content_type = "video"
 
+        # Determine if review needed
+        needs_review = classification["confidence"] < 0.7 or definition_score < 0.7
+
         return ClassifiedResource(
             id=resource_id,
             url=extracted.url,
@@ -420,7 +509,9 @@ class IngestionPipeline:
             color=classification["color"],
             confidence=classification["confidence"],
             reasoning=classification["reasoning"],
-            needs_review=classification["confidence"] < 0.7,
+            needs_review=needs_review,
+            definition_score=definition_score,
+            definition_feedback=definition_feedback,
             reading_time=estimate_reading_time(extracted.word_count, extracted.has_video),
             word_count=extracted.word_count,
         )
