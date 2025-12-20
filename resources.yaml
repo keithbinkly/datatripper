@@ -43,9 +43,9 @@
 # ═══════════════════════════════════════════════════════════════════════════════
 
 metadata:
-  version: "1.1"
-  lastUpdated: 2025-12-17
-  totalResources: 61
+  version: "1.2"
+  lastUpdated: 2025-12-19
+  totalResources: 73
 
 domains:
   - id: knowledge-engineering
@@ -2265,3 +2265,423 @@ resources:
     validationStatus: unvalidated
     readingTime: 12m
     color: "#a855f7"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # AI Tools - Development Tools (Added 2025-12-19)
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: summarize-sh-cli
+    url: https://summarize.sh/
+    preferredLabel: "summarize.sh: Web Content Extraction CLI"
+    alternateLabels:
+      - summarize CLI
+      - web scraping tool
+      - content extraction
+      - YouTube transcript extraction
+      - LLM summarization tool
+    definition: >
+      CLI tool that transforms web content into concise summaries through
+      extraction, cleaning, and LLM summarization. Handles YouTube transcripts
+      with multiple fallback methods, anti-scraping sites, and produces
+      scriptable JSON output. Not a library—a standalone pipeline tool.
+
+    author: p-steinberger
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Development Tools
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: context-engineering-for-ai-agents
+
+    validationStatus: unvalidated
+    readingTime: 5m
+    color: "#10b981"
+
+  - id: cocoindex-data-transformation
+    url: https://cocoindex.io/
+    preferredLabel: "CocoIndex: Data Transformation Framework for AI"
+    alternateLabels:
+      - CocoIndex
+      - incremental indexing
+      - knowledge graph builder
+      - data pipeline framework
+      - Rust data framework
+    definition: >
+      Ultra-performant data transformation framework with Rust core engine.
+      Enables declarative pipelines with automatic incremental processing—
+      only reprocesses changed data. Exports to vector databases and graph
+      databases (Neo4j). Not for real-time streaming; optimized for batch
+      ETL with smart change detection.
+
+    author: cocoindex-team
+    source: Website
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Development Tools
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: semiosis-kb-unit-testing
+
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#10b981"
+
+  - id: cocoindex-meeting-notes-graph
+    url: https://cocoindex.io/blogs/meeting-notes-graph
+    preferredLabel: "Building a Knowledge Graph from Meeting Notes with CocoIndex"
+    alternateLabels:
+      - meeting notes to graph
+      - document to knowledge graph
+      - Neo4j pipeline
+      - LLM extraction pipeline
+    definition: >
+      Tutorial on transforming unstructured meeting notes into a queryable
+      knowledge graph. Demonstrates CocoIndex pipeline: source detection,
+      document splitting, LLM extraction, and Neo4j export with deduplication.
+      Key pattern: primary key-based node deduplication prevents duplicates
+      on re-runs.
+
+    author: cocoindex-team
+    source: Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: knowledge-engineering
+    category: Knowledge Graphs
+    granularity: implementation
+
+    relationships:
+      - type: broader
+        target: cocoindex-data-transformation
+
+    validationStatus: unvalidated
+    readingTime: 20m
+    color: "#06b6d4"
+
+  - id: oh-my-opencode
+    url: https://github.com/code-yeongyu/oh-my-opencode
+    preferredLabel: "Oh-My-OpenCode: Multi-Agent Plugin System"
+    alternateLabels:
+      - OpenCode plugins
+      - multi-agent orchestration
+      - agent team structure
+      - Claude Opus orchestrator
+    definition: >
+      Plugin system that transforms OpenCode into a coordinated development
+      team with specialized agents (Sisyphus orchestrator, Oracle debugger,
+      Frontend Engineer, Librarian). Includes LSP/AST-Grep support, curated
+      MCPs, and async agent execution. Not a standalone tool—requires OpenCode
+      as the base IDE.
+
+    author: y-code
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: mcp-use-framework
+
+    validationStatus: unvalidated
+    readingTime: 15m
+    color: "#10b981"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # AI Tools - Agent Infrastructure (Added 2025-12-19)
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: mcp-use-framework
+    url: https://github.com/mcp-use/mcp-use
+    preferredLabel: "mcp-use: Full-Stack MCP Framework"
+    alternateLabels:
+      - MCP framework
+      - Model Context Protocol
+      - MCP agents
+      - MCP clients
+      - MCP servers
+    definition: >
+      Comprehensive framework for building with Model Context Protocol in
+      6 lines of code. Provides MCP agents (multi-step reasoning), clients
+      (direct tool access), servers (custom tool definition), and inspector
+      (web debugger). Python and TypeScript with API parity. Not a standalone
+      agent—a framework for building MCP-enabled systems.
+
+    author: mcp-use-team
+    source: GitHub
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: implementation
+
+    relationships:
+      - type: related
+        target: advanced-tool-use-anthropic
+
+    validationStatus: unvalidated
+    readingTime: 20m
+    color: "#10b981"
+
+  - id: agent-skills-format
+    url: https://agentskills.io/home
+    preferredLabel: "Agent Skills: Open Format for Agent Capabilities"
+    alternateLabels:
+      - agent skills
+      - skill format
+      - agent capabilities
+      - portable agent knowledge
+      - Claude Code skills
+    definition: >
+      Open format for packaging agent capabilities as portable, version-
+      controlled folders containing instructions, scripts, and resources.
+      Adopted by Claude Code, OpenAI Codex, GitHub Copilot, Cursor, and others.
+      Originally developed by Anthropic. Not a tool—a standard specification
+      for agent capability packaging.
+
+    author: anthropic-team
+    source: Website
+    contentType: documentation
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: foundational
+
+    relationships:
+      - type: related
+        target: tool-search-dead-skills
+
+    validationStatus: unvalidated
+    readingTime: 10m
+    color: "#10b981"
+
+  - id: origon-ai-platform
+    url: https://origon.ai/stories/origon-is-here
+    preferredLabel: "Origon: Production-Grade AI Agent Platform"
+    alternateLabels:
+      - Origon
+      - enterprise AI agents
+      - human-AI collaboration
+      - adaptive learning agents
+      - agent observability
+    definition: >
+      Enterprise platform for production-grade AI agents with integrated
+      task management, memory, storage, and observability. Features human-AI
+      collaboration (agents request clarification, humans maintain oversight),
+      adaptive learning within safe constraints, and pre-built business apps.
+      Not open source—commercial platform targeting enterprise deployment.
+
+    author: origon-team
+    source: Blog
+    contentType: blog
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: state-of-agent-engineering-2025
+
+    validationStatus: unvalidated
+    readingTime: 10m
+    color: "#10b981"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # AI & LLMs - Research & Analysis (Added 2025-12-19)
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: fast-agentic-search-relace
+    url: https://www.relace.ai/blog/fast-agentic-search
+    preferredLabel: "Fast Agentic Search: 4x Latency Reduction via Parallelism"
+    alternateLabels:
+      - FAS
+      - parallel agentic search
+      - codebase search
+      - agentic code intelligence
+      - RL-trained search agent
+    definition: >
+      Research on training search subagents with reinforcement learning to
+      explore codebases in parallel rather than sequentially. Achieves 4x
+      latency reduction while maintaining accuracy. Key insight: search
+      consumes 56.6% of tokens in coding tasks—parallelizing it with 4-12
+      simultaneous tool calls dramatically reduces wall-clock time.
+
+    author: relace-team
+    source: Blog
+    contentType: paper
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-llms
+    category: Agent Memory
+    granularity: advanced
+
+    relationships:
+      - type: related
+        target: context-engineering-for-ai-agents
+
+    validationStatus: unvalidated
+    readingTime: 25m
+    color: "#a855f7"
+
+  - id: cot-monitorability-openai
+    url: https://openai.com/index/evaluating-chain-of-thought-monitorability/
+    preferredLabel: "Evaluating Chain-of-Thought Monitorability"
+    alternateLabels:
+      - CoT monitorability
+      - reasoning monitoring
+      - AI safety evaluation
+      - chain of thought monitoring
+      - monitorability tax
+    definition: >
+      OpenAI research on measuring how effectively LLMs verbalize internal
+      reasoning. Introduces 13 evaluations across intervention, process,
+      and outcome-property archetypes. Key finding: longer chains of thought
+      improve monitorability; accessing CoT significantly outperforms action-
+      only monitoring. Proposes "monitorability tax"—smaller models with more
+      reasoning can match larger models while remaining easier to monitor.
+
+    author: openai-team
+    source: OpenAI
+    contentType: paper
+    publishedDate: 2025-12-18
+    dateAdded: 2025-12-19
+
+    domain: ai-llms
+    category: AI Evaluation
+    granularity: advanced
+
+    relationships:
+      - type: related
+        target: ai-evals-changing-pm-craft
+
+    validationStatus: unvalidated
+    readingTime: 30m
+    color: "#a855f7"
+
+  - id: state-of-agent-engineering-2025
+    url: https://www.langchain.com/state-of-agent-engineering
+    preferredLabel: "State of Agent Engineering 2025"
+    alternateLabels:
+      - agent engineering survey
+      - LangChain agent report
+      - AI agent trends
+      - agent production statistics
+    definition: >
+      LangChain survey of 1,300+ professionals on agent engineering trends.
+      Key findings: 57.3% now operate agents in production (up from 51%);
+      quality remains top barrier (32%); 89% have observability; multi-model
+      strategies dominate (76%+). Evaluation maturity lags—only 52% run
+      offline evals. Validates quality-first approach to agent development.
+
+    author: langchain-team
+    source: LangChain
+    contentType: paper
+    publishedDate: 2025-01-01
+    dateAdded: 2025-12-19
+
+    domain: ai-llms
+    category: LLM Foundations
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: context-engineering-for-ai-agents
+
+    validationStatus: unvalidated
+    readingTime: 20m
+    color: "#a855f7"
+
+  - id: tool-search-dead-skills
+    url: https://nicolaygerold.com/posts/tool-search-is-dead-long-live-skills
+    preferredLabel: "Tool Search is Dead, Long Live Skills"
+    alternateLabels:
+      - skills vs tools
+      - just-in-time tool discovery
+      - agent capability packaging
+      - Amp skills
+    definition: >
+      Argues that traditional tool discovery is obsolete, replaced by "skills"
+      that bundle instructions, MCP servers, and toolboxes into self-contained
+      packages. Enables just-in-time tool discovery—users access capabilities
+      contextually without proactive searching. Reframes agent interaction from
+      active tool searching to integrated, passive discovery.
+
+    author: n-gerold
+    source: Personal Site
+    contentType: essay
+    publishedDate: ~
+    dateAdded: 2025-12-19
+
+    domain: ai-tools
+    category: Agent Infrastructure
+    granularity: conceptual
+
+    relationships:
+      - type: related
+        target: agent-skills-format
+      - type: related
+        target: advanced-tool-use-anthropic
+
+    validationStatus: unvalidated
+    readingTime: 10m
+    color: "#10b981"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Data Visualization - UI/UX Principles (Added 2025-12-19)
+  # ─────────────────────────────────────────────────────────────────────────────
+
+  - id: 7-principles-rich-web-apps
+    url: https://rauchg.com/2014/7-principles-of-rich-web-applications
+    preferredLabel: "7 Principles of Rich Web Applications"
+    alternateLabels:
+      - web application principles
+      - frontend architecture
+      - Guillermo Rauch principles
+      - rich web apps
+      - SPA best practices
+    definition: >
+      Foundational essay on building performant web applications. Covers
+      server-rendered initial content, responsive UI feedback, optimistic
+      updates, URL-driven state, and graceful degradation. Written in 2014
+      but principles remain relevant. Not about AI—pure frontend architecture
+      philosophy from the creator of Next.js.
+
+    author: g-rauch
+    source: Personal Site
+    contentType: essay
+    publishedDate: 2014-11-04
+    dateAdded: 2025-12-19
+
+    domain: data-visualization
+    category: UI/UX Principles
+    granularity: foundational
+
+    relationships: []
+
+    validationStatus: unvalidated
+    readingTime: 25m
+    color: "#8b5cf6"

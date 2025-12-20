@@ -1317,3 +1317,138 @@ authors:
       AI product development blog. Covers AI evaluation methods, product
       management for AI products, and practical AI implementation.
     bioSource: https://manialabs.substack.com/
+
+  # ═══════════════════════════════════════════════════════════════════════════
+  # Added 2025-12-19 - Ingestion Pipeline Tools Research
+  # ═══════════════════════════════════════════════════════════════════════════
+
+  - id: p-steinberger
+    name: Peter Steinberger
+    gender: male
+    location:
+      city: Vienna
+      country: Austria
+      continent: Europe
+    jobTitle: Founder
+    industry: Developer Tools
+    affiliation: PSPDFKit
+    perspectiveType: practitioner
+    yearsInField: ~
+    socialFollowing: medium
+    bio: >
+      Founder of PSPDFKit. Creator of summarize CLI tool for web content
+      extraction and summarization.
+    bioSource: https://github.com/steipete
+
+  - id: relace-team
+    name: Relace Team
+    location:
+      country: USA
+      continent: North America
+    industry: AI Infrastructure
+    affiliation: Relace
+    perspectiveType: organization
+    bio: >
+      AI company focused on agentic search and code intelligence.
+      Developed Fast Agentic Search (FAS) for parallel codebase exploration.
+    bioSource: https://www.relace.ai/
+
+  - id: openai-team
+    name: OpenAI
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    industry: AI Research
+    affiliation: OpenAI
+    perspectiveType: organization
+    bio: >
+      AI research company. Creators of GPT series, ChatGPT, and leading
+      AI safety research including chain-of-thought monitorability studies.
+    bioSource: https://openai.com/
+
+  - id: cocoindex-team
+    name: CocoIndex Team
+    location:
+      country: USA
+      continent: North America
+    industry: Data Infrastructure
+    affiliation: CocoIndex
+    perspectiveType: organization
+    bio: >
+      Developers of CocoIndex, an ultra-performant data transformation
+      framework for AI with incremental processing and graph export.
+    bioSource: https://cocoindex.io/
+
+  - id: mcp-use-team
+    name: MCP-Use Team
+    location:
+      country: ~
+      continent: ~
+    industry: AI Infrastructure
+    affiliation: ~
+    perspectiveType: organization
+    bio: >
+      Open source contributors developing mcp-use, a full-stack framework
+      for building with the Model Context Protocol (MCP).
+    bioSource: https://github.com/mcp-use/mcp-use
+
+  - id: origon-team
+    name: Origon Team
+    location:
+      country: ~
+      continent: ~
+    industry: AI Infrastructure
+    affiliation: Origon
+    perspectiveType: organization
+    bio: >
+      Developers of Origon, an AI platform for production-grade agents
+      with human-AI collaboration and adaptive learning.
+    bioSource: https://origon.ai/
+
+  - id: n-gerold
+    name: Nicolay Gerold
+    gender: male
+    location:
+      country: ~
+      continent: ~
+    industry: AI/Developer Tools
+    affiliation: Amp
+    perspectiveType: practitioner
+    yearsInField: ~
+    bio: >
+      Developer and writer on AI agent patterns. Author of "Tool Search
+      is Dead, Long Live Skills" on agent capability packaging.
+    bioSource: https://nicolaygerold.com/
+
+  - id: g-rauch
+    name: Guillermo Rauch
+    gender: male
+    location:
+      city: San Francisco
+      country: USA
+      continent: North America
+    jobTitle: CEO
+    industry: Developer Tools
+    affiliation: Vercel
+    perspectiveType: practitioner
+    yearsInField: 15
+    socialFollowing: large
+    bio: >
+      CEO of Vercel, creator of Next.js and Socket.io. Prolific writer
+      on web development principles and frontend architecture.
+    bioSource: https://rauchg.com/
+
+  - id: y-code
+    name: Code Yeongyu
+    gender: ~
+    location:
+      country: ~
+      continent: ~
+    industry: Developer Tools
+    affiliation: ~
+    perspectiveType: practitioner
+    bio: >
+      Open source developer. Creator of Oh-My-OpenCode, a plugin system
+      for multi-agent orchestration in OpenCode.
+    bioSource: https://github.com/code-yeongyu
