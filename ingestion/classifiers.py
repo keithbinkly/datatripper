@@ -420,7 +420,12 @@ def configure_dspy(provider: str = "anthropic", model: str = "claude-sonnet-4-20
 class IngestionPipeline:
     """Full ingestion pipeline combining all modules."""
 
-    def __init__(self, existing_authors: Optional[set[str]] = None, score_definitions: bool = True):
+    def __init__(
+        self,
+        existing_authors: Optional[set[str]] = None,
+        score_definitions: bool = True,
+        enable_logging: bool = True,
+    ):
         self.classifier = ResourceClassifier()
         self.definition_gen = DefinitionGenerator()
         self.definition_scorer = DefinitionScorer() if score_definitions else None
@@ -428,6 +433,11 @@ class IngestionPipeline:
         self.id_generator = IdGenerator()
         self.existing_authors = existing_authors or set()
         self.score_definitions = score_definitions
+        self.enable_logging = enable_logging
+        self.logger = None
+        if enable_logging:
+            from .logger import get_logger
+            self.logger = get_logger()
 
     def process(self, extracted) -> ClassifiedResource:
         """
@@ -441,12 +451,19 @@ class IngestionPipeline:
         """
         from .extractor import estimate_reading_time
 
+        # Start logging
+        if self.logger:
+            self.logger.start_run(extracted.url)
+            self.logger.log_extraction(extracted)
+
         # Step 1: Classify
         classification = self.classifier(
             title=extracted.title or "Untitled",
             content=extracted.text,
             url=extracted.url,
         )
+        if self.logger:
+            self.logger.log_classification(classification)
 
         # Step 2: Generate definition
         definition = self.definition_gen(
@@ -459,6 +476,7 @@ class IngestionPipeline:
         # Step 2b: Score definition quality (optional)
         definition_score = 1.0
         definition_feedback = None
+        score_result = None
         if self.definition_scorer:
             score_result = self.definition_scorer(
                 definition=definition["definition"],
@@ -468,6 +486,9 @@ class IngestionPipeline:
             definition_score = score_result["score"]
             definition_feedback = score_result["feedback"]
 
+        if self.logger:
+            self.logger.log_definition(definition, score_result)
+
         # Step 3: Extract author
         author = self.author_extractor(
             content=extracted.text,
@@ -475,6 +496,8 @@ class IngestionPipeline:
             detected_author=extracted.author_name,
             platform=extracted.source_platform,
         )
+        if self.logger:
+            self.logger.log_author(author)
 
         # Step 4: Generate ID
         resource_id = self.id_generator(
@@ -490,6 +513,10 @@ class IngestionPipeline:
 
         # Determine if review needed
         needs_review = classification["confidence"] < 0.7 or definition_score < 0.7
+
+        # Finish logging
+        if self.logger:
+            self.logger.finish_run(success=True, resource_id=resource_id)
 
         return ClassifiedResource(
             id=resource_id,
