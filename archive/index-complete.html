@@ -8,254 +8,194 @@
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg-base: #0a0a0a;
-      --bg-surface: #0f0f0f;
-      --bg-card: #141414;
-      --bg-hover: #1a1a1a;
+      --bg-base: #0d0d0d;
+      --bg-surface: #111;
+      --bg-card: #161616;
+      --bg-hover: #1c1c1c;
 
-      --border-dim: #1f1f1f;
-      --border-mid: #2a2a2a;
-      --border-bright: #3a3a3a;
+      --border-dim: #222;
+      --border-mid: #333;
 
-      --text-dim: #666;
-      --text-mid: #999;
-      --text-bright: #ccc;
-      --text-white: #f0f0f0;
+      --text-dim: #6b6b6b;
+      --text-mid: #a0a0a0;
+      --text-bright: #d4d4d4;
+      --text-white: #f5f5f5;
 
-      --cyan: #5ccfe6;
-      --orange: #ffab70;
-      --green: #87c38a;
-      --purple: #c9a0dc;
-      --amber: #d4a84b;
+      --accent: #d4a84b;
+      --link: #7db4c9;
+
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 3rem;
+      --space-xl: 4.5rem;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    html { font-size: 16px; }
+    html { font-size: 18px; }
 
     body {
       min-height: 100vh;
-      font-family: 'IBM Plex Sans', -apple-system, sans-serif;
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-base);
       color: var(--text-bright);
-      line-height: 1.6;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
     }
 
     .container {
-      max-width: 900px;
+      max-width: 680px;
       margin: 0 auto;
-      padding: 3rem 1.5rem;
+      padding: var(--space-xl) var(--space-md);
     }
 
     a { color: inherit; text-decoration: none; }
+    a:hover { color: var(--link); }
 
     /* ═══════════════════════════════════════════
-       HEADER - Minimal
+       HEADER
        ═══════════════════════════════════════════ */
 
     .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 3rem;
-      padding-bottom: 1.5rem;
-      border-bottom: 1px solid var(--border-dim);
+      margin-bottom: var(--space-xl);
     }
 
     .brand {
       font-family: 'JetBrains Mono', monospace;
-      color: var(--amber);
-      font-weight: 600;
-      font-size: 1.1rem;
+      color: var(--accent);
+      font-weight: 500;
+      font-size: 0.9rem;
       letter-spacing: 0.02em;
     }
 
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: var(--space-md);
     }
 
     .nav-link {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-dim);
-      transition: color 0.2s;
+      transition: color 0.15s;
     }
 
-    .nav-link:hover { color: var(--cyan); }
+    .nav-link:hover { color: var(--link); }
 
     /* ═══════════════════════════════════════════
-       ASCII ART
+       ASCII ART (optional decorative element)
        ═══════════════════════════════════════════ */
 
     .ascii-art {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      line-height: 1.3;
-      color: var(--border-bright);
-      white-space: pre;
-      margin-bottom: 2rem;
-      opacity: 0.5;
-      user-select: none;
-    }
-
-    .ascii-art .highlight {
-      color: var(--amber);
-      opacity: 1;
-    }
-
-    .ascii-art .dim {
-      color: var(--border-mid);
+      display: none; /* Hidden for cleaner layout */
     }
 
     /* ═══════════════════════════════════════════
-       HERO - Introduction
+       HERO
        ═══════════════════════════════════════════ */
 
     .hero {
-      margin-bottom: 3rem;
+      margin-bottom: var(--space-xl);
     }
 
     .hero-name {
-      font-size: 2rem;
+      font-size: 1.75rem;
       font-weight: 600;
       color: var(--text-white);
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-xs);
+      letter-spacing: -0.01em;
     }
 
     .hero-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       color: var(--text-mid);
-      margin-bottom: 1.25rem;
+      margin-bottom: var(--space-md);
     }
 
     .hero-bio {
-      font-size: 1.05rem;
+      font-size: 1rem;
       color: var(--text-bright);
-      line-height: 1.7;
-      max-width: 640px;
+      line-height: 1.8;
     }
 
     .hero-bio strong {
       color: var(--text-white);
+      font-weight: 500;
     }
 
     .hero-links {
       display: flex;
-      gap: 1.25rem;
-      margin-top: 1.25rem;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
     }
 
     .hero-link {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-dim);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
+      transition: color 0.15s;
     }
 
-    .hero-link:hover { color: var(--cyan); }
+    .hero-link:hover { color: var(--link); }
 
-    .hero-link-icon {
-      font-size: 0.9rem;
-    }
+    .hero-link-icon { display: none; }
 
     /* ═══════════════════════════════════════════
-       CONTENT GRID - 2x2 Cards
+       SECTION LABELS
        ═══════════════════════════════════════════ */
 
     .section-label {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       color: var(--text-dim);
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-sm);
       text-transform: uppercase;
     }
 
-    .content-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 1rem;
-      margin-bottom: 3rem;
+    /* ═══════════════════════════════════════════
+       LIBRARY LIST
+       ═══════════════════════════════════════════ */
+
+    .library-list {
+      margin-bottom: var(--space-xl);
     }
 
-    @media (max-width: 600px) {
-      .content-grid { grid-template-columns: 1fr; }
-    }
-
-    .content-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-mid);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
-      transition: all 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .content-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 2px;
-      opacity: 0.6;
-    }
-
-    .content-card.cyan::before { background: var(--cyan); }
-    .content-card.orange::before { background: var(--orange); }
-    .content-card.green::before { background: var(--green); }
-    .content-card.purple::before { background: var(--purple); }
-
-    .content-card:hover {
-      background: var(--bg-hover);
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-    }
-
-    .card-header {
+    .library-item {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       justify-content: space-between;
-      margin-bottom: 0.5rem;
+      padding: var(--space-sm) 0;
+      border-bottom: 1px solid var(--border-dim);
+      transition: color 0.15s;
     }
 
-    .card-title {
+    .library-item:first-child {
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .library-item:hover {
+      color: var(--link);
+    }
+
+    .library-item:hover .library-title {
+      color: var(--link);
+    }
+
+    .library-title {
       font-size: 1rem;
-      font-weight: 500;
       color: var(--text-white);
+      transition: color 0.15s;
     }
 
-    .card-count {
+    .library-count {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.75rem;
       color: var(--text-dim);
-    }
-
-    .card-desc {
-      font-size: 0.9rem;
-      color: var(--text-mid);
-      line-height: 1.5;
-    }
-
-    .card-arrow {
-      position: absolute;
-      bottom: 1rem;
-      right: 1.25rem;
-      color: var(--text-dim);
-      font-size: 1rem;
-      opacity: 0;
-      transform: translateX(-4px);
-      transition: all 0.2s;
-    }
-
-    .content-card:hover .card-arrow {
-      opacity: 1;
-      transform: translateX(0);
     }
 
     /* ═══════════════════════════════════════════
@@ -263,79 +203,78 @@
        ═══════════════════════════════════════════ */
 
     .project-section {
-      margin-bottom: 3rem;
+      margin-bottom: var(--space-xl);
     }
 
     .project-card {
       background: var(--bg-card);
-      border: 1px solid var(--border-mid);
-      border-radius: 12px;
-      padding: 1.5rem;
-      border-left: 3px solid var(--amber);
+      border: 1px solid var(--border-dim);
+      border-radius: 8px;
+      padding: var(--space-md);
     }
 
     .project-header {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
     }
 
     .project-name {
       font-family: 'JetBrains Mono', monospace;
-      color: var(--amber);
-      font-size: 1.1rem;
-      font-weight: 600;
+      color: var(--accent);
+      font-size: 1rem;
+      font-weight: 500;
     }
 
     .project-badge {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.65rem;
-      color: var(--bg-base);
-      background: var(--green);
+      color: var(--text-dim);
+      background: var(--bg-surface);
+      border: 1px solid var(--border-dim);
       padding: 2px 8px;
-      border-radius: 3px;
-      font-weight: 500;
+      border-radius: 4px;
     }
 
     .project-desc {
-      font-size: 1rem;
+      font-size: 0.95rem;
       color: var(--text-bright);
       line-height: 1.7;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-md);
     }
 
     .project-update {
       background: var(--bg-surface);
-      border-radius: 8px;
-      padding: 1rem 1.25rem;
-      margin-bottom: 1rem;
+      border-radius: 6px;
+      padding: var(--space-sm) var(--space-md);
+      margin-bottom: var(--space-md);
+      border-left: 2px solid var(--border-mid);
     }
 
     .project-update-header {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
-      margin-bottom: 0.5rem;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
     }
 
     .update-date {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-dim);
     }
 
     .update-label {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.65rem;
-      color: var(--cyan);
-      background: rgba(92, 207, 230, 0.1);
-      padding: 2px 6px;
-      border-radius: 3px;
+      font-size: 0.6rem;
+      color: var(--link);
+      background: transparent;
+      padding: 0;
     }
 
     .project-update p {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-mid);
       line-height: 1.6;
     }
@@ -343,32 +282,36 @@
     .project-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
-      margin-bottom: 1rem;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-sm);
     }
 
     .project-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-dim);
-      border: 1px solid var(--border-mid);
-      padding: 4px 10px;
-      border-radius: 4px;
+      padding: 0;
+    }
+
+    .project-tag::after {
+      content: ' ·';
+      color: var(--border-mid);
+    }
+
+    .project-tag:last-child::after {
+      content: '';
     }
 
     .project-links {
       display: flex;
-      gap: 1.5rem;
+      gap: var(--space-md);
     }
 
     .project-link {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.85rem;
-      color: var(--cyan);
-      display: flex;
-      align-items: center;
-      gap: 0.4rem;
-      transition: color 0.2s;
+      font-size: 0.8rem;
+      color: var(--link);
+      transition: color 0.15s;
     }
 
     .project-link:hover { color: var(--text-white); }
@@ -378,53 +321,38 @@
        ═══════════════════════════════════════════ */
 
     .about-section {
-      margin-bottom: 3rem;
+      margin-bottom: var(--space-xl);
     }
 
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 2rem;
+      gap: var(--space-lg);
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 540px) {
       .about-grid { grid-template-columns: 1fr; }
     }
 
     .about-column h3 {
       font-family: 'JetBrains Mono', monospace;
       font-size: 0.7rem;
-      letter-spacing: 0.15em;
+      letter-spacing: 0.1em;
       color: var(--text-dim);
       text-transform: uppercase;
-      margin-bottom: 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid var(--border-dim);
+      margin-bottom: var(--space-sm);
     }
 
     .timeline-item {
-      display: flex;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-sm);
     }
 
-    .timeline-tree {
-      font-family: 'JetBrains Mono', monospace;
-      color: var(--border-bright);
-      font-size: 0.8rem;
-      flex-shrink: 0;
-      width: 1.5rem;
-    }
-
-    .timeline-content {
-      flex: 1;
-    }
+    .timeline-tree { display: none; }
 
     .timeline-org {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-white);
       font-weight: 500;
-      margin-bottom: 0.15rem;
     }
 
     .timeline-role {
@@ -434,53 +362,49 @@
 
     .timeline-dates {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-dim);
     }
 
     .timeline-sub {
-      margin-left: 1.5rem;
-      padding-left: 0.75rem;
+      margin-left: var(--space-sm);
+      padding-left: var(--space-sm);
       border-left: 1px solid var(--border-dim);
-      margin-bottom: 0.75rem;
+      margin-bottom: var(--space-xs);
     }
 
     .timeline-sub .timeline-role {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
     }
 
     .timeline-sub .timeline-dates {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
     }
 
     .skills-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: var(--space-xs);
     }
 
     .skill-tag {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       color: var(--text-mid);
-      background: var(--bg-card);
-      border: 1px solid var(--border-mid);
-      padding: 6px 12px;
-      border-radius: 6px;
     }
 
     .education-item {
-      margin-bottom: 1rem;
+      margin-bottom: var(--space-sm);
     }
 
     .education-school {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       color: var(--text-white);
       font-weight: 500;
     }
 
     .education-detail {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-mid);
     }
 
@@ -489,40 +413,82 @@
        ═══════════════════════════════════════════ */
 
     .footer {
-      padding-top: 1.5rem;
+      margin-top: var(--space-lg);
+      padding-top: var(--space-md);
       border-top: 1px solid var(--border-dim);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 1.5rem;
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-dim);
     }
 
-    .status-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
+    .status { display: none; }
+    .clock { display: none; }
+
+    /* ═══════════════════════════════════════════
+       JOURNAL / WRITING
+       ═══════════════════════════════════════════ */
+
+    .journal-section {
+      margin-bottom: var(--space-xl);
     }
 
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--green);
-      box-shadow: 0 0 8px var(--green);
+    .journal-entry {
+      margin-bottom: var(--space-lg);
     }
 
-    .clock {
+    .journal-entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .journal-meta {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 0.75rem;
+      font-size: 0.7rem;
       color: var(--text-dim);
+      margin-bottom: var(--space-xs);
+    }
+
+    .journal-title {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: var(--space-sm);
+      line-height: 1.4;
+    }
+
+    .journal-title a {
+      color: inherit;
+    }
+
+    .journal-title a:hover {
+      color: var(--link);
+    }
+
+    .journal-excerpt {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: var(--space-sm);
+    }
+
+    .journal-continue {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--link);
+    }
+
+    .journal-continue:hover {
+      color: var(--text-white);
+    }
+
+    /* ═══════════════════════════════════════════
+       LIBRARY INTRO
+       ═══════════════════════════════════════════ */
+
+    .library-intro {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      margin-bottom: var(--space-md);
+      line-height: 1.7;
     }
   </style>
 </head>
@@ -575,87 +541,49 @@
       </div>
     </section>
 
-    <!-- Content Grid -->
-    <section>
-      <div class="section-label">Explore</div>
-      <div class="content-grid">
-        <a href="pages/knowledge-engineering.html" class="content-card cyan">
-          <div class="card-header">
-            <span class="card-title">Knowledge Engineering</span>
-            <span class="card-count">54 resources</span>
-          </div>
-          <p class="card-desc">Semantic layers, ontologies, context engineering for AI-ready data</p>
-          <span class="card-arrow">→</span>
-        </a>
+    <!-- Journal -->
+    <section class="journal-section">
+      <div class="section-label">Writing</div>
 
-        <a href="pages/data-engineering.html" class="content-card orange">
-          <div class="card-header">
-            <span class="card-title">Data Engineering</span>
-            <span class="card-count">73 resources</span>
-          </div>
-          <p class="card-desc">dbt best practices, data modeling, pipeline development</p>
-          <span class="card-arrow">→</span>
-        </a>
-
-        <a href="pages/personal-growth.html" class="content-card green">
-          <div class="card-header">
-            <span class="card-title">Personal Growth</span>
-            <span class="card-count">46 resources</span>
-          </div>
-          <p class="card-desc">Career development, leadership, learning strategies</p>
-          <span class="card-arrow">→</span>
-        </a>
-
-        <a href="pages/terminal-stack.html" class="content-card purple">
-          <div class="card-header">
-            <span class="card-title">Terminal Dev Stack</span>
-            <span class="card-count">guide</span>
-          </div>
-          <p class="card-desc">Ghostty, tmux, nvim, lazygit — the full setup</p>
-          <span class="card-arrow">→</span>
-        </a>
-      </div>
+      <article class="journal-entry">
+        <div class="journal-meta">Dec 21, 2024</div>
+        <h2 class="journal-title">
+          <a href="journal/dbt-agent-mcp.html">The Semantic Layer as Agent Memory</a>
+        </h2>
+        <p class="journal-excerpt">
+          I've been experimenting with MCP server integration for dbt, and something clicked this week.
+          The semantic layer isn't just about consistent metrics—it's the vocabulary that lets AI agents
+          understand what the business actually means. When an agent asks "what's revenue?", MetricFlow
+          doesn't just return a number. It returns context: how it's calculated, what dimensions apply,
+          which filters matter. That context is exactly what LLMs need to reason about data correctly.
+        </p>
+        <a href="journal/dbt-agent-mcp.html" class="journal-continue">continue reading →</a>
+      </article>
     </section>
 
-    <!-- Project Section -->
-    <section class="project-section">
-      <div class="section-label">Current Project</div>
-      <div class="project-card">
-        <div class="project-header">
-          <span class="project-name">dbt-agent</span>
-          <span class="project-badge">ACTIVE</span>
-        </div>
-        <p class="project-desc">
-          An experimental environment exploring how AI agents, memory systems, and semantic layers
-          can accelerate dbt pipeline development. Building towards "conversational BI" — where
-          analysts query data through natural language backed by proper semantic context.
-        </p>
-
-        <div class="project-update">
-          <div class="project-update-header">
-            <span class="update-date">Dec 2024</span>
-            <span class="update-label">latest</span>
-          </div>
-          <p>
-            Exploring MCP server integration for dbt. The semantic layer becomes the bridge —
-            metrics defined in MetricFlow give agents the vocabulary to understand what the
-            business actually means by "revenue" or "active users."
-          </p>
-        </div>
-
-        <div class="project-tags">
-          <span class="project-tag">ai-agents</span>
-          <span class="project-tag">semantic-layer</span>
-          <span class="project-tag">dbt</span>
-          <span class="project-tag">mcp</span>
-          <span class="project-tag">knowledge-graphs</span>
-        </div>
-
-        <div class="project-links">
-          <a href="https://github.com/keithbinkly/dbt-agent" target="_blank" class="project-link">
-            <span>◈</span> view on github
-          </a>
-        </div>
+    <!-- Library -->
+    <section>
+      <div class="section-label">Library</div>
+      <p class="library-intro">
+        A curated collection of articles, papers, and resources I've found valuable—organized by theme.
+      </p>
+      <div class="library-list">
+        <a href="pages/knowledge-engineering.html" class="library-item">
+          <span class="library-title">Knowledge Engineering</span>
+          <span class="library-count">32</span>
+        </a>
+        <a href="pages/data-engineering.html" class="library-item">
+          <span class="library-title">Data Engineering</span>
+          <span class="library-count">78</span>
+        </a>
+        <a href="pages/design-craft.html" class="library-item">
+          <span class="library-title">Design Craft</span>
+          <span class="library-count">24</span>
+        </a>
+        <a href="pages/personal-growth.html" class="library-item">
+          <span class="library-title">Personal Growth</span>
+          <span class="library-count">46</span>
+        </a>
       </div>
     </section>
 

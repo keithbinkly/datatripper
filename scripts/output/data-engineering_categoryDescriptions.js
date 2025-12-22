@@ -1,0 +1,17 @@
+    const categoryDescriptions = {
+      'all': { title: 'All Resources', description: 'Browse the complete Data Engineering collection.', count: 78 },
+      'dbt-practices': { title: 'dbt Practices', description: 'dbt Practices resources.', count: 3 },
+      'pipeline-tools': { title: 'Pipeline Tools', description: 'Pipeline Tools resources.', count: 5 },
+      'semantic-layer': { title: 'Semantic Layer', description: 'Semantic Layer resources.', count: 4 },
+      'pipelines--sql': { title: 'Pipelines & SQL', description: 'Pipelines & SQL resources.', count: 4 },
+      'data-modeling': { title: 'Data Modeling', description: 'Data Modeling resources.', count: 4 },
+      'roles--organization': { title: 'Roles & Organization', description: 'Roles & Organization resources.', count: 5 },
+      'ai--data-strategy': { title: 'AI + Data Strategy', description: 'AI + Data Strategy resources.', count: 5 },
+      'agent-architecture': { title: 'Agent Architecture', description: 'Agent Architecture resources.', count: 9 },
+      'claude--ai-tools': { title: 'Claude & AI Tools', description: 'Claude & AI Tools resources.', count: 11 },
+      'ai-industry': { title: 'AI Industry', description: 'AI Industry resources.', count: 6 },
+      'analytics-strategy': { title: 'Analytics Strategy', description: 'Analytics Strategy resources.', count: 6 },
+      'enterprise-ai': { title: 'Enterprise AI', description: 'Enterprise AI resources.', count: 7 },
+      'ai-futures': { title: 'AI Futures', description: 'AI Futures resources.', count: 5 },
+      'infrastructure': { title: 'Infrastructure', description: 'Infrastructure resources.', count: 4 },
+    };

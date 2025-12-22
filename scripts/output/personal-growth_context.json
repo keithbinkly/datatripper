@@ -1,0 +1,54 @@
+{
+  "title": "Personal Growth",
+  "lede": "Personal Growth bridges <strong>career strategy</strong> and <strong>inner development</strong>\u2014recognizing that professional success requires both external skills and internal clarity. The best practitioners invest in both technical depth and self-awareness.",
+  "stat_num": "10x",
+  "stat_label": "impact difference between individual contributors and force multipliers",
+  "terms": [
+    {
+      "name": "Force Multiplier",
+      "definition": "Person who amplifies the effectiveness of everyone around them"
+    },
+    {
+      "name": "Glue Work",
+      "definition": "Essential but often invisible work that holds teams together"
+    },
+    {
+      "name": "Career Moat",
+      "definition": "Skills and reputation that protect your career from disruption"
+    },
+    {
+      "name": "Digital Wellness",
+      "definition": "Intentional relationship with technology and attention"
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Learn in public",
+      "definition": "Share your journey, attract opportunities"
+    },
+    {
+      "name": "Compound skills",
+      "definition": "Build skills that multiply each other's value"
+    },
+    {
+      "name": "Self-awareness",
+      "definition": "Know your patterns, triggers, and blindspots"
+    }
+  ],
+  "accent_color": "#10b981",
+  "next_page": "design-craft.html",
+  "prev_page": "../index.html",
+  "resource_count": 46,
+  "categories": [
+    "Job Market",
+    "Leadership",
+    "Skills & Learning",
+    "AI Learning",
+    "Mental Health",
+    "Purpose & Identity",
+    "Relationships",
+    "Communication",
+    "Digital Wellness",
+    "Lifestyle"
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "title": "Design Craft",
+  "lede": "Design Craft bridges <strong>visualization</strong> and <strong>storytelling</strong>\u2014the art of making data comprehensible and compelling. Great design isn't decoration; it's the mechanism that transforms raw numbers into understanding and action.",
+  "stat_num": "3s",
+  "stat_label": "time to form first impression of a dashboard",
+  "terms": [
+    {
+      "name": "Visual Vocabulary",
+      "definition": "Matching chart types to the relationship you want to show"
+    },
+    {
+      "name": "Scrollytelling",
+      "definition": "Scroll-driven narrative that reveals data progressively"
+    },
+    {
+      "name": "Data-Ink Ratio",
+      "definition": "Proportion of ink devoted to data vs non-data elements"
+    },
+    {
+      "name": "Big Number",
+      "definition": "Hero KPI card designed for immediate comprehension"
+    },
+    {
+      "name": "AI Slop",
+      "definition": "Generic, over-designed aesthetic common in AI-generated UIs"
+    }
+  ],
+  "patterns": [
+    {
+      "name": "Less is more",
+      "definition": "Fewer colors, larger fonts, generous whitespace"
+    },
+    {
+      "name": "Clarity over decoration",
+      "definition": "Every visual element should serve comprehension"
+    },
+    {
+      "name": "Narrative arc",
+      "definition": "Guide the viewer through a logical story progression"
+    }
+  ],
+  "accent_color": "#8b5cf6",
+  "next_page": "knowledge-engineering.html",
+  "prev_page": "../index.html",
+  "resource_count": 24,
+  "categories": [
+    "Dashboard Exemplars",
+    "UI/UX Principles",
+    "Data Story Process",
+    "Scrollytelling",
+    "Visualization Libraries",
+    "UI Components",
+    "Pudding Infrastructure"
+  ]
+}
