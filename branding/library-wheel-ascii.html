@@ -37,7 +37,7 @@
 </head>
 <body>
   <div id="info">
-    <span>The Archivist's Wheel</span> · Keeper of Knowledge
+    <span>The Archivist's Wheel</span> · Keeper of Knowledge · <em>Click to turn</em>
   </div>
 
   <script type="importmap">
@@ -56,38 +56,66 @@
     let camera, scene, renderer, effect;
     let mainWheel;
     let shelfAssemblies = [];
-    const gears = [];
+
+    // Animation state
+    let currentRotation = 0;
+    let targetRotation = 0;
+    let isAnimating = false;
+    let autoRotateTimer = null;
+    const SHELF_COUNT = 8;
+    const ROTATION_PER_SHELF = (Math.PI * 2) / SHELF_COUNT;
 
     init();
     animate();
+    scheduleNextRotation();
 
-    function createGear(innerRadius, outerRadius, teeth, thickness, toothDepth) {
+    function createGearDisc(radius, holeSize, teeth, thickness) {
+      // Create a gear shape with diamond-shaped center hole (like RIT recreation)
       const shape = new THREE.Shape();
+
+      // Outer edge with teeth
       const anglePerTooth = (Math.PI * 2) / teeth;
+      const toothDepth = radius * 0.1;
       const toothWidth = anglePerTooth * 0.5;
 
       for (let i = 0; i < teeth; i++) {
         const angle = i * anglePerTooth;
-        const x1 = Math.cos(angle) * outerRadius;
-        const y1 = Math.sin(angle) * outerRadius;
-        const tipAngle = angle + toothWidth * 0.5;
-        const x2 = Math.cos(tipAngle) * (outerRadius + toothDepth);
-        const y2 = Math.sin(tipAngle) * (outerRadius + toothDepth);
-        const x3 = Math.cos(angle + toothWidth) * outerRadius;
-        const y3 = Math.sin(angle + toothWidth) * outerRadius;
-        const valleyAngle = angle + anglePerTooth;
-        const x4 = Math.cos(valleyAngle) * outerRadius;
-        const y4 = Math.sin(valleyAngle) * outerRadius;
+        const r = radius;
 
-        if (i === 0) shape.moveTo(x1, y1);
-        shape.lineTo(x2, y2);
-        shape.lineTo(x3, y3);
-        shape.lineTo(x4, y4);
+        if (i === 0) {
+          shape.moveTo(Math.cos(angle) * r, Math.sin(angle) * r);
+        }
+
+        // Tooth
+        shape.lineTo(
+          Math.cos(angle + toothWidth * 0.3) * (r + toothDepth),
+          Math.sin(angle + toothWidth * 0.3) * (r + toothDepth)
+        );
+        shape.lineTo(
+          Math.cos(angle + toothWidth * 0.7) * (r + toothDepth),
+          Math.sin(angle + toothWidth * 0.7) * (r + toothDepth)
+        );
+        shape.lineTo(
+          Math.cos(angle + toothWidth) * r,
+          Math.sin(angle + toothWidth) * r
+        );
+
+        // Valley
+        const nextAngle = (i + 1) * anglePerTooth;
+        shape.lineTo(Math.cos(nextAngle) * r, Math.sin(nextAngle) * r);
       }
 
-      const holePath = new THREE.Path();
-      holePath.absarc(0, 0, innerRadius, 0, Math.PI * 2, true);
-      shape.holes.push(holePath);
+      // Diamond-shaped center hole (rotated square)
+      if (holeSize > 0) {
+        const holePath = new THREE.Path();
+        const d = holeSize;
+        holePath.moveTo(0, d);      // Top
+        holePath.lineTo(d, 0);      // Right
+        holePath.lineTo(0, -d);     // Bottom
+        holePath.lineTo(-d, 0);     // Left
+        holePath.lineTo(0, d);      // Back to top
+        shape.holes.push(holePath);
+      }
 
       const geometry = new THREE.ExtrudeGeometry(shape, {
         depth: thickness,
@@ -97,337 +125,389 @@
       return geometry;
     }
 
-    function createOpenBook() {
-      // Open book with pages facing outward
+    function createOpenBook(color) {
+      // Simple chunky book - one solid block that reads clearly as "book" in ASCII
       const bookGroup = new THREE.Group();
 
-      const pageMat = new THREE.MeshStandardMaterial({ color: 0xf5f0e0, roughness: 0.9 });
-      const coverMat = new THREE.MeshStandardMaterial({ color: 0x4a2c1a, roughness: 0.8 });
+      const coverMat = new THREE.MeshStandardMaterial({ color: color, roughness: 0.85 });
+      const pageMat = new THREE.MeshStandardMaterial({ color: 0xf5f5e8, roughness: 0.9 });
 
-      // Left page spread
-      const leftPage = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.7, 0.02),
+      // Main page block - one solid cream rectangle
+      const pageBlock = new THREE.Mesh(
+        new THREE.BoxGeometry(3.5, 0.4, 2.5),
         pageMat
       );
-      leftPage.position.set(-0.26, 0, 0);
-      leftPage.rotation.y = 0.15;
-      bookGroup.add(leftPage);
+      bookGroup.add(pageBlock);
 
-      // Right page spread
-      const rightPage = new THREE.Mesh(
-        new THREE.BoxGeometry(0.5, 0.7, 0.02),
-        pageMat
-      );
-      rightPage.position.set(0.26, 0, 0);
-      rightPage.rotation.y = -0.15;
-      bookGroup.add(rightPage);
-
-      // Spine
-      const spine = new THREE.Mesh(
-        new THREE.BoxGeometry(0.08, 0.72, 0.15),
+      // Colored cover/border around edges
+      const coverTop = new THREE.Mesh(
+        new THREE.BoxGeometry(3.7, 0.12, 0.2),
         coverMat
       );
-      spine.position.set(0, 0, -0.06);
-      bookGroup.add(spine);
+      coverTop.position.set(0, 0.15, -1.35);
+      bookGroup.add(coverTop);
 
-      // Cover edges
-      const leftCover = new THREE.Mesh(
-        new THREE.BoxGeometry(0.52, 0.72, 0.03),
+      const coverBottom = new THREE.Mesh(
+        new THREE.BoxGeometry(3.7, 0.12, 0.2),
         coverMat
       );
-      leftCover.position.set(-0.28, 0, -0.04);
-      leftCover.rotation.y = 0.15;
-      bookGroup.add(leftCover);
+      coverBottom.position.set(0, 0.15, 1.35);
+      bookGroup.add(coverBottom);
 
-      const rightCover = new THREE.Mesh(
-        new THREE.BoxGeometry(0.52, 0.72, 0.03),
+      const coverLeft = new THREE.Mesh(
+        new THREE.BoxGeometry(0.2, 0.12, 2.5),
         coverMat
       );
-      rightCover.position.set(0.28, 0, -0.04);
-      rightCover.rotation.y = -0.15;
-      bookGroup.add(rightCover);
+      coverLeft.position.set(-1.85, 0.15, 0);
+      bookGroup.add(coverLeft);
+
+      const coverRight = new THREE.Mesh(
+        new THREE.BoxGeometry(0.2, 0.12, 2.5),
+        coverMat
+      );
+      coverRight.position.set(1.85, 0.15, 0);
+      bookGroup.add(coverRight);
 
       return bookGroup;
     }
 
+    function easeOutCubic(t) {
+      return 1 - Math.pow(1 - t, 3);
+    }
+
+    function scheduleNextRotation() {
+      // Random delay between 3-6 seconds
+      const delay = 3000 + Math.random() * 3000;
+      autoRotateTimer = setTimeout(() => {
+        // Rotate to next shelf position
+        targetRotation = currentRotation + ROTATION_PER_SHELF;
+        isAnimating = true;
+      }, delay);
+    }
+
     function init() {
-      // 3/4 VIEW - from front-left corner, like the Ramelli illustration
+      // 3/4 VIEW - positioned to see INTO the wheel (between the side walls)
       camera = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.1, 100);
-      camera.position.set(-12, 3, 16);
+      camera.position.set(20, 5, 18);
       camera.lookAt(0, 0, 0);
 
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0x0a0908);
 
-      // Lighting for 3/4 view
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
+      // Lighting
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
       scene.add(ambientLight);
 
-      const keyLight = new THREE.DirectionalLight(0xfff5e0, 1.4);
-      keyLight.position.set(-5, 8, 12);
+      const keyLight = new THREE.DirectionalLight(0xfff5e0, 1.3);
+      keyLight.position.set(-4, 6, 10);
       scene.add(keyLight);
 
       const fillLight = new THREE.DirectionalLight(0xe0e8ff, 0.5);
-      fillLight.position.set(8, 2, 8);
+      fillLight.position.set(6, 2, 6);
       scene.add(fillLight);
 
-      const rimLight = new THREE.DirectionalLight(0xffffff, 0.3);
-      rimLight.position.set(0, -2, -8);
-      scene.add(rimLight);
+      const backLight = new THREE.DirectionalLight(0xffffff, 0.25);
+      backLight.position.set(0, 0, -8);
+      scene.add(backLight);
 
       // Materials
       const brassMat = new THREE.MeshStandardMaterial({
         color: 0xd4a855,
-        metalness: 0.8,
-        roughness: 0.2
+        metalness: 0.75,
+        roughness: 0.25
       });
 
       const copperMat = new THREE.MeshStandardMaterial({
         color: 0xcd7f32,
-        metalness: 0.75,
+        metalness: 0.7,
         roughness: 0.3
       });
 
       const woodMat = new THREE.MeshStandardMaterial({
-        color: 0x8b6240,
+        color: 0x9b7653,
+        metalness: 0.0,
+        roughness: 0.8
+      });
+
+      const darkWoodMat = new THREE.MeshStandardMaterial({
+        color: 0x5c4033,
         metalness: 0.0,
         roughness: 0.85
       });
 
-      const darkWoodMat = new THREE.MeshStandardMaterial({
-        color: 0x5c3d2e,
-        metalness: 0.0,
-        roughness: 0.9
-      });
-
       const ironMat = new THREE.MeshStandardMaterial({
         color: 0x4a4a4a,
-        metalness: 0.85,
+        metalness: 0.8,
         roughness: 0.4
       });
 
-      // === CABINET FRAME (more architectural, like Ramelli) ===
+      // === SUPPORT FRAME (perpendicular - posts on SIDES of wheel) ===
+      // Like RIT recreation: vertical posts along Z-axis, supporting axle from sides
 
-      // Left pillar
-      const pillarGeom = new THREE.BoxGeometry(0.8, 13, 1.2);
-      const leftPillar = new THREE.Mesh(pillarGeom, darkWoodMat);
-      leftPillar.position.set(-6.5, 0, 0);
-      scene.add(leftPillar);
+      const frameDepth = 8.0; // How far apart the side posts are
 
-      // Right pillar
-      const rightPillar = new THREE.Mesh(pillarGeom, darkWoodMat);
-      rightPillar.position.set(6.5, 0, 0);
-      scene.add(rightPillar);
+      // Front-left leg (angled outward)
+      const legGeom = new THREE.BoxGeometry(0.6, 11, 0.6);
+      const frontLeftLeg = new THREE.Mesh(legGeom, darkWoodMat);
+      frontLeftLeg.position.set(-0.8, -0.5, frameDepth / 2 + 0.5);
+      frontLeftLeg.rotation.x = -0.08; // Slight outward angle
+      scene.add(frontLeftLeg);
 
-      // Top decorative beam
-      const topBeamGeom = new THREE.BoxGeometry(14.5, 0.8, 1.2);
+      // Front-right leg
+      const frontRightLeg = new THREE.Mesh(legGeom, darkWoodMat);
+      frontRightLeg.position.set(0.8, -0.5, frameDepth / 2 + 0.5);
+      frontRightLeg.rotation.x = -0.08;
+      scene.add(frontRightLeg);
+
+      // Back-left leg
+      const backLeftLeg = new THREE.Mesh(legGeom, darkWoodMat);
+      backLeftLeg.position.set(-0.8, -0.5, -frameDepth / 2 - 0.5);
+      backLeftLeg.rotation.x = 0.08;
+      scene.add(backLeftLeg);
+
+      // Back-right leg
+      const backRightLeg = new THREE.Mesh(legGeom, darkWoodMat);
+      backRightLeg.position.set(0.8, -0.5, -frameDepth / 2 - 0.5);
+      backRightLeg.rotation.x = 0.08;
+      scene.add(backRightLeg);
+
+      // Top beam (runs along Z-axis, above wheel)
+      const topBeamGeom = new THREE.BoxGeometry(0.7, 0.7, frameDepth + 2);
       const topBeam = new THREE.Mesh(topBeamGeom, darkWoodMat);
-      topBeam.position.set(0, 6.8, 0);
+      topBeam.position.set(0, 5.8, 0);
       scene.add(topBeam);
 
-      // Bottom base
-      const baseGeom = new THREE.BoxGeometry(14.5, 0.6, 2);
-      const base = new THREE.Mesh(baseGeom, darkWoodMat);
-      base.position.set(0, -6.6, 0.4);
-      scene.add(base);
+      // Cross braces at top (connecting front and back pairs)
+      const topCrossGeom = new THREE.BoxGeometry(2.2, 0.5, 0.5);
+      const frontCross = new THREE.Mesh(topCrossGeom, darkWoodMat);
+      frontCross.position.set(0, 5.2, frameDepth / 2 + 0.3);
+      scene.add(frontCross);
 
-      // Decorative top crown
-      const crownGeom = new THREE.BoxGeometry(12, 0.4, 0.8);
-      const crown = new THREE.Mesh(crownGeom, woodMat);
-      crown.position.set(0, 7.3, 0);
-      scene.add(crown);
+      const backCross = new THREE.Mesh(topCrossGeom, darkWoodMat);
+      backCross.position.set(0, 5.2, -frameDepth / 2 - 0.3);
+      scene.add(backCross);
 
-      // Side panels (partial, cabinet-like)
-      const sidePanelGeom = new THREE.BoxGeometry(0.2, 10, 3);
-      const leftPanel = new THREE.Mesh(sidePanelGeom, darkWoodMat);
-      leftPanel.position.set(-6.8, 0.5, -1);
-      scene.add(leftPanel);
+      // Bottom cross beam (base)
+      const bottomBeamGeom = new THREE.BoxGeometry(2.5, 0.4, frameDepth + 2.5);
+      const bottomBeam = new THREE.Mesh(bottomBeamGeom, darkWoodMat);
+      bottomBeam.position.set(0, -5.8, 0);
+      scene.add(bottomBeam);
 
-      const rightPanel = new THREE.Mesh(sidePanelGeom, darkWoodMat);
-      rightPanel.position.set(6.8, 0.5, -1);
-      scene.add(rightPanel);
+      // Axle bearing blocks (on the top beam, holding the axle)
+      const bearingGeom = new THREE.BoxGeometry(1.2, 1.0, 0.8);
+      const frontBearing = new THREE.Mesh(bearingGeom, woodMat);
+      frontBearing.position.set(0, 5.2, frameDepth / 2 - 0.5);
+      scene.add(frontBearing);
 
-      // Axle support brackets
-      const bracketGeom = new THREE.BoxGeometry(1.5, 1.5, 0.5);
-      const leftBracket = new THREE.Mesh(bracketGeom, brassMat);
-      leftBracket.position.set(-6, 0, 0.7);
-      scene.add(leftBracket);
-
-      const rightBracket = new THREE.Mesh(bracketGeom, brassMat);
-      rightBracket.position.set(6, 0, 0.7);
-      scene.add(rightBracket);
+      const backBearing = new THREE.Mesh(bearingGeom, woodMat);
+      backBearing.position.set(0, 5.2, -frameDepth / 2 + 0.5);
+      scene.add(backBearing);
 
       // === MAIN BOOK WHEEL ===
       mainWheel = new THREE.Group();
       scene.add(mainWheel);
 
-      const wheelRadius = 5;
+      const wheelRadius = 4.8;
+      const wheelDepth = 6.5; // Distance between side walls - wide enough to see shelves clearly
 
-      // Outer wooden rim
-      const outerRimGeom = new THREE.TorusGeometry(wheelRadius, 0.4, 16, 64);
-      const outerRim = new THREE.Mesh(outerRimGeom, woodMat);
-      mainWheel.add(outerRim);
+      // === CIRCULAR SIDE WALLS (the key feature!) ===
 
-      // Inner rim
-      const innerRimGeom = new THREE.TorusGeometry(wheelRadius - 1, 0.25, 12, 48);
-      const innerRim = new THREE.Mesh(innerRimGeom, darkWoodMat);
-      mainWheel.add(innerRim);
+      // Front side wall (large wooden disc)
+      const sideWallGeom = new THREE.CylinderGeometry(wheelRadius, wheelRadius, 0.25, 64);
+      const frontWall = new THREE.Mesh(sideWallGeom, woodMat);
+      frontWall.rotation.x = Math.PI / 2;
+      frontWall.position.z = wheelDepth / 2;
+      mainWheel.add(frontWall);
 
-      // Spokes
-      const numSpokes = 10;
-      for (let i = 0; i < numSpokes; i++) {
-        const angle = (i / numSpokes) * Math.PI * 2;
-        const spokeGeom = new THREE.CylinderGeometry(0.12, 0.12, wheelRadius * 2 - 1.2, 8);
-        const spoke = new THREE.Mesh(spokeGeom, darkWoodMat);
-        spoke.rotation.z = angle;
-        mainWheel.add(spoke);
+      // Back side wall
+      const backWall = new THREE.Mesh(sideWallGeom, woodMat);
+      backWall.rotation.x = Math.PI / 2;
+      backWall.position.z = -wheelDepth / 2;
+      mainWheel.add(backWall);
+
+      // Outer rim connecting the walls
+      const rimGeom = new THREE.TorusGeometry(wheelRadius, 0.2, 12, 64);
+      const frontRim = new THREE.Mesh(rimGeom, darkWoodMat);
+      frontRim.position.z = wheelDepth / 2;
+      mainWheel.add(frontRim);
+
+      const backRim = new THREE.Mesh(rimGeom, darkWoodMat);
+      backRim.position.z = -wheelDepth / 2;
+      mainWheel.add(backRim);
+
+      // === DECORATIVE GEARS ON SIDE WALLS ===
+      // 8 radial stacks: Central (small) → Middle ring (8 small) → Outer ring (8 large)
+
+      // Central gear around the axle (small - 50% of before)
+      const centralGearGeom = createGearDisc(0.8, 0.2, 16, 0.15);
+
+      const centralGearFront = new THREE.Mesh(centralGearGeom, brassMat);
+      centralGearFront.position.set(0, 0, wheelDepth / 2 + 0.15);
+      mainWheel.add(centralGearFront);
+
+      const centralGearBack = new THREE.Mesh(centralGearGeom, brassMat);
+      centralGearBack.position.set(0, 0, -wheelDepth / 2 - 0.15);
+      centralGearBack.rotation.y = Math.PI;
+      mainWheel.add(centralGearBack);
+
+      // Middle ring - 8 small gears encircling the central gear
+      // (tiny gaps between them - not driving each other, but driving outer gears)
+      const middleGearGeom = createGearDisc(0.65, 0.18, 12, 0.15);
+      const middleRingRadius = 1.55; // Just outside central gear
+
+      // Outer ring - 8 large gears at the edge
+      const outerGearGeom = createGearDisc(1.3, 0.35, 20, 0.15);
+      const outerRingRadius = 3.4; // Near the wheel rim
+
+      // Front wall - 8 radial stacks
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2 - Math.PI / 2; // Start at 12 o'clock
+
+        // Middle gear
+        const middleGear = new THREE.Mesh(middleGearGeom, copperMat);
+        middleGear.position.set(
+          Math.cos(angle) * middleRingRadius,
+          Math.sin(angle) * middleRingRadius,
+          wheelDepth / 2 + 0.15
+        );
+        mainWheel.add(middleGear);
+
+        // Outer gear
+        const outerGear = new THREE.Mesh(outerGearGeom, brassMat);
+        outerGear.position.set(
+          Math.cos(angle) * outerRingRadius,
+          Math.sin(angle) * outerRingRadius,
+          wheelDepth / 2 + 0.15
+        );
+        mainWheel.add(outerGear);
       }
 
-      // Central hub
-      const hubGeom = new THREE.CylinderGeometry(1.2, 1.2, 0.8, 32);
-      const hub = new THREE.Mesh(hubGeom, brassMat);
+      // Back wall - 8 radial stacks mirrored
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2 - Math.PI / 2;
+
+        // Middle gear
+        const middleGear = new THREE.Mesh(middleGearGeom, copperMat);
+        middleGear.position.set(
+          Math.cos(angle) * middleRingRadius,
+          Math.sin(angle) * middleRingRadius,
+          -wheelDepth / 2 - 0.15
+        );
+        middleGear.rotation.y = Math.PI;
+        mainWheel.add(middleGear);
+
+        // Outer gear
+        const outerGear = new THREE.Mesh(outerGearGeom, brassMat);
+        outerGear.position.set(
+          Math.cos(angle) * outerRingRadius,
+          Math.sin(angle) * outerRingRadius,
+          -wheelDepth / 2 - 0.15
+        );
+        outerGear.rotation.y = Math.PI;
+        mainWheel.add(outerGear);
+      }
+
+      // Central axle hub
+      const hubGeom = new THREE.CylinderGeometry(0.5, 0.5, wheelDepth + 1, 24);
+      const hub = new THREE.Mesh(hubGeom, ironMat);
       hub.rotation.x = Math.PI / 2;
       mainWheel.add(hub);
 
-      const hubCenter = new THREE.CylinderGeometry(0.6, 0.6, 1, 24);
-      const hubCenterMesh = new THREE.Mesh(hubCenter, ironMat);
-      hubCenterMesh.rotation.x = Math.PI / 2;
-      mainWheel.add(hubCenterMesh);
+      // Hub caps
+      const hubCapGeom = new THREE.CylinderGeometry(0.7, 0.7, 0.2, 24);
+      const hubCapFront = new THREE.Mesh(hubCapGeom, brassMat);
+      hubCapFront.rotation.x = Math.PI / 2;
+      hubCapFront.position.z = wheelDepth / 2 + 0.35;
+      mainWheel.add(hubCapFront);
 
-      // === BOOK PLATFORMS with OPEN BOOKS (10 around wheel) ===
-      const numShelves = 10;
-      for (let i = 0; i < numShelves; i++) {
-        const angle = (i / numShelves) * Math.PI * 2;
+      const hubCapBack = new THREE.Mesh(hubCapGeom, brassMat);
+      hubCapBack.rotation.x = Math.PI / 2;
+      hubCapBack.position.z = -wheelDepth / 2 - 0.35;
+      mainWheel.add(hubCapBack);
+
+      // === READING SHELVES (8 tilted lecterns around the wheel) ===
+      const bookColors = [0x8b0000, 0x1a1a4e, 0x2f4f2f, 0x4a3020, 0x3d0c02, 0x1a3a1a, 0x3d2b1f, 0x191940];
+
+      for (let i = 0; i < SHELF_COUNT; i++) {
+        const angle = (i / SHELF_COUNT) * Math.PI * 2;
 
         const shelfAssembly = new THREE.Group();
+
+        // Position at radius
+        const shelfRadius = wheelRadius - 1.2;
         shelfAssembly.position.set(
-          Math.cos(angle) * wheelRadius,
-          Math.sin(angle) * wheelRadius,
+          Math.cos(angle) * shelfRadius,
+          Math.sin(angle) * shelfRadius,
           0
         );
 
-        // Book platform / lectern
-        const platformGeom = new THREE.BoxGeometry(1.8, 0.1, 1.2);
-        const platform = new THREE.Mesh(platformGeom, woodMat);
-        platform.position.set(0.6, 0, 0);
-        platform.rotation.z = -Math.PI / 5; // ~36 degree reading angle
-        shelfAssembly.add(platform);
+        // Create tilted reading desk (lectern style)
+        const deskGroup = new THREE.Group();
 
-        // Lip to hold book
-        const lipGeom = new THREE.BoxGeometry(1.8, 0.15, 0.12);
+        // Tilted reading surface - larger and more visible
+        const surfaceGeom = new THREE.BoxGeometry(2.8, 0.12, wheelDepth - 0.4);
+        const surface = new THREE.Mesh(surfaceGeom, woodMat);
+        deskGroup.add(surface);
+
+        // Lip at the bottom (to hold books from sliding) - more prominent
+        const lipGeom = new THREE.BoxGeometry(2.8, 0.35, 0.15);
         const lip = new THREE.Mesh(lipGeom, darkWoodMat);
-        lip.position.set(0.15, -0.35, 0.5);
-        lip.rotation.z = -Math.PI / 5;
-        shelfAssembly.add(lip);
+        lip.position.set(0, 0.18, -(wheelDepth - 0.4) / 2 - 0.06);
+        deskGroup.add(lip);
 
-        // Side supports
-        const supportGeom = new THREE.BoxGeometry(0.1, 0.6, 1);
-        const leftSupport = new THREE.Mesh(supportGeom, darkWoodMat);
-        leftSupport.position.set(0.2, 0.1, -0.5);
-        leftSupport.rotation.z = -Math.PI / 5;
-        shelfAssembly.add(leftSupport);
+        // Side rails - more visible
+        const sideRailGeom = new THREE.BoxGeometry(2.9, 0.25, 0.12);
+        const leftRail = new THREE.Mesh(sideRailGeom, darkWoodMat);
+        leftRail.position.set(0, 0.12, -wheelDepth / 2 + 0.25);
+        deskGroup.add(leftRail);
 
-        const rightSupport = new THREE.Mesh(supportGeom, darkWoodMat);
-        rightSupport.position.set(0.2, 0.1, 0.5);
-        rightSupport.rotation.z = -Math.PI / 5;
-        shelfAssembly.add(rightSupport);
+        const rightRail = new THREE.Mesh(sideRailGeom, darkWoodMat);
+        rightRail.position.set(0, 0.12, wheelDepth / 2 - 0.25);
+        deskGroup.add(rightRail);
 
-        // OPEN BOOK facing outward (toward where scholar would sit)
-        const book = createOpenBook();
-        book.position.set(0.5, 0.15, 0);
-        book.rotation.z = -Math.PI / 5;
-        book.rotation.x = -Math.PI / 2; // Pages face outward
-        book.scale.set(1.2, 1.2, 1.2);
-        shelfAssembly.add(book);
+        // Tilt the desk outward (like a lectern facing outward)
+        deskGroup.rotation.z = -0.4; // Slightly more tilt for visibility
+        deskGroup.position.set(0.8, 0, 0);
+        shelfAssembly.add(deskGroup);
 
-        // Bracket connecting to wheel
-        const bracketGeom = new THREE.BoxGeometry(0.2, 0.5, 0.5);
-        const bracket = new THREE.Mesh(bracketGeom, ironMat);
-        bracket.position.set(-0.3, 0, 0);
-        shelfAssembly.add(bracket);
+        // Open book sitting on the tilted desk
+        const bookColor = bookColors[i % bookColors.length];
+        const openBook = createOpenBook(bookColor);
+        // No rotation - just position on the desk
+        openBook.position.set(1.0, 0.5, 0);
+        shelfAssembly.add(openBook);
 
         mainWheel.add(shelfAssembly);
         shelfAssemblies.push(shelfAssembly);
       }
 
-      // === LARGE SIDE GEARS (prominently visible like in illustration) ===
+      // Radial spokes (connecting center to shelves)
+      for (let i = 0; i < SHELF_COUNT; i++) {
+        const angle = (i / SHELF_COUNT) * Math.PI * 2 + ROTATION_PER_SHELF / 2;
+        const spokeGeom = new THREE.BoxGeometry(0.15, wheelRadius - 1.2, 0.15);
+        const spoke = new THREE.Mesh(spokeGeom, darkWoodMat);
+        spoke.rotation.z = angle;
+        spoke.position.set(
+          Math.cos(angle) * (wheelRadius / 2 - 0.3),
+          Math.sin(angle) * (wheelRadius / 2 - 0.3),
+          0
+        );
+        mainWheel.add(spoke);
+      }
 
-      // Main wheel gear (large, visible on side)
-      const mainGearGeom = createGear(0.8, 2.2, 36, 0.4, 0.25);
-      const mainGear = new THREE.Mesh(mainGearGeom, brassMat);
-      mainGear.position.set(0, 0, -1);
-      mainWheel.add(mainGear);
-
-      // Secondary large gear (meshing with main)
-      const secGearGeom = createGear(0.4, 1.4, 24, 0.35, 0.2);
-      const secGear = new THREE.Mesh(secGearGeom, copperMat);
-      secGear.position.set(-3.5, -1.5, -1);
-      scene.add(secGear);
-      gears.push({ mesh: secGear, speed: 0.006 * (36/24), direction: -1 });
-
-      // Tertiary gear
-      const tertGearGeom = createGear(0.25, 0.9, 18, 0.3, 0.15);
-      const tertGear = new THREE.Mesh(tertGearGeom, brassMat);
-      tertGear.position.set(-4.6, -2.8, -1);
-      scene.add(tertGear);
-      gears.push({ mesh: tertGear, speed: 0.006 * (36/24) * (24/18), direction: 1 });
-
-      // Small crank gear
-      const crankGearGeom = createGear(0.15, 0.55, 12, 0.25, 0.12);
-      const crankGear = new THREE.Mesh(crankGearGeom, copperMat);
-      crankGear.position.set(-5.3, -3.8, -1);
-      scene.add(crankGear);
-      gears.push({ mesh: crankGear, speed: 0.006 * (36/24) * (24/18) * (18/12), direction: -1 });
-
-      // Crank handle
-      const handleGeom = new THREE.CylinderGeometry(0.1, 0.1, 1.2, 8);
-      const handle = new THREE.Mesh(handleGeom, ironMat);
-      handle.position.set(-5.3, -3.8, -0.2);
-      handle.rotation.x = Math.PI / 2;
-      scene.add(handle);
-
-      // Gear hub decorations
-      const gearHubGeom = new THREE.CylinderGeometry(0.3, 0.3, 0.5, 16);
-      const secHub = new THREE.Mesh(gearHubGeom, ironMat);
-      secHub.rotation.x = Math.PI / 2;
-      secHub.position.set(-3.5, -1.5, -0.8);
-      scene.add(secHub);
-
-      const tertHub = new THREE.Mesh(gearHubGeom, ironMat);
-      tertHub.rotation.x = Math.PI / 2;
-      tertHub.position.set(-4.6, -2.8, -0.8);
-      tertHub.scale.set(0.7, 0.7, 0.7);
-      scene.add(tertHub);
-
-      // === SCHOLAR'S DESK (in front of wheel) ===
-      const deskGeom = new THREE.BoxGeometry(3, 0.15, 2);
+      // === READING DESK ===
+      const deskGeom = new THREE.BoxGeometry(2.5, 0.12, 1.8);
       const desk = new THREE.Mesh(deskGeom, woodMat);
-      desk.position.set(0, -3.5, 6);
+      desk.position.set(0, -3, 5.5);
       scene.add(desk);
 
       // Desk legs
-      const legGeom = new THREE.BoxGeometry(0.2, 2.5, 0.2);
-      const positions = [[-1.3, -4.7, 5.2], [1.3, -4.7, 5.2], [-1.3, -4.7, 6.8], [1.3, -4.7, 6.8]];
-      positions.forEach(pos => {
-        const leg = new THREE.Mesh(legGeom, darkWoodMat);
+      const deskLegGeom = new THREE.BoxGeometry(0.15, 2.2, 0.15);
+      [[-1, -4.1, 4.8], [1, -4.1, 4.8], [-1, -4.1, 6.2], [1, -4.1, 6.2]].forEach(pos => {
+        const leg = new THREE.Mesh(deskLegGeom, darkWoodMat);
         leg.position.set(...pos);
         scene.add(leg);
       });
-
-      // Chair (simple)
-      const chairSeat = new THREE.Mesh(
-        new THREE.BoxGeometry(1.5, 0.12, 1.5),
-        woodMat
-      );
-      chairSeat.position.set(0, -4, 8);
-      scene.add(chairSeat);
-
-      const chairBack = new THREE.Mesh(
-        new THREE.BoxGeometry(1.5, 2, 0.15),
-        darkWoodMat
-      );
-      chairBack.position.set(0, -3, 8.7);
-      scene.add(chairBack);
 
       // Renderer
       renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -450,15 +530,24 @@
 
       window.addEventListener('resize', onWindowResize);
       document.addEventListener('mousemove', onMouseMove);
+
+      // Click to manually rotate to next book
+      document.addEventListener('click', () => {
+        if (!isAnimating) {
+          clearTimeout(autoRotateTimer);
+          targetRotation = currentRotation + ROTATION_PER_SHELF;
+          isAnimating = true;
+        }
+      });
     }
 
     function onMouseMove(event) {
       const x = (event.clientX / window.innerWidth) * 2 - 1;
       const y = -(event.clientY / window.innerHeight) * 2 + 1;
 
-      // Subtle parallax around the 3/4 view
-      camera.position.x = -12 + x * 2;
-      camera.position.y = 3 + y * 1.5;
+      // Subtle camera movement based on mouse position
+      camera.position.x = 20 + x * 3;
+      camera.position.y = 5 + y * 2;
       camera.lookAt(0, 0, 0);
     }
 
@@ -472,17 +561,26 @@
     function animate() {
       requestAnimationFrame(animate);
 
-      // Rotate main wheel
-      mainWheel.rotation.z += 0.006;
+      // Smooth easing animation
+      if (isAnimating) {
+        const diff = targetRotation - currentRotation;
 
-      // Counter-rotate shelves to keep books facing outward
+        if (Math.abs(diff) < 0.001) {
+          // Snap to target and stop
+          currentRotation = targetRotation;
+          isAnimating = false;
+          scheduleNextRotation();
+        } else {
+          // Ease toward target (cubic ease-out feel)
+          currentRotation += diff * 0.03;
+        }
+      }
+
+      mainWheel.rotation.z = currentRotation;
+
+      // Counter-rotate shelves to keep books upright
       shelfAssemblies.forEach(shelf => {
-        shelf.rotation.z = -mainWheel.rotation.z;
-      });
-
-      // Rotate drive gears
-      gears.forEach(gear => {
-        gear.mesh.rotation.z += gear.speed * gear.direction;
+        shelf.rotation.z = -currentRotation;
       });
 
       effect.render(scene, camera);
