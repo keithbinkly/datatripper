@@ -229,9 +229,12 @@ def cmd_add(url: str, dry_run: bool = False, auto_approve: bool = False):
                 result.author_id,
                 result.author_name,
                 source_url=url,
+                github_enrichment=result.github_enrichment,
             ))
             f.write("\n")
         print(f"✓ New author written to: {authors_file}")
+        if result.github_enrichment:
+            print(f"  ✓ Enriched from GitHub: {result.github_enrichment.get('github', '')}")
 
     print("\n✅ Done! Resource added to knowledge base.")
 

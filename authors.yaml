@@ -1805,3 +1805,58 @@ authors:
     socialFollowing: ~
     bio: Creator of dbt-to-cube pipeline for semantic layer automation
     bioSource: https://github.com/nicholasyager
+
+  - id: s-n
+    name: Subramanya N
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: Bengaluru
+      country: India
+      continent: Asia
+    # Professional
+    jobTitle: R&D Engineer
+    industry: Enterprise Software
+    affiliation: Dassault Systemes
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Social
+    github: https://github.com/subramanya-kn
+    twitter: https://twitter.com/Subramanya14689
+    socialFollowing: ~
+    # Meta
+    bio: >
+      R&D Engineer at Dassault Systemes, writes about agentic AI infrastructure and context engineering.
+    bioSource: https://subramanya.ai/
+
+  - id: a-bergevin
+    name: Anna Bergevin
+    # Demographics
+    birthYear: ~
+    generation: ~
+    gender: ~
+    location:
+      city: ~
+      country: ~
+      continent: ~
+    # Professional
+    jobTitle: ~
+    industry: Data
+    affiliation: ~
+    perspectiveType: practitioner
+    yearsInField: ~
+    # Background
+    education: ~
+    nativeLanguage: ~
+    # Social
+    github: https://github.com/a-bergevin
+    socialFollowing: ~
+    # Meta
+    bio: >
+      Author of "When Data Met Product" newsletter on semantic infrastructure and data product management.
+    bioSource: https://dataprodmgmt.substack.com/

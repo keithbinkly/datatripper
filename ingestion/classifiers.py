@@ -404,6 +404,9 @@ class ClassifiedResource:
     reading_time: str
     word_count: int
 
+    # GitHub enrichment (optional, for new authors)
+    github_enrichment: Optional[dict] = None
+
 
 def configure_dspy(provider: str = "anthropic", model: str = "claude-sonnet-4-20250514"):
     """Configure DSPy with the specified LLM provider."""
@@ -418,26 +421,73 @@ def configure_dspy(provider: str = "anthropic", model: str = "claude-sonnet-4-20
 
 
 class IngestionPipeline:
-    """Full ingestion pipeline combining all modules."""
+    """Full ingestion pipeline combining all modules.
+
+    Uses lazy loading for DSPy modules to reduce startup time and memory
+    usage when not all modules are needed.
+    """
 
     def __init__(
         self,
         existing_authors: Optional[set[str]] = None,
         score_definitions: bool = True,
         enable_logging: bool = True,
+        enrich_github: bool = True,
     ):
-        self.classifier = ResourceClassifier()
-        self.definition_gen = DefinitionGenerator()
-        self.definition_scorer = DefinitionScorer() if score_definitions else None
-        self.author_extractor = AuthorExtractor()
-        self.id_generator = IdGenerator()
+        # Lazy-loaded module cache
+        self._classifier = None
+        self._definition_gen = None
+        self._definition_scorer = None
+        self._author_extractor = None
+        self._id_generator = None
+
         self.existing_authors = existing_authors or set()
         self.score_definitions = score_definitions
         self.enable_logging = enable_logging
-        self.logger = None
-        if enable_logging:
-            from .logger import get_logger
-            self.logger = get_logger()
+        self.enrich_github = enrich_github
+        self._logger = None
+        self._logger_loaded = False
+
+    @property
+    def classifier(self) -> ResourceClassifier:
+        if self._classifier is None:
+            self._classifier = ResourceClassifier()
+        return self._classifier
+
+    @property
+    def definition_gen(self) -> DefinitionGenerator:
+        if self._definition_gen is None:
+            self._definition_gen = DefinitionGenerator()
+        return self._definition_gen
+
+    @property
+    def definition_scorer(self) -> Optional[DefinitionScorer]:
+        if not self.score_definitions:
+            return None
+        if self._definition_scorer is None:
+            self._definition_scorer = DefinitionScorer()
+        return self._definition_scorer
+
+    @property
+    def author_extractor(self) -> AuthorExtractor:
+        if self._author_extractor is None:
+            self._author_extractor = AuthorExtractor()
+        return self._author_extractor
+
+    @property
+    def id_generator(self) -> IdGenerator:
+        if self._id_generator is None:
+            self._id_generator = IdGenerator()
+        return self._id_generator
+
+    @property
+    def logger(self):
+        if not self._logger_loaded:
+            self._logger_loaded = True
+            if self.enable_logging:
+                from .logger import get_logger
+                self._logger = get_logger()
+        return self._logger
 
     def process(self, extracted) -> ClassifiedResource:
         """
@@ -496,6 +546,21 @@ class IngestionPipeline:
             detected_author=extracted.author_name,
             platform=extracted.source_platform,
         )
+
+        # Step 3b: GitHub enrichment for new authors (optional)
+        github_enrichment = {}
+        is_new_author = author["author_id"] not in self.existing_authors
+        if self.enrich_github and is_new_author:
+            try:
+                from .github_enrichment import enrich_author
+                github_enrichment = enrich_author(
+                    author_name=author["author_name"],
+                    author_id=author["author_id"],
+                    source_url=extracted.url,
+                )
+            except Exception:
+                pass  # GitHub enrichment is optional, don't fail pipeline
+
         if self.logger:
             self.logger.log_author(author)
 
@@ -526,7 +591,7 @@ class IngestionPipeline:
             alternate_labels=definition["alternate_labels"],
             author_id=author["author_id"],
             author_name=author["author_name"],
-            is_new_author=author["author_id"] not in self.existing_authors,
+            is_new_author=is_new_author,
             source=extracted.source_platform,
             content_type=content_type,
             published_date=extracted.published_date,
@@ -541,4 +606,5 @@ class IngestionPipeline:
             definition_feedback=definition_feedback,
             reading_time=estimate_reading_time(extracted.word_count, extracted.has_video),
             word_count=extracted.word_count,
+            github_enrichment=github_enrichment if github_enrichment else None,
         )

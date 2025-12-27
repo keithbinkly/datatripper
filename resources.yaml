@@ -3879,3 +3879,205 @@ resources:
     validationStatus: unvalidated
     readingTime: 15m
     color: "#f97316"
+
+  # ============================================
+  # Context Graphs & Semantic Infrastructure Series (Dec 2025)
+  # ============================================
+
+  - id: context-graphs-trillion-dollar-evolution
+    url: https://subramanya.ai/2025/12/26/context-graphs-my-thoughts-on-the-trillion-dollar-evolution-of-agentic-memory/
+    preferredLabel: "Context Graphs: The Trillion Dollar Evolution of Agentic Infrastructure"
+    alternateLabels:
+      - decision traces
+      - agentic memory
+      - systems of record for decisions
+      - context graphs
+      - agent governance stack
+    definition: >
+      Introduces "decision traces" as the missing infrastructure layer for enterprise AI—the reasoning
+      connecting data to action that was never treated as data. Proposes context graphs as Phase 3 of
+      agentic evolution (after tools/MCP and skills), enabling agents to reference precedent and
+      institutional knowledge rather than operating in isolation.
+
+    # Provenance
+    author: s-n
+    source: subramanya.ai
+    contentType: essay
+    publishedDate: 2025-12-26
+    dateAdded: 2025-12-26
+
+    # Classification
+    domain: knowledge-engineering
+    category: Context Engineering
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: related
+        target: semantic-work-figma-moment
+      - type: related
+        target: chaos-to-context-semantic-infrastructure
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 4m
+    color: "#06b6d4"
+
+  - id: semantic-work-figma-moment
+    url: https://dataprodmgmt.substack.com/p/why-semantic-work-needs-its-design
+    preferredLabel: Semantic Work Needs Its Figma Moment
+    alternateLabels:
+      - semantic infrastructure tooling
+      - ontology democratization
+      - design systems for data
+      - semantic collaboration
+    definition: >
+      Argues that semantic infrastructure faces the same scaling crisis design faced 15 years ago—
+      expertise is scarce but demand is exploding. Proposes semantic work needs tools that democratize
+      expertise like design systems did, with guardrails preventing structural errors and templates
+      encoding common patterns.
+
+    # Provenance
+    author: a-bergevin
+    source: dataprodmgmt.substack.com
+    contentType: essay
+    publishedDate: 2025-12-23
+    dateAdded: 2025-12-26
+
+    # Classification
+    domain: knowledge-engineering
+    category: Semantic Foundations
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: related
+        target: chaos-to-context-semantic-infrastructure
+      - type: related
+        target: context-graphs-trillion-dollar-evolution
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 8m
+    color: "#06b6d4"
+
+  - id: chaos-to-context-semantic-infrastructure
+    url: https://dataprodmgmt.substack.com/p/from-chaos-to-context-where-to-begin
+    preferredLabel: "From Chaos to Context: Where to Begin with Semantic Infrastructure"
+    alternateLabels:
+      - semantic infrastructure getting started
+      - business context for AI
+      - semantic ambiguity
+      - metadata strategy
+    definition: >
+      Practical guide for starting semantic infrastructure work. Identifies semantic ambiguity (same term,
+      different meanings across departments) as the core problem AI amplifies. Presents four approaches
+      from full ontology to incremental, recommending "start small, plan for scale" with analyst-focused
+      AI assistants as early wins.
+
+    # Provenance
+    author: a-bergevin
+    source: dataprodmgmt.substack.com
+    contentType: essay
+    publishedDate: 2025-12-09
+    dateAdded: 2025-12-26
+
+    # Classification
+    domain: knowledge-engineering
+    category: Core Architecture
+    granularity: implementation
+
+    # Relationships
+    relationships:
+      - type: related
+        target: semantic-work-figma-moment
+      - type: narrower
+        target: kg-fail-enterprise-ontologies-part1
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 22m
+    color: "#06b6d4"
+
+  - id: kg-fail-enterprise-ontologies-part1
+    url: https://vinvashishta.substack.com/p/why-most-enterprise-ontologies-and
+    preferredLabel: "Why Most Enterprise Ontologies & Knowledge Graphs Fail Part 1"
+    alternateLabels:
+      - knowledge graph failure patterns
+      - ontology anti-patterns
+      - enterprise KG challenges
+    definition: >
+      First part of series on why enterprise ontologies fail. Identifies four fundamental challenges:
+      consensus is impossible (stakeholders never agree on single truth), stability cannot be guaranteed
+      (dynamism is intrinsic), completeness is unattainable (knowledge must expand continuously), and
+      transparency is unrealistic (companies won't share proprietary data).
+
+    # Provenance
+    author: v-vashishta
+    source: vinvashishta.substack.com
+    contentType: essay
+    publishedDate: 2025-12-16
+    dateAdded: 2025-12-26
+
+    # Classification
+    domain: knowledge-engineering
+    category: Knowledge Graphs
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: related
+        target: kg-fail-enterprise-ontologies-part2
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 6m
+    color: "#06b6d4"
+
+  - id: kg-fail-enterprise-ontologies-part2
+    url: https://vinvashishta.substack.com/p/why-most-enterprise-ontologies-and-376
+    preferredLabel: "Why Most Enterprise Ontologies & Knowledge Graphs Fail Part 2: The Reality Gap"
+    alternateLabels:
+      - knowledge graph reality gap
+      - ontology vs enterprise rules
+      - expert fallibility
+      - mathematical validation
+    definition: >
+      Second part examining the "reality gap" between ontology theory and enterprise reality. Key insight:
+      making ontologies work requires putting wrong information in initially because experts are fallible
+      and there's no perfect starting point. Critiques lack of mathematical validation for accuracy
+      (ontologies validate structure but not truth).
+
+    # Provenance
+    author: v-vashishta
+    source: vinvashishta.substack.com
+    contentType: essay
+    publishedDate: 2025-12-23
+    dateAdded: 2025-12-26
+
+    # Classification
+    domain: knowledge-engineering
+    category: Knowledge Graphs
+    granularity: conceptual
+
+    # Relationships
+    relationships:
+      - type: related
+        target: kg-fail-enterprise-ontologies-part1
+      - type: broader
+        target: chaos-to-context-semantic-infrastructure
+
+    # Quality
+    validationStatus: unvalidated
+
+    # Display
+    readingTime: 18m
+    color: "#06b6d4"

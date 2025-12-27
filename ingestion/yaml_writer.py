@@ -70,6 +70,7 @@ def generate_author_yaml(
     affiliation: Optional[str] = None,
     is_organization: bool = False,
     source_url: Optional[str] = None,
+    github_enrichment: Optional[dict] = None,
 ) -> str:
     """
     Generate a YAML entry for authors.yaml.
@@ -80,12 +81,41 @@ def generate_author_yaml(
         affiliation: Company/org if known
         is_organization: Whether this is an org, not individual
         source_url: URL where author info was found
+        github_enrichment: Optional dict with GitHub profile data
 
     Returns:
         Formatted YAML string ready to append to authors.yaml
     """
+    gh = github_enrichment or {}
+
     perspective = "organization" if is_organization else "practitioner"
-    affiliation_line = affiliation if affiliation else "~"
+
+    # Use GitHub data if available, otherwise fallback
+    affiliation_line = gh.get("affiliation") or affiliation or "~"
+    location_str = gh.get("location", "")
+    bio_text = gh.get("bio", "[To be researched]")
+
+    # Parse location if available (GitHub often has "City, Country" format)
+    city = "~"
+    country = "~"
+    if location_str:
+        parts = [p.strip() for p in location_str.split(",")]
+        if len(parts) >= 2:
+            city = parts[0]
+            country = parts[-1]
+        else:
+            city = location_str
+
+    # Build social links section
+    social_lines = []
+    if gh.get("github"):
+        social_lines.append(f"    github: {gh['github']}")
+    if gh.get("twitter"):
+        social_lines.append(f"    twitter: {gh['twitter']}")
+    social_section = "\n".join(social_lines) if social_lines else "    # (no social links found)"
+
+    # Followers count
+    followers = gh.get("github_followers", "~")
 
     yaml = f"""
   - id: {author_id}
@@ -95,8 +125,8 @@ def generate_author_yaml(
     generation: ~
     gender: ~
     location:
-      city: ~
-      country: ~
+      city: {city}
+      country: {country}
       continent: ~
     # Professional
     jobTitle: ~
@@ -107,10 +137,12 @@ def generate_author_yaml(
     # Background
     education: ~
     nativeLanguage: ~
+    # Social
+{social_section}
+    socialFollowing: {followers}
     # Meta
-    socialFollowing: ~
     bio: >
-      [To be researched]
+      {bio_text}
     bioSource: {source_url if source_url else '~'}
 """
     return yaml.strip()
@@ -189,7 +221,7 @@ def format_for_display(resource: ClassifiedResource) -> str:
 │ Alt Labels:  {', '.join(resource.alternate_labels)}
 │
 │ Author:      {resource.author_name} ({resource.author_id})
-│              {"[NEW AUTHOR]" if resource.is_new_author else "[EXISTING]"}
+│              {"[NEW AUTHOR]" if resource.is_new_author else "[EXISTING]"}{f" + GitHub" if resource.github_enrichment else ""}
 │ Source:      {resource.source}
 │ Reading:     {resource.reading_time} ({resource.word_count} words)
 └─────────────────────────────────────────────────────────────────────────────
