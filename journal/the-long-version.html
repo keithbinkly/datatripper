@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Long Version | Keith Binkly</title>
+  <meta name="description" content="From a 2012 conference about ideas I didn't understand to building AI systems for enterprise data.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0d0d0d;
+      --bg-surface: #111;
+      --border-dim: #222;
+      --border-mid: #333;
+      --text-dim: #6b6b6b;
+      --text-mid: #a0a0a0;
+      --text-bright: #d4d4d4;
+      --text-white: #f5f5f5;
+      --accent: #d4a84b;
+      --link: #7db4c9;
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 3rem;
+      --space-xl: 4.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 18px; }
+    body {
+      min-height: 100vh;
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-bright);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--text-white); }
+
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      display: inline-block;
+      margin-bottom: var(--space-lg);
+    }
+
+    .back-link:hover { color: var(--link); }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: var(--space-lg);
+      line-height: 1.3;
+    }
+
+    .article-content p {
+      margin-bottom: var(--space-md);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .article-content strong {
+      color: var(--text-white);
+      font-weight: 500;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border-mid);
+      margin: var(--space-lg) 0;
+    }
+
+    .highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">← back</a>
+
+    <article>
+      <h1>The Long Version</h1>
+
+      <div class="article-content">
+        <p>In February 2012, I helped coordinate a conference about ideas I didn't understand.</p>
+
+        <p>RepCon was a three-day workshop at Fort Mason in San Francisco—technologists, academics, librarians, all trying to figure out how machines could evaluate the credibility of human-generated content. Reputation systems. Semantic annotation. The "noosphere." I was 24, three months removed from quitting a finance job in LA after Steve Jobs died and I realized I didn't want to waste my life. I'd moved to the Bay Area with no plan, networked at tech meetups until someone offered me a job, and now I was arranging catering and hiring videographers for people far smarter than me.</p>
+
+        <p>On the last day, <a href="https://youtu.be/Vl9Vtm6mWAQ" target="_blank">John Perry Barlow</a>—EFF co-founder, Grateful Dead lyricist, internet prophet—gave the closing remarks. He talked about truth, about how we collectively determine what's real. He called what we were building "the digestive system for all of human thought."</p>
+
+        <p>I didn't fully understand what he meant. But I knew I was supposed to be in that room.</p>
+
+        <div class="divider"></div>
+
+        <p>After Hypothes.is ended, I moved back to LA and did whatever paid rent. Drove for Lyft. Did 5am setup for a farmers market at the Performing Arts Center. Ran a hot press machine putting artist logos on socks. I negotiated my first analytics job from $14 to $15 an hour. That was 2015.</p>
+
+        <div class="divider"></div>
+
+        <p>Today I'm Director of Analytics at Green Dot, running data for their Banking-as-a-Service division—Apple Cash, Uber, Amazon, Intuit. Four promotions in five years, none of them applied for. Each one formalized scope I'd already grown into.</p>
+
+        <p>Somewhere along the way I got obsessed with the same problem Barlow was talking about in 2012: how do systems understand meaning? Except now the systems are LLMs, and the meaning is enterprise business logic.</p>
+
+        <p>The short version: AI can't reliably "chat with your data" because most data infrastructure isn't built for it. Business definitions live in people's heads. The same metric means different things in different reports. There's no source of truth—just competing dashboards maintained by whoever built theirs most recently.</p>
+
+        <p>So I built something. I call it <span class="highlight">dbt-agent</span>.</p>
+
+        <p>It's a 36-skill development environment with 320,000+ lines of structured knowledge. When an agent asks "where should this model go?"—it doesn't guess. It loads the folder structure guide, checks the canonical models registry, applies the rules. Pipeline development dropped from 4 hours to 55 minutes. Not because the AI got faster—because it stopped making the same mistakes.</p>
+
+        <div class="divider"></div>
+
+        <p><strong>What's here</strong></p>
+        <p>data-centered.com is my curated library: 185+ resources on semantic layers, visualization design, and AI-ready infrastructure. It feeds my AI systems and my thinking about what makes data teams effective.</p>
+
+        <p><strong>Where this is going</strong></p>
+        <p>In October 2025, dbt Labs open-sourced MetricFlow. Snowflake, Salesforce, and others launched the Open Semantic Interchange initiative. Everyone wants to chat with their data. Almost no one has the infrastructure that makes those conversations reliable.</p>
+
+        <p>I'm documenting how to build it.</p>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
