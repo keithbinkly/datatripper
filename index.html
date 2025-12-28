@@ -127,6 +127,26 @@
       font-weight: 500;
     }
 
+    .hero-bio p {
+      margin-bottom: var(--space-md);
+    }
+
+    .hero-bio p:last-child {
+      margin-bottom: 0;
+    }
+
+    .hero-divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border-mid);
+      margin: var(--space-md) 0;
+    }
+
+    .hero-bio .highlight {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
     .hero-links {
       display: flex;
       gap: var(--space-md);
@@ -522,12 +542,41 @@
     <section class="hero">
       <h1 class="hero-name">Keith Binkly</h1>
       <p class="hero-title">Director, Data Analytics · Los Angeles</p>
-      <p class="hero-bio">
-        I build analytics operations and explore how <strong>semantic layers</strong>,
-        <strong>AI agents</strong>, and <strong>knowledge engineering</strong> can make
-        enterprise data actually useful. Currently leading data strategy across a BaaS division,
-        from first dedicated analyst to directing the function.
-      </p>
+      <div class="hero-bio">
+        <p>In February 2012, I helped coordinate a conference about ideas I didn't understand.</p>
+
+        <p>RepCon was a three-day workshop at Fort Mason in San Francisco—technologists, academics, librarians, all trying to figure out how machines could evaluate the credibility of human-generated content. Reputation systems. Semantic annotation. The "noosphere." I was 24, three months removed from quitting a finance job in LA after Steve Jobs died and I realized I didn't want to waste my life. I'd moved to the Bay Area with no plan, networked at tech meetups until someone offered me a job, and now I was arranging catering and hiring videographers for people far smarter than me.</p>
+
+        <p>On the last day, <a href="https://youtu.be/Vl9Vtm6mWAQ" target="_blank">John Perry Barlow</a>—EFF co-founder, Grateful Dead lyricist, internet prophet—gave the closing remarks. He talked about truth, about how we collectively determine what's real. He called what we were building "the digestive system for all of human thought."</p>
+
+        <p>I didn't fully understand what he meant. But I knew I was supposed to be in that room.</p>
+
+        <div class="hero-divider"></div>
+
+        <p>After Hypothes.is ended, I moved back to LA and did whatever paid rent. Drove for Lyft. Did 5am setup for a farmers market at the Performing Arts Center. Ran a hot press machine putting artist logos on socks. I negotiated my first analytics job from $14 to $15 an hour. That was 2015.</p>
+
+        <div class="hero-divider"></div>
+
+        <p>Today I'm Director of Analytics at Green Dot, running data for their Banking-as-a-Service division—Apple Cash, Uber, Amazon, Intuit. Four promotions in five years, none of them applied for. Each one formalized scope I'd already grown into.</p>
+
+        <p>Somewhere along the way I got obsessed with the same problem Barlow was talking about in 2012: how do systems understand meaning? Except now the systems are LLMs, and the meaning is enterprise business logic.</p>
+
+        <p>The short version: AI can't reliably "chat with your data" because most data infrastructure isn't built for it. Business definitions live in people's heads. The same metric means different things in different reports. There's no source of truth—just competing dashboards maintained by whoever built theirs most recently.</p>
+
+        <p>So I built something. I call it <span class="highlight">dbt-agent</span>.</p>
+
+        <p>It's a 36-skill development environment with 320,000+ lines of structured knowledge. When an agent asks "where should this model go?"—it doesn't guess. It loads the folder structure guide, checks the canonical models registry, applies the rules. Pipeline development dropped from 4 hours to 55 minutes. Not because the AI got faster—because it stopped making the same mistakes.</p>
+
+        <div class="hero-divider"></div>
+
+        <p><strong>What's here</strong></p>
+        <p>data-centered.com is my curated library: 185+ resources on semantic layers, visualization design, and AI-ready infrastructure. It feeds my AI systems and my thinking about what makes data teams effective.</p>
+
+        <p><strong>Where this is going</strong></p>
+        <p>In October 2025, dbt Labs open-sourced MetricFlow. Snowflake, Salesforce, and others launched the Open Semantic Interchange initiative. Everyone wants to chat with their data. Almost no one has the infrastructure that makes those conversations reliable.</p>
+
+        <p>I'm documenting how to build it.</p>
+      </div>
       <div class="hero-links">
         <a href="mailto:keith@example.com" class="hero-link">
           <span class="hero-link-icon">→</span> email
@@ -546,16 +595,53 @@
       <div class="section-label">Writing</div>
 
       <article class="journal-entry">
-        <div class="journal-meta">Dec 21, 2024</div>
+        <div class="journal-meta">Jan 2026</div>
+        <h2 class="journal-title">
+          <a href="journal/why-i-built-dbt-agent.html">Why I Built dbt-agent</a>
+        </h2>
+        <p class="journal-excerpt">
+          I kept having the same conversation with Claude. Every Monday: here's how we organize dbt models.
+          Every Wednesday: where should I put this new model? LLMs don't have persistent memory across sessions.
+          Every conversation starts fresh—a brilliant contractor who shows up each morning with amnesia.
+        </p>
+        <a href="journal/why-i-built-dbt-agent.html" class="journal-continue">continue reading →</a>
+      </article>
+
+      <article class="journal-entry">
+        <div class="journal-meta">Jan 2026</div>
+        <h2 class="journal-title">
+          <a href="journal/how-dbt-agent-thinks.html">How dbt-agent Thinks</a>
+        </h2>
+        <p class="journal-excerpt">
+          AI agents fail on enterprise data not because they're stupid, but because they're missing context
+          that humans take for granted. When a senior analyst decides where to put a new model, they're
+          drawing on years of accumulated patterns. AI doesn't have any of that—unless you give it to them.
+        </p>
+        <a href="journal/how-dbt-agent-thinks.html" class="journal-continue">continue reading →</a>
+      </article>
+
+      <article class="journal-entry">
+        <div class="journal-meta">Jan 2026</div>
+        <h2 class="journal-title">
+          <a href="journal/qa-methodology.html">The QA Methodology That Changed Everything</a>
+        </h2>
+        <p class="journal-excerpt">
+          The hardest part of migrating legacy SQL to dbt isn't writing the new code. It's proving
+          the new code produces identical results. Aggregate comparisons tell you that something is wrong.
+          Row-level tracing tells you where and why.
+        </p>
+        <a href="journal/qa-methodology.html" class="journal-continue">continue reading →</a>
+      </article>
+
+      <article class="journal-entry">
+        <div class="journal-meta">Dec 2024</div>
         <h2 class="journal-title">
           <a href="journal/dbt-agent-mcp.html">The Semantic Layer as Agent Memory</a>
         </h2>
         <p class="journal-excerpt">
           I've been experimenting with MCP server integration for dbt, and something clicked this week.
           The semantic layer isn't just about consistent metrics—it's the vocabulary that lets AI agents
-          understand what the business actually means. When an agent asks "what's revenue?", MetricFlow
-          doesn't just return a number. It returns context: how it's calculated, what dimensions apply,
-          which filters matter. That context is exactly what LLMs need to reason about data correctly.
+          understand what the business actually means.
         </p>
         <a href="journal/dbt-agent-mcp.html" class="journal-continue">continue reading →</a>
       </article>
@@ -622,7 +708,7 @@
             <span class="timeline-tree">└</span>
             <div class="timeline-content">
               <div class="timeline-org">Hypothes.is</div>
-              <div class="timeline-role">Executive Support</div>
+              <div class="timeline-role">Executive Support · RepCon & I Annotate conferences</div>
               <div class="timeline-dates">2012 · San Francisco</div>
             </div>
           </div>

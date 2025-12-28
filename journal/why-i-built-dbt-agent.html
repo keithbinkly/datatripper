@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why I Built dbt-agent | Keith Binkly</title>
+  <meta name="description" content="The problem statement and origin story behind dbt-agent, a 36-skill development environment for enterprise data work.">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-base: #0d0d0d;
+      --bg-surface: #111;
+      --bg-card: #161616;
+      --border-dim: #222;
+      --border-mid: #333;
+      --text-dim: #6b6b6b;
+      --text-mid: #a0a0a0;
+      --text-bright: #d4d4d4;
+      --text-white: #f5f5f5;
+      --accent: #d4a84b;
+      --link: #7db4c9;
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 3rem;
+      --space-xl: 4.5rem;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { font-size: 18px; }
+    body {
+      min-height: 100vh;
+      font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-base);
+      color: var(--text-bright);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-md);
+    }
+
+    a { color: var(--link); text-decoration: none; }
+    a:hover { color: var(--text-white); }
+
+    .back-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      display: inline-block;
+      margin-bottom: var(--space-lg);
+    }
+
+    .back-link:hover { color: var(--link); }
+
+    .article-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: var(--space-sm);
+    }
+
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 600;
+      color: var(--text-white);
+      margin-bottom: var(--space-lg);
+      line-height: 1.3;
+    }
+
+    .article-content p {
+      margin-bottom: var(--space-md);
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+
+    .article-content strong {
+      color: var(--text-white);
+      font-weight: 500;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: var(--border-mid);
+      margin: var(--space-lg) 0;
+    }
+
+    .article-content ul {
+      margin-bottom: var(--space-md);
+      padding-left: var(--space-md);
+    }
+
+    .article-content li {
+      margin-bottom: var(--space-xs);
+      color: var(--text-mid);
+    }
+
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: var(--space-md) 0 var(--space-lg);
+      font-size: 0.9rem;
+    }
+
+    .results-table th,
+    .results-table td {
+      text-align: left;
+      padding: var(--space-sm);
+      border-bottom: 1px solid var(--border-dim);
+    }
+
+    .results-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .results-table td {
+      color: var(--text-bright);
+    }
+
+    .results-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .next-section {
+      margin-top: var(--space-xl);
+      padding-top: var(--space-lg);
+      border-top: 1px solid var(--border-dim);
+    }
+
+    .next-section h3 {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: var(--space-sm);
+    }
+
+    .next-section ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .next-section li {
+      margin-bottom: var(--space-xs);
+    }
+
+    .next-section a {
+      font-size: 0.95rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <a href="../index.html" class="back-link">← back</a>
+
+    <article>
+      <div class="article-meta">January 2026</div>
+      <h1>Why I Built dbt-agent</h1>
+
+      <div class="article-content">
+        <p>I kept having the same conversation with Claude.</p>
+
+        <p>Every Monday: "At Green Dot, we organize dbt models into staging, intermediate, and marts layers. Sources go in staging. Business logic goes in intermediate. Reporting tables go in marts."</p>
+
+        <p>Every Wednesday: "Where should I put this new model?"</p>
+
+        <p>It wasn't Claude's fault. LLMs don't have persistent memory across sessions. Every conversation starts fresh—a brilliant contractor who shows up each morning with amnesia.</p>
+
+        <p>This is fine for one-off questions. It's a disaster for enterprise data work.</p>
+
+        <div class="divider"></div>
+
+        <p><strong>The actual problem</strong></p>
+
+        <p>Enterprise data teams have institutional knowledge that takes months to learn:</p>
+        <ul>
+          <li>How we name things</li>
+          <li>Where files go</li>
+          <li>Which patterns we've already built (and shouldn't rebuild)</li>
+          <li>What business terms actually mean</li>
+          <li>Why that weird edge case exists</li>
+        </ul>
+
+        <p>None of this lives in documentation. It lives in people's heads, accumulated through trial and error.</p>
+
+        <p>When I onboard a new analyst, they absorb this knowledge gradually. Six months in, they stop asking basic questions. A year in, they're productive. Two years in, they're teaching others.</p>
+
+        <p>AI doesn't get that ramp. Every session is day one.</p>
+
+        <div class="divider"></div>
+
+        <p><strong>The hypothesis</strong></p>
+
+        <p>What if I could give an AI agent the institutional memory it's missing?</p>
+
+        <p>Not fine-tuning. Not RAG over random documents. Structured knowledge—migration playbooks, canonical model patterns, folder structure rules, QA validation frameworks—curated and organized for retrieval.</p>
+
+        <p>When the agent encounters a problem, it doesn't guess. It checks the knowledge base first.</p>
+
+        <div class="divider"></div>
+
+        <p><strong>What I built</strong></p>
+
+        <p>dbt-agent is a 36-skill development environment with 320,000+ lines of structured documentation. It includes:</p>
+
+        <ul>
+          <li><strong>Migration playbooks</strong>: Step-by-step methodology for converting legacy SQL to dbt</li>
+          <li><strong>Canonical models registry</strong>: Existing patterns the agent checks before building new ones</li>
+          <li><strong>Folder structure guide</strong>: Where every type of model belongs</li>
+          <li><strong>QA validation framework</strong>: 6-phase testing methodology</li>
+          <li><strong>Human approval gates</strong>: Mandatory checkpoints at phase transitions</li>
+        </ul>
+
+        <p>The measured results:</p>
+
+        <table class="results-table">
+          <tr>
+            <th>Metric</th>
+            <th>Before</th>
+            <th>After</th>
+          </tr>
+          <tr>
+            <td>Pipeline development time</td>
+            <td>~4 hours</td>
+            <td>~55 minutes</td>
+          </tr>
+          <tr>
+            <td>Canonical model reuse</td>
+            <td>0%</td>
+            <td>87%</td>
+          </tr>
+          <tr>
+            <td>Common errors caught proactively</td>
+            <td>Reactive</td>
+            <td>80%+</td>
+          </tr>
+          <tr>
+            <td>Data variance from legacy</td>
+            <td>Variable</td>
+            <td>&lt;0.1%</td>
+          </tr>
+        </table>
+
+        <p>The 55-minute number surprised me. It's not because the AI is faster—it's because it stops making the same mistakes.</p>
+
+        <div class="next-section">
+          <h3>What's next</h3>
+          <ul>
+            <li><a href="how-dbt-agent-thinks.html">How dbt-agent Thinks →</a></li>
+            <li><a href="qa-methodology.html">The QA Methodology That Changed Everything →</a></li>
+          </ul>
+        </div>
+      </div>
+    </article>
+  </div>
+</body>
+</html>
